@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7C3AED">
+    <meta name="color-scheme" content="dark">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    
+    <!-- GOOGLE ANALYTICS -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB6P2MDJ48"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XB6P2MDJ48');
+    </script>
+
+    <!-- PRIMARY SEO -->
+    <title>VOIDINK Studios — #1 Professional Art & Design Studio | Logo, Illustration, Comic Book, Mascot, AI Agents, Web & App Development</title>
+    <meta name="description" content="VOIDINK Studios is the world's top-rated creative studio. We craft logos ($59), illustrations, comic book art ($600), mascot designs, AI agents, websites, mobile apps, DnD art, furry art, 3D models & more. 500+ projects. 4.9★ Trustpilot. 100% satisfaction guarantee.">
+    <meta name="keywords" content="VOIDINK, void ink, voidink studios, logo design, custom logo, illustration, mascot design, comic book art, comic artist for hire, DnD character art, dungeons and dragons commission, furry art commission, furry reference sheet, 3D models, 2D art, animation services, branding agency, brand identity, website design, web development, app development, mobile app design, AI agents, AI chatbot development, cover art, album cover design, book cover, NSFW art commission, SFW art, character design, digital art studio, freelance artist, art commission, affordable logo, professional illustration, best art commission site, cheap logo design, custom character art, RPG character art">
+    <meta name="author" content="VOIDINK Studios">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+    <meta name="revisit-after" content="1 days">
+    <meta name="language" content="English">
+    <meta name="distribution" content="global">
+    <meta name="coverage" content="worldwide">
+    <meta name="rating" content="general">
+    <link rel="canonical" href="https://voidinkstudios.netlify.app/">
+
+    <!-- OPEN GRAPH -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VOIDINK Studios — #1 Rated Creative Design Studio | Art Born From The Void">
+    <meta property="og:description" content="World-class logo design from $59, Comic Book Art from $600, AI Agents from $499, Websites from $399, Apps from $999. 500+ projects. 4.9★ Trustpilot.">
+    <meta property="og:image" content="https://voidinkstudios.netlify.app/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://voidinkstudios.netlify.app/">
+    <meta property="og:site_name" content="VOIDINK Studios">
+    <meta property="og:locale" content="en_US">
+
+    <!-- TWITTER -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VOIDINK Studios — Professional Art, Design, AI & Development">
+    <meta name="twitter:description" content="Logo, illustration, comic art, mascot, AI agents, web & app dev. Starting $39. 4.9★ Trustpilot.">
+    <meta name="twitter:image" content="https://voidinkstudios.netlify.app/images/og-image.jpg">
+
+    <!-- SCHEMA -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"Organization","name":"VOIDINK Studios","alternateName":["VOIDINK","Void Ink","Void Ink Studios"],"url":"https://voidinkstudios.netlify.app","description":"World's top-rated creative studio for logo design, illustration, comic book art, mascot design, AI agents, web development, app development, DnD art, furry art, and digital art services.","email":"voidinkstudios1@gmail.com","priceRange":"$39 - $4999","aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"347","bestRating":"5"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is VOIDINK Studios?","acceptedAnswer":{"@type":"Answer","text":"VOIDINK Studios is a world-class creative design studio offering 15+ services. Rated 4.9/5 on Trustpilot."}},{"@type":"Question","name":"How much does logo design cost?","acceptedAnswer":{"@type":"Answer","text":"Logo design starts at $59 with unlimited revisions."}},{"@type":"Question","name":"Does VOIDINK build AI agents?","acceptedAnswer":{"@type":"Answer","text":"Yes! Custom AI agents starting at $499."}},{"@type":"Question","name":"Does VOIDINK develop mobile apps?","acceptedAnswer":{"@type":"Answer","text":"Yes! iOS and Android apps starting at $999."}}]}
+    </script>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎨%3C/text%3E%3C/svg%3E">
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #06060e;
+            --bg2: #0a0a16;
+            --bg-card: #111122;
+            --text: #eeeef5;
+            --text2: #a0a0c0;
+            --text3: #7070a0;
+            --accent: #7C3AED;
+            --accent2: #8B5CF6;
+            --pink: #D946EF;
+            --blue: #6366F1;
+            --green: #4ADE80;
+            --glow: rgba(124,58,237,0.35);
+            --grad: linear-gradient(135deg,#7C3AED 0%,#D946EF 50%,#EC4899 100%);
+            --grad2: linear-gradient(135deg,#7C3AED,#8B5CF6);
+            --border: rgba(124,58,237,0.15);
+            --border2: rgba(124,58,237,0.3);
+            --glass: rgba(15,15,30,0.5);
+            --tr: all .4s cubic-bezier(.25,.46,.45,.94);
+            --tr2: all .2s ease;
+            --r: 20px;
+            --r2: 12px;
+            --rf: 50px;
+        }
+
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{scroll-behavior:smooth}
+        body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;-webkit-font-smoothing:antialiased;line-height:1.6}
+        ::-webkit-scrollbar{width:5px}
+        ::-webkit-scrollbar-track{background:var(--bg)}
+        ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:10px}
+        ::selection{background:var(--accent);color:#fff}
+        img{max-width:100%;display:block;height:auto}
+        button{font-family:inherit;background:none;border:none;color:inherit;cursor:pointer}
+        a{color:inherit}
+        :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+        .skip-link{position:absolute;left:-9999px;top:10px;background:var(--accent);color:#fff;padding:10px 20px;border-radius:8px;z-index:99999;font-weight:600;text-decoration:none;transition:left .3s}
+        .skip-link:focus{left:10px}
+
+        .container{max-width:1280px;margin:0 auto;padding:0 40px}
+        .section{padding:130px 0;position:relative}
+        .section-label{font-family:'Space Grotesk',sans-serif;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:5px;color:var(--accent);margin-bottom:20px;display:inline-flex;align-items:center;gap:10px;padding:7px 18px;border:1px solid var(--border);border-radius:var(--rf);background:rgba(124,58,237,.06)}
+        .section-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,5vw,3.6rem);font-weight:700;line-height:1.1;margin-bottom:22px;letter-spacing:-2px}
+        .section-sub{font-size:1.05rem;color:var(--text2);max-width:540px;line-height:1.8}
+        .gt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+        .cur{width:18px;height:18px;border:2px solid var(--accent);border-radius:50%;position:fixed;pointer-events:none;z-index:10000;transition:transform .15s,width .3s,height .3s;transform:translate(-50%,-50%);mix-blend-mode:difference}
+        .cur.h{width:50px;height:50px;background:rgba(124,58,237,.12)}
+
+        .pts{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+        .pt{position:absolute;border-radius:50%;opacity:0;animation:fl linear infinite}
+        @keyframes fl{0%{opacity:0;transform:translateY(100vh) scale(0)}10%{opacity:.5}90%{opacity:.08}100%{opacity:0;transform:translateY(-10vh) scale(1)}}
+
+        .ld{position:fixed;top:0;left:0;width:100%;height:100%;background:var(--bg);z-index:99999;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px;transition:opacity .5s,visibility .5s}
+        .ld.h{opacity:0;visibility:hidden;pointer-events:none}
+        .ld-logo{font-family:'Space Grotesk',sans-serif;font-size:2.5rem;font-weight:700;letter-spacing:-2px}
+        .ld-tag{font-size:.75rem;color:var(--text3);letter-spacing:4px;text-transform:uppercase}
+        .ld-bar{width:180px;height:2px;background:rgba(124,58,237,.15);border-radius:10px;overflow:hidden}
+        .ld-bar-in{width:0%;height:100%;border-radius:10px;background:var(--grad);animation:ldg .8s ease-in-out forwards}
+        @keyframes ldg{0%{width:0}100%{width:100%}}
+
+        .nav{position:fixed;top:0;left:0;width:100%;padding:16px 0;z-index:1000;transition:var(--tr)}
+        .nav.sc{padding:10px 0;background:rgba(6,6,14,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+        .nav .container{display:flex;align-items:center;justify-content:space-between}
+        .logo{font-family:'Space Grotesk',sans-serif;font-size:1.35rem;font-weight:700;letter-spacing:-1px;text-decoration:none;color:var(--text);display:flex;align-items:center;gap:10px}
+        .logo-i{width:34px;height:34px;border-radius:10px;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;color:#fff;box-shadow:0 4px 18px var(--glow)}
+        .logo-sub{font-size:.55rem;font-weight:400;color:var(--text3);letter-spacing:3px;text-transform:uppercase;display:block;margin-top:-2px}
+        .nl{display:flex;align-items:center;gap:28px;list-style:none}
+        .nl a{text-decoration:none;color:var(--text2);font-size:.82rem;font-weight:500;transition:var(--tr2);position:relative}
+        .nl a:hover{color:var(--text)}
+        .nl a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--grad);transition:var(--tr)}
+        .nl a:hover::after{width:100%}
+        .nav-cta{padding:9px 24px!important;background:var(--grad2)!important;color:#fff!important;border-radius:var(--rf)!important;font-weight:600!important}
+        .nav-cta:hover{box-shadow:0 8px 25px var(--glow)!important;transform:translateY(-2px)}
+        .nav-cta::after{display:none!important}
+        .mt{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;padding:8px;background:none;border:none}
+        .mt span{width:22px;height:2px;background:var(--text);transition:var(--tr);border-radius:2px;display:block}
+        .mt.a span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}
+        .mt.a span:nth-child(2){opacity:0}
+        .mt.a span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+
+        .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding-top:80px}
+        .hero-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden}
+        .hero-orb{position:absolute;border-radius:50%;filter:blur(80px);animation:orb 8s ease-in-out infinite alternate;will-change:transform}
+        .ho1{width:500px;height:500px;top:-120px;right:-80px;background:radial-gradient(circle,var(--accent) 0%,transparent 70%);opacity:.18}
+        .ho2{width:400px;height:400px;bottom:-80px;left:-80px;background:radial-gradient(circle,var(--pink) 0%,transparent 70%);opacity:.12;animation-delay:2s}
+        .ho3{width:350px;height:350px;top:30%;left:45%;background:radial-gradient(circle,var(--blue) 0%,transparent 70%);opacity:.08;animation-delay:4s}
+        @keyframes orb{0%{transform:translate(0,0) scale(1)}100%{transform:translate(25px,-25px) scale(1.08)}}
+        .hero-grid{position:absolute;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(rgba(124,58,237,.04) 1px,transparent 1px);background-size:40px 40px;-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 30%,transparent 100%);mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,black 30%,transparent 100%)}
+
+        .hero-side-left,.hero-side-right{position:absolute;top:0;height:100%;width:120px;z-index:0;display:flex;flex-direction:column;justify-content:center;gap:40px;align-items:center}
+        .hero-side-left{left:20px}
+        .hero-side-right{right:20px}
+        .side-line{width:1px;height:80px;background:linear-gradient(to bottom,transparent,var(--accent),transparent);opacity:.3}
+        .side-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);opacity:.4;box-shadow:0 0 10px var(--glow);animation:pulse 3s infinite}
+        .side-text{writing-mode:vertical-rl;font-size:.65rem;letter-spacing:4px;text-transform:uppercase;color:var(--text3);font-weight:500}
+        @keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.8;transform:scale(1.3)}}
+
+        .hero-vis{position:absolute;right:40px;top:50%;transform:translateY(-50%);width:380px;height:380px;z-index:0;opacity:.35}
+        .hr{position:absolute;border-radius:50%;border:1px solid var(--border2);animation:rr linear infinite;will-change:transform}
+        .hr1{width:380px;height:380px;top:0;left:0;animation-duration:25s}
+        .hr2{width:280px;height:280px;top:50px;left:50px;animation-duration:18s;animation-direction:reverse}
+        .hr3{width:180px;height:180px;top:100px;left:100px;animation-duration:12s}
+        .hrd{position:absolute;width:7px;height:7px;background:var(--accent);border-radius:50%;top:-3px;left:50%;box-shadow:0 0 12px var(--glow)}
+        @keyframes rr{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}
+        .hero-center-glow{position:absolute;width:120px;height:120px;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:50%;background:var(--accent);filter:blur(60px);opacity:.2}
+
+        .hero .container{position:relative;z-index:1}
+        .hero-content{max-width:750px}
+        .hero-badge{display:inline-flex;align-items:center;gap:10px;padding:7px 20px;margin-bottom:35px;border:1px solid var(--border);border-radius:var(--rf);font-size:.76rem;color:var(--text2);background:var(--glass);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+        .hbd{width:7px;height:7px;background:var(--green);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px rgba(74,222,128,.5)}
+        .hero-ey{font-family:'Space Grotesk',sans-serif;font-size:.85rem;font-weight:600;color:var(--accent);letter-spacing:1px;margin-bottom:14px}
+        .hero-t{font-family:'Space Grotesk',sans-serif;font-size:clamp(3rem,7.5vw,5.8rem);font-weight:700;line-height:.95;letter-spacing:-4px;margin-bottom:8px}
+        .vt{-webkit-text-stroke:1.5px var(--text);color:transparent}
+        .hero-tg{font-family:'Space Grotesk',sans-serif;font-size:clamp(.85rem,1.5vw,1.15rem);font-weight:400;color:var(--text3);letter-spacing:5px;text-transform:uppercase;margin-top:6px;margin-bottom:28px}
+        .hero-d{font-size:1.05rem;color:var(--text2);max-width:500px;line-height:1.8;margin-bottom:40px}
+        .hero-act{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+        .bp{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;background:var(--grad2);color:#fff;border:none;border-radius:var(--rf);font-size:.9rem;font-weight:600;cursor:pointer;transition:var(--tr);text-decoration:none;font-family:'Inter',sans-serif;position:relative;overflow:hidden}
+        .bp:hover{transform:translateY(-3px);box-shadow:0 12px 35px var(--glow)}
+        .bs{display:inline-flex;align-items:center;gap:10px;padding:15px 32px;background:var(--glass);color:var(--text);border:1px solid var(--border2);border-radius:var(--rf);font-size:.9rem;font-weight:500;cursor:pointer;transition:var(--tr);text-decoration:none;font-family:'Inter',sans-serif;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+        .bs:hover{border-color:var(--accent);background:rgba(124,58,237,.06);transform:translateY(-3px)}
+
+        .hero-trust{display:flex;align-items:center;gap:30px;margin-top:45px;padding-top:30px;border-top:1px solid var(--border);flex-wrap:wrap}
+        .trust-badge{display:flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border);border-radius:var(--rf);background:var(--glass);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+        .trust-stars{color:#FFC107;font-size:.7rem;letter-spacing:1px}
+        .trust-score{font-weight:700;font-size:.85rem}
+        .trust-label{font-size:.7rem;color:var(--text3)}
+        .trust-tp{color:#00B67A}
+
+        .hero-st{display:flex;gap:45px;margin-top:35px;padding-top:25px;border-top:1px solid var(--border);flex-wrap:wrap}
+        .hero-st h3{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .hero-st p{font-size:.78rem;color:var(--text3);margin-top:2px}
+
+        /* PARTNERS SECTION - BRIGHT & PROFESSIONAL */
+        .partners{padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;position:relative;z-index:1;background:linear-gradient(180deg,rgba(124,58,237,.02),rgba(124,58,237,.06),rgba(124,58,237,.02))}
+        .partners-label{text-align:center;font-size:.72rem;text-transform:uppercase;letter-spacing:4px;color:var(--text2);margin-bottom:35px;font-weight:600}
+        .partners-row{display:flex;align-items:center;justify-content:center;gap:45px;flex-wrap:wrap}
+        .partner{font-family:'Inter',sans-serif;font-size:1rem;font-weight:600;color:var(--text);letter-spacing:.3px;transition:var(--tr);display:flex;align-items:center;gap:10px;opacity:.85;cursor:pointer;padding:6px 4px}
+        .partner:hover{opacity:1;transform:translateY(-2px)}
+        .partner svg{width:22px;height:22px;flex-shrink:0}
+
+        .mq{padding:45px 0;border-bottom:1px solid var(--border);overflow:hidden;position:relative;z-index:1}
+        .mq-w{display:flex;animation:mqa 35s linear infinite;will-change:transform}
+        .mq-i{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:500;color:var(--text3);white-space:nowrap;padding:0 28px;display:flex;align-items:center;gap:28px}
+        .mq-d{width:4px;height:4px;background:var(--accent);border-radius:50%;flex-shrink:0;box-shadow:0 0 6px var(--glow)}
+        @keyframes mqa{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+        .sv-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:55px}
+        .sv-c{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:32px 24px;transition:var(--tr);position:relative;overflow:hidden;cursor:pointer}
+        .sv-c::before{content:'';position:absolute;top:0;left:0;width:100%;height:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:var(--tr)}
+        .sv-c:hover::before{transform:scaleX(1)}
+        .sv-c:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:0 0 60px rgba(124,58,237,.08)}
+        .sv-c>*{position:relative;z-index:1}
+        .sv-i{width:44px;height:44px;border-radius:12px;background:rgba(124,58,237,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:18px}
+        .sv-c h3{font-family:'Space Grotesk',sans-serif;font-size:1.05rem;font-weight:600;margin-bottom:8px}
+        .sv-c p{font-size:.82rem;color:var(--text2);line-height:1.7}
+        .sv-c .ar{margin-top:15px;color:var(--accent);font-size:1rem;transition:var(--tr);display:inline-block}
+        .sv-c:hover .ar{transform:translateX(5px)}
+        .sv-new{position:absolute;top:12px;right:12px;background:var(--grad);color:#fff;font-size:.6rem;font-weight:700;padding:3px 10px;border-radius:var(--rf);letter-spacing:1px;text-transform:uppercase}
+
+        .wk-g{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:55px}
+        .wk-i{position:relative;border-radius:var(--r);overflow:hidden;cursor:pointer;aspect-ratio:16/10;background:var(--bg-card);border:1px solid var(--border)}
+        .wk-p{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;transition:var(--tr)}
+        .wk-i:hover .wk-p{transform:scale(1.05);filter:brightness(.6)}
+        .wk-o{position:absolute;bottom:0;left:0;width:100%;padding:24px;background:linear-gradient(transparent,rgba(6,6,14,.95));transform:translateY(16px);opacity:0;transition:var(--tr)}
+        .wk-i:hover .wk-o{transform:translateY(0);opacity:1}
+        .wk-o h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:3px}
+        .wk-o p{font-size:.78rem;color:var(--text2)}
+
+        .pr-g{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:55px}
+        .pr-c{padding:28px 22px;border:1px solid var(--border);border-radius:var(--r);transition:var(--tr);background:var(--bg-card)}
+        .pr-c:hover{border-color:var(--accent);box-shadow:0 0 50px rgba(124,58,237,.08)}
+        .pr-n{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:700;color:rgba(124,58,237,.25);line-height:1;margin-bottom:16px;transition:var(--tr)}
+        .pr-c:hover .pr-n{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .pr-c h3{font-family:'Space Grotesk',sans-serif;font-size:1rem;font-weight:600;margin-bottom:6px}
+        .pr-c p{font-size:.8rem;color:var(--text2);line-height:1.7}
+
+        .tm-g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:55px}
+        .tm-c{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:28px;transition:var(--tr)}
+        .tm-c:hover{border-color:var(--border2);transform:translateY(-3px)}
+        .tm-s{color:var(--accent);font-size:.8rem;margin-bottom:16px;letter-spacing:2px}
+        .tm-t{font-size:.88rem;color:var(--text2);line-height:1.8;margin-bottom:20px;font-style:italic}
+        .tm-a{display:flex;align-items:center;gap:10px}
+        .tm-av{width:38px;height:38px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-weight:700;color:#fff;font-size:.75rem}
+        .tm-n{font-weight:600;font-size:.85rem}
+        .tm-r{font-size:.72rem;color:var(--text3)}
+
+        .pt-tabs{display:flex;gap:5px;margin-top:35px;margin-bottom:35px;flex-wrap:wrap}
+        .pt-tab{padding:8px 18px;border:1px solid var(--border);border-radius:var(--rf);font-size:.78rem;font-weight:500;cursor:pointer;transition:var(--tr);background:transparent;color:var(--text2);font-family:'Inter',sans-serif}
+        .pt-tab.a,.pt-tab:hover{background:var(--grad2);color:#fff;border-color:var(--accent);box-shadow:0 3px 12px var(--glow)}
+        .pc{display:none}
+        .pc.a{display:block}
+        .pg{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+        .pk{background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r);padding:32px 24px;transition:var(--tr);position:relative}
+        .pk.ft{border-color:var(--accent);background:linear-gradient(var(--bg-card),rgba(124,58,237,.03))}
+        .pk:hover{transform:translateY(-4px);box-shadow:0 0 50px rgba(124,58,237,.1)}
+        .pk-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;padding:3px 16px;border-radius:var(--rf);font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+        .pk-name{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;margin-bottom:5px}
+        .pk-og{font-size:.82rem;color:var(--text3);text-decoration:line-through;margin-bottom:3px}
+        .pk-pr{font-family:'Space Grotesk',sans-serif;font-size:2.2rem;font-weight:700;margin-bottom:3px;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+        .pk-desc{font-size:.76rem;color:var(--text3);margin-bottom:18px}
+        .pk-f{list-style:none;margin:18px 0;display:flex;flex-direction:column;gap:8px}
+        .pk-f li{font-size:.8rem;color:var(--text2);display:flex;align-items:flex-start;gap:7px}
+        .pk-f li::before{content:'✓';color:var(--accent);font-weight:700;font-size:.72rem;margin-top:2px}
+        .pk-dv{height:1px;background:var(--border);margin:14px 0}
+        .pk-et{font-size:.65rem;text-transform:uppercase;letter-spacing:2px;color:var(--text3);margin-bottom:8px;font-weight:600}
+        .pk-btn{width:100%;padding:12px;border-radius:var(--rf);font-size:.85rem;font-weight:600;cursor:pointer;transition:var(--tr);text-align:center;display:block;text-decoration:none;font-family:'Inter',sans-serif;margin-bottom:7px}
+        .pk-bo{background:transparent;border:1px solid var(--border2);color:var(--text)}
+        .pk-bo:hover{border-color:var(--accent);background:rgba(124,58,237,.05)}
+        .pk-bf{background:var(--grad2);border:1px solid var(--accent);color:#fff}
+        .pk-bf:hover{box-shadow:0 8px 25px var(--glow)}
+        .pk-chat{width:100%;padding:10px;border-radius:var(--rf);font-size:.78rem;font-weight:500;cursor:pointer;transition:var(--tr);text-align:center;display:block;text-decoration:none;font-family:'Inter',sans-serif;background:transparent;border:1px solid var(--border);color:var(--text2)}
+        .pk-chat:hover{border-color:var(--accent);color:var(--accent)}
+
+        .form-s{background:var(--bg2)}
+        .fm-g{display:grid;grid-template-columns:1fr 1fr;gap:55px;margin-top:55px}
+        .fg{margin-bottom:16px}
+        .fl{display:block;font-size:.8rem;font-weight:500;color:var(--text2);margin-bottom:5px}
+        .fi,.fsl,.fta{width:100%;padding:12px 15px;background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r2);color:var(--text);font-size:.85rem;font-family:'Inter',sans-serif;transition:var(--tr);outline:none}
+        .fi:focus,.fsl:focus,.fta:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(124,58,237,.08)}
+        .fta{resize:vertical;min-height:100px}
+        .fsl{cursor:pointer;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M6 9L2 5h8z' fill='%23a0a0c0'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 15px center;padding-right:35px}
+        .fr{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        .finfo{display:flex;flex-direction:column;justify-content:center}
+        .fii{display:flex;align-items:flex-start;gap:12px;padding:20px 0;border-bottom:1px solid var(--border)}
+        .fii-i{width:40px;height:40px;border-radius:12px;background:rgba(124,58,237,.08);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+        .fii h4{font-size:.88rem;font-weight:600;margin-bottom:2px}
+        .fii p{font-size:.78rem;color:var(--text2)}
+
+        .cw{position:fixed;bottom:25px;right:25px;z-index:9999}
+        .chat-toggle-btn{width:auto;height:auto;border-radius:var(--rf);background:var(--grad2);border:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 22px 12px 14px;box-shadow:0 8px 30px var(--glow);transition:var(--tr);position:relative;color:#fff;font-family:'Inter',sans-serif;font-size:.85rem;font-weight:600}
+        .chat-toggle-btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px var(--glow)}
+        .chat-avatar-wrapper{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#f0abfc,#c084fc);display:flex;align-items:center;justify-content:center;font-size:1.2rem;position:relative;border:2px solid rgba(255,255,255,.3)}
+        .chat-online{position:absolute;bottom:0;right:0;width:10px;height:10px;background:var(--green);border-radius:50%;border:2px solid var(--accent)}
+        .chat-toggle-text{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
+        .chat-toggle-text .ctt-main{font-size:.82rem;font-weight:600}
+        .chat-toggle-text .ctt-sub{font-size:.62rem;font-weight:400;opacity:.7}
+
+        .cb{position:absolute;bottom:65px;right:0;width:380px;height:510px;background:var(--bg-card);border:1px solid var(--border);border-radius:22px;overflow:hidden;display:none;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+        .cb.o{display:flex}
+        .ch{padding:16px;background:var(--grad2);display:flex;align-items:center;gap:12px}
+        .ch-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#f0abfc,#c084fc);display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:2px solid rgba(255,255,255,.3)}
+        .ch-info h4{font-size:.9rem;font-weight:600;color:#fff}
+        .ch-info p{font-size:.7rem;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:4px}
+        .ch-info .od{width:5px;height:5px;background:var(--green);border-radius:50%}
+        .ch-cl{margin-left:auto;background:none;border:none;color:#fff;font-size:1rem;cursor:pointer;opacity:.7;transition:var(--tr2);padding:5px}
+        .ch-cl:hover{opacity:1}
+        .cm{flex:1;padding:16px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+        .msg{max-width:85%;padding:10px 14px;border-radius:16px;font-size:.82rem;line-height:1.5}
+        .msg.bot{background:var(--bg2);border:1px solid var(--border);align-self:flex-start;border-bottom-left-radius:4px}
+        .msg.user{background:var(--grad2);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+        .msg .td{display:flex;gap:3px;padding:3px 0}
+        .msg .td span{width:5px;height:5px;background:var(--text3);border-radius:50%;animation:tp 1.4s infinite}
+        .msg .td span:nth-child(2){animation-delay:.2s}
+        .msg .td span:nth-child(3){animation-delay:.4s}
+        @keyframes tp{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-5px)}}
+        .qr{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+        .qb{padding:4px 10px;border:1px solid var(--border2);border-radius:var(--rf);font-size:.7rem;background:transparent;color:var(--accent);cursor:pointer;transition:var(--tr2);font-family:'Inter',sans-serif}
+        .qb:hover{background:rgba(124,58,237,.08);border-color:var(--accent)}
+        .ci-a{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:7px;align-items:center}
+        .ci{flex:1;padding:10px 13px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--rf);color:var(--text);font-size:.82rem;font-family:'Inter',sans-serif;outline:none}
+        .ci:focus{border-color:var(--accent)}
+        .ci::placeholder{color:var(--text3)}
+        .cs{width:38px;height:38px;border-radius:50%;background:var(--grad2);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;color:#fff;transition:var(--tr)}
+        .cs:hover{transform:scale(1.1)}
+
+        .cta-s{padding:110px 0}
+        .cta-b{background:var(--bg-card);border:1px solid var(--border);border-radius:24px;padding:75px;text-align:center;position:relative;overflow:hidden}
+        .cta-b::before{content:'';position:absolute;top:-80px;left:50%;transform:translateX(-50%);width:450px;height:450px;background:var(--accent);filter:blur(180px);opacity:.05;border-radius:50%}
+        .cta-b .section-title{max-width:600px;margin:0 auto 18px}
+        .cta-b .section-sub{max-width:450px;margin:0 auto 35px}
+
+        .ft{padding:70px 0 0;border-top:1px solid var(--border)}
+        .ft-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:45px;margin-bottom:55px}
+        .ft-b p{color:var(--text2);font-size:.85rem;line-height:1.8;margin-top:14px;max-width:270px}
+        .ft-t{font-family:'Space Grotesk',sans-serif;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:3px;color:var(--text3);margin-bottom:16px}
+        .ft-l{list-style:none;display:flex;flex-direction:column;gap:9px}
+        .ft-l a{color:var(--text2);text-decoration:none;font-size:.85rem;transition:var(--tr2)}
+        .ft-l a:hover{color:var(--accent)}
+        .ft-bot{display:flex;justify-content:space-between;align-items:center;padding-top:30px;padding-bottom:30px;border-top:1px solid var(--border)}
+        .ft-bot p{color:var(--text3);font-size:.78rem}
+        .sl{display:flex;gap:10px}
+        .sl a{width:36px;height:36px;border:1px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text2);text-decoration:none;font-size:.75rem;transition:var(--tr)}
+        .sl a:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);box-shadow:0 4px 12px var(--glow)}
+
+        /* HUGE BRAND NAME AT BOTTOM (Kickstarter style) */
+        .brand-huge{padding:60px 0 40px;text-align:center;position:relative;overflow:hidden;border-top:1px solid var(--border)}
+        .brand-huge::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:200px;background:var(--accent);filter:blur(150px);opacity:.08;border-radius:50%;pointer-events:none}
+        .brand-huge-name{font-family:'Space Grotesk',sans-serif;font-size:clamp(4rem,18vw,15rem);font-weight:800;line-height:.9;letter-spacing:-6px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;position:relative;z-index:1;user-select:none}
+        .brand-huge-sub{font-family:'Space Grotesk',sans-serif;font-size:clamp(.8rem,2vw,1.4rem);font-weight:400;letter-spacing:clamp(8px,2vw,20px);text-transform:uppercase;color:var(--text2);margin-top:10px;position:relative;z-index:1;padding-left:clamp(8px,2vw,20px)}
+
+        .rv{opacity:0;transform:translateY(30px);transition:all .8s cubic-bezier(.25,.46,.45,.94)}
+        .rv.ac{opacity:1;transform:translateY(0)}
+
+        @media(max-width:1024px){
+            .sv-g,.tm-g,.pg{grid-template-columns:repeat(2,1fr)}
+            .pr-g{grid-template-columns:repeat(2,1fr)}
+            .ft-g{grid-template-columns:repeat(2,1fr);gap:30px}
+            .fm-g{grid-template-columns:1fr}
+            .hero-vis,.hero-side-left,.hero-side-right{display:none}
+            .partners-row{gap:30px}
+        }
+        @media(max-width:768px){
+            .container{padding:0 20px}
+            .section{padding:80px 0}
+            .cur{display:none!important}
+            .hero-orb,.hero-grid,.pts,.hero-center-glow{display:none!important}
+            .mt{display:flex}
+            .nl{position:fixed;top:0;right:-100%;width:80%;max-width:320px;height:100vh;background:var(--bg2);flex-direction:column;justify-content:center;align-items:center;gap:25px;transition:var(--tr);border-left:1px solid var(--border)}
+            .nl.op{right:0}
+            .hero-t{letter-spacing:-2px}
+            .hero-st{flex-wrap:wrap;gap:20px}
+            .hero-act{flex-direction:column;align-items:stretch}
+            .hero-act .bp,.hero-act .bs{justify-content:center}
+            .hero-trust{flex-direction:column;align-items:flex-start;gap:12px}
+            .sv-g,.wk-g,.tm-g,.pg,.pr-g{grid-template-columns:1fr}
+            .cta-b{padding:40px 22px}
+            .ft-g{grid-template-columns:1fr;gap:22px}
+            .ft-bot{flex-direction:column;gap:15px;text-align:center}
+            .pt-tabs{justify-content:center}
+            .fr{grid-template-columns:1fr}
+            .cb{width:calc(100vw - 40px);right:-8px}
+            .partners-row{gap:20px}
+            .partner{font-size:.85rem}
+            .partner svg{width:18px;height:18px}
+            .cw{bottom:15px;right:15px}
+            .chat-toggle-btn{padding:10px 16px 10px 12px}
+            .chat-avatar-wrapper{width:35px;height:35px}
+            .mq-w{animation-duration:60s}
+            .brand-huge{padding:40px 0 25px}
+            .brand-huge-name{letter-spacing:-3px}
+            *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+        }
+    </style>
+</head>
+<body>
+
+<a href="#services" class="skip-link">Skip to main content</a>
+
+<div class="cur" id="cur" aria-hidden="true"></div>
+<div class="pts" id="pts" aria-hidden="true"></div>
+
+<div class="ld" id="ld" role="status" aria-label="Loading">
+    <div class="ld-logo"><span class="gt">VOID</span>INK</div>
+    <div class="ld-tag">Art Born From The Void</div>
+    <div class="ld-bar"><div class="ld-bar-in"></div></div>
+</div>
+
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+        <a href="#" class="logo" aria-label="VOIDINK Studios Home"><div class="logo-i" aria-hidden="true">VI</div><div><span>VOIDINK</span><span class="logo-sub">STUDIOS</span></div></a>
+        <ul class="nl" id="nl" role="menubar">
+            <li role="none"><a href="#services" role="menuitem">Services</a></li>
+            <li role="none"><a href="#work" role="menuitem">Portfolio</a></li>
+            <li role="none"><a href="#process" role="menuitem">Process</a></li>
+            <li role="none"><a href="#pricing" role="menuitem">Pricing</a></li>
+            <li role="none"><a href="#testimonials" role="menuitem">Reviews</a></li>
+            <li role="none"><a href="#query" role="menuitem">Contact</a></li>
+            <li role="none"><a href="#contact" class="nav-cta" role="menuitem">Get Quote</a></li>
+        </ul>
+        <button class="mt" id="mt" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+</nav>
+
+<main id="main-content">
+
+<section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero-bg" aria-hidden="true">
+        <div class="hero-orb ho1"></div>
+        <div class="hero-orb ho2"></div>
+        <div class="hero-orb ho3"></div>
+        <div class="hero-grid"></div>
+    </div>
+    <div class="hero-side-left" aria-hidden="true">
+        <div class="side-line"></div><div class="side-dot"></div>
+        <div class="side-text">VOIDINK STUDIOS</div>
+        <div class="side-dot" style="animation-delay:1s"></div><div class="side-line"></div>
+    </div>
+    <div class="hero-side-right" aria-hidden="true">
+        <div class="side-line"></div>
+        <div class="side-dot" style="animation-delay:.5s;background:var(--pink)"></div>
+        <div class="side-text">ART • DESIGN • CODE</div>
+        <div class="side-dot" style="animation-delay:1.5s;background:var(--blue)"></div>
+        <div class="side-line"></div>
+    </div>
+    <div class="hero-vis" aria-hidden="true">
+        <div class="hr hr1"><div class="hrd"></div></div>
+        <div class="hr hr2"><div class="hrd" style="background:var(--pink)"></div></div>
+        <div class="hr hr3"><div class="hrd" style="background:var(--blue)"></div></div>
+        <div class="hero-center-glow"></div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge"><span class="hbd" aria-hidden="true"></span>Open for commissions • Trusted by 200+ clients worldwide</div>
+            <div class="hero-ey">✦ World-Class Art, Design & Development Studio</div>
+            <h1 class="hero-t" id="hero-title">Art Born <span class="gt">From The</span> <span class="vt">VOID</span></h1>
+            <div class="hero-tg">— Where Imagination Has No Limits —</div>
+            <p class="hero-d">We craft world-class logos, illustrations, comic books, AI agents, websites, apps, and digital art that leave lasting impressions and drive real results.</p>
+            <div class="hero-act">
+                <a href="#query" class="bp">Start Your Project <span aria-hidden="true">→</span></a>
+                <a href="#work" class="bs">Explore Our Work</a>
+            </div>
+            <div class="hero-trust">
+                <div class="trust-badge">
+                    <span style="font-size:1rem" aria-hidden="true">⭐</span>
+                    <div><div><span class="trust-score trust-tp">4.9</span> <span class="trust-stars">★★★★★</span></div><div class="trust-label">Trustpilot — 347 Reviews</div></div>
+                </div>
+                <div class="trust-badge">
+                    <span style="font-size:1rem;color:#4285F4" aria-hidden="true">G</span>
+                    <div><div><span class="trust-score" style="color:#4285F4">4.8</span> <span class="trust-stars">★★★★★</span></div><div class="trust-label">Google Reviews — 189 Reviews</div></div>
+                </div>
+                <div class="trust-badge">
+                    <span style="font-size:.85rem" aria-hidden="true">🛡️</span>
+                    <div><div class="trust-score" style="font-size:.75rem">100% Money-Back Guarantee</div></div>
+                </div>
+            </div>
+            <div class="hero-st">
+                <div><h3>500+</h3><p>Projects Delivered</p></div>
+                <div><h3>200+</h3><p>Happy Clients</p></div>
+                <div><h3>15+</h3><p>Creative Services</p></div>
+                <div><h3>99%</h3><p>Satisfaction Rate</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PARTNERS SECTION WITH ORIGINAL SVG LOGOS -->
+<section class="partners">
+    <div class="container">
+        <div class="partners-label">Trusted By Industry Leaders & Powered By</div>
+        <div class="partners-row">
+            <div class="partner" title="Microsoft">
+                <svg viewBox="0 0 23 23" xmlns="http://www.w3.org/2000/svg"><path fill="#f25022" d="M1 1h10v10H1z"/><path fill="#7fba00" d="M12 1h10v10H12z"/><path fill="#00a4ef" d="M1 12h10v10H1z"/><path fill="#ffb900" d="M12 12h10v10H12z"/></svg>
+                Microsoft
+            </div>
+            <div class="partner" title="Adobe">
+                <svg viewBox="0 0 240 234" xmlns="http://www.w3.org/2000/svg"><path fill="#FA0F00" d="M150.7 0H240v234L150.7 0zM89.3 0H0v234L89.3 0zm30.7 86.2L177 234h-37.2l-17-43H80.4l35.6-104.8z"/></svg>
+                Adobe
+            </div>
+            <div class="partner" title="Google">
+                <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2c-2 1.5-4.5 2.4-7.2 2.4-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2c-.4.4 6.6-4.8 6.6-14.8 0-1.3-.1-2.3-.4-3.5z"/></svg>
+                Google
+            </div>
+            <div class="partner" title="Apple">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+                Apple
+            </div>
+            <div class="partner" title="Figma">
+                <svg viewBox="0 0 38 57" xmlns="http://www.w3.org/2000/svg"><path fill="#1abcfe" d="M19 28.5a9.5 9.5 0 1 1 19 0 9.5 9.5 0 0 1-19 0z"/><path fill="#0acf83" d="M0 47.5A9.5 9.5 0 0 1 9.5 38H19v9.5a9.5 9.5 0 1 1-19 0z"/><path fill="#ff7262" d="M19 0v19h9.5a9.5 9.5 0 1 0 0-19H19z"/><path fill="#f24e1e" d="M0 9.5A9.5 9.5 0 0 0 9.5 19H19V0H9.5A9.5 9.5 0 0 0 0 9.5z"/><path fill="#a259ff" d="M0 28.5A9.5 9.5 0 0 0 9.5 38H19V19H9.5A9.5 9.5 0 0 0 0 28.5z"/></svg>
+                Figma
+            </div>
+            <div class="partner" title="Vercel">
+                <svg viewBox="0 0 76 65" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M37.59.25l36.95 64H.64l36.95-64z"/></svg>
+                Vercel
+            </div>
+            <div class="partner" title="OpenAI">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.682zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>
+                OpenAI
+            </div>
+            <div class="partner" title="Meta">
+                <svg viewBox="0 0 287.56 191" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ma" x1="62.34" y1="101.45" x2="260.34" y2="91.45" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0064e1"/><stop offset=".4" stop-color="#0064e1"/><stop offset=".83" stop-color="#0073ee"/><stop offset="1" stop-color="#0082fb"/></linearGradient><linearGradient id="mb" x1="41.42" y1="53" x2="41.42" y2="126" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#0082fb"/><stop offset="1" stop-color="#0064e0"/></linearGradient></defs><path fill="#0081fb" d="M31.06 126c0 11 2.41 19.41 5.56 24.51A19 19 0 0 0 53.19 160c8.1 0 15.51-2 29.79-21.76 11.44-15.83 24.92-38 34-52l15.36-23.6c10.67-16.39 23-34.61 37.18-47C181.07 5.6 193.54 0 206.09 0c21.07 0 41.14 12.21 56.5 35.11 16.81 25.08 25 56.67 25 89.27 0 19.38-3.82 33.62-10.32 44.87C271 180.13 258.72 191 238.13 191v-31c17.63 0 22-16.2 22-34.74 0-26.42-6.16-55.74-19.73-76.69-9.63-14.86-22.11-23.94-35.84-23.94-14.85 0-26.8 11.2-40.23 31.17-7.14 10.61-14.47 23.54-22.7 38.13l-9.06 16C114.14 149.8 100.44 175.5 88.4 183a52.76 52.76 0 0 1-30.31 8.4c-21.72 0-34.55-9.4-42.5-23.6C9.03 156.11 5.53 141 5.53 123.72z"/><path fill="url(#ma)" d="M24.5 37.31C38.75 15.35 59.31 0 82.87 0c13.65 0 27.22 4 41.39 15.61 15.5 12.65 32 33.48 52.63 67.81l7.36 12.26c17.79 29.7 27.94 44.94 33.87 52.13 7.66 9.24 13 12 19.94 12 17.63 0 22-16.2 22-34.74l27.4-.86c0 19.38-3.82 33.62-10.32 44.87C271 180.13 258.72 191 238.13 191c-12.8 0-24.14-2.78-36.68-14.61-9.64-9.08-20.91-25.21-29.58-39.71L146.08 93.6c-12.94-21.62-24.81-37.74-31.68-45-7.4-7.85-16.89-17.33-32-17.33-12.24 0-22.63 8.59-31.33 21.74z"/><path fill="url(#mb)" d="M82.37 31.23c-12.24 0-22.63 8.59-31.33 21.74C38.72 71.86 31.06 99.83 31.06 126.61c0 11 2.41 19.41 5.56 24.51L10.14 168.15C3.03 156.11-.47 141-.47 123.72c0-30.94 8.5-63.2 24.67-88.11C38.45 13.65 59.01-1.7 82.57-1.7z"/></svg>
+                Meta
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="mq" aria-hidden="true">
+    <div class="mq-w">
+        <div class="mq-i">Website Design <span class="mq-d"></span></div>
+        <div class="mq-i">AI Agents <span class="mq-d"></span></div>
+        <div class="mq-i">App Development <span class="mq-d"></span></div>
+        <div class="mq-i">Logo Design <span class="mq-d"></span></div>
+        <div class="mq-i">Illustration <span class="mq-d"></span></div>
+        <div class="mq-i">Mascot Design <span class="mq-d"></span></div>
+        <div class="mq-i">Branding <span class="mq-d"></span></div>
+        <div class="mq-i">3D Models <span class="mq-d"></span></div>
+        <div class="mq-i">Comic Book Art <span class="mq-d"></span></div>
+        <div class="mq-i">DnD Character Art <span class="mq-d"></span></div>
+        <div class="mq-i">Furry Art <span class="mq-d"></span></div>
+        <div class="mq-i">Cover Art <span class="mq-d"></span></div>
+        <div class="mq-i">Animation <span class="mq-d"></span></div>
+        <div class="mq-i">2D Art <span class="mq-d"></span></div>
+        <div class="mq-i">Website Design <span class="mq-d"></span></div>
+        <div class="mq-i">AI Agents <span class="mq-d"></span></div>
+        <div class="mq-i">App Development <span class="mq-d"></span></div>
+        <div class="mq-i">Logo Design <span class="mq-d"></span></div>
+        <div class="mq-i">Illustration <span class="mq-d"></span></div>
+        <div class="mq-i">Mascot Design <span class="mq-d"></span></div>
+        <div class="mq-i">Branding <span class="mq-d"></span></div>
+        <div class="mq-i">3D Models <span class="mq-d"></span></div>
+        <div class="mq-i">Comic Book Art <span class="mq-d"></span></div>
+        <div class="mq-i">DnD Character Art <span class="mq-d"></span></div>
+        <div class="mq-i">Furry Art <span class="mq-d"></span></div>
+        <div class="mq-i">Cover Art <span class="mq-d"></span></div>
+        <div class="mq-i">Animation <span class="mq-d"></span></div>
+        <div class="mq-i">2D Art <span class="mq-d"></span></div>
+    </div>
+</div>
+
+<section class="section" id="services" aria-labelledby="services-title">
+    <div class="container">
+        <div class="rv">
+            <div class="section-label">✦ Our Services</div>
+            <h2 class="section-title" id="services-title">15+ Creative & tech services <br><span class="gt">under one roof</span></h2>
+            <p class="section-sub">From pixel-perfect art to AI-powered solutions — we handle every creative and technical challenge.</p>
+        </div>
+        <div class="sv-g">
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">💻</div><h3>Website Design & Development</h3><p>Modern, responsive websites with cutting-edge tech that convert visitors into loyal customers.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-new">NEW</div><div class="sv-i" aria-hidden="true">🤖</div><h3>AI Agents & Chatbots</h3><p>Custom AI-powered agents for 24/7 customer support, lead generation, sales automation & business intelligence.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-new">NEW</div><div class="sv-i" aria-hidden="true">📱</div><h3>App Development</h3><p>Native iOS & Android apps with stunning UI/UX, from concept to App Store submission.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">🎨</div><h3>Illustration</h3><p>Custom digital illustrations for books, games, social media & editorial — any style, any complexity.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">👾</div><h3>Mascot Design</h3><p>Unique mascot characters that become your brand's face with full expression sheets & animations.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">✦</div><h3>Branding & Logo</h3><p>Complete brand identity systems with logos, palettes, typography & comprehensive guidelines.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">🧊</div><h3>3D Models</h3><p>High-quality 3D character models, props & environments for games, animation & VR/AR.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">✏️</div><h3>2D Art & Design</h3><p>Professional 2D assets, sprite sheets, backgrounds & concept art for any project.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">🎬</div><h3>Animation</h3><p>2D & 3D animation, motion graphics, explainer videos & character animation that captivate.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">📚</div><h3>Comic Book Art</h3><p>Full comic creation — storyboarding, inking, coloring, lettering — complete page layouts.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">💿</div><h3>Cover Art</h3><p>Stunning album, book & game covers that grab attention and tell your story at a glance.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">⚔️</div><h3>DnD Character Art</h3><p>Detailed character portraits, full-body art & party illustrations for D&D campaigns and RPGs.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">🦊</div><h3>Furry Art</h3><p>Custom furry character designs, reference sheets & illustrations with vibrant expressions.</p><span class="ar" aria-hidden="true">→</span></article>
+            <article class="sv-c rv"><div class="sv-i" aria-hidden="true">🔥</div><h3>SFW & NSFW Art</h3><p>Professional artwork in both categories with complete discretion and quality assurance.</p><span class="ar" aria-hidden="true">→</span></article>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="work" style="background:var(--bg2)">
+    <div class="container">
+        <div class="rv"><div class="section-label">✦ Selected Work</div><h2 class="section-title">Projects we're <span class="gt">proud of</span></h2><p class="section-sub">A showcase of our best work across all creative and technical disciplines.</p></div>
+        <div class="wk-g">
+            <article class="wk-i rv"><div class="wk-p" style="background:linear-gradient(135deg,#1a1a2e,#7C3AED)">🦸</div><div class="wk-o"><h3>Heroic Comics — Issue #1</h3><p>Comic Book Art • 24 Pages</p></div></article>
+            <article class="wk-i rv"><div class="wk-p" style="background:linear-gradient(135deg,#0f172a,#22D3EE)">🤖</div><div class="wk-o"><h3>AutoReply AI Agent</h3><p>AI Chatbot • E-Commerce Integration</p></div></article>
+            <article class="wk-i rv"><div class="wk-p" style="background:linear-gradient(135deg,#2d1b69,#D946EF)">🐉</div><div class="wk-o"><h3>Dragon's Lair Campaign</h3><p>DnD Character Art • Party of 6</p></div></article>
+            <article class="wk-i rv"><div class="wk-p" style="background:linear-gradient(135deg,#1e3a5f,#6366F1)">📱</div><div class="wk-o"><h3>FitTrack Pro App</h3><p>iOS & Android • Full Development</p></div></article>
+            <article class="wk-i rv"><div class="wk-p" style="background:linear-gradient(135deg,#4c1d95,#8B5CF6)">🦊</div><div class="wk-o"><h3>Cosmic Fox — OC Design</h3><p>Furry Art • Full Reference Sheet</p></div></article>
+            <article class="wk-i rv"><div class="wk-p" style="background:linear-gradient(135deg,#312e81,#7C3AED)">✦</div><div class="wk-o"><h3>Nova Studios Rebrand</h3><p>Branding • Website • AI Chat</p></div></article>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="process">
+    <div class="container">
+        <div class="rv"><div class="section-label">✦ Our Process</div><h2 class="section-title">How we bring ideas <span class="gt">to life</span></h2></div>
+        <div class="pr-g">
+            <article class="pr-c rv"><div class="pr-n">01</div><h3>Discovery</h3><p>We learn your vision, audience & goals through detailed briefing.</p></article>
+            <article class="pr-c rv"><div class="pr-n">02</div><h3>Concept</h3><p>Initial concepts and sketches delivered within 24 hours.</p></article>
+            <article class="pr-c rv"><div class="pr-n">03</div><h3>Refine</h3><p>Unlimited revisions until you're 100% satisfied.</p></article>
+            <article class="pr-c rv"><div class="pr-n">04</div><h3>Deliver</h3><p>Final files in all formats with full ownership rights.</p></article>
+        </div>
+    </div>
+</section>
+
+<section class="section" id="pricing" style="background:var(--bg2)">
+    <div class="container">
+        <div class="rv"><div class="section-label">✦ Pricing</div><h2 class="section-title">Transparent pricing, <span class="gt">no surprises</span></h2><p class="section-sub">All packages include unlimited revisions and 100% ownership rights.</p></div>
+        <div class="pt-tabs rv" role="tablist">
+            <button class="pt-tab a" onclick="sp('logo',this)">Logo</button>
+            <button class="pt-tab" onclick="sp('mascot',this)">Mascot</button>
+            <button class="pt-tab" onclick="sp('3d',this)">3D</button>
+            <button class="pt-tab" onclick="sp('comic',this)">Comic</button>
+            <button class="pt-tab" onclick="sp('ill',this)">Illustration</button>
+            <button class="pt-tab" onclick="sp('brand',this)">Branding</button>
+            <button class="pt-tab" onclick="sp('web',this)">Website</button>
+            <button class="pt-tab" onclick="sp('ai',this)">AI Agents</button>
+            <button class="pt-tab" onclick="sp('app',this)">App Dev</button>
+            <button class="pt-tab" onclick="sp('anim',this)">Animation</button>
+            <button class="pt-tab" onclick="sp('dnd',this)">DnD Art</button>
+            <button class="pt-tab" onclick="sp('furry',this)">Furry</button>
+            <button class="pt-tab" onclick="sp('cover',this)">Cover Art</button>
+            <button class="pt-tab" onclick="sp('nsfw',this)">SFW/NSFW</button>
+        </div>
+
+        <div class="pc a" id="p-logo"><div class="pg"><article class="pk rv"><div class="pk-name">Logo Basic</div><div class="pk-og">$197</div><div class="pk-pr">$59</div><div class="pk-desc">Perfect for startups</div><ul class="pk-f"><li>6 Unique Concepts</li><li>Concepts within 24 Hours</li><li>Unlimited Revisions</li><li>Free Icon</li><li>100% Ownership</li><li>All Formats</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a><button class="pk-chat" onclick="oc()">💬 Live Chat</button></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Logo Professional</div><div class="pk-og">$497</div><div class="pk-pr">$149</div><div class="pk-desc">Brands that stand out</div><ul class="pk-f"><li>12 Unique Concepts</li><li>24-Hour Concepts</li><li>Unlimited Revisions</li><li>Icon + Favicon + Stationery</li><li>Social Media Kit</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a><button class="pk-chat" onclick="oc()">💬 Live Chat</button></article><article class="pk rv"><div class="pk-name">Logo Premium</div><div class="pk-og">$997</div><div class="pk-pr">$299</div><div class="pk-desc">Complete brand launch</div><ul class="pk-f"><li>Unlimited Concepts</li><li>12-Hour Concepts</li><li>Animated Logo Version</li><li>Complete Stationery</li><li>Social Media Kit</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a><button class="pk-chat" onclick="oc()">💬 Live Chat</button></article></div></div>
+
+        <div class="pc" id="p-mascot"><div class="pg"><article class="pk rv"><div class="pk-name">Mascot Basic</div><div class="pk-og">$997</div><div class="pk-pr">$299</div><div class="pk-desc">Simple mascot</div><ul class="pk-f"><li>1 Concept • 1 Pose</li><li>100% Custom</li><li>Unlimited Revisions</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Mascot Pro</div><div class="pk-og">$1667</div><div class="pk-pr">$499</div><div class="pk-desc">With expressions</div><ul class="pk-f"><li>2 Concepts • 2-3 Poses</li><li>100% Custom</li><li>Unlimited Revisions</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Mascot Ultimate</div><div class="pk-og">$2997</div><div class="pk-pr">$899</div><div class="pk-desc">Full suite + animation</div><ul class="pk-f"><li>4 Concepts • 6+ Poses</li><li>Animated Version</li><li>Unlimited Revisions</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-3d"><div class="pg"><article class="pk rv"><div class="pk-name">3D Basic</div><div class="pk-og">$497</div><div class="pk-pr">$149</div><div class="pk-desc">Simple 3D</div><ul class="pk-f"><li>1 3D Concept</li><li>Lights & Shading</li><li>Unlimited Revisions</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">3D Professional</div><div class="pk-og">$837</div><div class="pk-pr">$249</div><div class="pk-desc">Detailed model</div><ul class="pk-f"><li>2 3D Concepts</li><li>Advanced Lighting</li><li>Unlimited Revisions</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">3D Premium</div><div class="pk-og">$1497</div><div class="pk-pr">$499</div><div class="pk-desc">Full character</div><ul class="pk-f"><li>Full 3D Character</li><li>Texturing & Rigging</li><li>Multiple Renders</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-comic"><div class="pg"><article class="pk rv"><div class="pk-name">Comic Starter</div><div class="pk-og">$997</div><div class="pk-pr">$600</div><div class="pk-desc">4 pages</div><ul class="pk-f"><li>4 Illustrated Pages</li><li>3 Custom Characters</li><li>Panel Layouts + Color</li><li>Lettering + Bubbles</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Best Value</div><div class="pk-name">Comic Standard</div><div class="pk-og">$2497</div><div class="pk-pr">$1,400</div><div class="pk-desc">12 pages</div><ul class="pk-f"><li>12 Illustrated Pages</li><li>6 Custom Characters</li><li>Cover Art Included</li><li>Full Color + Shading</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Comic Full Issue</div><div class="pk-og">$5997</div><div class="pk-pr">$3,200</div><div class="pk-desc">24 pages</div><ul class="pk-f"><li>24 Pages + Covers</li><li>Unlimited Characters</li><li>Professional Inking</li><li>Print-Ready CMYK</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-ill"><div class="pg"><article class="pk rv"><div class="pk-name">Basic</div><div class="pk-og">$297</div><div class="pk-pr">$99</div><div class="pk-desc">Single scene</div><ul class="pk-f"><li>1 Illustration</li><li>Simple Background</li><li>Unlimited Revisions</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Pro</div><div class="pk-og">$697</div><div class="pk-pr">$249</div><div class="pk-desc">Detailed</div><ul class="pk-f"><li>1 Detailed Illustration</li><li>Full Background</li><li>Up to 3 Characters</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Premium</div><div class="pk-og">$1297</div><div class="pk-pr">$499</div><div class="pk-desc">Complex</div><ul class="pk-f"><li>1 Premium Illustration</li><li>Detailed Environment</li><li>Unlimited Characters</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-brand"><div class="pg"><article class="pk rv"><div class="pk-name">Startup</div><div class="pk-og">$997</div><div class="pk-pr">$349</div><div class="pk-desc">Essential</div><ul class="pk-f"><li>Logo (6 Concepts)</li><li>Color + Typography</li><li>Business Card</li><li>Guidelines (10 Pages)</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Business</div><div class="pk-og">$2497</div><div class="pk-pr">$799</div><div class="pk-desc">Complete</div><ul class="pk-f"><li>Logo (12 Concepts)</li><li>Full Identity System</li><li>Stationery Suite</li><li>Guidelines (30+ Pages)</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Enterprise</div><div class="pk-og">$4997</div><div class="pk-pr">$1,999</div><div class="pk-desc">Full overhaul</div><ul class="pk-f"><li>Unlimited Concepts</li><li>Brand Strategy</li><li>All Assets + Merch</li><li>Motion Logo</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-web"><div class="pg"><article class="pk rv"><div class="pk-name">Landing Page</div><div class="pk-og">$997</div><div class="pk-pr">$399</div><div class="pk-desc">Single page</div><ul class="pk-f"><li>1-Page Responsive</li><li>Modern UI/UX</li><li>Contact Form</li><li>SEO Optimized</li><li>Source Code</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Business Website</div><div class="pk-og">$2997</div><div class="pk-pr">$999</div><div class="pk-desc">Multi-page</div><ul class="pk-f"><li>5-7 Pages</li><li>Custom Design + Dev</li><li>CMS + Blog</li><li>SEO + Speed</li><li>30 Days Support</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">E-Commerce</div><div class="pk-og">$5997</div><div class="pk-pr">$2,499</div><div class="pk-desc">Online store</div><ul class="pk-f"><li>Unlimited Pages</li><li>100+ Products</li><li>Payment Gateway</li><li>Admin Dashboard</li><li>60 Days Support</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-ai"><div class="pg"><article class="pk rv"><div class="pk-name">AI Starter</div><div class="pk-og">$997</div><div class="pk-pr">$499</div><div class="pk-desc">Basic AI chatbot</div><ul class="pk-f"><li>1 AI Chatbot Agent</li><li>Website Integration</li><li>Auto-Reply System</li><li>Lead Capture</li><li>30 Days Support</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">AI Professional</div><div class="pk-og">$2997</div><div class="pk-pr">$1,499</div><div class="pk-desc">Advanced AI</div><ul class="pk-f"><li>Multi-Channel AI Agent</li><li>Web + WhatsApp + Email</li><li>CRM Integration</li><li>Custom Personality</li><li>90 Days Support</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">AI Enterprise</div><div class="pk-og">$7997</div><div class="pk-pr">$3,999</div><div class="pk-desc">Full ecosystem</div><ul class="pk-f"><li>Multiple AI Agents</li><li>All Channels</li><li>Custom Training</li><li>API Integration</li><li>6 Months Support</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-app"><div class="pg"><article class="pk rv"><div class="pk-name">App Starter</div><div class="pk-og">$2997</div><div class="pk-pr">$999</div><div class="pk-desc">Simple app</div><ul class="pk-f"><li>Single Platform</li><li>Up to 5 Screens</li><li>UI/UX Design</li><li>App Store Submission</li><li>30 Days Support</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">App Professional</div><div class="pk-og">$5997</div><div class="pk-pr">$2,999</div><div class="pk-desc">Full-featured</div><ul class="pk-f"><li>iOS + Android</li><li>Up to 15 Screens</li><li>Payment Integration</li><li>Admin Panel</li><li>60 Days Support</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">App Enterprise</div><div class="pk-og">$9997</div><div class="pk-pr">$4,999</div><div class="pk-desc">Complex app</div><ul class="pk-f"><li>iOS + Android + Web</li><li>Unlimited Screens</li><li>AI Integration</li><li>Full Admin Dashboard</li><li>90 Days Support</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-anim"><div class="pg"><article class="pk rv"><div class="pk-name">Logo Anim</div><div class="pk-og">$397</div><div class="pk-pr">$99</div><div class="pk-desc">Logo reveal</div><ul class="pk-f"><li>5-10 Sec Animation</li><li>Sound Effects</li><li>MP4 + GIF</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Explainer</div><div class="pk-og">$1997</div><div class="pk-pr">$699</div><div class="pk-desc">60-second</div><ul class="pk-f"><li>60 Sec 2D Animation</li><li>Script + Voiceover</li><li>Music + Storyboard</li><li>HD 1080p</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Character</div><div class="pk-og">$2997</div><div class="pk-pr">$1,199</div><div class="pk-desc">Full animation</div><ul class="pk-f"><li>Custom Rigging</li><li>30-60 Seconds</li><li>Sound Design</li><li>4K Quality</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-dnd"><div class="pg"><article class="pk rv"><div class="pk-name">Portrait</div><div class="pk-og">$197</div><div class="pk-pr">$79</div><div class="pk-desc">Bust</div><ul class="pk-f"><li>1 Portrait</li><li>Armor & Weapon Details</li><li>24-Hour Delivery</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Full Body</div><div class="pk-og">$497</div><div class="pk-pr">$199</div><div class="pk-desc">Complete</div><ul class="pk-f"><li>Full Body Art</li><li>Detailed Gear</li><li>Custom Background</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Full Party</div><div class="pk-og">$1497</div><div class="pk-pr">$599</div><div class="pk-desc">Up to 6 chars</div><ul class="pk-f"><li>Up to 6 Characters</li><li>Epic Scene</li><li>Dynamic Composition</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-furry"><div class="pg"><article class="pk rv"><div class="pk-name">Headshot</div><div class="pk-og">$97</div><div class="pk-pr">$39</div><div class="pk-desc">Icon</div><ul class="pk-f"><li>1 Headshot</li><li>Expressive Pose</li><li>24-Hour Delivery</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Reference Sheet</div><div class="pk-og">$497</div><div class="pk-pr">$199</div><div class="pk-desc">Full ref</div><ul class="pk-f"><li>Front + Back View</li><li>Color Palette</li><li>3 Expressions</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Scene</div><div class="pk-og">$797</div><div class="pk-pr">$349</div><div class="pk-desc">Full scene</div><ul class="pk-f"><li>1-2 Characters</li><li>Full Background</li><li>Dynamic Lighting</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-cover"><div class="pg"><article class="pk rv"><div class="pk-name">Album</div><div class="pk-og">$397</div><div class="pk-pr">$149</div><div class="pk-desc">Music cover</div><ul class="pk-f"><li>Custom Cover</li><li>Typography</li><li>Spotify/Apple Ready</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Book Cover</div><div class="pk-og">$697</div><div class="pk-pr">$299</div><div class="pk-desc">Book/novel</div><ul class="pk-f"><li>Front + Back + Spine</li><li>Custom Illustration</li><li>Print CMYK + Kindle</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Game Cover</div><div class="pk-og">$1297</div><div class="pk-pr">$499</div><div class="pk-desc">Key art</div><ul class="pk-f"><li>Key Art Design</li><li>Character + Environment</li><li>Store Page Sizes</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+
+        <div class="pc" id="p-nsfw"><div class="pg"><article class="pk rv"><div class="pk-name">Pin-Up</div><div class="pk-og">$197</div><div class="pk-pr">$89</div><div class="pk-desc">Single char</div><ul class="pk-f"><li>1 Full Body</li><li>SFW or NSFW</li><li>100% Confidential</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article><article class="pk ft rv"><div class="pk-badge">Popular</div><div class="pk-name">Scene</div><div class="pk-og">$497</div><div class="pk-pr">$199</div><div class="pk-desc">Full scene</div><ul class="pk-f"><li>1-2 Characters</li><li>Full Background</li><li>Lighting & Effects</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bf">Order Now</a></article><article class="pk rv"><div class="pk-name">Comic</div><div class="pk-og">$997</div><div class="pk-pr">$449</div><div class="pk-desc">4 pages</div><ul class="pk-f"><li>4 Illustrated Pages</li><li>Custom Characters</li><li>Full Color</li><li>100% Ownership</li></ul><a href="#query" class="pk-btn pk-bo">Order Now</a></article></div></div>
+    </div>
+</section>
+
+<section class="section" id="testimonials">
+    <div class="container">
+        <div class="rv"><div class="section-label">✦ Reviews</div><h2 class="section-title">What clients <span class="gt">say about us</span></h2></div>
+        <div class="tm-g">
+            <article class="tm-c rv"><div class="tm-s">★★★★★</div><p class="tm-t">"They brought my D&D character to life perfectly. The armor detail was exactly what I envisioned. Will order again!"</p><div class="tm-a"><div class="tm-av">RK</div><div><div class="tm-n">Ryan Knight</div><div class="tm-r">DnD Streamer</div></div></div></article>
+            <article class="tm-c rv"><div class="tm-s">★★★★★</div><p class="tm-t">"The AI chatbot they built for our store handles 80% of support tickets automatically. ROI was insane."</p><div class="tm-a"><div class="tm-av">SJ</div><div><div class="tm-n">Sarah Johnson</div><div class="tm-r">E-Commerce CEO</div></div></div></article>
+            <article class="tm-c rv"><div class="tm-s">★★★★★</div><p class="tm-t">"Comic book art exceeded all expectations. Professional quality, fast delivery. Published through Image Comics!"</p><div class="tm-a"><div class="tm-av">ML</div><div><div class="tm-n">Marcus Lee</div><div class="tm-r">Comic Publisher</div></div></div></article>
+        </div>
+    </div>
+</section>
+
+<!-- FORM SECTION (Phone number removed) -->
+<section class="section form-s" id="query">
+    <div class="container">
+        <div class="rv"><div class="section-label">✦ Get In Touch</div><h2 class="section-title">Tell us about <span class="gt">your project</span></h2><p class="section-sub">Fill out the form and we'll respond within 2 hours.</p></div>
+        <div class="fm-g">
+            <form class="rv" id="qf" onsubmit="sf(event)" novalidate>
+                <div class="fr">
+                    <div class="fg"><label class="fl" for="fn">Full Name *</label><input type="text" class="fi" id="fn" placeholder="John Doe" required autocomplete="name"></div>
+                    <div class="fg"><label class="fl" for="fe">Email *</label><input type="email" class="fi" id="fe" placeholder="john@example.com" required autocomplete="email"></div>
+                </div>
+                <div class="fg"><label class="fl" for="fsv">Service *</label><select class="fsl" id="fsv" required><option value="">Select service...</option><option>Website Design</option><option>AI Agent / Chatbot</option><option>App Development</option><option>Logo Design</option><option>Illustration</option><option>Mascot Design</option><option>Branding</option><option>3D Models</option><option>Animation</option><option>Comic Book Art</option><option>Cover Art</option><option>DnD Character Art</option><option>Furry Art</option><option>SFW Art</option><option>NSFW Art</option><option>Other</option></select></div>
+                <div class="fr">
+                    <div class="fg"><label class="fl" for="fb">Budget</label><select class="fsl" id="fb"><option value="">Select budget...</option><option>Under $100</option><option>$100-$500</option><option>$500-$1,000</option><option>$1,000-$3,000</option><option>$3,000-$5,000</option><option>$5,000+</option></select></div>
+                    <div class="fg"><label class="fl" for="fd">Deadline</label><select class="fsl" id="fd"><option value="">Select timeline...</option><option>ASAP / Rush</option><option>1 Week</option><option>2 Weeks</option><option>1 Month</option><option>Flexible</option></select></div>
+                </div>
+                <div class="fg"><label class="fl" for="fm">Project Description *</label><textarea class="fta" id="fm" placeholder="Tell us about your project..." required></textarea></div>
+                <div class="fg"><label class="fl" for="fref">References (optional)</label><input type="text" class="fi" id="fref" placeholder="Pinterest, Artstation links..."></div>
+                <button type="submit" class="bp" style="width:100%;justify-content:center;margin-top:6px">Submit Query <span aria-hidden="true">→</span></button>
+                <div id="fs" role="alert" style="display:none;text-align:center;padding:16px;color:#4ade80;font-weight:600;margin-top:12px">✅ Thank you! We'll respond within 2 hours!</div>
+            </form>
+            <div class="finfo rv">
+                <div class="fii"><div class="fii-i">⚡</div><div><h4>Quick Response</h4><p>Avg response: 30 minutes.</p></div></div>
+                <div class="fii"><div class="fii-i">🔒</div><div><h4>100% Confidential</h4><p>NDAs available. Full discretion.</p></div></div>
+                <div class="fii"><div class="fii-i">💬</div><div><h4>24/7 AI Support</h4><p>Our AI assistant never sleeps.</p></div></div>
+                <div class="fii"><div class="fii-i">🌍</div><div><h4>Global Clients</h4><p>We work across all timezones.</p></div></div>
+                <div class="fii" style="border-bottom:none"><div class="fii-i">✨</div><div><h4>Free Consultation</h4><p>Not sure? Let's talk first.</p></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-s" id="contact">
+    <div class="container">
+        <div class="cta-b rv">
+            <div class="section-label" style="justify-content:center">✦ Let's Create</div>
+            <h2 class="section-title">Ready to bring your vision to <span class="gt">life?</span></h2>
+            <p class="section-sub">Start your project and experience art born from the void.</p>
+            <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                <a href="#query" class="bp">Start a Project <span aria-hidden="true">→</span></a>
+                <a href="mailto:voidinkstudios1@gmail.com" class="bs">voidinkstudios1@gmail.com</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+</main>
+
+<footer class="ft" role="contentinfo">
+    <div class="container">
+        <div class="ft-g">
+            <div class="ft-b"><a href="#" class="logo"><div class="logo-i">VI</div><div><span>VOIDINK</span><span class="logo-sub">STUDIOS</span></div></a><p>Art born from the void. World-class creative studio for art, design, AI & development. Trusted by 200+ clients worldwide.</p></div>
+            <div><div class="ft-t">Art Services</div><ul class="ft-l"><li><a href="#pricing">Illustration</a></li><li><a href="#pricing">Mascot Design</a></li><li><a href="#pricing">Comic Book Art</a></li><li><a href="#pricing">DnD Character Art</a></li><li><a href="#pricing">Furry Art</a></li><li><a href="#pricing">Cover Art</a></li></ul></div>
+            <div><div class="ft-t">Tech Services</div><ul class="ft-l"><li><a href="#pricing">Website Design</a></li><li><a href="#pricing">AI Agents</a></li><li><a href="#pricing">App Development</a></li><li><a href="#pricing">Logo & Branding</a></li><li><a href="#pricing">3D Models</a></li><li><a href="#pricing">Animation</a></li></ul></div>
+            <div><div class="ft-t">Contact</div><ul class="ft-l"><li><a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a></li><li><a href="#">Discord: VOIDINK</a></li><li><a href="#">Trustpilot: 4.9/5</a></li><li><a href="#">Available 24/7</a></li></ul></div>
+        </div>
+        <div class="ft-bot">
+            <p>© 2025 VOIDINK Studios. All rights reserved.</p>
+            <div class="sl"><a href="#" aria-label="Twitter">𝕏</a><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Discord">DC</a><a href="#" aria-label="ArtStation">AS</a><a href="#" aria-label="DeviantArt">DA</a></div>
+        </div>
+    </div>
+    
+    <!-- HUGE BRAND NAME (Kickstarter Style) -->
+    <div class="brand-huge">
+        <div class="container">
+            <div class="brand-huge-name">VOIDINK</div>
+            <div class="brand-huge-sub">S T U D I O S</div>
+        </div>
+    </div>
+</footer>
+
+<div class="cw" id="cw">
+    <div class="cb" id="cbox" role="dialog" aria-label="Chat with VOIDINK Assistant">
+        <div class="ch">
+            <div class="ch-av">🤖</div>
+            <div class="ch-info"><h4>VOIDINK Assistant</h4><p><span class="od"></span> Online • Typically replies instantly</p></div>
+            <button class="ch-cl" onclick="tc()" aria-label="Close chat">✕</button>
+        </div>
+        <div class="cm" id="cms" role="log" aria-live="polite">
+            <div class="msg bot">
+                👋 Hi there! I'm your <strong>VOIDINK Assistant</strong>.<br><br>How can I help you today? ✨
+                <div class="qr">
+                    <button class="qb" onclick="qrp('I need a logo design')">Logo</button>
+                    <button class="qb" onclick="qrp('I want comic book art')">Comic</button>
+                    <button class="qb" onclick="qrp('Tell me about pricing')">Pricing</button>
+                    <button class="qb" onclick="qrp('I need an AI agent')">AI Agent</button>
+                    <button class="qb" onclick="qrp('I need an app')">App Dev</button>
+                    <button class="qb" onclick="qrp('I need a website')">Website</button>
+                    <button class="qb" onclick="qrp('DnD character art')">DnD Art</button>
+                </div>
+            </div>
+        </div>
+        <div class="ci-a">
+            <input type="text" class="ci" id="cin" placeholder="Ask me anything..." onkeypress="if(event.key==='Enter')sm()" aria-label="Type your message">
+            <button class="cs" onclick="sm()" aria-label="Send message">➤</button>
+        </div>
+    </div>
+    <button class="chat-toggle-btn" onclick="tc()" aria-label="Open VOIDINK Assistant chat">
+        <div class="chat-avatar-wrapper">🤖<div class="chat-online"></div></div>
+        <div class="chat-toggle-text">
+            <span class="ctt-main">Chat with Us</span>
+            <span class="ctt-sub">Online • Ask me anything</span>
+        </div>
+    </button>
+</div>
+
+<div style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden" aria-hidden="true">
+    <h2>VOIDINK Studios — Best Art Commission & Design Studio</h2>
+    <h3>Professional Logo Design</h3><p>Custom logo design starting at $59.</p>
+    <h3>AI Agent & Chatbot Development</h3><p>Custom AI agents starting at $499.</p>
+    <h3>Mobile App Development</h3><p>iOS and Android apps starting at $999.</p>
+    <h3>Comic Book Art Commission</h3><p>Professional comic art from $600.</p>
+    <h3>DnD Character Art</h3><p>D&D character portraits from $79.</p>
+    <h3>Furry Art Commission</h3><p>Custom furry art from $39.</p>
+    <h3>Website Design & Development</h3><p>Modern websites starting at $399.</p>
+    <h3>Mascot Design Service</h3><p>Custom mascots starting at $299.</p>
+</div>
+
+<script>
+(function(){const c=document.getElementById('pts');for(let i=0;i<15;i++){const p=document.createElement('div');p.className='pt';const s=Math.random()*3+1;p.style.width=s+'px';p.style.height=s+'px';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*18+12)+'s';p.style.animationDelay=(Math.random()*10)+'s';p.style.background=['#7C3AED','#D946EF','#6366F1','#22D3EE'][Math.floor(Math.random()*4)];c.appendChild(p)}})();
+
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('ld').classList.add('h')},600)});
+
+const cur=document.getElementById('cur');
+if(window.innerWidth>768){
+    document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
+    document.querySelectorAll('a,button,.sv-c,.wk-i,.pk,.tm-c,.pr-c').forEach(el=>{
+        el.addEventListener('mouseenter',()=>cur.classList.add('h'));
+        el.addEventListener('mouseleave',()=>cur.classList.remove('h'));
+    });
+}
+
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('sc',window.scrollY>50)});
+const mt=document.getElementById('mt'),nl=document.getElementById('nl');
+mt.addEventListener('click',()=>{
+    const isOpen=nl.classList.contains('op');
+    mt.classList.toggle('a');
+    nl.classList.toggle('op');
+    mt.setAttribute('aria-expanded',!isOpen);
+});
+nl.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{
+    mt.classList.remove('a');
+    nl.classList.remove('op');
+    mt.setAttribute('aria-expanded','false');
+}));
+
+const ro=new IntersectionObserver(e=>{
+    e.forEach((en,i)=>{
+        if(en.isIntersecting){
+            setTimeout(()=>{en.target.classList.add('ac')},i*70);
+            ro.unobserve(en.target);
+        }
+    });
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',function(e){
+        const href=this.getAttribute('href');
+        if(href==='#')return;
+        e.preventDefault();
+        const t=document.querySelector(href);
+        if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+});
+
+function ac(){
+    document.querySelectorAll('.hero-st h3').forEach(s=>{
+        const t=s.textContent,n=parseInt(t),sf=t.replace(/[0-9]/g,'');
+        let c=0;const inc=n/60;
+        const timer=setInterval(()=>{
+            c+=inc;
+            if(c>=n){c=n;clearInterval(timer)}
+            s.textContent=Math.floor(c)+sf;
+        },30);
+    });
+}
+const so=new IntersectionObserver(e=>{
+    e.forEach(en=>{if(en.isIntersecting){ac();so.unobserve(en.target)}});
+},{threshold:.5});
+const hs=document.querySelector('.hero-st');
+if(hs)so.observe(hs);
+
+function sp(cat,btn){
+    document.querySelectorAll('.pc').forEach(c=>c.classList.remove('a'));
+    document.querySelectorAll('.pt-tab').forEach(t=>t.classList.remove('a'));
+    document.getElementById('p-'+cat).classList.add('a');
+    btn.classList.add('a');
+    document.querySelectorAll('#p-'+cat+' .pk').forEach(el=>{
+        el.classList.remove('ac');
+        el.classList.add('rv');
+        ro.observe(el);
+    });
+}
+
+function sf(e){
+    e.preventDefault();
+    document.getElementById('fs').style.display='block';
+    document.getElementById('qf').reset();
+    setTimeout(()=>{document.getElementById('fs').style.display='none'},5000);
+}
+
+let co=false;
+function tc(){co=!co;document.getElementById('cbox').classList.toggle('o',co);if(co)document.getElementById('cin').focus()}
+function oc(){if(!co)tc()}
+function qrp(t){am(t,'user');setTimeout(()=>br(t),800)}
+function sm(){
+    const i=document.getElementById('cin');
+    const t=i.value.trim();
+    if(!t)return;
+    am(t,'user');
+    i.value='';
+    const tid='t-'+Date.now();
+    at(tid);
+    setTimeout(()=>{rt(tid);br(t)},1200);
+}
+function am(t,tp){const m=document.createElement('div');m.className='msg '+tp;m.innerHTML=t;document.getElementById('cms').appendChild(m);sc()}
+function at(id){const m=document.createElement('div');m.className='msg bot';m.id=id;m.innerHTML='<div class="td"><span></span><span></span><span></span></div>';document.getElementById('cms').appendChild(m);sc()}
+function rt(id){const e=document.getElementById(id);if(e)e.remove()}
+function sc(){const m=document.getElementById('cms');m.scrollTop=m.scrollHeight}
+
+function br(u){
+    const l=u.toLowerCase();let r='';
+    if(l.includes('logo'))r='🎨 <strong>Logo Design:</strong><br>• Basic: <strong>$59</strong><br>• Pro: <strong>$149</strong><br>• Premium: <strong>$299</strong><br><br>All with unlimited revisions! 🚀<div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('comic'))r='📚 <strong>Comic Book Art:</strong><br>• 4 Pages: <strong>$600</strong><br>• 12 Pages: <strong>$1,400</strong><br>• 24 Pages: <strong>$3,200</strong> 🔥<div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('ai')||l.includes('agent')||l.includes('chatbot'))r='🤖 <strong>AI Agents:</strong><br>• Starter: <strong>$499</strong><br>• Pro: <strong>$1,499</strong><br>• Enterprise: <strong>$3,999</strong> 🧠<div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('app'))r='📱 <strong>App Development:</strong><br>• Starter: <strong>$999</strong><br>• Pro: <strong>$2,999</strong><br>• Enterprise: <strong>$4,999</strong> 🚀<div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('website')||l.includes('web'))r='💻 <strong>Websites:</strong><br>• Landing: <strong>$399</strong><br>• Business: <strong>$999</strong><br>• E-Commerce: <strong>$2,499</strong> 🌐<div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('mascot'))r='👾 <strong>Mascot:</strong><br>• Basic: <strong>$299</strong><br>• Pro: <strong>$499</strong><br>• Ultimate: <strong>$899</strong><div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('price')||l.includes('cost'))r='💰 <strong>Starting prices:</strong><br>💻 Website: $399<br>🤖 AI: $499<br>📱 App: $999<br>🎨 Logo: $59<br>📚 Comic: $600<br>⚔️ DnD: $79<br>🦊 Furry: $39<div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('dnd')||l.includes('d&d'))r='⚔️ <strong>DnD Art:</strong><br>• Portrait: <strong>$79</strong><br>• Full Body: <strong>$199</strong><br>• Full Party: <strong>$599</strong><div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('furry'))r='🦊 <strong>Furry Art:</strong><br>• Headshot: <strong>$39</strong><br>• Ref Sheet: <strong>$199</strong><br>• Scene: <strong>$349</strong><div class="qr"><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    else if(l.includes('order')||l.includes('buy')||l.includes('start'))r='🚀 Let\'s go!<br>1️⃣ <a href="#query" onclick="tc()" style="color:var(--accent)">Fill our form</a><br>2️⃣ Email: voidinkstudios1@gmail.com<br>3️⃣ Tell me here!';
+    else if(l.includes('hello')||l.includes('hi')||l.includes('hey'))r='Hey! 👋 How can I help you today?<div class="qr"><button class="qb" onclick="qrp(\'Pricing\')">Pricing</button><button class="qb" onclick="qrp(\'Services\')">Services</button></div>';
+    else if(l.includes('service'))r='✨ <strong>15+ services:</strong><br>💻 Website • 🤖 AI • 📱 Apps • 🎨 Logo • 👾 Mascot • ✦ Branding • 🧊 3D • 🎬 Animation • 📚 Comic • ⚔️ DnD • 🦊 Furry<div class="qr"><button class="qb" onclick="qrp(\'Pricing\')">Pricing</button></div>';
+    else if(l.includes('thank'))r='You\'re welcome! 😊 Have a wonderful day! 🎉';
+    else r='Thanks! 😊 I can help with 15+ services & pricing.<div class="qr"><button class="qb" onclick="qrp(\'Pricing\')">Pricing</button><button class="qb" onclick="qrp(\'Order\')">Order</button></div>';
+    am(r,'bot');
+}
+</script>
+
+</body>
+</html>
