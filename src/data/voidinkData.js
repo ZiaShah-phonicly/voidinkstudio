@@ -55,7 +55,7 @@ export const workItems = [
     title: 'E-Commerce Store',
     meta: 'Website • Online Shop',
     likes: 334,
-    featured: false,
+    featured: true,
   },
   {
     id: 'web-restaurant',
@@ -100,7 +100,7 @@ export const workItems = [
     title: 'SaaS Product Landing',
     meta: 'Website • SaaS Landing',
     likes: 312,
-    featured: false,
+    featured: true,
   },
   {
     id: 'web-fashion',
@@ -118,7 +118,7 @@ export const workItems = [
     title: 'Fintech Banking App',
     meta: 'Mobile • Finance',
     likes: 318,
-    featured: false,
+    featured: true,
   },
   {
     id: 'app-ecommerce',
@@ -217,7 +217,7 @@ export const workItems = [
     title: 'AI Voice Agent',
     meta: 'Voice AI • Call Handling',
     likes: 356,
-    featured: false,
+    featured: true,
   },
   {
     id: 'ai-lead-gen',
@@ -275,12 +275,12 @@ export const workItems = [
   },
   {
     id: 'brand-identity',
-    image: '/portfolio/services/brand/1.jpg',
+    image: '/portfolio/brandforge.jpg',
     category: 'Design',
     title: 'BrandForge Identity',
     meta: 'Branding • Logo System',
     likes: 312,
-    featured: false,
+    featured: true,
   },
   {
     id: 'brand-kit',
@@ -311,12 +311,12 @@ export const workItems = [
   },
   {
     id: 'comic-cover',
-    image: '/portfolio/services/comic/1.jpg',
+    image: '/portfolio/heroic-comics.jpg',
     category: 'Design',
     title: 'Hero Issue Cover',
     meta: 'Comic • Cover Art',
     likes: 356,
-    featured: false,
+    featured: true,
   },
   {
     id: 'book-cover',
@@ -338,7 +338,7 @@ export const workItems = [
   },
   {
     id: 'dnd-portrait',
-    image: '/portfolio/services/dnd/1.jpg',
+    image: '/portfolio/brandforge.jpg',
     category: 'Design',
     title: 'Fantasy Portrait',
     meta: 'DnD • Character Art',

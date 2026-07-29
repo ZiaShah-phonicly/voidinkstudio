@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQ — VOIDINK Studios</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --text: #e8e8f0;
+      --text-muted: #8a8aa3;
+      --accent: #a855f7;
+      --accent-2: #ec4899;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding: 0 1.5rem;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 0 6rem;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      transition: opacity 0.2s;
+    }
+    .back-link:hover { opacity: 0.8; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      padding: 0.35rem 0.85rem;
+      border-radius: 100px;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+    .faq-category {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover {
+      border-color: rgba(168, 85, 247, 0.2);
+    }
+    .faq-question {
+      width: 100%;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 600;
+      text-align: left;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .faq-question:focus { outline: 2px solid var(--accent); outline-offset: -2px; }
+    .faq-icon {
+      width: 24px;
+      height: 24px;
+      min-width: 24px;
+      border-radius: 50%;
+      background: var(--surface-2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 1.1rem;
+      transition: transform 0.3s ease, background 0.2s;
+    }
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+      background: var(--accent);
+      color: white;
+    }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease;
+      padding: 0 1.5rem;
+    }
+    .faq-item.active .faq-answer {
+      max-height: 500px;
+      padding: 0 1.5rem 1.25rem;
+    }
+    .faq-answer p, .faq-answer ul {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .faq-answer ul { padding-left: 1.25rem; margin-top: 0.5rem; }
+    .faq-answer li { margin-bottom: 0.35rem; }
+    .faq-answer a { color: var(--accent); text-decoration: none; }
+    .faq-answer a:hover { text-decoration: underline; }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.05));
+      border: 1px solid rgba(168, 85, 247, 0.2);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .cta-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .cta-box p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+    }
+    .cta-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: white;
+      font-weight: 600;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+    }
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="/" class="back-link">← Back to VOIDINK Studios</a>
+    <div class="section-label">✦ FAQ</div>
+    <h1>Frequently Asked Questions</h1>
+    <p class="subtitle">Everything you need to know before starting your project with VOIDINK Studios.</p>
+
+    <!-- GENERAL -->
+    <div class="faq-category">General</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>What is VOIDINK Studios?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>VOIDINK Studios is a world-class creative and technology agency specializing in custom artwork, website design, app development, AI solutions, branding, and more. We work with clients globally — from indie creators and streamers to startups and established brands.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Where are you based? Do you work with international clients?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>We are a remote-first agency with team members across multiple timezones. We proudly serve clients in over 25 countries. We adapt our communication schedule to match your timezone, ensuring smooth collaboration regardless of location.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>How do I get started with a project?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Simply fill out the <a href="#contact">contact form</a> or email us at <a href="mailto:voidinkstudios@gmail.com">voidinkstudios@gmail.com</a> with your project details. We'll respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you offer free consultations?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes! Every project starts with a free, no-obligation consultation. We'll discuss your vision, budget, timeline, and answer any questions you have. There's no pressure to commit — we're here to help you make the best decision for your needs.</p>
+      </div>
+    </div>
+
+    <!-- PRICING & PAYMENT -->
+    <div class="faq-category">Pricing & Payment</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>How much does a typical project cost?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Pricing depends on the scope, complexity, and turnaround time of your project. Here are our typical starting prices by service:</p>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🌐 Website Design & Development</strong></p>
+        <ul>
+          <li><strong>Starter:</strong> $399 — Single-page responsive website</li>
+          <li><strong>Professional:</strong> $999 — Up to 7 custom pages + CMS</li>
+          <li><strong>E-Commerce:</strong> $2,499 — Full store with payment gateway</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🤖 AI Chatbots, Voice Agents & Automations</strong></p>
+        <ul>
+          <li><strong>Basic Chatbot:</strong> $499 — Website or WhatsApp integration</li>
+          <li><strong>Advanced AI Agent:</strong> $1,299 — Multi-platform + voice + automation</li>
+          <li><strong>Enterprise:</strong> $2,500+ — Custom AI systems & workflows</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">📱 App Development</strong></p>
+        <ul>
+          <li><strong>MVP:</strong> $2,999 — Single-platform app (iOS or Android)</li>
+          <li><strong>Full App:</strong> $5,999 — Cross-platform with backend</li>
+          <li><strong>Enterprise:</strong> $10,000+ — Complex apps with custom features</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🎨 Art & Illustration</strong></p>
+        <ul>
+          <li><strong>Custom Character Design:</strong> $79 — $249 depending on complexity</li>
+          <li><strong>DnD Character Art:</strong> $99 — $299 per character</li>
+          <li><strong>Furry Art:</strong> $89 — $349 depending on detail level</li>
+          <li><strong>NSFW Art:</strong> $99 — $399 (confidential & private)</li>
+          <li><strong>Cover Art:</strong> $149 — $499 (album, book, or game covers)</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🦸 Comic Book Art</strong></p>
+        <ul>
+          <li><strong>Per Page:</strong> $75 — $150 (pencils, inks, colors, lettering)</li>
+          <li><strong>Full Issue (24 pages):</strong> $1,499 — $2,999</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🎭 2D VTuber Models</strong></p>
+        <ul>
+          <li><strong>Model Art Only:</strong> $299 — $599</li>
+          <li><strong>Art + Live2D Rigging:</strong> $599 — $1,499</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🐉 3D Models</strong></p>
+        <ul>
+          <li><strong>Simple Prop/Item:</strong> $149 — $299</li>
+          <li><strong>Character Model:</strong> $399 — $899</li>
+          <li><strong>Environment/Scene:</strong> $599 — $1,499</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🏷️ Branding & Logo</strong></p>
+        <ul>
+          <li><strong>Logo Only:</strong> $199 — $499</li>
+          <li><strong>Full Brand Identity:</strong> $799 — $1,999 (logo, colors, typography, guidelines)</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🎬 Animation</strong></p>
+        <ul>
+          <li><strong>Logo Reveal:</strong> $199 — $499</li>
+          <li><strong>Explainer Video:</strong> $599 — $1,499 per minute</li>
+          <li><strong>Character Animation:</strong> $399 — $999 per minute</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🦁 Mascot Design</strong></p>
+        <ul>
+          <li><strong>Basic Mascot:</strong> $249 — $499</li>
+          <li><strong>Full Mascot Package:</strong> $599 — $1,199 (multiple poses, expressions, brand kit)</li>
+        </ul>
+
+        <p style="margin-top:0.75rem; color:#a855f7;"><strong>💡 All prices are starting estimates. For an exact quote tailored to your project, contact us with your requirements.</strong></p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>What payment methods do you accept?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>We accept multiple secure payment methods to accommodate clients worldwide:</p>
+        <ul>
+          <li>Credit/Debit Cards via Stripe</li>
+          <li>PayPal</li>
+          <li>Wise (TransferWise)</li>
+          <li>Payoneer</li>
+          <li>Bank Transfer (for large projects)</li>
+        </ul>
+        <p>All transactions are secure and encrypted.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you require a deposit? What is your payment structure?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, we require a <strong>50% non-refundable deposit</strong> to begin work. This secures your spot in our schedule and covers initial concept development. The remaining 50% is due upon your final approval, before we deliver the complete source files and assets.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you offer payment plans?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, we offer installment options for larger projects. If you'd like to pay in installments, please <a href="mailto:voidinkstudios@gmail.com">contact our team</a> and we'll work out a payment structure that fits your budget.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>What is your refund policy?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Refunds are available <strong>only before any concepts or drafts are delivered</strong>. Once we have delivered initial concepts or work-in-progress, the deposit becomes non-refundable as it covers the creative labor and time already invested. We offer unlimited revisions to refine the work until you are fully satisfied — but refunds are not issued after work has begun. See our <a href="/terms-of-service">Terms of Service</a> for full details.</p>
+      </div>
+    </div>
+
+    <!-- PROCESS & DELIVERY -->
+    <div class="faq-category">Process & Delivery</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>How long does a project take?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Timelines vary by service type and complexity. Here are typical turnaround ranges:</p>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🌐 Websites & Apps</strong></p>
+        <ul>
+          <li>Single-page website: 5–7 days</li>
+          <li>Multi-page website: 10–14 days</li>
+          <li>E-Commerce store: 21–30 days</li>
+          <li>Mobile app: 4–8 weeks</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🎨 Art & Design</strong></p>
+        <ul>
+          <li>Logo / Branding: 3–7 days</li>
+          <li>Character art / Illustration: 3–10 days</li>
+          <li>Cover art / Mascot design: 5–10 days</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🦸 Comics & VTuber Models</strong></p>
+        <ul>
+          <li>Comic book (24 pages): 3–6 weeks</li>
+          <li>2D VTuber Model + Rigging: 2–4 weeks</li>
+        </ul>
+
+        <p style="margin-top:0.75rem;"><strong style="color:#e8e8f0;">🤖 AI & Automation</strong></p>
+        <ul>
+          <li>Basic chatbot: 3–7 days</li>
+          <li>Advanced AI agent: 1–3 weeks</li>
+        </ul>
+
+        <p style="margin-top:0.75rem; color:#a855f7;"><strong>Rush delivery is available for an additional fee. We'll provide an exact timeline in your project proposal.</strong></p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>How many revisions are included?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>All our packages include <strong>unlimited revisions</strong> within the agreed project scope. Minor changes (colors, text, small adjustments) are always free. Major scope changes — like switching art styles mid-project or adding entirely new deliverables — may require a revised quote.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>What file formats will I receive?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>We deliver files in all industry-standard formats based on your project:</p>
+        <ul>
+          <li><strong>Artwork:</strong> PNG, JPG, SVG, PDF, PSD, AI, Procreate</li>
+          <li><strong>Websites:</strong> Full source code (HTML, CSS, JS, React, etc.), Figma files</li>
+          <li><strong>Apps:</strong> Source code repository, APK/IPA builds, documentation</li>
+          <li><strong>3D/VTuber:</strong> .vrm, Live2D files, Blender source files</li>
+          <li><strong>Video/Animation:</strong> MP4, MOV, GIF, After Effects project files</li>
+        </ul>
+        <p>Need a specific format? Just ask — we'll accommodate.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Will I own the rights to the final work?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. Upon full payment, you receive <strong>100% ownership rights</strong> to the final deliverables. This includes full commercial usage rights — you can use, modify, reproduce, and distribute the work as you see fit. We retain only the right to display the work in our portfolio unless you request a confidential NDA arrangement.</p>
+      </div>
+    </div>
+
+    <!-- SERVICES -->
+    <div class="faq-category">Services</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you design websites only, or do you also develop them?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>We do <strong>both</strong>. We handle the complete process: UI/UX design, responsive front-end development, CMS integration, and deployment. We build with modern tech stacks (React, Next.js, WordPress, Webflow, etc.) and provide full source code ownership.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Can you build AI chatbots and voice agents for my business?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, AI automation is one of our core services. We build custom AI chatbots for websites, WhatsApp, and Discord; voice agents for phone support; and workflow automations using tools like OpenAI, Make, n8n, and custom APIs. We'll train the AI on your business data for accurate, on-brand responses.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you create NSFW or adult artwork?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, we accept NSFW commissions for adult clients (18+) with full confidentiality and discretion. All NSFW projects are handled privately, never displayed in our public portfolio without explicit written consent, and protected under our standard confidentiality policy. We do not create content involving minors or illegal material.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Can you help with comic book creation from start to finish?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Absolutely. We offer full comic book production including character design, storyboarding, penciling, inking, coloring, lettering, and print-ready file preparation. Whether you need a single issue, a full series, or just cover art, we handle the entire pipeline.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Do you offer ongoing support after project delivery?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes. Our packages include free support periods:</p>
+        <ul>
+          <li><strong>Starter:</strong> 7 days free support</li>
+          <li><strong>Professional:</strong> 30 days free support</li>
+          <li><strong>E-Commerce:</strong> 60 days free support</li>
+        </ul>
+        <p>After the free period, we offer affordable monthly maintenance retainers for updates, bug fixes, and minor changes.</p>
+      </div>
+    </div>
+
+    <!-- PRIVACY & CONFIDENTIALITY -->
+    <div class="faq-category">Privacy & Confidentiality</div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Is my project information kept confidential?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Yes, absolutely. All project details, communications, and artwork are treated as strictly confidential by default. We never share your information or work without your permission. For sensitive commercial projects, we can sign a formal <strong>Non-Disclosure Agreement (NDA)</strong> before work begins.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>Will my artwork appear in your portfolio?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>Only with your explicit permission. By default, we may ask if we can showcase completed work. You can decline without any impact on your project. For NDA-protected projects, your work will never be displayed publicly.</p>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-question" onclick="toggleFaq(this)">
+        <span>How do you handle my personal data?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-answer">
+        <p>We collect only the information necessary to complete your project (name, email, project details, payment info). We do not sell or share your data with third parties for marketing. Payment data is handled securely by Stripe/PayPal — we never store your card details. Read our full <a href="/privacy-policy">Privacy Policy</a> for details.</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <h3>Still have questions?</h3>
+      <p>We're here to help. Reach out and we'll respond Asap!.</p>
+      <a href="mailto:voidinkstudios@gmail.com" class="cta-btn">Contact Us →</a>
+    </div>
+
+    <footer>
+      <p>© 2026 VOIDINK Studios. All rights reserved.</p>
+    </footer>
+  </div>
+
+  <script>
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const isActive = item.classList.contains('active');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+      if (!isActive) item.classList.add('active');
+    }
+  </script>
+</body>
+</html>

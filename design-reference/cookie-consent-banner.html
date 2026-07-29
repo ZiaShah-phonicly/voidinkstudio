@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie Consent Banner — VOIDINK Studios</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --surface-2: #1a1a26;
+      --text: #e8e8f0;
+      --text-muted: #8a8aa3;
+      --accent: #a855f7;
+      --accent-2: #ec4899;
+      --border: rgba(255,255,255,0.06);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding: 0 1.5rem;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 4rem 0;
+    }
+    h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    p { color: var(--text-muted); margin-bottom: 1rem; }
+    .code-block {
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      overflow-x: auto;
+    }
+    .code-block code {
+      color: var(--text);
+      font-family: 'Fira Code', 'Courier New', monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+    .highlight { color: var(--accent); }
+    .highlight-2 { color: var(--accent-2); }
+    footer {
+      text-align: center;
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+
+    /* ===== COOKIE BANNER STYLES ===== */
+    /* Copy everything below this line into your main CSS or <style> tag */
+
+    .cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(18,18,26,0.98), rgba(10,10,15,0.99));
+      border-top: 1px solid rgba(168, 85, 247, 0.15);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 1.25rem 1.5rem;
+      z-index: 9999;
+      transform: translateY(100%);
+      opacity: 0;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    .cookie-banner.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .cookie-banner-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .cookie-text {
+      flex: 1;
+      min-width: 250px;
+    }
+    .cookie-text p {
+      color: #b4b4c7;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+    .cookie-text a {
+      color: #a855f7;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .cookie-text a:hover {
+      color: #ec4899;
+      text-decoration: underline;
+    }
+    .cookie-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .cookie-btn {
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+    .cookie-btn-primary {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+      color: white;
+      box-shadow: 0 4px 15px rgba(168, 85, 247, 0.25);
+    }
+    .cookie-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+    }
+    .cookie-btn-secondary {
+      background: transparent;
+      color: #a855f7;
+      border: 1.5px solid rgba(168, 85, 247, 0.3);
+    }
+    .cookie-btn-secondary:hover {
+      background: rgba(168, 85, 247, 0.08);
+      border-color: rgba(168, 85, 247, 0.5);
+    }
+    .cookie-settings {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .cookie-settings.show { display: flex; }
+    .cookie-settings-box {
+      background: linear-gradient(180deg, #12121a, #0a0a0f);
+      border: 1px solid rgba(168, 85, 247, 0.15);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 480px;
+      width: 100%;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      transform: scale(0.95);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .cookie-settings.show .cookie-settings-box {
+      transform: scale(1);
+      opacity: 1;
+    }
+    .cookie-settings-box h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #e8e8f0;
+      margin-bottom: 0.5rem;
+    }
+    .cookie-settings-box > p {
+      color: #8a8aa3;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+    }
+    .cookie-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.875rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .cookie-toggle-row:last-of-type { border-bottom: none; }
+    .cookie-toggle-label strong {
+      display: block;
+      color: #e8e8f0;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    .cookie-toggle-label span {
+      color: #6b6b8a;
+      font-size: 0.8rem;
+    }
+    .cookie-toggle {
+      appearance: none;
+      width: 44px;
+      height: 24px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 100px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+    .cookie-toggle:checked {
+      background: linear-gradient(135deg, #a855f7, #ec4899);
+    }
+    .cookie-toggle::after {
+      content: '';
+      position: absolute;
+      top: 2px; left: 2px;
+      width: 20px; height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .cookie-toggle:checked::after {
+      transform: translateX(20px);
+    }
+    .cookie-toggle:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .cookie-settings-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+    }
+    .cookie-settings-actions .cookie-btn {
+      flex: 1;
+    }
+    @media (max-width: 640px) {
+      .cookie-banner-inner {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+      }
+      .cookie-actions {
+        justify-content: center;
+      }
+      .cookie-settings-box {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Cookie Consent Banner</h1>
+    <p>Copy the code below into your website. The banner auto-detects if the user has already made a choice and won't show again until they clear cookies.</p>
+
+    <h2 style="margin-top:2rem; font-size:1.1rem; color:#e8e8f0;">Step 1: Add this HTML just before your closing &lt;/body&gt; tag</h2>
+    <div class="code-block">
+      <code>&lt;!-- Cookie Consent Banner --&gt;
+&lt;div id="cookieBanner" class="cookie-banner"&gt;
+  &lt;div class="cookie-banner-inner"&gt;
+    &lt;div class="cookie-text"&gt;
+      &lt;p&gt;We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By clicking "Accept All", you consent to our use of cookies. &lt;a href="/privacy-policy.html"&gt;Privacy Policy&lt;/a&gt;.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class="cookie-actions"&gt;
+      &lt;button class="cookie-btn cookie-btn-secondary" onclick="openCookieSettings()"&gt;Preferences&lt;/button&gt;
+      &lt;button class="cookie-btn cookie-btn-primary" onclick="acceptAllCookies()"&gt;Accept All&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Cookie Settings Modal --&gt;
+&lt;div id="cookieSettings" class="cookie-settings"&gt;
+  &lt;div class="cookie-settings-box"&gt;
+    &lt;h3&gt;Cookie Preferences&lt;/h3&gt;
+    &lt;p&gt;Manage your cookie preferences below. Essential cookies cannot be disabled.&lt;/p&gt;
+    &lt;div class="cookie-toggle-row"&gt;
+      &lt;div class="cookie-toggle-label"&gt;
+        &lt;strong&gt;Essential&lt;/strong&gt;
+        &lt;span&gt;Required for the site to function&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type="checkbox" class="cookie-toggle" checked disabled&gt;
+    &lt;/div&gt;
+    &lt;div class="cookie-toggle-row"&gt;
+      &lt;div class="cookie-toggle-label"&gt;
+        &lt;strong&gt;Analytics&lt;/strong&gt;
+        &lt;span&gt;Helps us improve our website&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type="checkbox" class="cookie-toggle" id="analyticsCookies"&gt;
+    &lt;/div&gt;
+    &lt;div class="cookie-toggle-row"&gt;
+      &lt;div class="cookie-toggle-label"&gt;
+        &lt;strong&gt;Marketing&lt;/strong&gt;
+        &lt;span&gt;Used for personalized ads &amp; content&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;input type="checkbox" class="cookie-toggle" id="marketingCookies"&gt;
+    &lt;/div&gt;
+    &lt;div class="cookie-settings-actions"&gt;
+      &lt;button class="cookie-btn cookie-btn-secondary" onclick="closeCookieSettings()"&gt;Cancel&lt;/button&gt;
+      &lt;button class="cookie-btn cookie-btn-primary" onclick="saveCookiePreferences()"&gt;Save Preferences&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code>
+    </div>
+
+    <h2 style="margin-top:2rem; font-size:1.1rem; color:#e8e8f0;">Step 2: Add this JavaScript just before your closing &lt;/body&gt; tag (after the HTML above)</h2>
+    <div class="code-block">
+      <code>&lt;script&gt;
+(function() {
+  const banner = document.getElementById('cookieBanner');
+  const settingsModal = document.getElementById('cookieSettings');
+  const analyticsToggle = document.getElementById('analyticsCookies');
+  const marketingToggle = document.getElementById('marketingCookies');
+
+  // Check if user already made a choice
+  const consent = localStorage.getItem('cookieConsent');
+  if (!consent) {
+    setTimeout(() =&gt; banner.classList.add('show'), 800);
+  }
+
+  window.acceptAllCookies = function() {
+    localStorage.setItem('cookieConsent', JSON.stringify({
+      essential: true,
+      analytics: true,
+      marketing: true,
+      timestamp: new Date().toISOString()
+    }));
+    banner.classList.remove('show');
+  };
+
+  window.openCookieSettings = function() {
+    const saved = JSON.parse(localStorage.getItem('cookieConsent') || '{}');
+    if (analyticsToggle) analyticsToggle.checked = saved.analytics || false;
+    if (marketingToggle) marketingToggle.checked = saved.marketing || false;
+    settingsModal.classList.add('show');
+  };
+
+  window.closeCookieSettings = function() {
+    settingsModal.classList.remove('show');
+  };
+
+  window.saveCookiePreferences = function() {
+    localStorage.setItem('cookieConsent', JSON.stringify({
+      essential: true,
+      analytics: analyticsToggle ? analyticsToggle.checked : false,
+      marketing: marketingToggle ? marketingToggle.checked : false,
+      timestamp: new Date().toISOString()
+    }));
+    settingsModal.classList.remove('show');
+    banner.classList.remove('show');
+  };
+
+  // Close modal on backdrop click
+  settingsModal.addEventListener('click', function(e) {
+    if (e.target === settingsModal) closeCookieSettings();
+  });
+})();
+&lt;/script&gt;</code>
+    </div>
+
+    <h2 style="margin-top:2rem; font-size:1.1rem; color:#e8e8f0;">Step 3: Add the CSS (from the &lt;style&gt; tag in this file) to your main stylesheet</h2>
+    <p>Copy everything from <code>/* ===== COOKIE BANNER STYLES ===== */</code> down to the end of the CSS into your site's CSS file.</p>
+
+    <h2 style="margin-top:2rem; font-size:1.1rem; color:#e8e8f0;">Preview (scroll down to see the banner in action)</h2>
+    <p>Refresh this page to see the cookie banner appear at the bottom.</p>
+  </div>
+
+  <!-- ===== LIVE PREVIEW ===== -->
+  <div id="cookieBanner" class="cookie-banner">
+    <div class="cookie-banner-inner">
+      <div class="cookie-text">
+        <p>We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By clicking "Accept All", you consent to our use of cookies. <a href="/privacy-policy.html">Privacy Policy</a>.</p>
+      </div>
+      <div class="cookie-actions">
+        <button class="cookie-btn cookie-btn-secondary" onclick="openCookieSettings()">Preferences</button>
+        <button class="cookie-btn cookie-btn-primary" onclick="acceptAllCookies()">Accept All</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="cookieSettings" class="cookie-settings">
+    <div class="cookie-settings-box">
+      <h3>Cookie Preferences</h3>
+      <p>Manage your cookie preferences below. Essential cookies cannot be disabled.</p>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-label">
+          <strong>Essential</strong>
+          <span>Required for the site to function</span>
+        </div>
+        <input type="checkbox" class="cookie-toggle" checked disabled>
+      </div>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-label">
+          <strong>Analytics</strong>
+          <span>Helps us improve our website</span>
+        </div>
+        <input type="checkbox" class="cookie-toggle" id="analyticsCookies">
+      </div>
+      <div class="cookie-toggle-row">
+        <div class="cookie-toggle-label">
+          <strong>Marketing</strong>
+          <span>Used for personalized ads & content</span>
+        </div>
+        <input type="checkbox" class="cookie-toggle" id="marketingCookies">
+      </div>
+      <div class="cookie-settings-actions">
+        <button class="cookie-btn cookie-btn-secondary" onclick="closeCookieSettings()">Cancel</button>
+        <button class="cookie-btn cookie-btn-primary" onclick="saveCookiePreferences()">Save Preferences</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const banner = document.getElementById('cookieBanner');
+      const settingsModal = document.getElementById('cookieSettings');
+      const analyticsToggle = document.getElementById('analyticsCookies');
+      const marketingToggle = document.getElementById('marketingCookies');
+
+      const consent = localStorage.getItem('cookieConsent_voidink_preview');
+      if (!consent) {
+        setTimeout(() => banner.classList.add('show'), 800);
+      }
+
+      window.acceptAllCookies = function() {
+        localStorage.setItem('cookieConsent_voidink_preview', JSON.stringify({
+          essential: true,
+          analytics: true,
+          marketing: true,
+          timestamp: new Date().toISOString()
+        }));
+        banner.classList.remove('show');
+      };
+
+      window.openCookieSettings = function() {
+        const saved = JSON.parse(localStorage.getItem('cookieConsent_voidink_preview') || '{}');
+        if (analyticsToggle) analyticsToggle.checked = saved.analytics || false;
+        if (marketingToggle) marketingToggle.checked = saved.marketing || false;
+        settingsModal.classList.add('show');
+      };
+
+      window.closeCookieSettings = function() {
+        settingsModal.classList.remove('show');
+      };
+
+      window.saveCookiePreferences = function() {
+        localStorage.setItem('cookieConsent_voidink_preview', JSON.stringify({
+          essential: true,
+          analytics: analyticsToggle ? analyticsToggle.checked : false,
+          marketing: marketingToggle ? marketingToggle.checked : false,
+          timestamp: new Date().toISOString()
+        }));
+        settingsModal.classList.remove('show');
+        banner.classList.remove('show');
+      };
+
+      settingsModal.addEventListener('click', function(e) {
+        if (e.target === settingsModal) closeCookieSettings();
+      });
+    })();
+  </script>
+
+  <footer>
+    <p>© 2026 VOIDINK Studios. Cookie Consent Banner Component.</p>
+  </footer>
+</body>
+</html>

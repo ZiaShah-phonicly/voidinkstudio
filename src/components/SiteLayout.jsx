@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom'
 import ChatWidget from './ChatWidget'
+import CookieConsent from './CookieConsent'
 import { LogoMark } from './LogoMark'
 import { serviceDetails } from '../data/serviceDetails'
 
@@ -16,6 +17,7 @@ const navLinks = [
   { to: '/#process', label: 'Process' },
   { to: '/#pricing', label: 'Pricing' },
   { to: '/#testimonials', label: 'Reviews' },
+  { to: '/faq', label: 'FAQ' },
 ]
 
 const navActions = [
@@ -71,8 +73,9 @@ export default function SiteLayout() {
 
   useEffect(() => {
     setMenuOpen(false)
-    const isInnerPage =
-      location.pathname.startsWith('/services') || location.pathname.startsWith('/about')
+    const isInnerPage = ['/services', '/about', '/privacy-policy', '/terms-of-service', '/faq'].some((path) =>
+      location.pathname.startsWith(path),
+    )
     document.documentElement.classList.toggle('is-service-page', isInnerPage)
     if (location.hash) {
       const id = location.hash.replace('#', '')
@@ -219,39 +222,39 @@ export default function SiteLayout() {
                       </svg>
                     ),
                   },
-                  {
-                    label: 'Discord',
-                    icon: (
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          fill="currentColor"
-                          d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"
-                        />
-                      </svg>
-                    ),
-                  },
-                  {
-                    label: 'ArtStation',
-                    icon: (
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          fill="currentColor"
-                          d="M0 17.723l2.223-3.855h4.348l1.662 2.889h7.658L15.263 21H8.054l1.661-2.881H2.223L0 17.723zm10.375-5.826l1.663-2.879H24l-1.662 2.879h-12zM8.727 0L6.403 4.005H0l2.223 3.854h7.655l4.348-7.547L8.727 0z"
-                        />
-                      </svg>
-                    ),
-                  },
-                  {
-                    label: 'DeviantArt',
-                    icon: (
-                      <svg viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          fill="currentColor"
-                          d="M19.207 4.794l.23-.43V0H15.61l-.136.171-1.256 2.456L13.71 4.794H6.95l-.561.626-.625 4.104-.144.14.625 1.537h4.247l.953 1.862-.168.14H4.47L.309 17.992V24h3.852l.136-.136 1.281-2.501.148-.155h6.933l.561-.626.625-4.104.144-.14-.625-1.537h-4.247L12.206 10.9l.168-.14h6.933l4.16 4.154V9.207l-.23-.43-3.854-3.852-.005-.131z"
-                        />
-                      </svg>
-                    ),
-                  },
+                  // {
+                  //   label: 'Discord',
+                  //   icon: (
+                  //     <svg viewBox="0 0 24 24" aria-hidden="true">
+                  //       <path
+                  //         fill="currentColor"
+                  //         d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"
+                  //       />
+                  //     </svg>
+                  //   ),
+                  // },
+                  // {
+                  //   label: 'ArtStation',
+                  //   icon: (
+                  //     <svg viewBox="0 0 24 24" aria-hidden="true">
+                  //       <path
+                  //         fill="currentColor"
+                  //         d="M0 17.723l2.223-3.855h4.348l1.662 2.889h7.658L15.263 21H8.054l1.661-2.881H2.223L0 17.723zm10.375-5.826l1.663-2.879H24l-1.662 2.879h-12zM8.727 0L6.403 4.005H0l2.223 3.854h7.655l4.348-7.547L8.727 0z"
+                  //       />
+                  //     </svg>
+                  //   ),
+                  // },
+                  // {
+                  //   label: 'DeviantArt',
+                  //   icon: (
+                  //     <svg viewBox="0 0 24 24" aria-hidden="true">
+                  //       <path
+                  //         fill="currentColor"
+                  //         d="M19.207 4.794l.23-.43V0H15.61l-.136.171-1.256 2.456L13.71 4.794H6.95l-.561.626-.625 4.104-.144.14.625 1.537h4.247l.953 1.862-.168.14H4.47L.309 17.992V24h3.852l.136-.136 1.281-2.501.148-.155h6.933l.561-.626.625-4.104.144-.14-.625-1.537h-4.247L12.206 10.9l.168-.14h6.933l4.16 4.154V9.207l-.23-.43-3.854-3.852-.005-.131z"
+                  //       />
+                  //     </svg>
+                  //   ),
+                  // },
                 ].map(({ label, icon }) => {
                   const href =
                     label === 'Instagram' ? 'https://www.instagram.com/voidinkstudios/' : '#'
@@ -297,6 +300,15 @@ export default function SiteLayout() {
                   <Link to="/about">About Us</Link>
                 </li>
                 <li>
+                  <Link to="/privacy-policy">Privacy Policy</Link>
+                </li>
+                <li>
+                  <Link to="/terms-of-service">Terms of Service</Link>
+                </li>
+                <li>
+                  <Link to="/faq">FAQ</Link>
+                </li>
+                <li>
                   <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
                 </li>
                 <li>
@@ -314,11 +326,26 @@ export default function SiteLayout() {
             </div>
           </div>
           <div className="ft-bot">
-            <p>© 2026 VOIDINK Studios. All rights reserved.</p>
+            <p>
+              © 2026 VOIDINK Studios
+              <span className="ft-sep" aria-hidden="true">
+                |
+              </span>
+              <Link to="/privacy-policy">Privacy Policy</Link>
+              <span className="ft-sep" aria-hidden="true">
+                |
+              </span>
+              <Link to="/terms-of-service">Terms of Service</Link>
+              <span className="ft-sep" aria-hidden="true">
+                |
+              </span>
+              <Link to="/faq">FAQ</Link>
+            </p>
           </div>
         </div>
       </footer>
 
+      <CookieConsent />
       <ChatWidget open={chatOpen} onOpenChange={setChatOpen} />
     </>
   )

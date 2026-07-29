@@ -302,7 +302,7 @@ function formatPackageRecommendation(service, pkg, session) {
     lines.push('', `💡 Slightly above your budget — this is our best entry option. We can also customize a plan.`)
   }
 
-  lines.push('', '🚀 **Next step:** Share your references & we\'ll confirm within 2 hours.')
+  lines.push('', '🚀 **Next step:** Share your references & we\'ll confirm Asap!.')
   lines.push('📧 voidinkstudios1@gmail.com')
 
   return lines.join('\n')

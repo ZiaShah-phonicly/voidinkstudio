@@ -33,7 +33,7 @@ export const serviceDetails = [
     ],
     faqs: [
       { q: 'Do you use templates?', a: 'No. Every site is a custom modern design.' },
-      { q: 'Do I get hosting?', a: 'We set you up free on Netlify/Vercel and hand over ownership.' },
+      { q: 'Do I get hosting?', a: 'We give you full support to deploy your project into production on your hosting. Whether you use Netlify, Vercel, cPanel, shared hosting, or your own server — we help set everything up, go live, and make sure the site runs smoothly after launch.' },
       { q: 'Will I own the code?', a: 'Yes — 100% source code ownership on all packages.' },
     ],
   },

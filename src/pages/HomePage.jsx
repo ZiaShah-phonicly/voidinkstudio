@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
 import Partners from '../components/Partners'
 import PricingCard from '../components/PricingCard'
 import Reveal, { RevealItem } from '../components/Reveal'
+import useOutsideClose from '../hooks/useOutsideClose'
+import { homeFaqPreview } from '../data/faqData'
 import { submitToGoogleSheet } from '../utils/submitToGoogleSheet'
 import {
   budgetOptions,
@@ -15,7 +17,6 @@ import {
   processSteps,
   services,
   testimonials,
-  workCategories,
   workItems,
 } from '../data/voidinkData'
 
@@ -36,7 +37,7 @@ const ORDER_STORAGE_KEY = 'voidink_pending_order'
 const heroStats = [
   { value: 500, suffix: '+', label: 'Projects Delivered' },
   { value: 200, suffix: '+', label: 'clients in 25 countries' },
-  { value: 15, suffix: '+', label: 'Creative Services' },
+  { value: 14, suffix: '+', label: 'Creative Services' },
   { value: 99, suffix: '%', label: 'Satisfaction Rate' },
 ]
 
@@ -87,11 +88,15 @@ export default function HomePage() {
   const navigate = useNavigate()
   const location = useLocation()
   const [pricingTab, setPricingTab] = useState('web')
-  const [workTab, setWorkTab] = useState('All')
   const [formSuccess, setFormSuccess] = useState(false)
   const [formError, setFormError] = useState('')
   const [formSubmitting, setFormSubmitting] = useState(false)
   const [formData, setFormData] = useState(emptyForm)
+  const [openFaq, setOpenFaq] = useState(null)
+  const homeFaqRef = useRef(null)
+
+  const closeHomeFaq = useCallback(() => setOpenFaq(null), [])
+  useOutsideClose(homeFaqRef, openFaq !== null, closeHomeFaq)
 
   const isCustomPackage = formData.package === CUSTOM_PACKAGE
   const showPackagePrice = Boolean(formData.package && formData.package !== CUSTOM_PACKAGE)
@@ -237,8 +242,7 @@ export default function HomePage() {
   }
 
   const activePricing = pricingCategories.find((cat) => cat.id === pricingTab) ?? pricingCategories[0]
-  const filteredWork =
-    workTab === 'All' ? workItems : workItems.filter((item) => item.category === workTab)
+  const featuredWork = workItems.filter((item) => item.featured).slice(0, 6)
 
   return (
     <>
@@ -393,27 +397,12 @@ export default function HomePage() {
               Selected work across <span className="gt">web, apps & design</span>
             </h2>
             <p className="section-sub">
-              Landing pages, product dashboards, mobile apps, AI agents, branding, and original character art.
+              A snapshot of our best projects. Explore each service page for the full portfolio.
             </p>
           </Reveal>
 
-          <div className="pt-tabs wk-tabs" role="tablist" aria-label="Portfolio filters">
-            {workCategories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                role="tab"
-                aria-selected={workTab === cat}
-                className={`pt-tab ${workTab === cat ? 'a' : ''}`}
-                onClick={() => setWorkTab(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
           <div className="shot-g">
-            {filteredWork.map((item, index) => (
+            {featuredWork.map((item, index) => (
               <RevealItem
                 key={item.id}
                 delay={index * 40}
@@ -437,6 +426,15 @@ export default function HomePage() {
               </RevealItem>
             ))}
           </div>
+
+          <Reveal>
+            <div className="work-more">
+              <p>Want to see more work samples?</p>
+              <a href="#services" className="bs" onClick={(e) => handleAnchorClick(e, '#services')}>
+                Browse Services &amp; Portfolios <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -507,7 +505,56 @@ export default function HomePage() {
                 />
               ))}
             </div>
+            <p className="legal-note legal-note-center">
+              All packages subject to our <Link to="/terms-of-service">Terms of Service</Link>.
+            </p>
           </div>
+        </div>
+      </section>
+
+      <section className="section sp-faq home-faq" id="home-faq">
+        <div className="container">
+          <Reveal>
+            <div className="section-label">✦ FAQ</div>
+            <h2 className="section-title">
+              Frequently Asked <span className="gt">Questions</span>
+            </h2>
+            <p className="section-sub">Quick answers to the questions clients ask most before starting a project.</p>
+          </Reveal>
+
+          <div className="sp-faq-list" ref={homeFaqRef}>
+            {homeFaqPreview.map((faq, index) => {
+              const open = openFaq === index
+              return (
+                <RevealItem as="div" key={faq.q} delay={index * 70} className={`faq-acc${open ? ' active' : ''}`}>
+                  <button
+                    type="button"
+                    className="faq-acc-q"
+                    aria-expanded={open}
+                    onClick={() => setOpenFaq(open ? null : index)}
+                  >
+                    <span className="faq-acc-text">{faq.q}</span>
+                    <span className="faq-acc-icon" aria-hidden="true" />
+                  </button>
+                  <div className="faq-acc-a" inert={!open}>
+                    <div>
+                      <div className="faq-acc-a-inner">
+                        <p>{faq.a}</p>
+                      </div>
+                    </div>
+                  </div>
+                </RevealItem>
+              )
+            })}
+          </div>
+
+          <Reveal>
+            <div className="work-more">
+              <Link to="/faq" className="bs">
+                View All FAQs <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -551,7 +598,7 @@ export default function HomePage() {
             <h2 className="section-title">
               Tell us about <span className="gt">your project</span>
             </h2>
-            <p className="section-sub">Fill out the form and we'll respond within 2 hours.</p>
+            <p className="section-sub">Fill out the form and we'll respond Asap!</p>
           </Reveal>
           <div className="fm-g">
             <Reveal>
@@ -719,6 +766,10 @@ export default function HomePage() {
                     onChange={updateForm('references')}
                   />
                 </div>
+                <p className="legal-note">
+                  By submitting, you agree to our <Link to="/terms-of-service">Terms of Service</Link> and{' '}
+                  <Link to="/privacy-policy">Privacy Policy</Link>.
+                </p>
                 <button
                   type="submit"
                   className="bp"
