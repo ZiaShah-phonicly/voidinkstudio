@@ -4,6 +4,7 @@ import ChatWidget from './ChatWidget'
 import CookieConsent from './CookieConsent'
 import { LogoMark } from './LogoMark'
 import { serviceDetails } from '../data/serviceDetails'
+import { clearAuth, getAuth } from '../utils/authApi'
 
 const artServiceSlugs = ['custom-character-design', 'mascot-design', 'comic-book-art', 'dnd-character-art', 'furry-art', '2d-vtuber-models']
 const techServiceSlugs = ['website-design-development', 'ai-agents-chatbots', 'app-development', 'branding-logo', '3d-models', 'animation']
@@ -20,12 +21,6 @@ const navLinks = [
   { to: '/faq', label: 'FAQ' },
 ]
 
-const navActions = [
-  { to: '/about', label: 'About Us', className: 'nav-cta nav-cta-ghost' },
-  { to: '/#query', label: 'Contact Us', className: 'nav-cta nav-cta-ghost' },
-  { to: '/#query', label: 'Get Quote', className: 'nav-cta' },
-]
-
 export default function SiteLayout() {
   const [loading, setLoading] = useState(true)
   const [navScrolled, setNavScrolled] = useState(false)
@@ -33,6 +28,7 @@ export default function SiteLayout() {
   const [chatOpen, setChatOpen] = useState(false)
   const [particles, setParticles] = useState([])
   const [cursorHover, setCursorHover] = useState(false)
+  const [auth, setAuthState] = useState(() => getAuth())
   const cursorRef = useRef(null)
   const location = useLocation()
   const navigate = useNavigate()
@@ -41,6 +37,10 @@ export default function SiteLayout() {
     const timer = setTimeout(() => setLoading(false), 600)
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    setAuthState(getAuth())
+  }, [location.pathname])
 
   useEffect(() => {
     const items = Array.from({ length: 15 }, (_, i) => ({
@@ -73,8 +73,8 @@ export default function SiteLayout() {
 
   useEffect(() => {
     setMenuOpen(false)
-    const isInnerPage = ['/services', '/about', '/privacy-policy', '/terms-of-service', '/faq'].some((path) =>
-      location.pathname.startsWith(path),
+    const isInnerPage = ['/services', '/about', '/privacy-policy', '/terms-of-service', '/faq', '/login', '/register'].some(
+      (path) => location.pathname.startsWith(path),
     )
     document.documentElement.classList.toggle('is-service-page', isInnerPage)
     if (location.hash) {
@@ -97,6 +97,23 @@ export default function SiteLayout() {
     }
     navigate(hash ? `${path}#${hash}` : path)
   }
+
+  const handleLogout = () => {
+    clearAuth()
+    setAuthState(null)
+    setMenuOpen(false)
+    navigate('/')
+  }
+
+  const navActions = auth
+    ? [
+        { to: '/about', label: 'About Us', className: 'nav-cta nav-cta-ghost' },
+        { to: '/#query', label: 'Get Quote', className: 'nav-cta' },
+      ]
+    : [
+        { to: '/login', label: 'Log In', className: 'nav-cta nav-cta-ghost', route: true },
+        { to: '/register', label: 'Register', className: 'nav-cta', route: true },
+      ]
 
   return (
     <>
@@ -151,16 +168,30 @@ export default function SiteLayout() {
                 </a>
               </li>
             ))}
+            {auth ? (
+              <li role="none" className="nav-user">
+                <span className="nav-user-name">Hi, {auth.first_name || 'there'}</span>
+                <button type="button" className="nav-cta nav-cta-ghost" onClick={handleLogout}>
+                  Log Out
+                </button>
+              </li>
+            ) : null}
             {navActions.map((action) => (
               <li key={`${action.label}-${action.to}`} role="none">
-                <a
-                  href={action.to}
-                  className={action.className}
-                  role="menuitem"
-                  onClick={(e) => handleNavClick(e, action.to)}
-                >
-                  {action.label}
-                </a>
+                {action.route ? (
+                  <Link to={action.to} className={action.className} role="menuitem" onClick={() => setMenuOpen(false)}>
+                    {action.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={action.to}
+                    className={action.className}
+                    role="menuitem"
+                    onClick={(e) => handleNavClick(e, action.to)}
+                  >
+                    {action.label}
+                  </a>
+                )}
               </li>
             ))}
           </ul>
@@ -257,7 +288,11 @@ export default function SiteLayout() {
                   // },
                 ].map(({ label, icon }) => {
                   const href =
-                    label === 'Instagram' ? 'https://www.instagram.com/voidinkstudios/' : '#'
+                    label === 'X'
+                      ? 'https://x.com/voidinkstudios'
+                      : label === 'Instagram'
+                        ? 'https://www.instagram.com/voidinkstudios/'
+                        : '#'
                   const external = href.startsWith('http')
                   return (
                     <a
@@ -307,6 +342,12 @@ export default function SiteLayout() {
                 </li>
                 <li>
                   <Link to="/faq">FAQ</Link>
+                </li>
+                <li>
+                  <Link to="/login">Log In</Link>
+                </li>
+                <li>
+                  <Link to="/register">Register</Link>
                 </li>
                 <li>
                   <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>

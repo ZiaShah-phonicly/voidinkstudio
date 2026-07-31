@@ -1,0 +1,53 @@
+import { Link, Navigate, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { clearAuth, getAuth } from '../../utils/authApi'
+
+export default function AdminLayout() {
+  const auth = getAuth()
+  const navigate = useNavigate()
+
+  if (!auth?.access) {
+    return <Navigate to="/admin/login" replace />
+  }
+  if (!auth.is_staff) {
+    return <Navigate to="/admin/login" replace />
+  }
+
+  const logout = () => {
+    clearAuth()
+    navigate('/admin/login', { replace: true })
+  }
+
+  return (
+    <div className="admin-shell">
+      <header className="admin-top">
+        <div className="admin-top-inner">
+          <Link to="/admin" className="admin-brand">
+            VOIDINK <span>Admin</span>
+          </Link>
+          <nav className="admin-nav">
+            <NavLink to="/admin" end className={({ isActive }) => (isActive ? 'on' : undefined)}>
+              Orders
+            </NavLink>
+            <NavLink to="/admin/users" className={({ isActive }) => (isActive ? 'on' : undefined)}>
+              Users
+            </NavLink>
+          </nav>
+          <div className="admin-top-actions">
+            <span className="admin-who">
+              {auth.first_name} {auth.last_name}
+            </span>
+            <Link to="/" className="admin-link">
+              View site
+            </Link>
+            <button type="button" className="admin-link" onClick={logout}>
+              Log out
+            </button>
+          </div>
+        </div>
+      </header>
+      <main className="admin-main">
+        <Outlet />
+      </main>
+    </div>
+  )
+}

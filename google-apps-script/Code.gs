@@ -20,6 +20,8 @@ function doPost(e) {
       p.name || '',
       p.email || '',
       p.service || '',
+      p.package || '',
+      p.price || '',
       p.budget || '',
       p.deadline || '',
       p.description || '',

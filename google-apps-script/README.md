@@ -8,7 +8,7 @@ Yeh wahi **free + clean** method hai jo aapne share kiya — bas React site ke f
 2. **Row 1** mein yeh headings likho:
 
 ```
-Timestamp | Name | Email | Service | Budget | Deadline | Description | References
+Timestamp | Name | Email | Service | Package | Price | Budget | Deadline | Description | References
 ```
 
 ## Step 2 — Apps Script
@@ -52,7 +52,7 @@ npm run dev
 
 | Simple HTML guide | Aapki React site |
 |-------------------|----------------|
-| `name`, `email`, `phone`, `message` | `name`, `email`, `service`, `budget`, `deadline`, `description`, `references` |
+| `name`, `email`, `phone`, `message` | `name`, `email`, `service`, `package`, `price`, `budget`, `deadline`, `description`, `references` |
 | `<form>` + `FormData` | Same `FormData` — `src/utils/submitToGoogleSheet.js` |
 | Manual URL in script | URL `.env` se: `VITE_GOOGLE_SHEETS_URL` |
 

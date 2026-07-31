@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../Dev"
+		},
+		{
+			"path": "../backend-voidink"
+		}
+	],
+	"settings": {}
+}

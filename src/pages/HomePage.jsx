@@ -1,11 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
-import Partners from '../components/Partners'
 import PricingCard from '../components/PricingCard'
 import Reveal, { RevealItem } from '../components/Reveal'
 import useOutsideClose from '../hooks/useOutsideClose'
 import { homeFaqPreview } from '../data/faqData'
-import { submitToGoogleSheet } from '../utils/submitToGoogleSheet'
+import { submitToVoidinkApi } from '../utils/submitToVoidinkApi'
 import {
   budgetOptions,
   CUSTOM_PACKAGE,
@@ -184,7 +183,7 @@ export default function HomePage() {
     const budgetValue = isCustomPackage ? formData.budget : formData.price || formData.budget
 
     try {
-      await submitToGoogleSheet({
+      const formPayload = {
         name: formData.name,
         email: formData.email,
         service: formData.service,
@@ -194,7 +193,11 @@ export default function HomePage() {
         deadline: formData.deadline,
         description: formData.description,
         references: formData.references,
-      })
+      }
+
+      // MongoDB + Google Sheet both happen on the backend submit endpoint
+      // (sheet URL is GOOGLE_SHEETS_URL in backend-voidink/.env).
+      await submitToVoidinkApi(formPayload)
 
       const webhookUrl = import.meta.env.VITE_DISCORD_WEBHOOK_URL
       if (webhookUrl) {
@@ -335,8 +338,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <Partners />
 
       <div className="mq" aria-hidden="true">
         <div className="mq-w">
