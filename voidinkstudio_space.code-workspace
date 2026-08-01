@@ -8,6 +8,9 @@
 		},
 		{
 			"path": "../backend-voidink"
+		},
+		{
+			"path": "../Portfolio-Website"
 		}
 	],
 	"settings": {}

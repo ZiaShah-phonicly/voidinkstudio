@@ -163,7 +163,7 @@ export default function AdminOrdersPage() {
         <form onSubmit={onSearch} className="admin-search">
           <input
             type="search"
-            placeholder="Search name, email, service, package…"
+            placeholder="Search tracking ID, name, email, service…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -211,11 +211,11 @@ export default function AdminOrdersPage() {
                 </span>
               </div>
               <div className="admin-order-row-meta">
+                <span>{order.tracking_id || 'No tracking ID'}</span>
                 <span>{order.email}</span>
-                <span>{order.service || '—'}</span>
               </div>
               <div className="admin-order-row-meta">
-                <span>{order.package || 'Custom'}</span>
+                <span>{order.service || '—'}</span>
                 <span>{formatWhen(order.created_at)}</span>
               </div>
             </button>
@@ -237,6 +237,12 @@ export default function AdminOrdersPage() {
               </div>
 
               <dl className="admin-dl">
+                <div>
+                  <dt>Tracking ID</dt>
+                  <dd>
+                    <code>{detail.tracking_id || '—'}</code>
+                  </dd>
+                </div>
                 <div>
                   <dt>Email</dt>
                   <dd>

@@ -13,6 +13,7 @@ import AdminLayout from './pages/admin/AdminLayout'
 import AdminLoginPage from './pages/admin/AdminLoginPage'
 import AdminOrdersPage from './pages/admin/AdminOrdersPage'
 import AdminUsersPage from './pages/admin/AdminUsersPage'
+import TrackOrderPage from './pages/TrackOrderPage'
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/track" element={<TrackOrderPage />} />
+          <Route path="/track/:trackingId" element={<TrackOrderPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-service" element={<TermsOfServicePage />} />
           <Route path="/faq" element={<FaqPage />} />

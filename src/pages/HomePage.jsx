@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
+import GoldTubesBackground from '../components/GoldTubesBackground'
 import PricingCard from '../components/PricingCard'
 import Reveal, { RevealItem } from '../components/Reveal'
 import useOutsideClose from '../hooks/useOutsideClose'
 import { homeFaqPreview } from '../data/faqData'
+import { submitToGoogleSheet } from '../utils/submitToGoogleSheet'
 import { submitToVoidinkApi } from '../utils/submitToVoidinkApi'
 import {
   budgetOptions,
@@ -88,6 +90,8 @@ export default function HomePage() {
   const location = useLocation()
   const [pricingTab, setPricingTab] = useState('web')
   const [formSuccess, setFormSuccess] = useState(false)
+  const [trackingId, setTrackingId] = useState('')
+  const [copiedTracking, setCopiedTracking] = useState(false)
   const [formError, setFormError] = useState('')
   const [formSubmitting, setFormSubmitting] = useState(false)
   const [formData, setFormData] = useState(emptyForm)
@@ -195,14 +199,28 @@ export default function HomePage() {
         references: formData.references,
       }
 
-      // MongoDB + Google Sheet both happen on the backend submit endpoint
-      // (sheet URL is GOOGLE_SHEETS_URL in backend-voidink/.env).
-      await submitToVoidinkApi(formPayload)
+      // Temporary: sheet-only mode (VITE_FORM_USE_API=false). Flip to true when Mongo/API is ready again.
+      const useApi = String(import.meta.env.VITE_FORM_USE_API || '').toLowerCase() === 'true'
+      let result = null
+
+      if (useApi) {
+        try {
+          result = await submitToVoidinkApi(formPayload)
+        } catch (apiError) {
+          console.warn('Voidink API submit failed, falling back to Google Sheet:', apiError)
+          await submitToGoogleSheet(formPayload)
+        }
+      } else {
+        await submitToGoogleSheet(formPayload)
+      }
+
+      const nextTrackingId = result?.tracking_id || result?.order?.tracking_id || ''
 
       const webhookUrl = import.meta.env.VITE_DISCORD_WEBHOOK_URL
       if (webhookUrl) {
         const content = [
           'New VOIDINK Form Submission',
+          `Tracking ID: ${nextTrackingId || 'N/A'}`,
           `Name: ${formData.name}`,
           `Email: ${formData.email}`,
           `Service: ${formData.service}`,
@@ -221,9 +239,10 @@ export default function HomePage() {
         })
       }
 
+      setTrackingId(nextTrackingId)
+      setCopiedTracking(false)
       setFormSuccess(true)
       setFormData(emptyForm)
-      setTimeout(() => setFormSuccess(false), 5000)
     } catch (error) {
       setFormError(error.message || 'Something went wrong. Please email voidinkstudios1@gmail.com')
     } finally {
@@ -248,7 +267,8 @@ export default function HomePage() {
   const featuredWork = workItems.filter((item) => item.featured).slice(0, 6)
 
   return (
-    <>
+    <div className="home-page">
+      <GoldTubesBackground />
       <section className="hero" id="home" aria-labelledby="hero-title">
         <div className="hero-bg" aria-hidden="true">
           <div className="hero-orb ho1" />
@@ -390,7 +410,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="work" style={{ background: 'var(--bg2)' }}>
+      <section className="section" id="work">
         <div className="container">
           <Reveal>
             <div className="section-label">✦ Selected Work</div>
@@ -465,7 +485,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="pricing" style={{ background: 'var(--bg2)' }}>
+      <section className="section" id="pricing">
         <div className="container">
           <Reveal>
             <div className="section-label">✦ Pricing</div>
@@ -785,8 +805,36 @@ export default function HomePage() {
                   </div>
                 )}
                 {formSuccess && (
-                  <div id="fs" role="alert" style={{ textAlign: 'center', padding: '16px', color: '#4ade80', fontWeight: 600, marginTop: '12px' }}>
-                    ✅ Thank you! We'll respond ASAP!
+                  <div id="fs" className="form-success" role="alert">
+                    <p className="form-success-title">Thank you — we received your query.</p>
+                    {trackingId ? (
+                      <>
+                        <p className="form-success-sub">Save your tracking ID to check status anytime:</p>
+                        <div className="form-tracking">
+                          <code>{trackingId}</code>
+                          <button
+                            type="button"
+                            className="form-tracking-copy"
+                            onClick={async () => {
+                              try {
+                                await navigator.clipboard.writeText(trackingId)
+                                setCopiedTracking(true)
+                                setTimeout(() => setCopiedTracking(false), 2000)
+                              } catch {
+                                setCopiedTracking(false)
+                              }
+                            }}
+                          >
+                            {copiedTracking ? 'Copied' : 'Copy'}
+                          </button>
+                          <Link to={`/track/${trackingId}`} className="form-tracking-link">
+                            Track order →
+                          </Link>
+                        </div>
+                      </>
+                    ) : (
+                      <p className="form-success-sub">We&apos;ll respond ASAP.</p>
+                    )}
                   </div>
                 )}
               </form>
@@ -837,6 +885,6 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   )
 }

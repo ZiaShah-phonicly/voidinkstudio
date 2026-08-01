@@ -18,6 +18,7 @@ const navLinks = [
   { to: '/#process', label: 'Process' },
   { to: '/#pricing', label: 'Pricing' },
   { to: '/#testimonials', label: 'Reviews' },
+  { to: '/track', label: 'Track', route: true },
   { to: '/faq', label: 'FAQ' },
 ]
 
@@ -73,7 +74,7 @@ export default function SiteLayout() {
 
   useEffect(() => {
     setMenuOpen(false)
-    const isInnerPage = ['/services', '/about', '/privacy-policy', '/terms-of-service', '/faq', '/login', '/register'].some(
+    const isInnerPage = ['/services', '/about', '/privacy-policy', '/terms-of-service', '/faq', '/login', '/register', '/track'].some(
       (path) => location.pathname.startsWith(path),
     )
     document.documentElement.classList.toggle('is-service-page', isInnerPage)
@@ -105,15 +106,10 @@ export default function SiteLayout() {
     navigate('/')
   }
 
-  const navActions = auth
-    ? [
-        { to: '/about', label: 'About Us', className: 'nav-cta nav-cta-ghost' },
-        { to: '/#query', label: 'Get Quote', className: 'nav-cta' },
-      ]
-    : [
-        { to: '/login', label: 'Log In', className: 'nav-cta nav-cta-ghost', route: true },
-        { to: '/register', label: 'Register', className: 'nav-cta', route: true },
-      ]
+  const navActions = [
+    { to: '/about', label: 'About Us', className: 'nav-cta nav-cta-ghost' },
+    { to: '/#query', label: 'Get Quote', className: 'nav-cta' },
+  ]
 
   return (
     <>
@@ -339,6 +335,9 @@ export default function SiteLayout() {
                 </li>
                 <li>
                   <Link to="/terms-of-service">Terms of Service</Link>
+                </li>
+                <li>
+                  <Link to="/track">Track Order</Link>
                 </li>
                 <li>
                   <Link to="/faq">FAQ</Link>

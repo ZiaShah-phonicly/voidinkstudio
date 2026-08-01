@@ -28,3 +28,4 @@ dist-ssr
 public
 .env.example
 vite.config.js
+.env.example
