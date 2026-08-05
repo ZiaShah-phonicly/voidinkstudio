@@ -84,7 +84,7 @@ voidinkstudio/
 | ~~`/login`, `/register`~~ | Auth | **Removed** — public password forms + open registration were flagged by Google Safe Browsing. Page components still exist in `src/pages/` but are unrouted (so tree-shaken out of the bundle). Staff accounts are created with `backend-voidink/scripts/create_admin.py`. |
 | `/track`, `/track/:trackingId` | `TrackOrderPage` | Needs backend tracking API |
 | `/faq`, `/privacy-policy`, `/terms-of-service` | Legal/FAQ | |
-| `/admin/login` | Admin login | Outside SiteLayout |
+| `/admin/login` | Admin login | Google reCAPTCHA v2 when `VITE_RECAPTCHA_SITE_KEY` is set; backend must also enable verification |
 | `/admin` | Orders dashboard | Staff JWT required |
 | `/admin/users` | User management | Staff JWT required |
 | `/admin/crm` | Native CRM (pipeline + contacts) | Staff JWT; data from Mongo orders |
@@ -143,6 +143,7 @@ Home hash sections: `#home` `#services` `#work` `#process` `#pricing` `#testimon
 | `VITE_FORM_USE_API` | `true` = Mongo API; `false` = Sheet only |
 | `VITE_API_URL` | API origin; empty = use Vite `/api` proxy |
 | `VITE_DISCORD_WEBHOOK_URL` | Optional |
+| `VITE_RECAPTCHA_SITE_KEY` | Google reCAPTCHA v2 checkbox site key for `/admin/login`; pair with backend `RECAPTCHA_*` env |
 | `VITE_TUBES_ENABLED` | `true` / `false` — hero tubes WebGL cursor (default off; heavy) |
 | `VITE_TUBES_THEME` | `voidink` \| `gold` \| `silver` (only when enabled) |
 | `VITE_TUBES_COLORS` / `LIGHTS` / `INTENSITY` | Hero tubes overrides |

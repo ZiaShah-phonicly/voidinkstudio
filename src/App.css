@@ -734,6 +734,8 @@ body.cookie-banner-open{padding-bottom:100px}
 .admin-form input,.admin-detail select,.admin-search input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#12121c;color:var(--text);font:inherit}
 .admin-form button,.admin-search button,.admin-refresh{padding:12px 16px;border:none;border-radius:999px;background:linear-gradient(135deg,#7C3AED,#D946EF);color:#fff;font-weight:600;cursor:pointer}
 .admin-form button:disabled,.admin-refresh:disabled{opacity:.6;cursor:wait}
+.admin-recaptcha{min-height:78px;overflow:hidden}
+.admin-recaptcha>div{transform-origin:left top}
 .admin-error{color:#f87171;font-size:.85rem}
 .admin-foot{margin-top:18px;font-size:.85rem}
 .admin-foot a,.admin-link{color:var(--accent2);text-decoration:none;background:none;border:none;cursor:pointer;font:inherit}
@@ -869,4 +871,13 @@ body.cookie-banner-open{padding-bottom:100px}
   .admin-detail{position:static}
   .admin-list{max-height:none}
   .admin-crm-board{grid-template-columns:minmax(240px,1fr);min-height:auto}
+}
+@media(max-width:400px){
+  .admin-login-card{padding:28px 16px}
+  .admin-recaptcha{min-height:74px}
+  .admin-recaptcha>div{transform:scale(.94)}
+}
+@media(max-width:340px){
+  .admin-recaptcha{min-height:64px}
+  .admin-recaptcha>div{transform:scale(.81)}
 }
