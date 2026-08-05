@@ -35,6 +35,9 @@
 		},
 		{
 			"path": "../websiteprompts"
+		},
+		{
+			"path": "../backend-voidinkstudio"
 		}
 	],
 	"settings": {}

@@ -1,4 +1,6 @@
 import { Link, Navigate, NavLink, Outlet, useNavigate } from 'react-router-dom'
+import SiteFooter from '../../components/SiteFooter'
+import SiteHeader from '../../components/SiteHeader'
 import { clearAuth, getAuth } from '../../utils/authApi'
 
 export default function AdminLayout() {
@@ -19,7 +21,8 @@ export default function AdminLayout() {
 
   return (
     <div className="admin-shell">
-      <header className="admin-top">
+      <SiteHeader />
+      <div className="admin-top">
         <div className="admin-top-inner">
           <Link to="/admin" className="admin-brand">
             VOIDINK <span>Admin</span>
@@ -47,10 +50,11 @@ export default function AdminLayout() {
             </button>
           </div>
         </div>
-      </header>
+      </div>
       <main className="admin-main">
         <Outlet />
       </main>
+      <SiteFooter />
     </div>
   )
 }
