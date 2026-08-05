@@ -31,8 +31,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services/:slug" element={<ServicePage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
+          {/* <Route path="/login" element={<LoginPage />} /> */}
+          <Route path="/admin/register" element={<RegisterPage />} />
           <Route path="/track" element={<TrackOrderPage />} />
           <Route path="/track/:trackingId" element={<TrackOrderPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />

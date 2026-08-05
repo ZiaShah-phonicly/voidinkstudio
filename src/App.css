@@ -719,12 +719,16 @@ body.cookie-banner-open{padding-bottom:100px}
 }
 
 /* —— Admin portal —— */
-.admin-shell{min-height:100vh;background:radial-gradient(1200px 600px at 10% -10%,rgba(124,58,237,.18),transparent 55%),radial-gradient(900px 500px at 90% 0%,rgba(34,211,238,.08),transparent 50%),#0b0b12;color:var(--text);font-family:'Inter',system-ui,sans-serif}
-.admin-login-shell{display:grid;place-items:center;padding:40px 20px}
-.admin-login-card{width:min(420px,100%);padding:36px 32px;border:1px solid rgba(255,255,255,.08);background:rgba(18,18,28,.92);border-radius:18px}
+.admin-shell{min-height:100vh;display:flex;flex-direction:column;padding-top:130px;background:radial-gradient(1200px 600px at 10% -10%,rgba(124,58,237,.18),transparent 55%),radial-gradient(900px 500px at 90% 0%,rgba(34,211,238,.08),transparent 50%),#0b0b12;color:var(--text);font-family:'Inter',system-ui,sans-serif}
+.admin-login-shell{flex:1;display:grid;place-items:center;padding:40px 20px 70px}
+.admin-login-head{text-align:center;margin-bottom:24px}
+.admin-login-note{margin:18px 0 0;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.07);background:rgba(11,11,18,.6);font-size:.76rem;line-height:1.6;color:var(--text2)}
+.admin-login-note strong{color:var(--text)}
+.admin-login-card{width:min(440px,100%);padding:36px 32px;border:1px solid rgba(255,255,255,.08);background:rgba(18,18,28,.92);border-radius:18px}
 .admin-kicker{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent2);margin-bottom:10px}
 .admin-login-card h1{font-size:1.8rem;margin:0 0 8px;letter-spacing:-.03em}
 .admin-sub{color:var(--text2);font-size:.9rem;margin-bottom:24px}
+.admin-login-head .admin-sub{margin-bottom:0}
 .admin-form{display:grid;gap:14px}
 .admin-form label{display:grid;gap:6px;font-size:.8rem;color:var(--text2)}
 .admin-form input,.admin-detail select,.admin-search input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:#12121c;color:var(--text);font:inherit}
@@ -733,7 +737,7 @@ body.cookie-banner-open{padding-bottom:100px}
 .admin-error{color:#f87171;font-size:.85rem}
 .admin-foot{margin-top:18px;font-size:.85rem}
 .admin-foot a,.admin-link{color:var(--accent2);text-decoration:none;background:none;border:none;cursor:pointer;font:inherit}
-.admin-top{border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);position:sticky;top:0;z-index:20;background:rgba(11,11,18,.85)}
+.admin-top{border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(10px);background:rgba(11,11,18,.85)}
 .admin-top-inner{max-width:1200px;margin:0 auto;padding:14px 20px;display:flex;justify-content:space-between;align-items:center;gap:16px}
 .admin-brand{color:#fff;text-decoration:none;font-weight:700;letter-spacing:.04em}
 .admin-brand span{color:var(--accent2);font-weight:500;margin-left:6px}
@@ -743,7 +747,7 @@ body.cookie-banner-open{padding-bottom:100px}
 .admin-nav a.on{color:#fff;border-color:rgba(124,58,237,.55);background:rgba(124,58,237,.18)}
 .admin-top-actions{display:flex;align-items:center;gap:14px}
 .admin-who{font-size:.85rem;color:var(--text2)}
-.admin-main{max-width:1200px;margin:0 auto;padding:28px 20px 60px}
+.admin-main{width:100%;max-width:1200px;margin:0 auto;padding:28px 20px 60px;flex:1}
 .admin-main:has(.admin-crm){max-width:1480px}
 .admin-orders-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:22px}
 .admin-orders-head h1{margin:0;font-size:2rem;letter-spacing:-.03em}
@@ -859,6 +863,7 @@ body.cookie-banner-open{padding-bottom:100px}
 @media(max-width:900px){
   .admin-top-inner{flex-wrap:wrap}
   .admin-nav{margin:0;width:100%;order:3}
+  .admin-shell{padding-top:100px}
   .admin-stat-grid,.admin-stat-grid-5{grid-template-columns:repeat(2,1fr)}
   .admin-split{grid-template-columns:1fr}
   .admin-detail{position:static}

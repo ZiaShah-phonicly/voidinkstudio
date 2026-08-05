@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import SiteFooter from '../../components/SiteFooter'
+import SiteHeader from '../../components/SiteHeader'
 import { getAuth } from '../../utils/authApi'
 import { adminLogin } from '../../utils/adminApi'
 
@@ -30,44 +32,57 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="admin-shell admin-login-shell">
-      <div className="admin-login-card">
-        <p className="admin-kicker">Team access</p>
-        <h1>VOIDINK Admin</h1>
-        <p className="admin-sub">Sign in to review order form submissions.</p>
+    <div className="admin-shell">
+      <SiteHeader />
+      <main className="admin-login-shell">
+        <div className="admin-login-card">
+          <div className="admin-login-head">
+            <p className="admin-kicker">Staff access only</p>
+            <h1>
+              VOIDINK <span className="gt">Admin</span>
+            </h1>
+            <p className="admin-sub">Sign in to review order form submissions.</p>
+          </div>
 
-        <form onSubmit={onSubmit} className="admin-form">
-          <label>
-            Email
-            <input
-              type="email"
-              required
-              autoComplete="username"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </label>
-          <label>
-            Password
-            <input
-              type="password"
-              required
-              minLength={6}
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
-          {error ? <p className="admin-error">{error}</p> : null}
-          <button type="submit" disabled={submitting}>
-            {submitting ? 'Signing in…' : 'Enter admin'}
-          </button>
-        </form>
+          <form onSubmit={onSubmit} className="admin-form">
+            <label>
+              Email
+              <input
+                type="email"
+                required
+                autoComplete="username"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </label>
+            <label>
+              Password
+              <input
+                type="password"
+                required
+                minLength={6}
+                autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
+            {error ? <p className="admin-error">{error}</p> : null}
+            <button type="submit" disabled={submitting}>
+              {submitting ? 'Signing in…' : 'Enter admin'}
+            </button>
+          </form>
 
-        <p className="admin-foot">
-          <Link to="/">← Back to site</Link>
-        </p>
-      </div>
+          <p className="admin-login-note">
+            This is the official VOIDINK Studios staff portal on <strong>voidinkstudios.com</strong>. Never enter your
+            VOIDINK password on any other site.
+          </p>
+
+          <p className="admin-foot">
+            <Link to="/">← Back to site</Link>
+          </p>
+        </div>
+      </main>
+      <SiteFooter />
     </div>
   )
 }
