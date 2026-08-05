@@ -1,11 +1,11 @@
 # VOIDINK web deploy (VPS) — Phonicly-style pull + build
 
 Site: https://voidinkstudios.com  
-Repo checkout (example): `/var/www/voidink_frontend/voidinkstudio`  
+Repo checkout on the VPS: `/var/www/frontend`  
 Script: `./deploy-web.sh` (same shape as `Dev-Frontend/deploy-web.sh`)
 
 This is **not** Docker. Static `dist/` is built on the box; host nginx serves it.
-Backend API stays separate (`backend-voidink` Docker → `api.voidink.studio`).
+Backend API stays separate (`backend-voidink` Docker → `api.voidinkstudios.com`).
 
 ## One-time bootstrap
 
@@ -13,14 +13,13 @@ Backend API stays separate (`backend-voidink` Docker → `api.voidink.studio`).
 ssh root@YOUR_VPS_IP
 
 # checkout (read-only deploy key recommended)
-sudo mkdir -p /var/www/voidink_frontend
-sudo git clone git@github.com:YOUR_ORG/voidinkstudio.git /var/www/voidink_frontend/voidinkstudio
-cd /var/www/voidink_frontend/voidinkstudio
+sudo git clone git@github.com:YOUR_ORG/voidinkstudio.git /var/www/frontend
+cd /var/www/frontend
 chmod +x deploy-web.sh
 
 # VPS-only secrets / build env (gitignored — backup this file)
 cat > .env <<'EOF'
-VITE_API_URL=https://api.voidink.studio
+VITE_API_URL=https://api.voidinkstudios.com
 VITE_FORM_USE_API=true
 VITE_GOOGLE_SHEETS_URL=
 VITE_DISCORD_WEBHOOK_URL=
@@ -29,7 +28,7 @@ EOF
 # If API subdomain not ready yet: leave VITE_FORM_USE_API=false and set Sheets URL.
 
 # nginx + TLS
-sudo cp deploy/nginx.voidinkstudios.com.example /etc/nginx/sites-available/voidinkstudios.com
+sudo cp deploy/nginx.voidinkstudios.com.conf /etc/nginx/sites-available/voidinkstudios.com
 sudo ln -sf /etc/nginx/sites-available/voidinkstudios.com /etc/nginx/sites-enabled/
 # Point DNS A records for voidinkstudios.com + www at this VPS first, then:
 sudo certbot --nginx -d voidinkstudios.com -d www.voidinkstudios.com
@@ -43,7 +42,7 @@ sudo nginx -t && sudo systemctl reload nginx
 
 ```bash
 ssh root@YOUR_VPS_IP
-cd /var/www/voidink_frontend/voidinkstudio && ./deploy-web.sh
+cd /var/www/frontend && ./deploy-web.sh
 ```
 
 `deploy-web.sh`: `git reset --hard origin/main` → `npm ci` only if lockfile changed → build to `dist.new` → backup live → atomic swap → `chown`.
@@ -59,11 +58,11 @@ curl -s https://voidinkstudios.com/ | grep -oE 'assets/index-[A-Za-z0-9_-]+\.js'
 ## Rollback
 
 ```bash
-cd /var/www/voidink_frontend
-# latest backup:
-tar -xzf dist-backup-YYYYMMDD-HHMMSS.tgz -C voidinkstudio/dist
+cd /var/www
+# latest backup sits next to the checkout:
+tar -xzf dist-backup-YYYYMMDD-HHMMSS.tgz -C frontend/dist
 # or:
-cd voidinkstudio && mv dist dist.bad && mv dist.old dist
+cd frontend && mv dist dist.bad && mv dist.old dist
 ```
 
 ## Order with backend
