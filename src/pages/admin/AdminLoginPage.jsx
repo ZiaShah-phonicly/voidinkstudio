@@ -22,6 +22,8 @@ export default function AdminLoginPage() {
   usePageMeta({
     title: 'VOIDINK Studios — Team Admin Login',
     robots: 'noindex, nofollow, noarchive',
+    description: 'Authorized team login portal for VOIDINK Studios staff. Internal use only.',
+    canonical: 'none',
   })
 
   if (existing?.access && existing.is_staff) {

@@ -4,6 +4,7 @@ import SiteLayout from './components/SiteLayout'
 import AboutPage from './pages/AboutPage'
 import FaqPage from './pages/FaqPage'
 import HomePage from './pages/HomePage'
+import NotFoundPage from './pages/NotFoundPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import ServicePage from './pages/ServicePage'
 import TermsOfServicePage from './pages/TermsOfServicePage'
@@ -23,6 +24,7 @@ function App() {
           <Route index element={<AdminOrdersPage />} />
           <Route path="users" element={<AdminUsersPage />} />
           <Route path="crm" element={<AdminCrmPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
 
         <Route element={<SiteLayout />}>
@@ -34,6 +36,7 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-service" element={<TermsOfServicePage />} />
           <Route path="/faq" element={<FaqPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

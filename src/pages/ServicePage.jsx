@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
-import { Link, Navigate, useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import Reveal, { RevealItem } from '../components/Reveal'
 import PricingCard from '../components/PricingCard'
 import useOutsideClose from '../hooks/useOutsideClose'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
 import { getServiceGallery } from '../data/serviceGalleries'
 import { pricingCategories } from '../data/voidinkData'
+import NotFoundPage from './NotFoundPage'
 
 const ORDER_STORAGE_KEY = 'voidink_pending_order'
 
@@ -25,7 +26,7 @@ export default function ServicePage() {
   useOutsideClose(faqListRef, openFaq !== null, closeFaq)
 
   if (!service) {
-    return <Navigate to="/" replace />
+    return <NotFoundPage />
   }
 
   const pricing = pricingCategories.find((cat) => cat.id === service.pricingCategoryId)

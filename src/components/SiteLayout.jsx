@@ -4,6 +4,7 @@ import ChatWidget from './ChatWidget'
 import CookieConsent from './CookieConsent'
 import SiteFooter from './SiteFooter'
 import SiteHeader from './SiteHeader'
+import usePageMeta from '../hooks/usePageMeta'
 
 export default function SiteLayout() {
   const [loading, setLoading] = useState(true)
@@ -12,6 +13,10 @@ export default function SiteLayout() {
   const [cursorHover, setCursorHover] = useState(false)
   const cursorRef = useRef(null)
   const location = useLocation()
+
+  // index.html hardcodes the homepage canonical, which would mark every other
+  // public route as a duplicate of "/".
+  usePageMeta({ canonical: `${window.location.origin}${location.pathname}` })
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 600)

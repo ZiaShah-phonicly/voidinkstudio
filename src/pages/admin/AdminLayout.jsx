@@ -11,6 +11,8 @@ export default function AdminLayout() {
   usePageMeta({
     title: 'VOIDINK Studios — Team Admin Portal',
     robots: 'noindex, nofollow, noarchive',
+    description: 'Internal VOIDINK Studios staff portal for orders, users and CRM. Not a public page.',
+    canonical: 'none',
   })
 
   if (!auth?.access) {
