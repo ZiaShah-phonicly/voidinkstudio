@@ -269,7 +269,7 @@ export default function TermsOfServicePage() {
           <p>
             <strong>VOIDINK Studios</strong>
             <br />
-            Email: <a href="mailto:voidinkstudios@gmail.com">voidinkstudios@gmail.com</a>
+            Email: <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
             <br />
             Website:{' '}
             <a href="https://voidinkstudios.netlify.app" target="_blank" rel="noopener noreferrer">

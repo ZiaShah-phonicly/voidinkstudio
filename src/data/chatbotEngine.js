@@ -207,7 +207,6 @@ function pickPackageByScope(pricing, scope) {
           ...refPkg,
           name: `Reference Sheet (${variant.label})`,
           price: variant.price,
-          original: variant.original,
           desc: variant.desc,
           features: variant.features,
         }

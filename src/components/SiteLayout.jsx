@@ -4,6 +4,7 @@ import ChatWidget from './ChatWidget'
 import CookieConsent from './CookieConsent'
 import { LogoMark } from './LogoMark'
 import { serviceDetails } from '../data/serviceDetails'
+import { studioStatsCopy } from '../data/voidinkData'
 import { clearAuth, getAuth } from '../utils/authApi'
 
 const artServiceSlugs = ['custom-character-design', 'mascot-design', 'comic-book-art', 'dnd-character-art', 'furry-art', '2d-vtuber-models']
@@ -222,8 +223,8 @@ export default function SiteLayout() {
                 <LogoMark />
               </Link>
               <p>
-                Art born from the void. World-class creative studio for art, design, AI & development. Trusted by 200+
-                clients in 25 countries.
+                Art born from the void. World-class creative studio for art, design, AI & development.{' '}
+                {studioStatsCopy.trustedBy}.
               </p>
               <div className="sl">
                 {[

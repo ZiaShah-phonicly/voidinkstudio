@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+
+Sitemap: https://voidinkstudios.com/sitemap.xml

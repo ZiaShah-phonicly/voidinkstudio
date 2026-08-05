@@ -144,8 +144,11 @@ Home hash sections: `#home` `#services` `#work` `#process` `#pricing` `#testimon
 | `VITE_FORM_USE_API` | `true` = Mongo API; `false` = Sheet only |
 | `VITE_API_URL` | API origin; empty = use Vite `/api` proxy |
 | `VITE_DISCORD_WEBHOOK_URL` | Optional |
-| `VITE_TUBES_THEME` | `voidink` \| `gold` \| `silver` |
+| `VITE_TUBES_ENABLED` | `true` / `false` — hero tubes WebGL cursor (default off; heavy) |
+| `VITE_TUBES_THEME` | `voidink` \| `gold` \| `silver` (only when enabled) |
 | `VITE_TUBES_COLORS` / `LIGHTS` / `INTENSITY` | Hero tubes overrides |
+
+Also ship `public/robots.txt` + `public/sitemap.xml`. Prod nginx: see `deploy/nginx.voidinkstudios.com.example` (HSTS / X-Frame-Options).
 
 **Rules:**
 

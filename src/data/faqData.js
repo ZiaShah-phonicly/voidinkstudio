@@ -17,7 +17,7 @@ export const faqCategories = [
       {
         q: 'How do I get started with a project?',
         a: [
-          'Fill out the contact form on our homepage or email us at voidinkstudios@gmail.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
+          'Fill out the contact form on our homepage or email us at voidinkstudios1@gmail.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
         ],
       },
       {
@@ -33,85 +33,125 @@ export const faqCategories = [
     items: [
       {
         q: 'How much does a typical project cost?',
-        a: ['Pricing depends on the scope, complexity, and turnaround time of your project. Here are our typical starting prices by service:'],
+        a: [
+          'Pricing depends on the scope, complexity, and turnaround time of your project. Here are our current package prices (same as the Pricing section on the homepage):',
+        ],
         groups: [
           {
-            title: '?? Website Design & Development',
+            title: 'Website Design & Development',
             list: [
-              'Starter: $399 ? Single-page responsive website',
-              'Professional: $999 ? Up to 7 custom pages + CMS',
-              'E-Commerce: $2,499 ? Full store with payment gateway',
+              'Starter: $399 — Single-page responsive website',
+              'Professional: $999 — Up to 7 custom pages + CMS',
+              'E-Commerce: $2,499 — Full store with payment gateway',
             ],
           },
           {
-            title: '?? AI Chatbots, Voice Agents & Automations',
+            title: 'AI Chatbots, Voice Agents & Automations',
             list: [
-              'Basic Chatbot: $499 ? Website or WhatsApp integration',
-              'Advanced AI Agent: $1,299 ? Multi-platform + voice + automation',
-              'Enterprise: $2,500+ ? Custom AI systems & workflows',
+              'Starter: $299 — Website chatbot + lead capture',
+              'Professional: $799 — Full automation (n8n / multi-channel)',
+              'Enterprise: $1,499 — Voice AI + custom workflows',
             ],
           },
           {
-            title: '?? App Development',
+            title: 'App Development',
             list: [
-              'MVP: $2,999 ? Single-platform app (iOS or Android)',
-              'Full App: $5,999 ? Cross-platform with backend',
-              'Enterprise: $10,000+ ? Complex apps with custom features',
+              'Starter: $599 — Single-platform app (up to 5 screens)',
+              'Professional: $2,499 — iOS + Android',
+              'Enterprise: $4,499 — Complex apps (up to 25 screens)',
             ],
           },
           {
-            title: '?? Art & Illustration',
+            title: 'Comic Book Art',
             list: [
-              'Custom Character Design: $79 ? $249 depending on complexity',
-              'DnD Character Art: $99 ? $299 per character',
-              'Furry Art: $89 ? $349 depending on detail level',
-              'NSFW Art: $99 ? $399 (confidential & private)',
-              'Cover Art: $149 ? $499 (album, book, or game covers)',
+              'Starter: $399 — 4 illustrated pages',
+              'Standard: $999 — 12 pages',
+              'Full Issue: $2,499 — 24 pages',
             ],
           },
           {
-            title: '?? Comic Book Art',
+            title: 'Branding & Logo',
             list: [
-              'Per Page: $75 ? $150 (pencils, inks, colors, lettering)',
-              'Full Issue (24 pages): $1,499 ? $2,999',
+              'Logo Only: $59',
+              'Brand Starter: $199',
+              'Full Brand Identity: $499',
             ],
           },
           {
-            title: '?? 2D VTuber Models',
-            list: ['Model Art Only: $299 ? $599', 'Art + Live2D Rigging: $599 ? $1,499'],
-          },
-          {
-            title: '?? 3D Models',
+            title: 'Mascot Design',
             list: [
-              'Simple Prop/Item: $149 ? $299',
-              'Character Model: $399 ? $899',
-              'Environment/Scene: $599 ? $1,499',
+              'Basic: $99',
+              'Professional: $169',
+              'Ultimate: $249 — with animation',
             ],
           },
           {
-            title: '??? Branding & Logo',
+            title: '2D VTuber Models',
             list: [
-              'Logo Only: $199 ? $499',
-              'Full Brand Identity: $799 ? $1,999 (logo, colors, typography, guidelines)',
+              'Half Body No Rig: $149',
+              'Half Body Rigged: $299',
+              'Full Body No Rig: $249',
+              'Full Body Rigged: $499',
             ],
           },
           {
-            title: '?? Animation',
+            title: '3D Models',
             list: [
-              'Logo Reveal: $199 ? $499',
-              'Explainer Video: $599 ? $1,499 per minute',
-              'Character Animation: $399 ? $999 per minute',
+              'Basic: $249',
+              'Professional: $349 — with rigging',
+              'Premium: $599',
             ],
           },
           {
-            title: '?? Mascot Design',
+            title: 'Animation',
             list: [
-              'Basic Mascot: $249 ? $499',
-              'Full Mascot Package: $599 ? $1,199 (multiple poses, expressions, brand kit)',
+              'Logo Animation: $99',
+              'Explainer Video: $499',
+              'Character Animation: $899',
+            ],
+          },
+          {
+            title: 'Custom Character Design',
+            list: [
+              'Bust / Headshot: $49',
+              'Half Body: $99',
+              'Full Body: $149',
+            ],
+          },
+          {
+            title: 'DnD Character Art',
+            list: [
+              'Character Art: $99',
+              'Character Scene: $149',
+              'Full Party: $449 — up to 6 characters',
+            ],
+          },
+          {
+            title: 'Furry Art',
+            list: [
+              'Headshot: $39',
+              'Reference Sheet (SFW): $149 · (NSFW): $199',
+              'Full Scene: $299',
+            ],
+          },
+          {
+            title: 'NSFW Art',
+            list: [
+              'Single Character: $99',
+              'Full Scene: $199',
+              'Illustrated Pages: $399',
+            ],
+          },
+          {
+            title: 'Cover Art',
+            list: [
+              'Album / Single Cover: $99',
+              'Book Cover: $249',
+              'Game Cover / Key Art: $449',
             ],
           },
         ],
-        note: 'All prices are starting estimates. For an exact quote tailored to your project, contact us with your requirements.',
+        note: 'These match our live pricing cards. For a custom quote, use the contact form on the homepage.',
       },
       {
         q: 'What payment methods do you accept?',
@@ -282,7 +322,7 @@ export const homeFaqPreview = [
   },
   {
     q: 'How do I get started with a project?',
-    a: 'Fill out the contact form on our homepage or email us at voidinkstudios@gmail.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
+    a: 'Fill out the contact form on our homepage or email us at voidinkstudios1@gmail.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
   },
   {
     q: 'Do you require a deposit?',

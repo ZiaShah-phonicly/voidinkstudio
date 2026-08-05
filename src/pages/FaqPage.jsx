@@ -105,7 +105,7 @@ export default function FaqPage() {
             >
               Contact Us <span aria-hidden="true">→</span>
             </a>
-            <a href="mailto:voidinkstudios@gmail.com" className="bs">
+            <a href="mailto:voidinkstudios1@gmail.com" className="bs">
               Email Us
             </a>
           </div>

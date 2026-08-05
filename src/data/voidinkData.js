@@ -1,5 +1,22 @@
 import { serviceDetails } from './serviceDetails'
 
+/** Single source of truth for marketing stats (hero, about, footer, SEO). */
+export const studioStats = {
+  projects: 500,
+  clients: 200,
+  countries: 25,
+  services: 14,
+  satisfaction: 99,
+  rating: '4.9',
+}
+
+export const studioStatsCopy = {
+  clientsCountries: `${studioStats.clients}+ clients in ${studioStats.countries} countries`,
+  clientsCountriesTitle: `${studioStats.clients}+ Clients in ${studioStats.countries} Countries`,
+  projectsDelivered: `${studioStats.projects}+ Projects Delivered`,
+  trustedBy: `Trusted by ${studioStats.clients}+ clients in ${studioStats.countries} countries`,
+}
+
 export const marqueeItems = [
   'Website Design',
   'AI Chatbots & Voice',
@@ -32,318 +49,318 @@ export const workCategories = ['All', 'Web', 'AI Agents', 'Apps', 'Design']
 export const workItems = [
   {
     id: 'web-medical',
-    image: '/portfolio/web/web-01-medical.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-01-medical.webp',
     category: 'Web',
     title: 'Medical Clinic Website',
     meta: 'Website • Healthcare',
-    likes: 268,
     featured: false,
   },
   {
     id: 'web-real-estate',
-    image: '/portfolio/web/web-02-real-estate.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-02-real-estate.webp',
     category: 'Web',
     title: 'Real Estate Website',
     meta: 'Website • Property Listings',
-    likes: 291,
     featured: false,
   },
   {
     id: 'web-ecommerce',
-    image: '/portfolio/web/web-03-ecommerce.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-03-ecommerce.webp',
     category: 'Web',
     title: 'E-Commerce Store',
     meta: 'Website • Online Shop',
-    likes: 334,
     featured: true,
   },
   {
     id: 'web-restaurant',
-    image: '/portfolio/web/web-04-restaurant.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-04-restaurant.webp',
     category: 'Web',
     title: 'Restaurant Website',
     meta: 'Website • Hospitality',
-    likes: 247,
     featured: false,
   },
   {
     id: 'web-automotive',
-    image: '/portfolio/web/web-05-automotive.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-05-automotive.webp',
     category: 'Web',
     title: 'Automotive Dealership Site',
     meta: 'Website • Auto Sales',
-    likes: 256,
     featured: false,
   },
   {
     id: 'web-beauty-spa',
-    image: '/portfolio/web/web-06-beauty-spa.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-06-beauty-spa.webp',
     category: 'Web',
     title: 'Beauty & Spa Website',
     meta: 'Website • Wellness Brand',
-    likes: 278,
     featured: false,
   },
   {
     id: 'web-fitness',
-    image: '/portfolio/web/web-07-fitness.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-07-fitness.webp',
     category: 'Web',
     title: 'Fitness Studio Website',
     meta: 'Website • Gym & Training',
-    likes: 263,
     featured: false,
   },
   {
     id: 'web-saas',
-    image: '/portfolio/web/web-08-saas-landing.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-08-saas-landing.webp',
     category: 'Web',
     title: 'SaaS Product Landing',
     meta: 'Website • SaaS Landing',
-    likes: 312,
     featured: true,
   },
   {
     id: 'web-fashion',
-    image: '/portfolio/web/web-09-fashion-store.png',
+    serviceSlug: 'website-design-development',
+    image: '/portfolio/web/web-09-fashion-store.webp',
     category: 'Web',
     title: 'Fashion Store Website',
     meta: 'Website • Fashion Retail',
-    likes: 289,
     featured: false,
   },
   {
     id: 'app-fintech',
-    image: '/portfolio/apps/app-01-fintech.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-01-fintech.webp',
     category: 'Apps',
     title: 'Fintech Banking App',
     meta: 'Mobile • Finance',
-    likes: 318,
     featured: true,
   },
   {
     id: 'app-ecommerce',
-    image: '/portfolio/apps/app-02-ecommerce.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-02-ecommerce.webp',
     category: 'Apps',
     title: 'E-Commerce Shopping App',
     meta: 'Mobile • Retail',
-    likes: 295,
     featured: false,
   },
   {
     id: 'app-telemedicine',
-    image: '/portfolio/apps/app-03-telemedicine.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-03-telemedicine.webp',
     category: 'Apps',
     title: 'Telemedicine App',
     meta: 'Mobile • Healthcare',
-    likes: 274,
     featured: false,
   },
   {
     id: 'app-food-delivery',
-    image: '/portfolio/apps/app-04-food-delivery.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-04-food-delivery.webp',
     category: 'Apps',
     title: 'Food Delivery App',
     meta: 'Mobile • On-Demand',
-    likes: 301,
     featured: false,
   },
   {
     id: 'app-real-estate',
-    image: '/portfolio/apps/app-05-real-estate.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-05-real-estate.webp',
     category: 'Apps',
     title: 'Real Estate App',
     meta: 'Mobile • Property Search',
-    likes: 267,
     featured: false,
   },
   {
     id: 'app-saas-crm',
-    image: '/portfolio/apps/app-06-saas-crm.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-06-saas-crm.webp',
     category: 'Apps',
     title: 'SaaS CRM App',
     meta: 'Mobile • Business CRM',
-    likes: 288,
     featured: false,
   },
   {
     id: 'app-on-demand',
-    image: '/portfolio/apps/app-07-on-demand.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-07-on-demand.webp',
     category: 'Apps',
     title: 'On-Demand Services App',
     meta: 'Mobile • Services Marketplace',
-    likes: 254,
     featured: false,
   },
   {
     id: 'app-edtech',
-    image: '/portfolio/apps/app-08-edtech.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-08-edtech.webp',
     category: 'Apps',
     title: 'EdTech Learning App',
     meta: 'Mobile • Education',
-    likes: 276,
     featured: false,
   },
   {
     id: 'app-fitness',
-    image: '/portfolio/apps/app-09-fitness.png',
+    serviceSlug: 'app-development',
+    image: '/portfolio/apps/app-09-fitness.webp',
     category: 'Apps',
     title: 'Fitness & Wellness App',
     meta: 'Mobile • Health & Fitness',
-    likes: 292,
     featured: false,
   },
   {
     id: 'ai-customer-support',
-    image: '/portfolio/ai/ai-01-customer-support.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-01-customer-support.webp',
     category: 'AI Agents',
     title: 'AI Customer Support Bot',
     meta: 'Chatbot • Auto Support',
-    likes: 342,
     featured: false,
   },
   {
     id: 'ai-whatsapp',
-    image: '/portfolio/ai/ai-02-whatsapp-automation.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-02-whatsapp-automation.webp',
     category: 'AI Agents',
     title: 'WhatsApp Automation Agent',
     meta: 'Messaging • Auto Replies',
-    likes: 298,
     featured: false,
   },
   {
     id: 'ai-voice-agent',
-    image: '/portfolio/ai/ai-03-voice-agent.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-03-voice-agent.webp',
     category: 'AI Agents',
     title: 'AI Voice Agent',
     meta: 'Voice AI • Call Handling',
-    likes: 356,
     featured: true,
   },
   {
     id: 'ai-lead-gen',
-    image: '/portfolio/ai/ai-04-lead-gen.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-04-lead-gen.webp',
     category: 'AI Agents',
     title: 'Lead Generation Bot',
     meta: 'Chatbot • Lead Capture',
-    likes: 274,
     featured: false,
   },
   {
     id: 'ai-ecommerce',
-    image: '/portfolio/ai/ai-05-ecommerce.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-05-ecommerce.webp',
     category: 'AI Agents',
     title: 'E-Commerce AI Assistant',
     meta: 'Shopping • Support Agent',
-    likes: 311,
     featured: false,
   },
   {
     id: 'ai-restaurant',
-    image: '/portfolio/ai/ai-06-restaurant.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-06-restaurant.webp',
     category: 'AI Agents',
     title: 'Restaurant Booking Bot',
     meta: 'Hospitality • Orders',
-    likes: 259,
     featured: false,
   },
   {
     id: 'ai-real-estate',
-    image: '/portfolio/ai/ai-07-real-estate.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-07-real-estate.webp',
     category: 'AI Agents',
     title: 'Real Estate AI Agent',
     meta: 'Property • Lead Qualifier',
-    likes: 287,
     featured: false,
   },
   {
     id: 'ai-healthcare',
-    image: '/portfolio/ai/ai-08-healthcare.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-08-healthcare.webp',
     category: 'AI Agents',
     title: 'Healthcare Chatbot',
     meta: 'Medical • Patient Support',
-    likes: 268,
     featured: false,
   },
   {
     id: 'ai-workflow-auto',
-    image: '/portfolio/ai/ai-09-workflow.png',
+    serviceSlug: 'ai-agents-chatbots',
+    image: '/portfolio/ai/ai-09-workflow.webp',
     category: 'AI Agents',
     title: 'Workflow Automation',
     meta: 'n8n • Business Automations',
-    likes: 323,
     featured: false,
   },
   {
     id: 'brand-identity',
+    serviceSlug: 'branding-logo',
     image: '/portfolio/brandforge.jpg',
     category: 'Design',
     title: 'BrandForge Identity',
     meta: 'Branding • Logo System',
-    likes: 312,
     featured: true,
   },
   {
     id: 'brand-kit',
+    serviceSlug: 'branding-logo',
     image: '/portfolio/services/brand/5.jpg',
     category: 'Design',
     title: 'Visual Identity Suite',
     meta: 'Branding • Full Brand Kit',
-    likes: 278,
     featured: false,
   },
   {
     id: 'mascot-set',
+    serviceSlug: 'mascot-design',
     image: '/portfolio/services/mascot/1.jpg',
     category: 'Design',
     title: 'Brand Mascot Set',
     meta: 'Mascot • Character IP',
-    likes: 264,
     featured: false,
   },
   {
     id: 'stream-mascot',
+    serviceSlug: 'mascot-design',
     image: '/portfolio/services/mascot/4.jpg',
     category: 'Design',
     title: 'Stream Mascot Look',
     meta: 'Mascot • Brand Face',
-    likes: 241,
     featured: false,
   },
   {
     id: 'comic-cover',
+    serviceSlug: 'comic-book-art',
     image: '/portfolio/heroic-comics.jpg',
     category: 'Design',
     title: 'Hero Issue Cover',
     meta: 'Comic • Cover Art',
-    likes: 356,
-    featured: true,
+    featured: false,
   },
   {
     id: 'book-cover',
+    serviceSlug: 'cover-art',
     image: '/portfolio/services/cover/4.jpg',
     category: 'Design',
     title: 'Title Typography Cover',
     meta: 'Cover Art • Publishing',
-    likes: 298,
     featured: false,
   },
   {
     id: 'character-sheet',
+    serviceSlug: 'custom-character-design',
     image: '/portfolio/services/character/1.jpg',
     category: 'Design',
     title: 'Hero Character Sheet',
     meta: 'Character Design • OC',
-    likes: 287,
     featured: false,
   },
   {
     id: 'dnd-portrait',
-    image: '/portfolio/brandforge.jpg',
+    serviceSlug: 'dnd-character-art',
+    image: '/portfolio/services/dnd/1.webp',
     category: 'Design',
     title: 'Fantasy Portrait',
     meta: 'DnD • Character Art',
-    likes: 334,
-    featured: false,
+    featured: true,
   },
 ]
 
@@ -474,7 +491,6 @@ export function getFormPackagesForService(serviceName) {
           value: `${pkg.name} (${variant.label})`,
           label: `${pkg.name} (${variant.label})`,
           price: variant.price || '',
-          original: variant.original || '',
           desc: variant.desc || pkg.desc || '',
           features: variant.features || pkg.features || [],
         })
@@ -484,7 +500,6 @@ export function getFormPackagesForService(serviceName) {
         value: pkg.name,
         label: pkg.name,
         price: pkg.price || '',
-        original: pkg.original || '',
         desc: pkg.desc || '',
         features: pkg.features || [],
       })
@@ -511,7 +526,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Starter',
-        original: '$799',
         price: '$399',
         desc: 'Personal brands & small businesses',
         featured: false,
@@ -527,7 +541,6 @@ export const pricingCategories = [
       },
       {
         name: 'Professional',
-        original: '$1,999',
         price: '$999',
         desc: 'Growing businesses & startups',
         featured: true,
@@ -545,7 +558,6 @@ export const pricingCategories = [
       },
       {
         name: 'E-Commerce',
-        original: '$4,999',
         price: '$2,499',
         desc: 'Online stores & product brands',
         featured: false,
@@ -568,7 +580,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Starter',
-        original: '$599',
         price: '$299',
         desc: '24/7 website support',
         featured: false,
@@ -584,7 +595,6 @@ export const pricingCategories = [
       },
       {
         name: 'Professional',
-        original: '$1,599',
         price: '$799',
         desc: 'Full automation',
         featured: true,
@@ -602,7 +612,6 @@ export const pricingCategories = [
       },
       {
         name: 'Enterprise',
-        original: '$2,999',
         price: '$1,499',
         desc: 'Voice AI + full automation',
         featured: false,
@@ -625,7 +634,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Starter',
-        original: '$1,299',
         price: '$599',
         desc: 'MVPs & simple apps',
         featured: false,
@@ -642,7 +650,6 @@ export const pricingCategories = [
       },
       {
         name: 'Professional',
-        original: '$4,999',
         price: '$2,499',
         desc: 'Startups & growing businesses',
         featured: true,
@@ -661,7 +668,6 @@ export const pricingCategories = [
       },
       {
         name: 'Enterprise',
-        original: '$8,999',
         price: '$4,499',
         desc: 'Complex apps & platforms',
         featured: false,
@@ -685,7 +691,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Starter',
-        original: '$799',
         price: '$399',
         desc: 'Short stories, pilots, samples',
         featured: false,
@@ -701,7 +706,6 @@ export const pricingCategories = [
       },
       {
         name: 'Standard',
-        original: '$1,999',
         price: '$999',
         desc: 'Short comics, webtoons, pitches',
         featured: true,
@@ -719,7 +723,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Issue',
-        original: '$4,999',
         price: '$2,499',
         desc: 'Full comic books & publishing',
         featured: false,
@@ -742,7 +745,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Basic',
-        original: '$499',
         price: '$249',
         desc: 'Simple 3D objects, props, products',
         featured: false,
@@ -757,7 +759,6 @@ export const pricingCategories = [
       },
       {
         name: 'Professional',
-        original: '$699',
         price: '$349',
         desc: '3D characters, detailed models',
         featured: true,
@@ -775,7 +776,6 @@ export const pricingCategories = [
       },
       {
         name: 'Premium',
-        original: '$1,199',
         price: '$599',
         desc: 'Complex characters & environments',
         featured: false,
@@ -797,7 +797,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Basic',
-        original: '$199',
         price: '$99',
         desc: 'Simple brand mascot',
         featured: false,
@@ -812,7 +811,6 @@ export const pricingCategories = [
       },
       {
         name: 'Professional',
-        original: '$349',
         price: '$169',
         desc: 'Full brand mascot with expressions',
         featured: true,
@@ -828,7 +826,6 @@ export const pricingCategories = [
       },
       {
         name: 'Ultimate',
-        original: '$499',
         price: '$249',
         desc: 'Complete package with animation',
         featured: false,
@@ -850,7 +847,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Half Body No Rig',
-        original: '$299',
         price: '$149',
         desc: 'Character design only',
         featured: false,
@@ -867,7 +863,6 @@ export const pricingCategories = [
       },
       {
         name: 'Half Body Rigged',
-        original: '$599',
         price: '$299',
         desc: 'New VTubers starting streaming',
         featured: true,
@@ -886,7 +881,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Body No Rig',
-        original: '$499',
         price: '$249',
         desc: 'Full design without animation',
         featured: false,
@@ -903,7 +897,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Body Rigged',
-        original: '$999',
         price: '$499',
         desc: 'Pro VTubers — full movement',
         featured: false,
@@ -927,7 +920,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Logo Only',
-        original: '$197',
         price: '$59',
         desc: 'Startups needing just a logo',
         featured: false,
@@ -942,7 +934,6 @@ export const pricingCategories = [
       },
       {
         name: 'Brand Starter',
-        original: '$399',
         price: '$199',
         desc: 'New brands building identity',
         featured: true,
@@ -959,7 +950,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Brand Identity',
-        original: '$999',
         price: '$499',
         desc: 'Complete professional brand launch',
         featured: false,
@@ -982,7 +972,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Logo Animation',
-        original: '$199',
         price: '$99',
         desc: 'Brand intros & social media',
         featured: false,
@@ -997,7 +986,6 @@ export const pricingCategories = [
       },
       {
         name: 'Explainer Video',
-        original: '$999',
         price: '$499',
         desc: 'Product/service marketing',
         featured: true,
@@ -1015,7 +1003,6 @@ export const pricingCategories = [
       },
       {
         name: 'Character Animation',
-        original: '$1,799',
         price: '$899',
         desc: 'Custom animated characters',
         featured: false,
@@ -1037,7 +1024,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Character Art',
-        original: '$199',
         price: '$99',
         desc: 'Single character showcase',
         featured: false,
@@ -1052,7 +1038,6 @@ export const pricingCategories = [
       },
       {
         name: 'Character Scene',
-        original: '$299',
         price: '$149',
         desc: 'Character with environment',
         featured: true,
@@ -1069,7 +1054,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Party',
-        original: '$899',
         price: '$449',
         desc: 'Full campaign party illustration',
         featured: false,
@@ -1091,7 +1075,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Headshot',
-        original: '$79',
         price: '$39',
         desc: 'Profile pictures & icons',
         featured: false,
@@ -1105,7 +1088,6 @@ export const pricingCategories = [
       },
       {
         name: 'Reference Sheet',
-        original: '$299',
         price: '$149',
         desc: 'Full character reference for commissions',
         featured: true,
@@ -1123,7 +1105,6 @@ export const pricingCategories = [
             id: 'sfw',
             label: 'SFW',
             price: '$149',
-            original: '$299',
             desc: 'Safe for work — full character reference',
             features: [
               'Front + Back + Side View',
@@ -1139,7 +1120,6 @@ export const pricingCategories = [
             id: 'nsfw',
             label: 'NSFW',
             price: '$199',
-            original: '$399',
             desc: 'NSFW reference sheet — 100% confidential',
             features: [
               'Front + Back + Side View',
@@ -1155,7 +1135,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Scene',
-        original: '$599',
         price: '$299',
         desc: 'Detailed artwork with background',
         featured: false,
@@ -1176,7 +1155,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Single Character',
-        original: '$199',
         price: '$99',
         desc: 'Single character NSFW artwork',
         featured: false,
@@ -1190,7 +1168,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Scene',
-        original: '$399',
         price: '$199',
         desc: 'Detailed NSFW scene',
         featured: true,
@@ -1207,7 +1184,6 @@ export const pricingCategories = [
       },
       {
         name: 'Illustrated Pages',
-        original: '$799',
         price: '$399',
         desc: 'Multi-page NSFW artwork',
         featured: false,
@@ -1228,7 +1204,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Album / Single Cover',
-        original: '$199',
         price: '$99',
         desc: 'Music artists — Spotify ready',
         featured: false,
@@ -1243,7 +1218,6 @@ export const pricingCategories = [
       },
       {
         name: 'Book Cover',
-        original: '$499',
         price: '$249',
         desc: 'Authors, novels, Kindle',
         featured: true,
@@ -1259,7 +1233,6 @@ export const pricingCategories = [
       },
       {
         name: 'Game Cover / Key Art',
-        original: '$899',
         price: '$449',
         desc: 'Game developers & indie studios',
         featured: false,
@@ -1280,7 +1253,6 @@ export const pricingCategories = [
     packages: [
       {
         name: 'Bust / Headshot',
-        original: '$99',
         price: '$49',
         desc: 'Profile pictures & avatars',
         featured: false,
@@ -1295,7 +1267,6 @@ export const pricingCategories = [
       },
       {
         name: 'Half Body',
-        original: '$199',
         price: '$99',
         desc: 'Character showcase & storytelling',
         featured: false,
@@ -1310,7 +1281,6 @@ export const pricingCategories = [
       },
       {
         name: 'Full Body',
-        original: '$299',
         price: '$149',
         desc: 'Complete character design',
         featured: true,

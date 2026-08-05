@@ -38,6 +38,10 @@ function parseColorList(value, fallback) {
   return colors.length ? colors : fallback
 }
 
+function tubesEnabled() {
+  return String(import.meta.env.VITE_TUBES_ENABLED || 'false').trim().toLowerCase() === 'true'
+}
+
 function getTubesPalette() {
   const themeKey = String(import.meta.env.VITE_TUBES_THEME || 'voidink')
     .trim()
@@ -53,8 +57,11 @@ function getTubesPalette() {
 
 export default function GoldTubesBackground() {
   const canvasRef = useRef(null)
+  const enabled = tubesEnabled()
 
   useEffect(() => {
+    if (!enabled) return undefined
+
     const canvas = canvasRef.current
     if (!canvas) return undefined
 
@@ -87,9 +94,9 @@ export default function GoldTubesBackground() {
       disposed = true
       app?.dispose?.()
     }
-  }, [])
+  }, [enabled])
 
-  if (typeof document === 'undefined') return null
+  if (!enabled || typeof document === 'undefined') return null
 
   return createPortal(
     <div className="home-tubes-wrap" aria-hidden="true">

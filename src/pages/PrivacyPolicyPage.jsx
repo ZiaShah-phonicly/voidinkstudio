@@ -134,7 +134,7 @@ export default function PrivacyPolicyPage() {
           <li>Request a copy of your data in a portable format</li>
         </ul>
         <p>
-          To exercise any of these rights, contact us at <strong>voidinkstudios@gmail.com</strong>.
+          To exercise any of these rights, contact us at <strong>voidinkstudios1@gmail.com</strong>.
         </p>
 
         <h2>8. Data Security</h2>
@@ -165,7 +165,7 @@ export default function PrivacyPolicyPage() {
           <p>
             <strong>VOIDINK Studios</strong>
             <br />
-            Email: <a href="mailto:voidinkstudios@gmail.com">voidinkstudios@gmail.com</a>
+            Email: <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
             <br />
             Website:{' '}
             <a href="https://voidinkstudios.netlify.app" target="_blank" rel="noopener noreferrer">

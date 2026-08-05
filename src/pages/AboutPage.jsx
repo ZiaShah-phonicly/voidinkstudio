@@ -1,5 +1,6 @@
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import Reveal, { RevealItem } from '../components/Reveal'
+import { studioStats, studioStatsCopy } from '../data/voidinkData'
 
 const whyChoose = [
   {
@@ -35,11 +36,11 @@ const whyChoose = [
 ]
 
 const stats = [
-  { value: '500+', label: 'Projects Delivered' },
-  { value: '200+', label: 'clients in 25 countries' },
-  { value: '14+', label: 'Creative & Tech Services' },
-  { value: '99%', label: 'Client Satisfaction Rate' },
-  { value: '4.9★', label: 'Average Rating' },
+  { value: `${studioStats.projects}+`, label: 'Projects Delivered' },
+  { value: `${studioStats.clients}+`, label: `clients in ${studioStats.countries} countries` },
+  { value: `${studioStats.services}+`, label: 'Creative & Tech Services' },
+  { value: `${studioStats.satisfaction}%`, label: 'Client Satisfaction Rate' },
+  { value: `${studioStats.rating}★`, label: 'Average Rating' },
 ]
 
 const designServices =
@@ -143,7 +144,7 @@ export default function AboutPage() {
               <p>
                 VOIDINK Studios was founded with one simple belief — great creative work should be accessible to
                 everyone. What started as a small design studio has grown into a full-service creative and technology
-                partner trusted by 200+ clients in 25 countries across 500+ delivered projects.
+                partner {studioStatsCopy.trustedBy.toLowerCase()} across {studioStats.projects}+ delivered projects.
               </p>
               <p>
                 We combine human creativity with modern tools and technology to deliver results that are not just

@@ -19,6 +19,8 @@ import {
   pricingCategoryToFormService,
   processSteps,
   services,
+  studioStats,
+  studioStatsCopy,
   testimonials,
   workItems,
 } from '../data/voidinkData'
@@ -38,42 +40,63 @@ const emptyForm = {
 const ORDER_STORAGE_KEY = 'voidink_pending_order'
 
 const heroStats = [
-  { value: 500, suffix: '+', label: 'Projects Delivered' },
-  { value: 200, suffix: '+', label: 'clients in 25 countries' },
-  { value: 14, suffix: '+', label: 'Creative Services' },
-  { value: 99, suffix: '%', label: 'Satisfaction Rate' },
+  { value: studioStats.projects, suffix: '+', label: 'Projects Delivered' },
+  { value: studioStats.clients, suffix: '+', label: `clients in ${studioStats.countries} countries` },
+  { value: studioStats.services, suffix: '+', label: 'Creative Services' },
+  { value: studioStats.satisfaction, suffix: '%', label: 'Satisfaction Rate' },
 ]
 
 function StatCounter({ target, suffix }) {
   const [count, setCount] = useState(0)
   const ref = useRef(null)
-  const started = useRef(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return undefined
 
+    let frameId = 0
+    let timerId = 0
+    let started = false
+
+    const run = () => {
+      if (started) return
+      started = true
+      const durationMs = 1200
+      const start = performance.now()
+
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / durationMs)
+        // ease-out so the final value lands cleanly
+        const eased = 1 - (1 - t) ** 3
+        const next = Math.round(target * eased)
+        setCount(t >= 1 ? target : next)
+        if (t < 1) frameId = requestAnimationFrame(tick)
+      }
+
+      frameId = requestAnimationFrame(tick)
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || started.current) return
-        started.current = true
-        let current = 0
-        const increment = target / 60
-        const timer = setInterval(() => {
-          current += increment
-          if (current >= target) {
-            setCount(target)
-            clearInterval(timer)
-          } else {
-            setCount(Math.floor(current))
-          }
-        }, 30)
+        if (entry.isIntersecting) run()
       },
-      { threshold: 0.5 },
+      { threshold: 0.2 },
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+
+    // If already on-screen (common on desktop), don't wait forever on IO quirks
+    timerId = window.setTimeout(() => {
+      const rect = el.getBoundingClientRect()
+      const visible = rect.top < window.innerHeight && rect.bottom > 0
+      if (visible) run()
+    }, 400)
+
+    return () => {
+      observer.disconnect()
+      window.clearTimeout(timerId)
+      cancelAnimationFrame(frameId)
+    }
   }, [target])
 
   return (
@@ -129,7 +152,6 @@ export default function HomePage() {
       `I want to order: ${packageLabel}`,
       `Price: ${order.price || 'N/A'}`,
     ]
-    if (order.original) lines.push(`Was: ${order.original}`)
     if (order.desc) lines.push(`About this package: ${order.desc}`)
 
     const featureList = Array.isArray(order.features)
@@ -168,7 +190,6 @@ export default function HomePage() {
         {
           ...order,
           price: order.price || matched?.price || '',
-          original: order.original || matched?.original || '',
           desc: order.desc || matched?.desc || '',
           features: order.features || matched?.features || [],
         },
@@ -229,10 +250,20 @@ export default function HomePage() {
           result = await submitToVoidinkApi(formPayload)
         } catch (apiError) {
           console.warn('Voidink API submit failed, falling back to Google Sheet:', apiError)
-          await submitToGoogleSheet(formPayload)
+          const sheetResult = await submitToGoogleSheet(formPayload)
+          if (sheetResult?.status === 'skipped') {
+            throw new Error(
+              'Could not save your request right now. Please email voidinkstudios1@gmail.com or try again.',
+            )
+          }
         }
       } else {
-        await submitToGoogleSheet(formPayload)
+        const sheetResult = await submitToGoogleSheet(formPayload)
+        if (sheetResult?.status === 'skipped') {
+          throw new Error(
+            'Form is not configured yet. Please email voidinkstudios1@gmail.com.',
+          )
+        }
       }
 
       const nextTrackingId = result?.tracking_id || result?.order?.tracking_id || ''
@@ -253,11 +284,15 @@ export default function HomePage() {
           `References: ${formData.references || 'None'}`,
         ].join('\n')
 
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content }),
-        })
+        try {
+          await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content }),
+          })
+        } catch (discordError) {
+          console.warn('Discord notify failed (order still saved):', discordError)
+        }
       }
 
       setTrackingId(nextTrackingId)
@@ -274,7 +309,9 @@ export default function HomePage() {
   const handleAnchorClick = (event, href) => {
     if (href === '#') return
     event.preventDefault()
-    navigate({ pathname: '/', hash: href.replace('#', '') })
+    const id = href.replace('#', '')
+    navigate({ pathname: '/', hash: id })
+    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
   }
 
   const handleOrderClick = (event, order) => {
@@ -327,7 +364,7 @@ export default function HomePage() {
           <div className="hero-content">
             <div className="hero-badge">
               <span className="hbd" aria-hidden="true" />
-              Open for commissions • Trusted by 200+ clients in 25 countries!
+              Open for commissions • {studioStatsCopy.trustedBy}!
             </div>
             <div className="hero-ey">✦ World-Class Art, Design & Development Studio</div>
             <h1 className="hero-t" id="hero-title">
@@ -363,7 +400,7 @@ export default function HomePage() {
                 </span>
                 <div>
                   <div className="trust-score" style={{ fontSize: '0.75rem' }}>
-                    200+ Clients in 25 Countries
+                    {studioStatsCopy.clientsCountriesTitle}
                   </div>
                 </div>
               </div>
@@ -452,17 +489,14 @@ export default function HomePage() {
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
-                <a href="#query" className="shot-media" onClick={(e) => handleAnchorClick(e, '#query')}>
+                <Link to={`/services/${item.serviceSlug || 'website-design-development'}`} className="shot-media">
                   <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
                   <span className="shot-hover">View project</span>
-                </a>
+                </Link>
                 <div className="shot-info">
                   <div className="shot-text">
                     <h3>{item.title}</h3>
                     <p>{item.meta}</p>
-                  </div>
-                  <div className="shot-likes" aria-label={`${item.likes} likes`}>
-                    ♥ {item.likes}
                   </div>
                 </div>
               </RevealItem>
