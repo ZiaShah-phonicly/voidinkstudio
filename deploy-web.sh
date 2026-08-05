@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 #
 # Pull-based web deploy — run ON the VPS inside the voidinkstudio checkout:
-#   cd /var/www/voidink_frontend/voidinkstudio && ./deploy-web.sh
+#   cd /var/www/frontend && ./deploy-web.sh
 #   # nginx serves https://voidinkstudios.com from this checkout's dist/
 #
 # Backend URL is env-selected via this checkout's .env (gitignored, VPS-only):
-#   VITE_API_URL=https://api.voidink.studio
+#   VITE_API_URL=https://api.voidinkstudios.com
 #   VITE_FORM_USE_API=true
 #   VITE_GOOGLE_SHEETS_URL=...   # optional fallback / dual-write
 #
