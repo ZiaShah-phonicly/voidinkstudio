@@ -1,20 +1,28 @@
 import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
+import RecaptchaCheckbox from '../../components/RecaptchaCheckbox'
 import SiteFooter from '../../components/SiteFooter'
 import SiteHeader from '../../components/SiteHeader'
-import useRobotsMeta from '../../hooks/useRobotsMeta'
+import usePageMeta from '../../hooks/usePageMeta'
 import { getAuth } from '../../utils/authApi'
 import { adminLogin } from '../../utils/adminApi'
+
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || ''
 
 export default function AdminLoginPage() {
   const navigate = useNavigate()
   const existing = getAuth()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [recaptchaToken, setRecaptchaToken] = useState('')
+  const [recaptchaVersion, setRecaptchaVersion] = useState(0)
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  useRobotsMeta('noindex, nofollow, noarchive')
+  usePageMeta({
+    title: 'VOIDINK Studios — Team Admin Login',
+    robots: 'noindex, nofollow, noarchive',
+  })
 
   if (existing?.access && existing.is_staff) {
     return <Navigate to="/admin" replace />
@@ -23,12 +31,18 @@ export default function AdminLoginPage() {
   const onSubmit = async (event) => {
     event.preventDefault()
     setError('')
+    if (RECAPTCHA_SITE_KEY && !recaptchaToken) {
+      setError('Please complete the CAPTCHA.')
+      return
+    }
     setSubmitting(true)
     try {
-      await adminLogin({ email, password })
+      await adminLogin({ email, password, recaptcha_token: recaptchaToken })
       navigate('/admin', { replace: true })
     } catch (err) {
       setError(err.message || 'Login failed')
+      setRecaptchaToken('')
+      setRecaptchaVersion((version) => version + 1)
     } finally {
       setSubmitting(false)
     }
@@ -69,8 +83,14 @@ export default function AdminLoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </label>
+            <RecaptchaCheckbox
+              key={recaptchaVersion}
+              siteKey={RECAPTCHA_SITE_KEY}
+              onChange={setRecaptchaToken}
+              onError={setError}
+            />
             {error ? <p className="admin-error">{error}</p> : null}
-            <button type="submit" disabled={submitting}>
+            <button type="submit" disabled={submitting || (Boolean(RECAPTCHA_SITE_KEY) && !recaptchaToken)}>
               {submitting ? 'Signing in…' : 'Enter admin'}
             </button>
           </form>
