@@ -16,7 +16,6 @@ export default function PricingCard({
   const selected = hasVariants ? pkg.variants.find((v) => v.id === variantId) || pkg.variants[0] : null
 
   const price = selected?.price ?? pkg.price
-  const original = selected?.original ?? pkg.original
   const desc = selected?.desc ?? pkg.desc
   const features = selected?.features ?? pkg.features
   const orderLabel = selected ? `Order ${selected.label}` : 'Order Now'
@@ -28,7 +27,6 @@ export default function PricingCard({
       categoryLabel,
       packageName,
       price,
-      original,
       desc,
       features,
     })
@@ -60,7 +58,6 @@ export default function PricingCard({
         </div>
       )}
 
-      <div className="pk-og">{original}</div>
       <div className="pk-pr">{price}</div>
       <div className="pk-desc">{desc}</div>
       <ul className="pk-f">

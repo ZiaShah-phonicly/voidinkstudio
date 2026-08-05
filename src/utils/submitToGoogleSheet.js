@@ -9,13 +9,15 @@
  * VITE_GOOGLE_SHEETS_URL=https://script.google.com/macros/s/XXXX/exec
  */
 export async function submitToGoogleSheet(payload) {
-  const url = import.meta.env.VITE_GOOGLE_SHEETS_URL
+  const url = (import.meta.env.VITE_GOOGLE_SHEETS_URL || '').trim()
 
+  // Optional: skip sheet if URL not configured; MongoDB API still saves.
   if (!url) {
-    throw new Error('Google Sheets URL missing. Add VITE_GOOGLE_SHEETS_URL in .env file.')
+    return { status: 'skipped', reason: 'missing_sheets_url' }
   }
 
   const body = new URLSearchParams()
+  body.set('tracking_id', payload.tracking_id || '')
   body.set('name', payload.name || '')
   body.set('email', payload.email || '')
   body.set('service', payload.service || '')

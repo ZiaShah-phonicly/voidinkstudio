@@ -1,21 +1,27 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-dom'
-import Partners from '../components/Partners'
+import GoldTubesBackground from '../components/GoldTubesBackground'
 import PricingCard from '../components/PricingCard'
 import Reveal, { RevealItem } from '../components/Reveal'
+import useOutsideClose from '../hooks/useOutsideClose'
+import { homeFaqPreview } from '../data/faqData'
 import { submitToGoogleSheet } from '../utils/submitToGoogleSheet'
+import { submitToVoidinkApi } from '../utils/submitToVoidinkApi'
 import {
   budgetOptions,
   CUSTOM_PACKAGE,
   deadlineOptions,
+  findFormPackageOption,
   formServices,
+  getFormPackagesForService,
   marqueeItems,
   pricingCategories,
   pricingCategoryToFormService,
   processSteps,
   services,
+  studioStats,
+  studioStatsCopy,
   testimonials,
-  workCategories,
   workItems,
 } from '../data/voidinkData'
 
@@ -34,42 +40,63 @@ const emptyForm = {
 const ORDER_STORAGE_KEY = 'voidink_pending_order'
 
 const heroStats = [
-  { value: 500, suffix: '+', label: 'Projects Delivered' },
-  { value: 200, suffix: '+', label: 'clients in 25 countries' },
-  { value: 15, suffix: '+', label: 'Creative Services' },
-  { value: 99, suffix: '%', label: 'Satisfaction Rate' },
+  { value: studioStats.projects, suffix: '+', label: 'Projects Delivered' },
+  { value: studioStats.clients, suffix: '+', label: `clients in ${studioStats.countries} countries` },
+  { value: studioStats.services, suffix: '+', label: 'Creative Services' },
+  { value: studioStats.satisfaction, suffix: '%', label: 'Satisfaction Rate' },
 ]
 
 function StatCounter({ target, suffix }) {
   const [count, setCount] = useState(0)
   const ref = useRef(null)
-  const started = useRef(false)
 
   useEffect(() => {
     const el = ref.current
     if (!el) return undefined
 
+    let frameId = 0
+    let timerId = 0
+    let started = false
+
+    const run = () => {
+      if (started) return
+      started = true
+      const durationMs = 1200
+      const start = performance.now()
+
+      const tick = (now) => {
+        const t = Math.min(1, (now - start) / durationMs)
+        // ease-out so the final value lands cleanly
+        const eased = 1 - (1 - t) ** 3
+        const next = Math.round(target * eased)
+        setCount(t >= 1 ? target : next)
+        if (t < 1) frameId = requestAnimationFrame(tick)
+      }
+
+      frameId = requestAnimationFrame(tick)
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting || started.current) return
-        started.current = true
-        let current = 0
-        const increment = target / 60
-        const timer = setInterval(() => {
-          current += increment
-          if (current >= target) {
-            setCount(target)
-            clearInterval(timer)
-          } else {
-            setCount(Math.floor(current))
-          }
-        }, 30)
+        if (entry.isIntersecting) run()
       },
-      { threshold: 0.5 },
+      { threshold: 0.2 },
     )
 
     observer.observe(el)
-    return () => observer.disconnect()
+
+    // If already on-screen (common on desktop), don't wait forever on IO quirks
+    timerId = window.setTimeout(() => {
+      const rect = el.getBoundingClientRect()
+      const visible = rect.top < window.innerHeight && rect.bottom > 0
+      if (visible) run()
+    }, 400)
+
+    return () => {
+      observer.disconnect()
+      window.clearTimeout(timerId)
+      cancelAnimationFrame(frameId)
+    }
   }, [target])
 
   return (
@@ -87,19 +114,32 @@ export default function HomePage() {
   const navigate = useNavigate()
   const location = useLocation()
   const [pricingTab, setPricingTab] = useState('web')
-  const [workTab, setWorkTab] = useState('All')
   const [formSuccess, setFormSuccess] = useState(false)
+  const [trackingId, setTrackingId] = useState('')
+  const [copiedTracking, setCopiedTracking] = useState(false)
   const [formError, setFormError] = useState('')
   const [formSubmitting, setFormSubmitting] = useState(false)
   const [formData, setFormData] = useState(emptyForm)
+  const [openFaq, setOpenFaq] = useState(null)
+  const homeFaqRef = useRef(null)
+
+  const closeHomeFaq = useCallback(() => setOpenFaq(null), [])
+  useOutsideClose(homeFaqRef, openFaq !== null, closeHomeFaq)
 
   const isCustomPackage = formData.package === CUSTOM_PACKAGE
   const showPackagePrice = Boolean(formData.package && formData.package !== CUSTOM_PACKAGE)
+  const servicePackages = getFormPackagesForService(formData.service)
 
   const updateForm = (field) => (event) => {
     const value = event.target.value
     setFormData((prev) => {
       const next = { ...prev, [field]: value }
+      if (field === 'service') {
+        // Switching service resets package/price so the right options show.
+        next.package = ''
+        next.price = ''
+        next.budget = ''
+      }
       if (field === 'package' && value === CUSTOM_PACKAGE) {
         next.price = ''
       }
@@ -112,7 +152,6 @@ export default function HomePage() {
       `I want to order: ${packageLabel}`,
       `Price: ${order.price || 'N/A'}`,
     ]
-    if (order.original) lines.push(`Was: ${order.original}`)
     if (order.desc) lines.push(`About this package: ${order.desc}`)
 
     const featureList = Array.isArray(order.features)
@@ -134,17 +173,28 @@ export default function HomePage() {
       order.service ||
       pricingCategoryToFormService[order.categoryId] ||
       ''
+    // Keep package value aligned with dropdown options (e.g. "Starter", "Reference Sheet (SFW)")
+    const packageValue = order.packageName || CUSTOM_PACKAGE
+    const matched = findFormPackageOption(service, packageValue)
     const packageLabel = order.categoryLabel
-      ? `${order.categoryLabel} — ${order.packageName}`
-      : order.packageName
+      ? `${order.categoryLabel} — ${packageValue}`
+      : packageValue
 
     setFormData((prev) => ({
       ...prev,
       service,
-      package: packageLabel || CUSTOM_PACKAGE,
-      price: order.price || '',
+      package: packageValue,
+      price: order.price || matched?.price || '',
       budget: '',
-      description: buildOrderDescription(order, packageLabel || order.packageName || 'Selected package'),
+      description: buildOrderDescription(
+        {
+          ...order,
+          price: order.price || matched?.price || '',
+          desc: order.desc || matched?.desc || '',
+          features: order.features || matched?.features || [],
+        },
+        packageLabel || 'Selected package',
+      ),
     }))
   }
 
@@ -179,7 +229,7 @@ export default function HomePage() {
     const budgetValue = isCustomPackage ? formData.budget : formData.price || formData.budget
 
     try {
-      await submitToGoogleSheet({
+      const formPayload = {
         name: formData.name,
         email: formData.email,
         service: formData.service,
@@ -189,12 +239,40 @@ export default function HomePage() {
         deadline: formData.deadline,
         description: formData.description,
         references: formData.references,
-      })
+      }
+
+      // Temporary: sheet-only mode (VITE_FORM_USE_API=false). Flip to true when Mongo/API is ready again.
+      const useApi = String(import.meta.env.VITE_FORM_USE_API || '').toLowerCase() === 'true'
+      let result = null
+
+      if (useApi) {
+        try {
+          result = await submitToVoidinkApi(formPayload)
+        } catch (apiError) {
+          console.warn('Voidink API submit failed, falling back to Google Sheet:', apiError)
+          const sheetResult = await submitToGoogleSheet(formPayload)
+          if (sheetResult?.status === 'skipped') {
+            throw new Error(
+              'Could not save your request right now. Please email voidinkstudios1@gmail.com or try again.',
+            )
+          }
+        }
+      } else {
+        const sheetResult = await submitToGoogleSheet(formPayload)
+        if (sheetResult?.status === 'skipped') {
+          throw new Error(
+            'Form is not configured yet. Please email voidinkstudios1@gmail.com.',
+          )
+        }
+      }
+
+      const nextTrackingId = result?.tracking_id || result?.order?.tracking_id || ''
 
       const webhookUrl = import.meta.env.VITE_DISCORD_WEBHOOK_URL
       if (webhookUrl) {
         const content = [
           'New VOIDINK Form Submission',
+          `Tracking ID: ${nextTrackingId || 'N/A'}`,
           `Name: ${formData.name}`,
           `Email: ${formData.email}`,
           `Service: ${formData.service}`,
@@ -206,16 +284,21 @@ export default function HomePage() {
           `References: ${formData.references || 'None'}`,
         ].join('\n')
 
-        await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content }),
-        })
+        try {
+          await fetch(webhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content }),
+          })
+        } catch (discordError) {
+          console.warn('Discord notify failed (order still saved):', discordError)
+        }
       }
 
+      setTrackingId(nextTrackingId)
+      setCopiedTracking(false)
       setFormSuccess(true)
       setFormData(emptyForm)
-      setTimeout(() => setFormSuccess(false), 5000)
     } catch (error) {
       setFormError(error.message || 'Something went wrong. Please email voidinkstudios1@gmail.com')
     } finally {
@@ -226,7 +309,9 @@ export default function HomePage() {
   const handleAnchorClick = (event, href) => {
     if (href === '#') return
     event.preventDefault()
-    navigate({ pathname: '/', hash: href.replace('#', '') })
+    const id = href.replace('#', '')
+    navigate({ pathname: '/', hash: id })
+    setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50)
   }
 
   const handleOrderClick = (event, order) => {
@@ -237,11 +322,11 @@ export default function HomePage() {
   }
 
   const activePricing = pricingCategories.find((cat) => cat.id === pricingTab) ?? pricingCategories[0]
-  const filteredWork =
-    workTab === 'All' ? workItems : workItems.filter((item) => item.category === workTab)
+  const featuredWork = workItems.filter((item) => item.featured).slice(0, 6)
 
   return (
-    <>
+    <div className="home-page">
+      <GoldTubesBackground />
       <section className="hero" id="home" aria-labelledby="hero-title">
         <div className="hero-bg" aria-hidden="true">
           <div className="hero-orb ho1" />
@@ -279,7 +364,7 @@ export default function HomePage() {
           <div className="hero-content">
             <div className="hero-badge">
               <span className="hbd" aria-hidden="true" />
-              Open for commissions • Trusted by 200+ clients in 25 countries!
+              Open for commissions • {studioStatsCopy.trustedBy}!
             </div>
             <div className="hero-ey">✦ World-Class Art, Design & Development Studio</div>
             <h1 className="hero-t" id="hero-title">
@@ -315,7 +400,7 @@ export default function HomePage() {
                 </span>
                 <div>
                   <div className="trust-score" style={{ fontSize: '0.75rem' }}>
-                    200+ Clients in 25 Countries
+                    {studioStatsCopy.clientsCountriesTitle}
                   </div>
                 </div>
               </div>
@@ -331,8 +416,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <Partners />
 
       <div className="mq" aria-hidden="true">
         <div className="mq-w">
@@ -385,7 +468,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="work" style={{ background: 'var(--bg2)' }}>
+      <section className="section" id="work">
         <div className="container">
           <Reveal>
             <div className="section-label">✦ Selected Work</div>
@@ -393,27 +476,12 @@ export default function HomePage() {
               Selected work across <span className="gt">web, apps & design</span>
             </h2>
             <p className="section-sub">
-              Landing pages, product dashboards, mobile apps, AI agents, branding, and original character art.
+              A snapshot of our best projects. Explore each service page for the full portfolio.
             </p>
           </Reveal>
 
-          <div className="pt-tabs wk-tabs" role="tablist" aria-label="Portfolio filters">
-            {workCategories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                role="tab"
-                aria-selected={workTab === cat}
-                className={`pt-tab ${workTab === cat ? 'a' : ''}`}
-                onClick={() => setWorkTab(cat)}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
           <div className="shot-g">
-            {filteredWork.map((item, index) => (
+            {featuredWork.map((item, index) => (
               <RevealItem
                 key={item.id}
                 delay={index * 40}
@@ -421,22 +489,28 @@ export default function HomePage() {
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
-                <a href="#query" className="shot-media" onClick={(e) => handleAnchorClick(e, '#query')}>
+                <Link to={`/services/${item.serviceSlug || 'website-design-development'}`} className="shot-media">
                   <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
                   <span className="shot-hover">View project</span>
-                </a>
+                </Link>
                 <div className="shot-info">
                   <div className="shot-text">
                     <h3>{item.title}</h3>
                     <p>{item.meta}</p>
                   </div>
-                  <div className="shot-likes" aria-label={`${item.likes} likes`}>
-                    ♥ {item.likes}
-                  </div>
                 </div>
               </RevealItem>
             ))}
           </div>
+
+          <Reveal>
+            <div className="work-more">
+              <p>Want to see more work samples?</p>
+              <a href="#services" className="bs" onClick={(e) => handleAnchorClick(e, '#services')}>
+                Browse Services &amp; Portfolios <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -466,7 +540,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="pricing" style={{ background: 'var(--bg2)' }}>
+      <section className="section" id="pricing">
         <div className="container">
           <Reveal>
             <div className="section-label">✦ Pricing</div>
@@ -507,7 +581,56 @@ export default function HomePage() {
                 />
               ))}
             </div>
+            <p className="legal-note legal-note-center">
+              All packages subject to our <Link to="/terms-of-service">Terms of Service</Link>.
+            </p>
           </div>
+        </div>
+      </section>
+
+      <section className="section sp-faq home-faq" id="home-faq">
+        <div className="container">
+          <Reveal>
+            <div className="section-label">✦ FAQ</div>
+            <h2 className="section-title">
+              Frequently Asked <span className="gt">Questions</span>
+            </h2>
+            <p className="section-sub">Quick answers to the questions clients ask most before starting a project.</p>
+          </Reveal>
+
+          <div className="sp-faq-list" ref={homeFaqRef}>
+            {homeFaqPreview.map((faq, index) => {
+              const open = openFaq === index
+              return (
+                <RevealItem as="div" key={faq.q} delay={index * 70} className={`faq-acc${open ? ' active' : ''}`}>
+                  <button
+                    type="button"
+                    className="faq-acc-q"
+                    aria-expanded={open}
+                    onClick={() => setOpenFaq(open ? null : index)}
+                  >
+                    <span className="faq-acc-text">{faq.q}</span>
+                    <span className="faq-acc-icon" aria-hidden="true" />
+                  </button>
+                  <div className="faq-acc-a" inert={!open}>
+                    <div>
+                      <div className="faq-acc-a-inner">
+                        <p>{faq.a}</p>
+                      </div>
+                    </div>
+                  </div>
+                </RevealItem>
+              )
+            })}
+          </div>
+
+          <Reveal>
+            <div className="work-more">
+              <Link to="/faq" className="bs">
+                View All FAQs <span aria-hidden="true">→</span>
+              </Link>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -551,7 +674,7 @@ export default function HomePage() {
             <h2 className="section-title">
               Tell us about <span className="gt">your project</span>
             </h2>
-            <p className="section-sub">Fill out the form and we'll respond within 2 hours.</p>
+            <p className="section-sub">Fill out the form and we'll respond Asap!</p>
           </Reveal>
           <div className="fm-g">
             <Reveal>
@@ -610,23 +733,51 @@ export default function HomePage() {
                     id="fpkg"
                     required
                     value={formData.package || ''}
+                    disabled={!formData.service}
                     onChange={(event) => {
                       const value = event.target.value
+                      if (value === CUSTOM_PACKAGE || value === '') {
+                        setFormData((prev) => ({
+                          ...prev,
+                          package: value,
+                          price: '',
+                          budget: value === CUSTOM_PACKAGE ? prev.budget : '',
+                        }))
+                        return
+                      }
+                      const matched =
+                        servicePackages.find((opt) => opt.value === value) ||
+                        findFormPackageOption(formData.service, value)
                       setFormData((prev) => ({
                         ...prev,
                         package: value,
-                        price: value === CUSTOM_PACKAGE || value === '' ? '' : prev.price,
-                        budget: value === CUSTOM_PACKAGE ? prev.budget : '',
+                        price: matched?.price || '',
+                        budget: '',
                       }))
                     }}
                   >
-                    <option value="">Select package...</option>
+                    <option value="">
+                      {formData.service ? 'Select package...' : 'Select a service first...'}
+                    </option>
                     <option value={CUSTOM_PACKAGE}>{CUSTOM_PACKAGE}</option>
-                    {formData.package && formData.package !== CUSTOM_PACKAGE && (
-                      <option value={formData.package}>{formData.package}</option>
-                    )}
+                    {servicePackages.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label} — {opt.price}
+                      </option>
+                    ))}
+                    {/* Keep Order Now / legacy values selectable if not in current list */}
+                    {formData.package &&
+                      formData.package !== CUSTOM_PACKAGE &&
+                      !servicePackages.some((opt) => opt.value === formData.package) && (
+                        <option value={formData.package}>{formData.package}</option>
+                      )}
                   </select>
-                  {showPackagePrice && <p className="form-hint">Auto-filled from pricing — switch to Custom if you need something else.</p>}
+                  {showPackagePrice && (
+                    <p className="form-hint">Price auto-filled from our packages — switch to Custom for a quote.</p>
+                  )}
+                  {formData.service && servicePackages.length === 0 && (
+                    <p className="form-hint">No fixed packages for this service — choose Custom / Need a quote.</p>
+                  )}
                 </div>
                 {showPackagePrice ? (
                   <div className="fr">
@@ -719,6 +870,10 @@ export default function HomePage() {
                     onChange={updateForm('references')}
                   />
                 </div>
+                <p className="legal-note">
+                  By submitting, you agree to our <Link to="/terms-of-service">Terms of Service</Link> and{' '}
+                  <Link to="/privacy-policy">Privacy Policy</Link>.
+                </p>
                 <button
                   type="submit"
                   className="bp"
@@ -733,8 +888,36 @@ export default function HomePage() {
                   </div>
                 )}
                 {formSuccess && (
-                  <div id="fs" role="alert" style={{ textAlign: 'center', padding: '16px', color: '#4ade80', fontWeight: 600, marginTop: '12px' }}>
-                    ✅ Thank you! We'll respond ASAP!
+                  <div id="fs" className="form-success" role="alert">
+                    <p className="form-success-title">Thank you — we received your query.</p>
+                    {trackingId ? (
+                      <>
+                        <p className="form-success-sub">Save your tracking ID to check status anytime:</p>
+                        <div className="form-tracking">
+                          <code>{trackingId}</code>
+                          <button
+                            type="button"
+                            className="form-tracking-copy"
+                            onClick={async () => {
+                              try {
+                                await navigator.clipboard.writeText(trackingId)
+                                setCopiedTracking(true)
+                                setTimeout(() => setCopiedTracking(false), 2000)
+                              } catch {
+                                setCopiedTracking(false)
+                              }
+                            }}
+                          >
+                            {copiedTracking ? 'Copied' : 'Copy'}
+                          </button>
+                          <Link to={`/track/${trackingId}`} className="form-tracking-link">
+                            Track order →
+                          </Link>
+                        </div>
+                      </>
+                    ) : (
+                      <p className="form-success-sub">We&apos;ll respond ASAP.</p>
+                    )}
                   </div>
                 )}
               </form>
@@ -785,6 +968,6 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
-    </>
+    </div>
   )
 }

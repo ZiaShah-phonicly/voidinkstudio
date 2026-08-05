@@ -25,4 +25,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-public
+
+# Local unzip dumps (not site runtime assets)
+public/AI Chatbots*/
+public/App Development*/
+public/Website Design*/
+public/Dnd-*/
+sunshine-dental.html
+voidinkstudio_space.code-workspace

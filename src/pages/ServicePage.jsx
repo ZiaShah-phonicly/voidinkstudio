@@ -1,6 +1,8 @@
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, Navigate, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import Reveal, { RevealItem } from '../components/Reveal'
 import PricingCard from '../components/PricingCard'
+import useOutsideClose from '../hooks/useOutsideClose'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
 import { getServiceGallery } from '../data/serviceGalleries'
 import { pricingCategories } from '../data/voidinkData'
@@ -11,7 +13,16 @@ export default function ServicePage() {
   const { slug } = useParams()
   const navigate = useNavigate()
   const { setCursorHover = () => {}, setChatOpen = () => {} } = useOutletContext() ?? {}
+  const [openFaq, setOpenFaq] = useState(null)
+  const faqListRef = useRef(null)
   const service = getServiceBySlug(slug)
+
+  useEffect(() => {
+    setOpenFaq(null)
+  }, [slug])
+
+  const closeFaq = useCallback(() => setOpenFaq(null), [])
+  useOutsideClose(faqListRef, openFaq !== null, closeFaq)
 
   if (!service) {
     return <Navigate to="/" replace />
@@ -239,28 +250,12 @@ export default function ServicePage() {
                 />
               ))}
             </div>
+            <p className="legal-note legal-note-center">
+              All packages subject to our <Link to="/terms-of-service">Terms of Service</Link>.
+            </p>
           </div>
         </section>
       )}
-
-      <section className="section sp-faq" style={{ background: 'var(--bg2)' }}>
-        <div className="container">
-          <Reveal>
-            <div className="section-label">✦ FAQ</div>
-            <h2 className="section-title">
-              Common questions about <span className="gt">{service.title.toLowerCase()}</span>
-            </h2>
-          </Reveal>
-          <div className="sp-faq-grid">
-            {service.faqs.map((faq, index) => (
-              <RevealItem key={faq.q} delay={index * 70} className="sp-faq-card">
-                <h3>{faq.q}</h3>
-                <p>{faq.a}</p>
-              </RevealItem>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <section className="section sp-related">
         <div className="container">
@@ -309,7 +304,7 @@ export default function ServicePage() {
               <h2 className="section-title">
                 Let's build your <span className="gt">{service.title.toLowerCase()}</span> project
               </h2>
-              <p className="section-sub">Tell us about your vision — we respond within 2 hours.</p>
+              <p className="section-sub">Tell us about your vision — we respond Asap!.</p>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <a href="/#query" className="bp" onClick={goToContact}>
                   Start a Project <span aria-hidden="true">→</span>
@@ -322,6 +317,51 @@ export default function ServicePage() {
           </Reveal>
         </div>
       </section>
+
+      {service.faqs?.length > 0 && (
+        <section id="faq" className="section sp-faq" style={{ background: 'var(--bg2)' }}>
+          <div className="container">
+            <Reveal>
+              <div className="section-label">✦ FAQ</div>
+              <h2 className="section-title">
+                Common questions about <span className="gt">{service.title.toLowerCase()}</span>
+              </h2>
+              <p className="section-sub">
+                Answers specific to this service. Looking for more?{' '}
+                <Link to="/faq" className="sp-faq-more">
+                  View all FAQs
+                </Link>
+              </p>
+            </Reveal>
+
+            <div className="sp-faq-list" ref={faqListRef}>
+              {service.faqs.map((faq, index) => {
+                const open = openFaq === index
+                return (
+                  <RevealItem as="div" key={faq.q} delay={index * 80} className={`faq-acc${open ? ' active' : ''}`}>
+                    <button
+                      type="button"
+                      className="faq-acc-q"
+                      aria-expanded={open}
+                      onClick={() => setOpenFaq(open ? null : index)}
+                    >
+                      <span className="faq-acc-text">{faq.q}</span>
+                      <span className="faq-acc-icon" aria-hidden="true" />
+                    </button>
+                    <div className="faq-acc-a" inert={!open}>
+                      <div>
+                        <div className="faq-acc-a-inner">
+                          <p>{faq.a}</p>
+                        </div>
+                      </div>
+                    </div>
+                  </RevealItem>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+      )}
     </main>
   )
 }

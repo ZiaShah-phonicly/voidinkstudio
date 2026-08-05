@@ -1,0 +1,15 @@
+---
+description: VOIDINK frontend engineering standards — read AGENTS.md first
+alwaysApply: true
+---
+
+# VOIDINK Frontend — Agent Rule
+
+1. **Before any task**, read `AGENTS.md` at the repo root for architecture, env flags, form/Order Now/track/admin flows, and failure modes.
+2. Partner API lives in `../backend-voidink` — read that repo’s `AGENTS.md` when touching submit, auth, track, or admin APIs.
+3. Work as a **senior engineer**: reproduce → root cause → minimal fix → verify happy + failure path. No drive-by refactors.
+4. **Form regressions are critical** — keep service→packages dropdown, price autofill, and Order Now prefill (`voidink_pending_order` + `location.state.order`) working.
+5. Respect `VITE_FORM_USE_API` (`false` = Sheets only; `true` = Mongo API). Do not assume Mongo is always on.
+6. `.env` must be UTF-8 **without BOM**. `VITE_*` values are baked at `npm run build` — rebuild `dist` after env changes.
+7. Security: never commit secrets; never weaken admin `is_staff` gates; don’t log JWTs/passwords.
+8. Prefer editing `src/data/*` for content/pricing over hardcoding in pages.
