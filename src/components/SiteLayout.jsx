@@ -42,7 +42,7 @@ export default function SiteLayout() {
   }, [])
 
   useEffect(() => {
-    const isInnerPage = ['/services', '/about', '/privacy-policy', '/terms-of-service', '/faq', '/login', '/register', '/track'].some(
+    const isInnerPage = ['/services', '/about', '/privacy-policy', '/terms-of-service', '/faq', '/track'].some(
       (path) => location.pathname.startsWith(path),
     )
     document.documentElement.classList.toggle('is-service-page', isInnerPage)

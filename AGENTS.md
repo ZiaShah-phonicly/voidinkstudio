@@ -12,8 +12,7 @@ Public marketing + commission site for **VOIDINK Studios**:
 
 - Service showcase, pricing cards, contact/order form
 - Order tracking page (`/track`)
-- Client register/login (routes exist; header CTAs may be hidden)
-- Staff **admin portal** (`/admin`) for orders, users, and native CRM pipeline
+- Staff **admin portal** (`/admin`) for orders, users, and native CRM pipeline — gated by nginx Basic Auth in production (see `deploy/nginx.voidinkstudios.com.conf`)
 
 Stack: **Vite 8 + React 19 + React Router 7**. No Redux, no UI kit, no axios — plain `fetch` + `App.css`.
 
@@ -82,7 +81,7 @@ voidinkstudio/
 | `/` | `HomePage` | Form `#query`, pricing `#pricing`, Order Now prefill |
 | `/about` | About | |
 | `/services/:slug` | `ServicePage` | Order Now → home form via state + sessionStorage |
-| `/login`, `/register` | Auth | Header buttons may be removed; URLs still work |
+| ~~`/login`, `/register`~~ | Auth | **Removed** — public password forms + open registration were flagged by Google Safe Browsing. Page components still exist in `src/pages/` but are unrouted (so tree-shaken out of the bundle). Staff accounts are created with `backend-voidink/scripts/create_admin.py`. |
 | `/track`, `/track/:trackingId` | `TrackOrderPage` | Needs backend tracking API |
 | `/faq`, `/privacy-policy`, `/terms-of-service` | Legal/FAQ | |
 | `/admin/login` | Admin login | Outside SiteLayout |

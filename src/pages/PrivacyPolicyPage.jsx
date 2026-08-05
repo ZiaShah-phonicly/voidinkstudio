@@ -14,7 +14,7 @@ export default function PrivacyPolicyPage() {
           <p>
             <strong>VOIDINK Studios</strong> (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) respects your
             privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when
-            you visit our website <strong>voidinkstudios.netlify.app</strong> and use our creative services.
+            you visit our website <strong>voidinkstudios.com</strong> and use our creative services.
           </p>
         </div>
 
@@ -168,9 +168,7 @@ export default function PrivacyPolicyPage() {
             Email: <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
             <br />
             Website:{' '}
-            <a href="https://voidinkstudios.netlify.app" target="_blank" rel="noopener noreferrer">
-              voidinkstudios.netlify.app
-            </a>
+            <a href="https://voidinkstudios.com">voidinkstudios.com</a>
             <br />
             Response time: Within 2 hours during business hours
           </p>

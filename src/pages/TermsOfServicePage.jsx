@@ -272,9 +272,7 @@ export default function TermsOfServicePage() {
             Email: <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
             <br />
             Website:{' '}
-            <a href="https://voidinkstudios.netlify.app" target="_blank" rel="noopener noreferrer">
-              voidinkstudios.netlify.app
-            </a>
+            <a href="https://voidinkstudios.com">voidinkstudios.com</a>
             <br />
             Response time: Within 2 hours
           </p>
