@@ -31,6 +31,9 @@ export default function AdminLayout() {
             <NavLink to="/admin/users" className={({ isActive }) => (isActive ? 'on' : undefined)}>
               Users
             </NavLink>
+            <NavLink to="/admin/crm" className={({ isActive }) => (isActive ? 'on' : undefined)}>
+              CRM
+            </NavLink>
           </nav>
           <div className="admin-top-actions">
             <span className="admin-who">

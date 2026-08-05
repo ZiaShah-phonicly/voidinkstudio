@@ -447,6 +447,63 @@ export const pricingCategoryToFormService = {
   character: 'Custom Character Design',
 }
 
+/** Form service name → pricing category id (for package dropdown) */
+export const formServiceToPricingCategoryId = {
+  ...Object.fromEntries(
+    Object.entries(pricingCategoryToFormService).map(([id, service]) => [service, id]),
+  ),
+  // Logo Design shares Branding packages (Logo Only / Brand Starter / Full Brand)
+  'Logo Design': 'brand',
+}
+
+/**
+ * Packages available in the contact form for a selected service.
+ * Variants (e.g. Furry Reference Sheet SFW/NSFW) become separate options.
+ */
+export function getFormPackagesForService(serviceName) {
+  const categoryId = formServiceToPricingCategoryId[serviceName]
+  if (!categoryId) return []
+  const category = pricingCategories.find((cat) => cat.id === categoryId)
+  if (!category?.packages?.length) return []
+
+  const options = []
+  for (const pkg of category.packages) {
+    if (Array.isArray(pkg.variants) && pkg.variants.length) {
+      for (const variant of pkg.variants) {
+        options.push({
+          value: `${pkg.name} (${variant.label})`,
+          label: `${pkg.name} (${variant.label})`,
+          price: variant.price || '',
+          original: variant.original || '',
+          desc: variant.desc || pkg.desc || '',
+          features: variant.features || pkg.features || [],
+        })
+      }
+    } else {
+      options.push({
+        value: pkg.name,
+        label: pkg.name,
+        price: pkg.price || '',
+        original: pkg.original || '',
+        desc: pkg.desc || '',
+        features: pkg.features || [],
+      })
+    }
+  }
+  return options
+}
+
+export function findFormPackageOption(serviceName, packageValue) {
+  if (!serviceName || !packageValue || packageValue === CUSTOM_PACKAGE) return null
+  const options = getFormPackagesForService(serviceName)
+  return (
+    options.find((opt) => opt.value === packageValue) ||
+    options.find((opt) => opt.label === packageValue) ||
+    options.find((opt) => packageValue.endsWith(opt.value) || packageValue.includes(opt.value)) ||
+    null
+  )
+}
+
 export const pricingCategories = [
   {
     id: 'web',

@@ -10,6 +10,45 @@ export async function adminLogin(payload) {
   return data
 }
 
+export async function fetchAdminCrm({ search = '' } = {}) {
+  const params = new URLSearchParams()
+  if (search) params.set('search', search)
+  params.set('limit', '200')
+
+  const res = await fetch(`${apiUrl('/api/admin/crm/')}?${params}`, {
+    headers: authHeaders(),
+  })
+  const data = await res.json().catch(() => null)
+  if (!res.ok || data?.ok === false) {
+    throw new Error(data?.error || `Failed to load CRM (${res.status})`)
+  }
+  return data
+}
+
+export async function fetchAdminCrmDeal(dealId) {
+  const res = await fetch(apiUrl(`/api/admin/crm/deals/${dealId}/`), {
+    headers: authHeaders(),
+  })
+  const data = await res.json().catch(() => null)
+  if (!res.ok || data?.ok === false) {
+    throw new Error(data?.error || `Failed to load deal (${res.status})`)
+  }
+  return data
+}
+
+export async function updateAdminCrmDealStage(dealId, stage) {
+  const res = await fetch(apiUrl(`/api/admin/crm/deals/${dealId}/`), {
+    method: 'PATCH',
+    headers: authHeaders(),
+    body: JSON.stringify({ stage }),
+  })
+  const data = await res.json().catch(() => null)
+  if (!res.ok || data?.ok === false) {
+    throw new Error(data?.error || `Failed to update deal (${res.status})`)
+  }
+  return data.deal
+}
+
 export async function fetchAdminOrders({ status = '', search = '' } = {}) {
   const params = new URLSearchParams()
   if (status) params.set('status', status)

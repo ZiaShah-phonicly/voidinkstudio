@@ -11,7 +11,9 @@ import {
   budgetOptions,
   CUSTOM_PACKAGE,
   deadlineOptions,
+  findFormPackageOption,
   formServices,
+  getFormPackagesForService,
   marqueeItems,
   pricingCategories,
   pricingCategoryToFormService,
@@ -103,11 +105,18 @@ export default function HomePage() {
 
   const isCustomPackage = formData.package === CUSTOM_PACKAGE
   const showPackagePrice = Boolean(formData.package && formData.package !== CUSTOM_PACKAGE)
+  const servicePackages = getFormPackagesForService(formData.service)
 
   const updateForm = (field) => (event) => {
     const value = event.target.value
     setFormData((prev) => {
       const next = { ...prev, [field]: value }
+      if (field === 'service') {
+        // Switching service resets package/price so the right options show.
+        next.package = ''
+        next.price = ''
+        next.budget = ''
+      }
       if (field === 'package' && value === CUSTOM_PACKAGE) {
         next.price = ''
       }
@@ -142,17 +151,29 @@ export default function HomePage() {
       order.service ||
       pricingCategoryToFormService[order.categoryId] ||
       ''
+    // Keep package value aligned with dropdown options (e.g. "Starter", "Reference Sheet (SFW)")
+    const packageValue = order.packageName || CUSTOM_PACKAGE
+    const matched = findFormPackageOption(service, packageValue)
     const packageLabel = order.categoryLabel
-      ? `${order.categoryLabel} — ${order.packageName}`
-      : order.packageName
+      ? `${order.categoryLabel} — ${packageValue}`
+      : packageValue
 
     setFormData((prev) => ({
       ...prev,
       service,
-      package: packageLabel || CUSTOM_PACKAGE,
-      price: order.price || '',
+      package: packageValue,
+      price: order.price || matched?.price || '',
       budget: '',
-      description: buildOrderDescription(order, packageLabel || order.packageName || 'Selected package'),
+      description: buildOrderDescription(
+        {
+          ...order,
+          price: order.price || matched?.price || '',
+          original: order.original || matched?.original || '',
+          desc: order.desc || matched?.desc || '',
+          features: order.features || matched?.features || [],
+        },
+        packageLabel || 'Selected package',
+      ),
     }))
   }
 
@@ -678,23 +699,51 @@ export default function HomePage() {
                     id="fpkg"
                     required
                     value={formData.package || ''}
+                    disabled={!formData.service}
                     onChange={(event) => {
                       const value = event.target.value
+                      if (value === CUSTOM_PACKAGE || value === '') {
+                        setFormData((prev) => ({
+                          ...prev,
+                          package: value,
+                          price: '',
+                          budget: value === CUSTOM_PACKAGE ? prev.budget : '',
+                        }))
+                        return
+                      }
+                      const matched =
+                        servicePackages.find((opt) => opt.value === value) ||
+                        findFormPackageOption(formData.service, value)
                       setFormData((prev) => ({
                         ...prev,
                         package: value,
-                        price: value === CUSTOM_PACKAGE || value === '' ? '' : prev.price,
-                        budget: value === CUSTOM_PACKAGE ? prev.budget : '',
+                        price: matched?.price || '',
+                        budget: '',
                       }))
                     }}
                   >
-                    <option value="">Select package...</option>
+                    <option value="">
+                      {formData.service ? 'Select package...' : 'Select a service first...'}
+                    </option>
                     <option value={CUSTOM_PACKAGE}>{CUSTOM_PACKAGE}</option>
-                    {formData.package && formData.package !== CUSTOM_PACKAGE && (
-                      <option value={formData.package}>{formData.package}</option>
-                    )}
+                    {servicePackages.map((opt) => (
+                      <option key={opt.value} value={opt.value}>
+                        {opt.label} — {opt.price}
+                      </option>
+                    ))}
+                    {/* Keep Order Now / legacy values selectable if not in current list */}
+                    {formData.package &&
+                      formData.package !== CUSTOM_PACKAGE &&
+                      !servicePackages.some((opt) => opt.value === formData.package) && (
+                        <option value={formData.package}>{formData.package}</option>
+                      )}
                   </select>
-                  {showPackagePrice && <p className="form-hint">Auto-filled from pricing — switch to Custom if you need something else.</p>}
+                  {showPackagePrice && (
+                    <p className="form-hint">Price auto-filled from our packages — switch to Custom for a quote.</p>
+                  )}
+                  {formData.service && servicePackages.length === 0 && (
+                    <p className="form-hint">No fixed packages for this service — choose Custom / Need a quote.</p>
+                  )}
                 </div>
                 {showPackagePrice ? (
                   <div className="fr">

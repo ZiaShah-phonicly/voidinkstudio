@@ -11,6 +11,30 @@
 		},
 		{
 			"path": "../Portfolio-Website"
+		},
+		{
+			"path": "../Dev-Frontend"
+		},
+		{
+			"path": "../gpu-server"
+		},
+		{
+			"path": "../mobile-app"
+		},
+		{
+			"path": "../mobile-app-synaptic"
+		},
+		{
+			"path": "../React_Chrome_Extension"
+		},
+		{
+			"path": "../backend-synaptic"
+		},
+		{
+			"path": "../DentalCare"
+		},
+		{
+			"path": "../websiteprompts"
 		}
 	],
 	"settings": {}
