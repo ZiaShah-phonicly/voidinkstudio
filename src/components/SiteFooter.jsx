@@ -112,12 +112,6 @@ export default function SiteFooter() {
                   <Link to="/faq">FAQ</Link>
                 </li>
                 <li>
-                  <Link to="/login">Log In</Link>
-                </li>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-                <li>
                   <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
                 </li>
                 <li>

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import SiteFooter from '../../components/SiteFooter'
 import SiteHeader from '../../components/SiteHeader'
+import useRobotsMeta from '../../hooks/useRobotsMeta'
 import { getAuth } from '../../utils/authApi'
 import { adminLogin } from '../../utils/adminApi'
 
@@ -12,6 +13,8 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
+
+  useRobotsMeta('noindex, nofollow, noarchive')
 
   if (existing?.access && existing.is_staff) {
     return <Navigate to="/admin" replace />

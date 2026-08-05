@@ -4,9 +4,7 @@ import SiteLayout from './components/SiteLayout'
 import AboutPage from './pages/AboutPage'
 import FaqPage from './pages/FaqPage'
 import HomePage from './pages/HomePage'
-import LoginPage from './pages/LoginPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
-import RegisterPage from './pages/RegisterPage'
 import ServicePage from './pages/ServicePage'
 import TermsOfServicePage from './pages/TermsOfServicePage'
 import AdminLayout from './pages/admin/AdminLayout'
@@ -31,8 +29,6 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services/:slug" element={<ServicePage />} />
-          {/* <Route path="/login" element={<LoginPage />} /> */}
-          <Route path="/admin/register" element={<RegisterPage />} />
           <Route path="/track" element={<TrackOrderPage />} />
           <Route path="/track/:trackingId" element={<TrackOrderPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />

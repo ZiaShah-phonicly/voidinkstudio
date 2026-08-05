@@ -1,6 +1,7 @@
 User-agent: *
 Allow: /
 
+# Staff portal + removed public auth routes — keep out of Search/Safe Browsing crawl
 Disallow: /admin
 Disallow: /admin/
 Disallow: /login

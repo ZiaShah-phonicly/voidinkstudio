@@ -1,11 +1,14 @@
 import { Link, Navigate, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import SiteFooter from '../../components/SiteFooter'
 import SiteHeader from '../../components/SiteHeader'
+import useRobotsMeta from '../../hooks/useRobotsMeta'
 import { clearAuth, getAuth } from '../../utils/authApi'
 
 export default function AdminLayout() {
   const auth = getAuth()
   const navigate = useNavigate()
+
+  useRobotsMeta('noindex, nofollow, noarchive')
 
   if (!auth?.access) {
     return <Navigate to="/admin/login" replace />
