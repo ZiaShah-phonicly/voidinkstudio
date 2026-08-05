@@ -718,6 +718,21 @@ body.cookie-banner-open{padding-bottom:100px}
   .faq-acc-a-inner{padding:0 18px 18px}
 }
 
+/* —— 404 —— */
+.nf-page{min-height:70vh;padding:160px 0 100px;text-align:center;position:relative}
+.nf-inner{max-width:720px;margin:0 auto}
+.nf-code{font-family:'Space Grotesk',sans-serif;font-size:clamp(5rem,18vw,9rem);font-weight:800;line-height:.9;letter-spacing:-.08em;margin:10px 0 18px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.9}
+.nf-sub{max-width:520px;margin:0 auto 18px}
+.nf-path{margin:0 0 28px;font-size:.85rem;color:var(--text2)}
+.nf-path code{padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:rgba(124,58,237,.08);color:var(--text);font-size:.8rem}
+.nf-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:12px}
+.nf-actions .nav-cta{text-decoration:none}
+@media(max-width:600px){
+  .nf-page{padding:130px 0 70px}
+  .nf-actions{flex-direction:column;align-items:stretch}
+  .nf-actions .nav-cta{justify-content:center}
+}
+
 /* —— Admin portal —— */
 .admin-shell{min-height:100vh;display:flex;flex-direction:column;padding-top:130px;background:radial-gradient(1200px 600px at 10% -10%,rgba(124,58,237,.18),transparent 55%),radial-gradient(900px 500px at 90% 0%,rgba(34,211,238,.08),transparent 50%),#0b0b12;color:var(--text);font-family:'Inter',system-ui,sans-serif}
 .admin-login-shell{flex:1;display:grid;place-items:center;padding:40px 20px 70px}
