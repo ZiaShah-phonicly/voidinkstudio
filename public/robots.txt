@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Staff portal + removed public auth routes — keep out of Search/Safe Browsing crawl
+# Legacy auth / staff paths (portal lives on admin.voidinkstudios.com)
 Disallow: /admin
 Disallow: /admin/
 Disallow: /login
