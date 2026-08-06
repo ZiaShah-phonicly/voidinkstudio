@@ -12,11 +12,12 @@ Public marketing + commission site for **VOIDINK Studios**:
 
 - Service showcase, pricing cards, contact/order form
 - Order tracking page (`/track`)
-- Staff **admin portal** (`/admin`) for orders, users, and native CRM pipeline — gated by nginx Basic Auth in production (see `deploy/nginx.voidinkstudios.com.conf`)
 
 Stack: **Vite 8 + React 19 + React Router 7**. No Redux, no UI kit, no axios — plain `fetch` + `App.css`.
 
-**CRM:** Native admin page `/admin/crm` backed by `GET /api/admin/crm/` (Mongo `voidink_contacts` / `voidink_deals` / `voidink_activities`). Form submit upserts CRM when API+Mongo saves an order. Optional n8n enrichment: import `backend-voidink/workflows/voidink-crm-order-enrichment.json` (see that folder’s README).
+**Staff admin portal** lives in a **separate app**: `D:\voidinkstudio_workspace\voidink-admin` (deploy later on `admin.voidinkstudios.com`). Same `backend-voidink` API.
+
+**CRM:** Form submit still upserts CRM in Mongo when API+Mongo saves an order. Staff manage pipeline in `voidink-admin`. Optional n8n enrichment: import `backend-voidink/workflows/voidink-crm-order-enrichment.json`.
 
 ---
 
@@ -59,10 +60,9 @@ voidinkstudio/
 │   ├── App.css               # Almost all styles
 │   ├── main.jsx
 │   ├── components/           # SiteLayout, PricingCard, ChatWidget, GoldTubesBackground, …
-│   ├── pages/                # Public pages
-│   ├── pages/admin/          # AdminLayout, AdminLogin, Orders, Users, Crm
+│   ├── pages/                # Public pages (+ NotFoundPage)
 │   ├── data/                 # Content + pricing + form package helpers
-│   ├── utils/                # authApi, adminApi, submit*, trackOrder
+│   ├── utils/                # authApi (session helpers), submit*, trackOrder
 │   └── hooks/
 ├── public/                   # Images, _redirects (Netlify SPA)
 ├── google-apps-script/       # Code.gs — Sheets web app (redeploy after edits)
@@ -81,13 +81,10 @@ voidinkstudio/
 | `/` | `HomePage` | Form `#query`, pricing `#pricing`, Order Now prefill |
 | `/about` | About | |
 | `/services/:slug` | `ServicePage` | Order Now → home form via state + sessionStorage |
-| ~~`/login`, `/register`~~ | Auth | **Removed** — public password forms + open registration were flagged by Google Safe Browsing. Page components still exist in `src/pages/` but are unrouted (so tree-shaken out of the bundle). Staff accounts are created with `backend-voidink/scripts/create_admin.py`. |
 | `/track`, `/track/:trackingId` | `TrackOrderPage` | Needs backend tracking API |
 | `/faq`, `/privacy-policy`, `/terms-of-service` | Legal/FAQ | |
-| `/admin/login` | Admin login | Google reCAPTCHA v2 when `VITE_RECAPTCHA_SITE_KEY` is set; backend must also enable verification |
-| `/admin` | Orders dashboard | Staff JWT required |
-| `/admin/users` | User management | Staff JWT required |
-| `/admin/crm` | Native CRM (pipeline + contacts) | Staff JWT; data from Mongo orders |
+| `*` | `NotFoundPage` | Branded 404 |
+| ~~`/login`, `/register`, `/admin/*`~~ | Auth / admin | **Removed from this app** — staff portal is `voidink-admin`. Prod nginx may 301 `/admin` → `admin.voidinkstudios.com`. |
 
 Home hash sections: `#home` `#services` `#work` `#process` `#pricing` `#testimonials` `#query`.
 
@@ -127,11 +124,7 @@ Home hash sections: `#home` `#services` `#work` `#process` `#pricing` `#testimon
 
 ### 5.3 Admin portal
 
-- Auth: `localStorage` key `voidink_auth` (`authApi.js`)
-- Staff gate: `is_staff === true` (`AdminLayout`, `adminLogin`)
-- Orders: list/filter/status update (`adminApi.js`)
-- Users: list + enable/disable + grant/revoke admin
-- CRM: `AdminCrmPage` → `GET /api/admin/crm/` (deals pipeline + contacts); deal detail/notes via `GET /api/admin/crm/deals/<id>/`; stage moves via `PATCH` `{ stage }` (syncs linked order status)
+Moved to **`voidink-admin`**. See that repo’s `AGENTS.md`.
 
 ---
 
@@ -143,7 +136,6 @@ Home hash sections: `#home` `#services` `#work` `#process` `#pricing` `#testimon
 | `VITE_FORM_USE_API` | `true` = Mongo API; `false` = Sheet only |
 | `VITE_API_URL` | API origin; empty = use Vite `/api` proxy |
 | `VITE_DISCORD_WEBHOOK_URL` | Optional |
-| `VITE_RECAPTCHA_SITE_KEY` | Google reCAPTCHA v2 checkbox site key for `/admin/login`; pair with backend `RECAPTCHA_*` env |
 | `VITE_TUBES_ENABLED` | `true` / `false` — hero tubes WebGL cursor (default off; heavy) |
 | `VITE_TUBES_THEME` | `voidink` \| `gold` \| `silver` (only when enabled) |
 | `VITE_TUBES_COLORS` / `LIGHTS` / `INTENSITY` | Hero tubes overrides |

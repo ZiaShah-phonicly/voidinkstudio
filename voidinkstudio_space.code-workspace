@@ -38,6 +38,9 @@
 		},
 		{
 			"path": "../backend-voidinkstudio"
+		},
+		{
+			"path": "../voidink-admin"
 		}
 	],
 	"settings": {}
