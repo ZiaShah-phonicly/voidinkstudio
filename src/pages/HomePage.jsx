@@ -115,8 +115,6 @@ export default function HomePage() {
   const location = useLocation()
   const [pricingTab, setPricingTab] = useState('web')
   const [formSuccess, setFormSuccess] = useState(false)
-  const [trackingId, setTrackingId] = useState('')
-  const [copiedTracking, setCopiedTracking] = useState(false)
   const [formError, setFormError] = useState('')
   const [formSubmitting, setFormSubmitting] = useState(false)
   const [formData, setFormData] = useState(emptyForm)
@@ -295,8 +293,6 @@ export default function HomePage() {
         }
       }
 
-      setTrackingId(nextTrackingId)
-      setCopiedTracking(false)
       setFormSuccess(true)
       setFormData(emptyForm)
     } catch (error) {
@@ -889,35 +885,7 @@ export default function HomePage() {
                 )}
                 {formSuccess && (
                   <div id="fs" className="form-success" role="alert">
-                    <p className="form-success-title">Thank you — we received your query.</p>
-                    {trackingId ? (
-                      <>
-                        <p className="form-success-sub">Save your tracking ID to check status anytime:</p>
-                        <div className="form-tracking">
-                          <code>{trackingId}</code>
-                          <button
-                            type="button"
-                            className="form-tracking-copy"
-                            onClick={async () => {
-                              try {
-                                await navigator.clipboard.writeText(trackingId)
-                                setCopiedTracking(true)
-                                setTimeout(() => setCopiedTracking(false), 2000)
-                              } catch {
-                                setCopiedTracking(false)
-                              }
-                            }}
-                          >
-                            {copiedTracking ? 'Copied' : 'Copy'}
-                          </button>
-                          <Link to={`/track/${trackingId}`} className="form-tracking-link">
-                            Track order →
-                          </Link>
-                        </div>
-                      </>
-                    ) : (
-                      <p className="form-success-sub">We&apos;ll respond ASAP.</p>
-                    )}
+                    <p className="form-success-title">Thank you — we received your order query and will respond ASAP.</p>
                   </div>
                 )}
               </form>
