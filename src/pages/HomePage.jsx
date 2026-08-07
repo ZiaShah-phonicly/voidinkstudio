@@ -178,21 +178,26 @@ export default function HomePage() {
       ? `${order.categoryLabel} — ${packageValue}`
       : packageValue
 
+    let description = buildOrderDescription(
+      {
+        ...order,
+        price: order.price || matched?.price || '',
+        desc: order.desc || matched?.desc || '',
+        features: order.features || matched?.features || [],
+      },
+      packageLabel || 'Selected package',
+    )
+    if (order.brief) {
+      description = `${description}\n${order.brief}`
+    }
+
     setFormData((prev) => ({
       ...prev,
       service,
       package: packageValue,
       price: order.price || matched?.price || '',
       budget: '',
-      description: buildOrderDescription(
-        {
-          ...order,
-          price: order.price || matched?.price || '',
-          desc: order.desc || matched?.desc || '',
-          features: order.features || matched?.features || [],
-        },
-        packageLabel || 'Selected package',
-      ),
+      description,
     }))
   }
 

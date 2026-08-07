@@ -112,7 +112,7 @@ export default function SiteFooter() {
                   <Link to="/faq">FAQ</Link>
                 </li>
                 <li>
-                  <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
+                  <a href="mailto:support@voidinkstudios.com">support@voidinkstudios.com</a>
                 </li>
                 <li>
                   <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
