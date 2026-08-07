@@ -284,6 +284,50 @@ function recommendPackage(session) {
   return pickPackageByBudget(pricing, session.budgetMax)
 }
 
+function buildChatBrief(session) {
+  const notes = Array.isArray(session?.projectNotes) ? session.projectNotes.filter(Boolean) : []
+  if (!notes.length) return ''
+  // Keep recent user lines that look like project detail (skip short button taps)
+  const useful = notes.filter((n) => {
+    const t = String(n).trim()
+    if (t.length < 12) return false
+    if (/^(start order|get quote|order now|other services|start new project|compare packages|different service|view pricing)$/i.test(t)) {
+      return false
+    }
+    return true
+  })
+  return (useful.length ? useful : notes).slice(-4).join('\n')
+}
+
+/** Order Now payload — same shape as PricingCard / ServicePage prefill */
+export function buildOrderFromChatSession(session) {
+  const brief = buildChatBrief(session)
+  if (!session?.serviceSlug) {
+    return {
+      packageName: 'Custom / Need a quote',
+      brief: brief || undefined,
+    }
+  }
+
+  const service = getService(session.serviceSlug)
+  const pricing = getPricingForService(session.serviceSlug)
+  if (!service) {
+    return { packageName: 'Custom / Need a quote', brief: brief || undefined }
+  }
+
+  const pkg = recommendPackage(session)
+  return {
+    service: service.formService,
+    categoryId: pricing?.id || service.pricingCategoryId,
+    categoryLabel: pricing?.label || service.title,
+    packageName: pkg?.name || 'Custom / Need a quote',
+    price: pkg?.price || '',
+    desc: pkg?.desc || '',
+    features: pkg?.features || [],
+    brief: brief || undefined,
+  }
+}
+
 function formatPackageRecommendation(service, pkg, session) {
   const lines = [
     `${service.icon} **Perfect match for you:**`,
@@ -369,6 +413,19 @@ function buildQuickReplies(session) {
   return ['Get Quote', 'Other services', 'Talk to human']
 }
 
+function buildStartOrderReply(session) {
+  const service = session.serviceSlug ? getService(session.serviceSlug) : null
+  const order = buildOrderFromChatSession(session)
+  return {
+    session,
+    text: service
+      ? `🚀 **Let's start your ${service.title} project!**\n\nTap **Order Now** — we'll open the contact form with your chat details filled in.\n\nYou just add **name**, **email**, and any extra brief. We'll reply **asap**!`
+      : '🚀 Tap **Order Now** to open the contact form (we\'ll prefill what we can from chat). Add your **name** & **email** — we reply **asap**!',
+    quickReplies: ['Other services', 'Start new project'],
+    orderCta: { label: 'Order Now', order },
+  }
+}
+
 export function processChatMessage(userMessage, session) {
   const text = userMessage.trim()
   const lower = text.toLowerCase()
@@ -380,6 +437,15 @@ export function processChatMessage(userMessage, session) {
       text: 'Hey! 👋 I\'m **VOIDINK Assistant**.\n\nTell me what you want to create — e.g. logo ($59), website ($399), comic, DnD art, VTuber, AI chatbot — and I\'ll recommend the **best package**.\n\nWhat project do you have in mind?',
       quickReplies: buildQuickReplies(initialChatSession),
     }
+  }
+
+  if (
+    lower.includes('start my order') ||
+    lower.includes('start order') ||
+    lower === 'get quote' ||
+    lower.includes('i want to order')
+  ) {
+    return buildStartOrderReply(next)
   }
 
   if (lower.includes('thank')) {
@@ -596,14 +662,7 @@ export function processChatQuickReply(label, session) {
   }
 
   if (label === 'Start order' || label === 'Get Quote') {
-    const service = session.serviceSlug ? getService(session.serviceSlug) : null
-    return {
-      session,
-      text: service
-        ? `🚀 **Let's start your ${service.title} project!**\n\n1️⃣ Go to **Contact** section on our site\n2️⃣ Select "${service.formService}" in the form\n3️⃣ Or email **voidinkstudios1@gmail.com**\n\nInclude your references & we'll reply within **2 hours**!`
-        : '🚀 Fill the **Contact form** on our site or email **voidinkstudios1@gmail.com** — we respond within 2 hours!',
-      quickReplies: ['Other services', 'Start new project'],
-    }
+    return buildStartOrderReply(session)
   }
 
   if (label === 'Different service') {

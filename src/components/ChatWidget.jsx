@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   chatQuickReplies,
   initialChatSession,
   processChatMessage,
   processChatQuickReply,
 } from '../data/chatbotEngine'
+
+const ORDER_STORAGE_KEY = 'voidink_pending_order'
 
 const welcomeMessage = {
   id: 'welcome',
@@ -23,6 +26,7 @@ function formatBotText(text) {
 }
 
 export default function ChatWidget({ open: controlledOpen, onOpenChange }) {
+  const navigate = useNavigate()
   const [internalOpen, setInternalOpen] = useState(false)
   const open = controlledOpen ?? internalOpen
   const setOpen = (value) => {
@@ -53,6 +57,17 @@ export default function ChatWidget({ open: controlledOpen, onOpenChange }) {
     else setInternalOpen((prev) => !prev)
   }
 
+  const goToOrderForm = (order) => {
+    if (!order) return
+    try {
+      sessionStorage.setItem(ORDER_STORAGE_KEY, JSON.stringify(order))
+    } catch {
+      // ignore quota / private mode
+    }
+    setOpen(false)
+    navigate({ pathname: '/', hash: 'query' }, { state: { order } })
+  }
+
   const pushBotReply = (result, delay = 900) => {
     setTyping(true)
     setTimeout(() => {
@@ -65,6 +80,7 @@ export default function ChatWidget({ open: controlledOpen, onOpenChange }) {
           type: 'bot',
           text: result.text,
           quickReplies: result.quickReplies || null,
+          orderCta: result.orderCta || null,
         },
       ])
     }, delay)
@@ -109,9 +125,18 @@ export default function ChatWidget({ open: controlledOpen, onOpenChange }) {
           {messages.map((msg) => (
             <div key={msg.id} className={`msg ${msg.type}`}>
               {msg.type === 'bot' ? formatBotText(msg.text) : msg.text}
-              {msg.quickReplies?.length > 0 && (
+              {(msg.orderCta || msg.quickReplies?.length > 0) && (
                 <div className="qr">
-                  {msg.quickReplies.map((label) => (
+                  {msg.orderCta && (
+                    <button
+                      type="button"
+                      className="qb qb-primary"
+                      onClick={() => goToOrderForm(msg.orderCta.order)}
+                    >
+                      {msg.orderCta.label || 'Order Now'}
+                    </button>
+                  )}
+                  {msg.quickReplies?.map((label) => (
                     <button key={label} type="button" className="qb" onClick={() => handleQuickReply(label)}>
                       {label}
                     </button>
