@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
+Allow: /llms.txt
 
 # Legacy auth / staff paths (portal lives on admin.voidinkstudios.com)
 Disallow: /admin

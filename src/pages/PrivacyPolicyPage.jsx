@@ -1,7 +1,14 @@
 import LegalPageShell from '../components/LegalPageShell'
 import Reveal from '../components/Reveal'
+import usePageMeta from '../hooks/usePageMeta'
+import { pageTitle } from '../data/seo'
 
 export default function PrivacyPolicyPage() {
+  usePageMeta({
+    title: pageTitle('Privacy Policy'),
+    description: 'How VOIDINK Studios collects, uses, and protects personal data on voidinkstudios.com.',
+  })
+
   return (
     <LegalPageShell
       label="✦ Legal"
@@ -134,7 +141,7 @@ export default function PrivacyPolicyPage() {
           <li>Request a copy of your data in a portable format</li>
         </ul>
         <p>
-          To exercise any of these rights, contact us at <strong>voidinkstudios1@gmail.com</strong>.
+          To exercise any of these rights, contact us at <strong>support@voidinkstudios.com</strong>.
         </p>
 
         <h2>8. Data Security</h2>
@@ -165,7 +172,7 @@ export default function PrivacyPolicyPage() {
           <p>
             <strong>VOIDINK Studios</strong>
             <br />
-            Email: <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
+            Email: <a href="mailto:support@voidinkstudios.com">support@voidinkstudios.com</a>
             <br />
             Website:{' '}
             <a href="https://voidinkstudios.com">voidinkstudios.com</a>

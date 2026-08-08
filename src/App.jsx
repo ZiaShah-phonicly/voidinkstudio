@@ -1,8 +1,9 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import './App.css'
 import SiteLayout from './components/SiteLayout'
 import AboutPage from './pages/AboutPage'
 import FaqPage from './pages/FaqPage'
+import FursuitPage from './pages/FursuitPage'
 import HomePage from './pages/HomePage'
 import NotFoundPage from './pages/NotFoundPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
@@ -17,6 +18,8 @@ function App() {
         <Route element={<SiteLayout />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/fursuits" element={<Navigate to="/services/fursuits" replace />} />
+          <Route path="/services/fursuits" element={<FursuitPage />} />
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/track" element={<TrackOrderPage />} />
           <Route path="/track/:trackingId" element={<TrackOrderPage />} />

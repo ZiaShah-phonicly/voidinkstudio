@@ -5,6 +5,7 @@ import { clearAuth, getAuth } from '../utils/authApi'
 
 const navLinks = [
   { to: '/#services', label: 'Services' },
+  { to: '/services/fursuits', label: 'Fursuits', isNew: true },
   { to: '/#work', label: 'Portfolio' },
   { to: '/#process', label: 'Process' },
   { to: '/#pricing', label: 'Pricing' },
@@ -71,6 +72,7 @@ export default function SiteHeader() {
               <li key={link.to} role="none">
                 <a href={link.to} role="menuitem" onClick={(e) => handleNavClick(e, link.to)}>
                   {link.label}
+                  {link.isNew ? <span className="nav-new">NEW</span> : null}
                 </a>
               </li>
             ))}

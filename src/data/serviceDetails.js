@@ -418,6 +418,143 @@ export const serviceDetails = [
     ],
   },
   {
+    slug: 'fursuits',
+    cardImage: '/portfolio/services/furry/1.jpg',
+    icon: '🐾',
+    title: 'Fursuit Commissions',
+    shortText:
+      'Custom-made anthropomorphic animal costumes — heads, partials, and full suits crafted with professional quality.',
+    tagline: 'Art Born From The VOID — Now in 3D',
+    isNew: true,
+    pageLayout: 'commission',
+    pricingCategoryId: 'fursuit',
+    formService: 'Fursuit Commissions',
+    gradient: 'linear-gradient(135deg,#3b0764,#7C3AED)',
+    startingPrice: '$800',
+    turnaround: '4–16 weeks',
+    heroEyebrow: '✦ Custom Fursuit Commissions',
+    heroHeadline: { before: 'Art Born From The ', accent: 'VOID', after: ' — Now in 3D' },
+    trustLine: 'Trusted by collectors & performers worldwide',
+    relatedSlugs: ['furry-art', 'mascot-design', 'custom-character-design'],
+    overview:
+      'We bring your fursona to life with handcrafted, professional-quality fursuits. From expressive heads to full-body suits, every piece is built with precision, passion, and 200+ clients worth of experience.',
+    highlights: [
+      '200+ clients worldwide',
+      'DHL Express shipping',
+      'WIP photo/video updates',
+      'Art-to-suit pipeline',
+      'Fit guarantee from your measurements',
+    ],
+    includes: [
+      'Custom construction from your reference sheet',
+      'Professional faux fur + hidden seams',
+      'WIP updates at every milestone',
+      'DHL Express shipping (tracked + insured)',
+      'Fit based on your measurements / DTD',
+    ],
+    deliverables: ['Finished suit / head / partial', 'Care guide', 'Tracked DHL shipment', 'WIP archive'],
+    idealFor: ['Fursona debuts', 'Conventions & performances', 'Collectors', 'Content creators'],
+    addons: [
+      { name: 'LED Eyes', price: '+$100' },
+      { name: 'Moving Jaw', price: '+$150' },
+      { name: 'Extra Tongue', price: '+$50' },
+      { name: 'Magnetic Eyelids', price: '+$80' },
+      { name: 'Padded Bodysuit', price: '+$200' },
+      { name: 'Rush Order (2× speed)', price: '+30% of total' },
+    ],
+    trustSignals: [
+      {
+        icon: '🌍',
+        title: '200+ Clients Worldwide',
+        text: 'Proven track record across 25 countries.',
+      },
+      {
+        icon: '📦',
+        title: 'DHL Express Shipping',
+        text: '3–5 days to USA, fully tracked and insured.',
+      },
+      {
+        icon: '📸',
+        title: 'Work-in-Progress Updates',
+        text: 'Photo/video updates at every major milestone.',
+      },
+      {
+        icon: '💳',
+        title: 'Secure Payment',
+        text: 'Payoneer, Wise, and bank transfer accepted.',
+      },
+      {
+        icon: '🎨',
+        title: 'Art-to-Suit Pipeline',
+        text: 'We design your character AND build the suit — seamless process.',
+      },
+    ],
+    cta: {
+      eyebrow: '✦ Ready to Become Your Fursona?',
+      title: 'Commission slots open soon',
+      subtitle: 'Join our waitlist or inquire now.',
+      buttonLabel: 'Get a Free Quote',
+      contacts: [
+        { label: 'Email', value: 'support@voidinkstudios.com', href: 'mailto:support@voidinkstudios.com', icon: '📧' },
+        { label: 'X', value: '@VoidinkSuits', href: 'https://x.com/VoidinkSuits', icon: '🐦' },
+        {
+          label: 'FurAffinity',
+          value: 'VoidinkStudios',
+          href: 'https://www.furaffinity.net/user/voidinkstudios/',
+          icon: '🎨',
+        },
+      ],
+    },
+    process: [
+      {
+        step: '01',
+        title: 'Design',
+        text: 'We review your reference sheet and take detailed measurements. A Duct Tape Dummy (DTD) guide is sent if ordering a full/partial suit.',
+      },
+      {
+        step: '02',
+        title: 'Sculpt',
+        text: 'Head is carved from high-density foam or built on a resin base. You receive WIP photos at every milestone.',
+      },
+      {
+        step: '03',
+        title: 'Fur',
+        text: 'Premium faux fur is hand-cut, pinned, and sewn with hidden seams. Airbrushing and detail work applied.',
+      },
+      {
+        step: '04',
+        title: 'Finish',
+        text: 'Final fitting, quality check, and professional DHL shipping to your door in 3–5 business days.',
+      },
+    ],
+    faqs: [
+      {
+        q: 'Do I need a reference sheet?',
+        a: "Yes, a clear, unshaded reference sheet is required. If you don't have one, we offer reference sheet design as a separate service.",
+      },
+      {
+        q: 'What measurements do you need?',
+        a: 'For heads, just your head circumference. For partials/full suits, we send a detailed measurement guide + Duct Tape Dummy (DTD) instructions.',
+      },
+      {
+        q: 'How do payments work?',
+        a: '50% non-refundable deposit to secure your slot. Remaining 50% + shipping due before delivery. We accept Payoneer, Wise, and bank transfer.',
+      },
+      {
+        q: 'Do you ship internationally?',
+        a: 'Yes! We ship worldwide via DHL Express. USA delivery is 3–5 business days. Shipping costs are calculated by weight and destination.',
+      },
+      {
+        q: "What if the suit doesn't fit?",
+        a: 'We guarantee fit based on the measurements you provide. Minor adjustments can be discussed. Please follow our measurement guide carefully.',
+      },
+      {
+        q: 'Do you offer payment plans?',
+        a: 'Yes, for orders $2,000+. We can split the deposit into 2–3 installments. Contact us to discuss.',
+      },
+    ],
+  },
+  {
     slug: 'nsfw-art',
     cardImage: '/portfolio/nexus-rag.jpg',
     icon: '🔥',
@@ -538,5 +675,10 @@ export function getServiceBySlug(slug) {
 }
 
 export function getRelatedServices(currentSlug, limit = 3) {
+  const current = getServiceBySlug(currentSlug)
+  if (current?.relatedSlugs?.length) {
+    const related = current.relatedSlugs.map((slug) => getServiceBySlug(slug)).filter(Boolean)
+    if (related.length) return related.slice(0, limit)
+  }
   return serviceDetails.filter((service) => service.slug !== currentSlug).slice(0, limit)
 }

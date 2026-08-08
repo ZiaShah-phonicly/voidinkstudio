@@ -40,7 +40,9 @@ export default function PricingCard({
       onMouseLeave={onMouseLeave}
     >
       {pkg.badge && <div className="pk-badge">{pkg.badge}</div>}
-      <div className="pk-name">{pkg.name}</div>
+      <div className="pk-name">
+        {pkg.emoji ? `${pkg.emoji} ${pkg.name}` : pkg.name}
+      </div>
 
       {hasVariants && (
         <div className="pk-variants" role="group" aria-label={`${pkg.name} options`}>
