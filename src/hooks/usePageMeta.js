@@ -24,6 +24,15 @@ function applyMetaContent(selector, attrName, attrValue, content) {
   }
 }
 
+function applyMany(entries) {
+  const restores = entries
+    .filter((entry) => entry[3])
+    .map(([selector, attrName, attrValue, content]) =>
+      applyMetaContent(selector, attrName, attrValue, content),
+    )
+  return () => restores.forEach((restore) => restore())
+}
+
 /**
  * The SPA ships a single index.html, so per-route title/robots/description/
  * canonical have to be applied at runtime. Static view-source will always show
@@ -37,8 +46,13 @@ export default function usePageMeta({ title, robots, description, canonical } = 
     if (!title) return undefined
     const previous = document.title
     document.title = title
+    const restoreShare = applyMany([
+      ['meta[property="og:title"]', 'property', 'og:title', title],
+      ['meta[name="twitter:title"]', 'name', 'twitter:title', title],
+    ])
     return () => {
       document.title = previous
+      restoreShare()
     }
   }, [title])
 
@@ -49,25 +63,34 @@ export default function usePageMeta({ title, robots, description, canonical } = 
 
   useEffect(() => {
     if (!description) return undefined
-    return applyMetaContent('meta[name="description"]', 'name', 'description', description)
+    return applyMany([
+      ['meta[name="description"]', 'name', 'description', description],
+      ['meta[property="og:description"]', 'property', 'og:description', description],
+      ['meta[name="twitter:description"]', 'name', 'twitter:description', description],
+    ])
   }, [description])
 
   useEffect(() => {
     if (!canonical) return undefined
 
     const link = document.querySelector('link[rel="canonical"]')
-    if (!link) return undefined
-
-    const previous = link.getAttribute('href')
+    const previous = link?.getAttribute('href')
     if (canonical === CANONICAL_NONE) {
-      link.remove()
-    } else {
+      link?.remove()
+    } else if (link) {
       link.setAttribute('href', canonical)
     }
 
+    const restoreOg =
+      canonical === CANONICAL_NONE
+        ? undefined
+        : applyMetaContent('meta[property="og:url"]', 'property', 'og:url', canonical)
+
     return () => {
+      restoreOg?.()
+      if (!link) return
       if (canonical === CANONICAL_NONE) {
-        link.setAttribute('href', previous)
+        if (previous != null) link.setAttribute('href', previous)
         document.head.appendChild(link)
         return
       }

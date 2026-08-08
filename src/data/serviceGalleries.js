@@ -112,5 +112,7 @@ export const serviceGalleries = {
 }
 
 export function getServiceGallery(slug) {
-  return serviceGalleries[slug] || []
+  if (serviceGalleries[slug]?.length) return serviceGalleries[slug]
+  if (slug === 'fursuits') return serviceGalleries['furry-art'] || []
+  return []
 }

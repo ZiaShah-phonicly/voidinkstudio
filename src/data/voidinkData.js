@@ -5,7 +5,7 @@ export const studioStats = {
   projects: 500,
   clients: 200,
   countries: 25,
-  services: 14,
+  services: 15,
   satisfaction: 99,
   rating: '4.9',
 }
@@ -29,6 +29,7 @@ export const marqueeItems = [
   'Animation',
   'DnD Character Art',
   'Furry Art',
+  'Fursuit Commissions',
   'NSFW Art',
   'Cover Art',
   'Custom Character Design',
@@ -435,6 +436,10 @@ export const formServices = [
   'Animation',
   'DnD Character Art',
   'Furry Art',
+  'Fursuit Commission — Head',
+  'Fursuit Commission — Partial',
+  'Fursuit Commission — Full Suit',
+  'Fursuit Commission — Other/Quote',
   'NSFW Art',
   'Cover Art',
   'Custom Character Design',
@@ -442,6 +447,8 @@ export const formServices = [
 ]
 
 export const budgetOptions = ['Under $100', '$100-$500', '$500-$1,000', '$1,000-$3,000', '$3,000-$5,000', '$5,000+']
+export const fursuitBudgetOptions = ['Under $1k', '$1k-$2k', '$2k-$3k', '$3k+']
+export const fursuitSuitTypes = ['Head', 'Partial', 'Full', 'Other']
 export const deadlineOptions = ['ASAP / Rush', '1 Week', '2 Weeks', '1 Month', 'Flexible']
 
 export const CUSTOM_PACKAGE = 'Custom / Need a quote'
@@ -459,6 +466,7 @@ export const pricingCategoryToFormService = {
   anim: 'Animation',
   dnd: 'DnD Character Art',
   furry: 'Furry Art',
+  fursuit: 'Fursuit Commissions',
   nsfw: 'NSFW Art',
   cover: 'Cover Art',
   character: 'Custom Character Design',
@@ -471,6 +479,53 @@ export const formServiceToPricingCategoryId = {
   ),
   // Logo Design shares Branding packages (Logo Only / Brand Starter / Full Brand)
   'Logo Design': 'brand',
+  'Fursuit Commissions': 'fursuit',
+  'Fursuit Commission — Head': 'fursuit',
+  'Fursuit Commission — Partial': 'fursuit',
+  'Fursuit Commission — Full Suit': 'fursuit',
+  'Fursuit Commission — Other/Quote': 'fursuit',
+}
+
+export const FURSUIT_FORM_SERVICES = [
+  'Fursuit Commission — Head',
+  'Fursuit Commission — Partial',
+  'Fursuit Commission — Full Suit',
+  'Fursuit Commission — Other/Quote',
+]
+
+const FURSUIT_PACKAGE_TO_FORM_SERVICE = {
+  'Custom Head': 'Fursuit Commission — Head',
+  'Partial Suit': 'Fursuit Commission — Partial',
+  'Full Suit': 'Fursuit Commission — Full Suit',
+}
+
+export function isFursuitFormService(serviceName) {
+  if (!serviceName) return false
+  return (
+    serviceName === 'Fursuit Commissions' ||
+    FURSUIT_FORM_SERVICES.includes(serviceName) ||
+    String(serviceName).toLowerCase().includes('fursuit')
+  )
+}
+
+export function getFursuitFormServiceForPackage(packageName) {
+  if (!packageName || packageName === CUSTOM_PACKAGE) return 'Fursuit Commission — Other/Quote'
+  return FURSUIT_PACKAGE_TO_FORM_SERVICE[packageName] || 'Fursuit Commission — Other/Quote'
+}
+
+export function getFursuitSuitTypeForPackage(packageName) {
+  if (packageName === 'Custom Head') return 'Head'
+  if (packageName === 'Partial Suit') return 'Partial'
+  if (packageName === 'Full Suit') return 'Full'
+  return 'Other'
+}
+
+export function getFursuitPackageForFormService(serviceName) {
+  if (serviceName === 'Fursuit Commission — Head') return 'Custom Head'
+  if (serviceName === 'Fursuit Commission — Partial') return 'Partial Suit'
+  if (serviceName === 'Fursuit Commission — Full Suit') return 'Full Suit'
+  if (serviceName === 'Fursuit Commission — Other/Quote') return CUSTOM_PACKAGE
+  return ''
 }
 
 /**
@@ -1145,6 +1200,59 @@ export const pricingCategories = [
           'All File Formats + Source File',
           'Unlimited Revisions',
           'Delivery: 3–6 Days',
+        ],
+      },
+    ],
+  },
+  {
+    id: 'fursuit',
+    label: 'Fursuit',
+    packages: [
+      {
+        name: 'Custom Head',
+        emoji: '🎭',
+        price: '$800 — $1,500',
+        desc: 'Expressive foam or resin fursuit head',
+        featured: false,
+        features: [
+          'Foam-based or resin blank construction',
+          'Moving jaw (optional)',
+          'Follow-me or static eyes',
+          'Custom ventilation & visibility',
+          'Fits 22"–24" head size (adjustable)',
+          'Turnaround: 4–6 weeks',
+        ],
+      },
+      {
+        name: 'Partial Suit',
+        emoji: '🐾',
+        price: '$1,500 — $3,000',
+        desc: 'Head + paws + tail — most popular debut package',
+        featured: true,
+        badge: 'Most Popular',
+        features: [
+          'Everything in Head, PLUS:',
+          'Hand paws with fleece or silicone pads',
+          'Outdoor feet paws with durable soles',
+          'Tail with belt loop or bodysuit attachment',
+          'Optional: Sleeves / Arm sleeves',
+          'Turnaround: 8–12 weeks',
+        ],
+      },
+      {
+        name: 'Full Suit',
+        emoji: '🐺',
+        price: '$3,000 — $6,000+',
+        desc: 'Complete plantigrade or digitigrade fursuit',
+        featured: false,
+        features: [
+          'Everything in Partial, PLUS:',
+          'Plantigrade or digitigrade bodysuit',
+          'Hidden zipper entry',
+          'Padded muscle suit (optional)',
+          'Cooling vest pocket (optional)',
+          'Full character accuracy guarantee',
+          'Turnaround: 12–16 weeks',
         ],
       },
     ],

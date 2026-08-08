@@ -1,8 +1,15 @@
 import { Link } from 'react-router-dom'
 import LegalPageShell from '../components/LegalPageShell'
 import Reveal from '../components/Reveal'
+import usePageMeta from '../hooks/usePageMeta'
+import { pageTitle } from '../data/seo'
 
 export default function TermsOfServicePage() {
+  usePageMeta({
+    title: pageTitle('Terms of Service'),
+    description: 'Terms for using VOIDINK Studios website, commissions, payments, revisions, and ownership.',
+  })
+
   return (
     <LegalPageShell
       label="✦ Legal"
@@ -269,7 +276,7 @@ export default function TermsOfServicePage() {
           <p>
             <strong>VOIDINK Studios</strong>
             <br />
-            Email: <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a>
+            Email: <a href="mailto:support@voidinkstudios.com">support@voidinkstudios.com</a>
             <br />
             Website:{' '}
             <a href="https://voidinkstudios.com">voidinkstudios.com</a>

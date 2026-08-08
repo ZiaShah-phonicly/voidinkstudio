@@ -2,10 +2,15 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom'
 import Reveal, { RevealItem } from '../components/Reveal'
 import PricingCard from '../components/PricingCard'
+import ImageLightbox from '../components/ImageLightbox'
+import ServiceCardBg from '../components/ServiceCardBg'
 import useOutsideClose from '../hooks/useOutsideClose'
+import usePageMeta from '../hooks/usePageMeta'
+import JsonLd from '../components/JsonLd'
+import { breadcrumbSchema, graphSchema, pageTitle, serviceMetaDescription, serviceSchema } from '../data/seo'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
 import { getServiceGallery } from '../data/serviceGalleries'
-import { pricingCategories } from '../data/voidinkData'
+import { getFursuitFormServiceForPackage, isFursuitFormService, pricingCategories } from '../data/voidinkData'
 import NotFoundPage from './NotFoundPage'
 
 const ORDER_STORAGE_KEY = 'voidink_pending_order'
@@ -15,19 +20,34 @@ export default function ServicePage() {
   const navigate = useNavigate()
   const { setCursorHover = () => {}, setChatOpen = () => {} } = useOutletContext() ?? {}
   const [openFaq, setOpenFaq] = useState(null)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
   const faqListRef = useRef(null)
   const service = getServiceBySlug(slug)
 
   useEffect(() => {
     setOpenFaq(null)
+    setLightboxIndex(null)
   }, [slug])
 
   const closeFaq = useCallback(() => setOpenFaq(null), [])
   useOutsideClose(faqListRef, openFaq !== null, closeFaq)
+  usePageMeta({
+    title: service ? pageTitle(service.title) : undefined,
+    description: service ? serviceMetaDescription(service) : undefined,
+  })
 
   if (!service) {
     return <NotFoundPage />
   }
+
+  const servicePath = `/services/${service.slug}`
+  const serviceLd = graphSchema(
+    serviceSchema(service, { path: servicePath }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: service.title, path: servicePath },
+    ]),
+  )
 
   const pricing = pricingCategories.find((cat) => cat.id === service.pricingCategoryId)
   const related = getRelatedServices(service.slug)
@@ -42,7 +62,9 @@ export default function ServicePage() {
     event.preventDefault()
     const payload = {
       ...order,
-      service: service.formService,
+      service: isFursuitFormService(service.formService)
+        ? getFursuitFormServiceForPackage(order.packageName)
+        : service.formService,
       categoryId: pricing?.id || service.pricingCategoryId,
       categoryLabel: pricing?.label || service.title,
     }
@@ -56,6 +78,7 @@ export default function ServicePage() {
 
   return (
     <main id="main-content" className="service-page">
+      <JsonLd data={serviceLd} />
       <section className="sp-hero">
         <div className="sp-hero-bg" style={{ background: service.gradient }} aria-hidden="true" />
         <div className="container">
@@ -125,27 +148,37 @@ export default function ServicePage() {
               {gallery.map((item, index) => (
                 <RevealItem
                   key={`${item.image}-${item.title}`}
+                  as="button"
+                  type="button"
                   delay={index * 40}
-                  className="shot"
+                  className="shot shot-open"
                   onMouseEnter={() => setCursorHover(true)}
                   onMouseLeave={() => setCursorHover(false)}
+                  onClick={() => setLightboxIndex(index)}
                 >
-                  <div className="shot-media">
-                    <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+                  <span className="shot-media">
+                    <img src={item.image} alt="" loading="lazy" decoding="async" />
                     <span className="shot-hover">View shot</span>
-                  </div>
-                  <div className="shot-info">
-                    <div className="shot-text">
-                      <h3>{item.title}</h3>
-                      <p>{item.meta}</p>
-                    </div>
-                  </div>
+                  </span>
+                  <span className="shot-info">
+                    <span className="shot-text">
+                      <span className="shot-name">{item.title}</span>
+                      <span className="shot-meta">{item.meta}</span>
+                    </span>
+                  </span>
                 </RevealItem>
               ))}
             </div>
           </div>
         </section>
       )}
+
+      <ImageLightbox
+        items={gallery}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onChange={setLightboxIndex}
+      />
 
       <section className="section sp-highlights" style={{ background: 'var(--bg2)' }}>
         <div className="container">
@@ -277,9 +310,7 @@ export default function ServicePage() {
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
-                {item.cardImage && (
-                  <img className="sv-shadow" src={item.cardImage} alt="" aria-hidden="true" loading="lazy" />
-                )}
+                <ServiceCardBg slug={item.slug} fallbackImage={item.cardImage} delayMs={index * 280} />
                 {item.isNew && <div className="sv-new">NEW</div>}
                 <div className="sv-i" aria-hidden="true">
                   {item.icon}

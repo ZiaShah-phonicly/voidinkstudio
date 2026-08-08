@@ -5,7 +5,7 @@ export const faqCategories = [
       {
         q: 'What is VOIDINK Studios?',
         a: [
-          'VOIDINK Studios is a world-class creative and technology agency specializing in custom artwork, website design, app development, AI solutions, branding, and more. We work with clients globally ? from indie creators and streamers to startups and established brands.',
+          'VOIDINK Studios is a world-class creative and technology agency specializing in custom artwork, website design, app development, AI solutions, branding, and more. We work with clients globally — from indie creators and streamers to startups and established brands.',
         ],
       },
       {
@@ -17,13 +17,13 @@ export const faqCategories = [
       {
         q: 'How do I get started with a project?',
         a: [
-          'Fill out the contact form on our homepage or email us at voidinkstudios1@gmail.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
+          'Fill out the contact form on our homepage or email us at support@voidinkstudios.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
         ],
       },
       {
         q: 'Do you offer free consultations?',
         a: [
-          'Yes. Every project starts with a free, no-obligation consultation. We discuss your vision, budget, timeline, and answer any questions you have. There is no pressure to commit ? we are here to help you make the best decision for your needs.',
+          'Yes. Every project starts with a free, no-obligation consultation. We discuss your vision, budget, timeline, and answer any questions you have. There is no pressure to commit — we are here to help you make the best decision for your needs.',
         ],
       },
     ],
@@ -135,6 +135,14 @@ export const faqCategories = [
             ],
           },
           {
+            title: 'Fursuit Commissions',
+            list: [
+              'Custom Head: $800 — $1,500',
+              'Partial Suit: $1,500 — $3,000',
+              'Full Suit: $3,000 — $6,000+',
+            ],
+          },
+          {
             title: 'NSFW Art',
             list: [
               'Single Character: $99',
@@ -194,29 +202,30 @@ export const faqCategories = [
         a: ['Timelines vary by service type and complexity. Here are typical turnaround ranges:'],
         groups: [
           {
-            title: '?? Websites & Apps',
+            title: 'Websites & Apps',
             list: [
-              'Single-page website: 5?7 days',
-              'Multi-page website: 10?14 days',
-              'E-Commerce store: 21?30 days',
-              'Mobile app: 4?8 weeks',
+              'Single-page website: 5–7 days',
+              'Multi-page website: 10–14 days',
+              'E-Commerce store: 21–30 days',
+              'Mobile app: 4–8 weeks',
             ],
           },
           {
-            title: '?? Art & Design',
+            title: 'Art & Design',
             list: [
-              'Logo / Branding: 3?7 days',
-              'Character art / Illustration: 3?10 days',
-              'Cover art / Mascot design: 5?10 days',
+              'Logo / Branding: 3–7 days',
+              'Character art / Illustration: 3–10 days',
+              'Cover art / Mascot design: 5–10 days',
+              'Fursuit head: 4–6 weeks · Partial: 8–12 weeks · Full suit: 12–16 weeks',
             ],
           },
           {
-            title: '?? Comics & VTuber Models',
-            list: ['Comic book (24 pages): 3?6 weeks', '2D VTuber Model + Rigging: 2?4 weeks'],
+            title: 'Comics & VTuber Models',
+            list: ['Comic book (24 pages): 3–6 weeks', '2D VTuber Model + Rigging: 2–4 weeks'],
           },
           {
-            title: '?? AI & Automation',
-            list: ['Basic chatbot: 3?7 days', 'Advanced AI agent: 1?3 weeks'],
+            title: 'AI & Automation',
+            list: ['Basic chatbot: 3–7 days', 'Advanced AI agent: 1–3 weeks'],
           },
         ],
         note: 'Rush delivery is available for an additional fee. We provide an exact timeline in your project proposal.',
@@ -224,7 +233,7 @@ export const faqCategories = [
       {
         q: 'How many revisions are included?',
         a: [
-          'All our packages include unlimited revisions within the agreed project scope. Minor changes (colors, text, small adjustments) are always free. Major scope changes ? like switching art styles mid-project or adding entirely new deliverables ? may require a revised quote.',
+          'All our packages include unlimited revisions within the agreed project scope. Minor changes (colors, text, small adjustments) are always free. Major scope changes — like switching art styles mid-project or adding entirely new deliverables — may require a revised quote.',
         ],
       },
       {
@@ -237,12 +246,12 @@ export const faqCategories = [
           '3D/VTuber: .vrm, Live2D files, Blender source files',
           'Video/Animation: MP4, MOV, GIF, After Effects project files',
         ],
-        after: ['Need a specific format? Just ask ? we will accommodate.'],
+        after: ['Need a specific format? Just ask — we will accommodate.'],
       },
       {
         q: 'Will I own the rights to the final work?',
         a: [
-          'Yes. Upon full payment, you receive 100% ownership rights to the final deliverables. This includes full commercial usage rights ? you can use, modify, reproduce, and distribute the work as you see fit. We retain only the right to display the work in our portfolio unless you request a confidential NDA arrangement.',
+          'Yes. Upon full payment, you receive 100% ownership rights to the final deliverables. This includes full commercial usage rights — you can use, modify, reproduce, and distribute the work as you see fit. We retain only the right to display the work in our portfolio unless you request a confidential NDA arrangement.',
         ],
       },
     ],
@@ -267,6 +276,13 @@ export const faqCategories = [
         a: [
           'Yes, we accept NSFW commissions for adult clients (18+) with full confidentiality and discretion. All NSFW projects are handled privately, never displayed in our public portfolio without explicit written consent, and protected under our standard confidentiality policy. We do not create content involving minors or illegal material.',
         ],
+      },
+      {
+        q: 'Do you make fursuits?',
+        a: [
+          'Yes. We commission custom fursuit heads ($800–$1,500), partials ($1,500–$3,000), and full suits ($3,000–$6,000+). A clear reference sheet is required. We ship worldwide via DHL Express. See the dedicated Fursuit Commissions page for packages, add-ons, and FAQ.',
+        ],
+        link: { to: '/services/fursuits', label: 'View Fursuit Commissions' },
       },
       {
         q: 'Can you help with comic book creation from start to finish?',
@@ -306,7 +322,7 @@ export const faqCategories = [
       {
         q: 'How do you handle my personal data?',
         a: [
-          'We collect only the information necessary to complete your project (name, email, project details, payment info). We do not sell or share your data with third parties for marketing. Payment data is handled securely by Stripe/PayPal ? we never store your card details.',
+          'We collect only the information necessary to complete your project (name, email, project details, payment info). We do not sell or share your data with third parties for marketing. Payment data is handled securely by Stripe/PayPal — we never store your card details.',
         ],
         link: { to: '/privacy-policy', label: 'Read the full Privacy Policy' },
       },
@@ -322,7 +338,7 @@ export const homeFaqPreview = [
   },
   {
     q: 'How do I get started with a project?',
-    a: 'Fill out the contact form on our homepage or email us at voidinkstudios1@gmail.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
+    a: 'Fill out the contact form on our homepage or email us at support@voidinkstudios.com with your project details. We will respond within 2 hours with a free consultation, timeline estimate, and pricing. Once you approve the proposal and submit the 50% deposit, we begin work immediately.',
   },
   {
     q: 'Do you require a deposit?',

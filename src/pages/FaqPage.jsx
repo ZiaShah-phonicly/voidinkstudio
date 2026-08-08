@@ -3,12 +3,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import LegalPageShell from '../components/LegalPageShell'
 import Reveal, { RevealItem } from '../components/Reveal'
 import useOutsideClose from '../hooks/useOutsideClose'
+import usePageMeta from '../hooks/usePageMeta'
+import JsonLd from '../components/JsonLd'
 import { faqCategories } from '../data/faqData'
+import { faqPageSchemaFromCategories, graphSchema, pageTitle } from '../data/seo'
 
 export default function FaqPage() {
   const [openKey, setOpenKey] = useState(null)
   const listRef = useRef(null)
   const navigate = useNavigate()
+  usePageMeta({
+    title: pageTitle('FAQ'),
+    description:
+      'Answers about VOIDINK Studios pricing, process, ownership, deposits, and how to start a custom art, web, app, or AI project.',
+  })
 
   const closeFaq = useCallback(() => setOpenKey(null), [])
   useOutsideClose(listRef, openKey !== null, closeFaq)
@@ -20,6 +28,7 @@ export default function FaqPage() {
       breadcrumb="FAQ"
       subtitle="Everything you need to know before starting your project with VOIDINK Studios."
     >
+      <JsonLd data={graphSchema(faqPageSchemaFromCategories(faqCategories))} />
       <div className="faq-page-list" ref={listRef}>
         {faqCategories.map((group) => (
           <section key={group.category} className="faq-group">
@@ -105,7 +114,7 @@ export default function FaqPage() {
             >
               Contact Us <span aria-hidden="true">→</span>
             </a>
-            <a href="mailto:voidinkstudios1@gmail.com" className="bs">
+            <a href="mailto:support@voidinkstudios.com" className="bs">
               Email Us
             </a>
           </div>

@@ -81,6 +81,7 @@ voidinkstudio/
 | `/` | `HomePage` | Form `#query`, pricing `#pricing`, Order Now prefill |
 | `/about` | About | |
 | `/services/:slug` | `ServicePage` | Order Now → home form via state + sessionStorage |
+| `/services/fursuits`, `/fursuits` | `FursuitPage` | Dedicated fursuit commissions page (`/fursuits` redirects) |
 | `/track`, `/track/:trackingId` | `TrackOrderPage` | Needs backend tracking API |
 | `/faq`, `/privacy-policy`, `/terms-of-service` | Legal/FAQ | |
 | `*` | `NotFoundPage` | Branded 404 |
@@ -100,6 +101,8 @@ Home hash sections: `#home` `#services` `#work` `#process` `#pricing` `#testimon
    - `true`: `POST /api/voidink/submit/` via `submitToVoidinkApi.js`; on API failure, fallback to Sheet.
 3. Optional Discord webhook if `VITE_DISCORD_WEBHOOK_URL` is set.
 4. Success UI may show `tracking_id` **only when API/Mongo saved the order**.
+
+**Fursuit commissions:** Dedicated page `/services/fursuits` (also `/fursuits` → redirect). Form dropdown includes Head / Partial / Full / Other. Extra fields (species, suit type, reference sheet link, budget range) show when any Fursuit service is selected and are folded into `description` / `references` on submit. Order Now prefills the matching Fursuit service + package (`Custom Head` / `Partial Suit` / `Full Suit`).
 
 **Package / price behavior (do not regress):**
 
@@ -140,7 +143,13 @@ Moved to **`voidink-admin`**. See that repo’s `AGENTS.md`.
 | `VITE_TUBES_THEME` | `voidink` \| `gold` \| `silver` (only when enabled) |
 | `VITE_TUBES_COLORS` / `LIGHTS` / `INTENSITY` | Hero tubes overrides |
 
-Also ship `public/robots.txt` + `public/sitemap.xml`. Prod nginx: see `deploy/nginx.voidinkstudios.com.example` (HSTS / X-Frame-Options).
+Also ship `public/robots.txt` + `public/sitemap.xml` + `public/llms.txt` (AI/GEO brand summary). Prod nginx: see `deploy/nginx.voidinkstudios.com.example` (HSTS / X-Frame-Options).
+
+**SEO / GEO (do not spam):**
+
+- Brand spellings live in `src/data/seo.js` + Organization/WebSite schema in `index.html` (`voidinkstudio` without “s” is a known misspelling; do not stuff it into H1).
+- Per-route title/description via `usePageMeta`. FAQ/Service JSON-LD must match visible page content.
+- Never add fake `AggregateRating`, SearchAction without a real site search, or LocalBusiness without a real NAP.
 
 **Rules:**
 

@@ -3,7 +3,7 @@ import { LogoMark } from './LogoMark'
 import { serviceDetails } from '../data/serviceDetails'
 import { studioStatsCopy } from '../data/voidinkData'
 
-const artServiceSlugs = ['custom-character-design', 'mascot-design', 'comic-book-art', 'dnd-character-art', 'furry-art', '2d-vtuber-models']
+const artServiceSlugs = ['custom-character-design', 'mascot-design', 'comic-book-art', 'dnd-character-art', 'furry-art', 'fursuits', '2d-vtuber-models']
 const techServiceSlugs = ['website-design-development', 'ai-agents-chatbots', 'app-development', 'branding-logo', '3d-models', 'animation']
 
 const artServices = artServiceSlugs.map((slug) => serviceDetails.find((s) => s.slug === slug)).filter(Boolean)

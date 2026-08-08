@@ -3,8 +3,13 @@ import { Link, useLocation, useNavigate, useOutletContext } from 'react-router-d
 import GoldTubesBackground from '../components/GoldTubesBackground'
 import PricingCard from '../components/PricingCard'
 import Reveal, { RevealItem } from '../components/Reveal'
+import ImageLightbox from '../components/ImageLightbox'
+import ServiceCardBg from '../components/ServiceCardBg'
 import useOutsideClose from '../hooks/useOutsideClose'
+import usePageMeta from '../hooks/usePageMeta'
+import JsonLd from '../components/JsonLd'
 import { homeFaqPreview } from '../data/faqData'
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, faqPageSchema, graphSchema } from '../data/seo'
 import { submitToGoogleSheet } from '../utils/submitToGoogleSheet'
 import { submitToVoidinkApi } from '../utils/submitToVoidinkApi'
 import {
@@ -13,7 +18,13 @@ import {
   deadlineOptions,
   findFormPackageOption,
   formServices,
+  fursuitBudgetOptions,
+  fursuitSuitTypes,
   getFormPackagesForService,
+  getFursuitFormServiceForPackage,
+  getFursuitPackageForFormService,
+  getFursuitSuitTypeForPackage,
+  isFursuitFormService,
   marqueeItems,
   pricingCategories,
   pricingCategoryToFormService,
@@ -35,6 +46,10 @@ const emptyForm = {
   deadline: '',
   description: '',
   references: '',
+  species: '',
+  suitType: '',
+  referenceSheet: '',
+  fursuitBudget: '',
 }
 
 const ORDER_STORAGE_KEY = 'voidink_pending_order'
@@ -119,14 +134,20 @@ export default function HomePage() {
   const [formSubmitting, setFormSubmitting] = useState(false)
   const [formData, setFormData] = useState(emptyForm)
   const [openFaq, setOpenFaq] = useState(null)
+  const [workLightboxIndex, setWorkLightboxIndex] = useState(null)
   const homeFaqRef = useRef(null)
 
   const closeHomeFaq = useCallback(() => setOpenFaq(null), [])
   useOutsideClose(homeFaqRef, openFaq !== null, closeHomeFaq)
+  usePageMeta({
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+  })
 
   const isCustomPackage = formData.package === CUSTOM_PACKAGE
   const showPackagePrice = Boolean(formData.package && formData.package !== CUSTOM_PACKAGE)
   const servicePackages = getFormPackagesForService(formData.service)
+  const isFursuit = isFursuitFormService(formData.service)
 
   const updateForm = (field) => (event) => {
     const value = event.target.value
@@ -137,6 +158,38 @@ export default function HomePage() {
         next.package = ''
         next.price = ''
         next.budget = ''
+        next.species = ''
+        next.suitType = ''
+        next.referenceSheet = ''
+        next.fursuitBudget = ''
+        if (isFursuitFormService(value)) {
+          const mappedPackage = getFursuitPackageForFormService(value)
+          next.package = mappedPackage
+          next.suitType = getFursuitSuitTypeForPackage(mappedPackage)
+          if (mappedPackage && mappedPackage !== CUSTOM_PACKAGE) {
+            const matched = findFormPackageOption(value, mappedPackage)
+            next.price = matched?.price || ''
+          }
+        }
+      }
+      if (field === 'suitType' && isFursuitFormService(prev.service)) {
+        const mappedPackage =
+          value === 'Head'
+            ? 'Custom Head'
+            : value === 'Partial'
+              ? 'Partial Suit'
+              : value === 'Full'
+                ? 'Full Suit'
+                : CUSTOM_PACKAGE
+        next.package = mappedPackage
+        next.service = getFursuitFormServiceForPackage(mappedPackage)
+        if (mappedPackage === CUSTOM_PACKAGE) {
+          next.price = ''
+        } else {
+          const matched = findFormPackageOption(next.service, mappedPackage)
+          next.price = matched?.price || ''
+          next.budget = ''
+        }
       }
       if (field === 'package' && value === CUSTOM_PACKAGE) {
         next.price = ''
@@ -167,12 +220,15 @@ export default function HomePage() {
 
   const applyOrderToForm = (order) => {
     if (!order) return
-    const service =
+    let service =
       order.service ||
       pricingCategoryToFormService[order.categoryId] ||
       ''
     // Keep package value aligned with dropdown options (e.g. "Starter", "Reference Sheet (SFW)")
     const packageValue = order.packageName || CUSTOM_PACKAGE
+    if (order.categoryId === 'fursuit' || isFursuitFormService(service)) {
+      service = getFursuitFormServiceForPackage(packageValue)
+    }
     const matched = findFormPackageOption(service, packageValue)
     const packageLabel = order.categoryLabel
       ? `${order.categoryLabel} — ${packageValue}`
@@ -198,6 +254,10 @@ export default function HomePage() {
       price: order.price || matched?.price || '',
       budget: '',
       description,
+      suitType: isFursuitFormService(service) ? getFursuitSuitTypeForPackage(packageValue) : '',
+      species: order.species || '',
+      referenceSheet: order.referenceSheet || '',
+      fursuitBudget: '',
     }))
   }
 
@@ -229,7 +289,28 @@ export default function HomePage() {
 
     const packageValue = formData.package || CUSTOM_PACKAGE
     const priceValue = showPackagePrice ? formData.price : ''
-    const budgetValue = isCustomPackage ? formData.budget : formData.price || formData.budget
+    const budgetValue = isFursuit
+      ? isCustomPackage
+        ? formData.fursuitBudget || formData.budget
+        : formData.fursuitBudget || formData.price || formData.budget
+      : isCustomPackage
+        ? formData.budget
+        : formData.price || formData.budget
+
+    const fursuitNotes = isFursuit
+      ? [
+          formData.species && `Species: ${formData.species}`,
+          formData.suitType && `Suit Type: ${formData.suitType}`,
+          formData.referenceSheet && `Reference Sheet: ${formData.referenceSheet}`,
+          formData.fursuitBudget && `Budget Range: ${formData.fursuitBudget}`,
+        ].filter(Boolean)
+      : []
+    const description = fursuitNotes.length
+      ? `${fursuitNotes.join('\n')}\n\n${formData.description}`
+      : formData.description
+    const references = [formData.references, isFursuit ? formData.referenceSheet : '']
+      .filter(Boolean)
+      .join(' | ')
 
     try {
       const formPayload = {
@@ -240,8 +321,8 @@ export default function HomePage() {
         price: priceValue || budgetValue || '',
         budget: budgetValue || '',
         deadline: formData.deadline,
-        description: formData.description,
-        references: formData.references,
+        description,
+        references,
       }
 
       // Temporary: sheet-only mode (VITE_FORM_USE_API=false). Flip to true when Mongo/API is ready again.
@@ -256,7 +337,7 @@ export default function HomePage() {
           const sheetResult = await submitToGoogleSheet(formPayload)
           if (sheetResult?.status === 'skipped') {
             throw new Error(
-              'Could not save your request right now. Please email voidinkstudios1@gmail.com or try again.',
+              'Could not save your request right now. Please email support@voidinkstudios.com or try again.',
             )
           }
         }
@@ -264,7 +345,7 @@ export default function HomePage() {
         const sheetResult = await submitToGoogleSheet(formPayload)
         if (sheetResult?.status === 'skipped') {
           throw new Error(
-            'Form is not configured yet. Please email voidinkstudios1@gmail.com.',
+            'Form is not configured yet. Please email support@voidinkstudios.com.',
           )
         }
       }
@@ -283,8 +364,8 @@ export default function HomePage() {
           `Price: ${priceValue || 'N/A'}`,
           `Budget: ${budgetValue || 'N/A'}`,
           `Deadline: ${formData.deadline || 'N/A'}`,
-          `Description: ${formData.description}`,
-          `References: ${formData.references || 'None'}`,
+          `Description: ${description}`,
+          `References: ${references || 'None'}`,
         ].join('\n')
 
         try {
@@ -301,7 +382,7 @@ export default function HomePage() {
       setFormSuccess(true)
       setFormData(emptyForm)
     } catch (error) {
-      setFormError(error.message || 'Something went wrong. Please email voidinkstudios1@gmail.com')
+      setFormError(error.message || 'Something went wrong. Please email support@voidinkstudios.com')
     } finally {
       setFormSubmitting(false)
     }
@@ -327,6 +408,7 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
+      <JsonLd data={graphSchema(faqPageSchema(homeFaqPreview))} />
       <GoldTubesBackground />
       <section className="hero" id="home" aria-labelledby="hero-title">
         <div className="hero-bg" aria-hidden="true">
@@ -433,7 +515,7 @@ export default function HomePage() {
           <Reveal>
             <div className="section-label">✦ Our Services</div>
               <h2 className="section-title" id="services-title">
-                14 Creative & tech services <br />
+                {studioStats.services} Creative & tech services <br />
                 <span className="gt">under one roof</span>
               </h2>
             <p className="section-sub">
@@ -451,9 +533,7 @@ export default function HomePage() {
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
-                {service.cardImage && (
-                  <img className="sv-shadow" src={service.cardImage} alt="" aria-hidden="true" loading="lazy" />
-                )}
+                <ServiceCardBg slug={service.slug} fallbackImage={service.cardImage} delayMs={index * 280} />
                 {service.isNew && <div className="sv-new">NEW</div>}
                 <div className="sv-i" aria-hidden="true">
                   {service.icon}
@@ -485,24 +565,33 @@ export default function HomePage() {
             {featuredWork.map((item, index) => (
               <RevealItem
                 key={item.id}
+                as="button"
+                type="button"
                 delay={index * 40}
-                className="shot"
+                className="shot shot-open"
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
+                onClick={() => setWorkLightboxIndex(index)}
               >
-                <Link to={`/services/${item.serviceSlug || 'website-design-development'}`} className="shot-media">
-                  <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
-                  <span className="shot-hover">View project</span>
-                </Link>
-                <div className="shot-info">
-                  <div className="shot-text">
-                    <h3>{item.title}</h3>
-                    <p>{item.meta}</p>
-                  </div>
-                </div>
+                <span className="shot-media">
+                  <img src={item.image} alt="" loading="lazy" decoding="async" />
+                  <span className="shot-hover">View shot</span>
+                </span>
+                <span className="shot-info">
+                  <span className="shot-text">
+                    <span className="shot-name">{item.title}</span>
+                    <span className="shot-meta">{item.meta}</span>
+                  </span>
+                </span>
               </RevealItem>
             ))}
           </div>
+          <ImageLightbox
+            items={featuredWork}
+            index={workLightboxIndex}
+            onClose={() => setWorkLightboxIndex(null)}
+            onChange={setWorkLightboxIndex}
+          />
 
           <Reveal>
             <div className="work-more">
@@ -743,6 +832,12 @@ export default function HomePage() {
                           package: value,
                           price: '',
                           budget: value === CUSTOM_PACKAGE ? prev.budget : '',
+                          ...(isFursuitFormService(prev.service)
+                            ? {
+                                service: getFursuitFormServiceForPackage(value),
+                                suitType: getFursuitSuitTypeForPackage(value),
+                              }
+                            : {}),
                         }))
                         return
                       }
@@ -754,6 +849,12 @@ export default function HomePage() {
                         package: value,
                         price: matched?.price || '',
                         budget: '',
+                        ...(isFursuitFormService(prev.service)
+                          ? {
+                              service: getFursuitFormServiceForPackage(value),
+                              suitType: getFursuitSuitTypeForPackage(value),
+                            }
+                          : {}),
                       }))
                     }}
                   >
@@ -780,6 +881,51 @@ export default function HomePage() {
                     <p className="form-hint">No fixed packages for this service — choose Custom / Need a quote.</p>
                   )}
                 </div>
+                {isFursuit && (
+                  <>
+                    <div className="fr">
+                      <div className="fg">
+                        <label className="fl" htmlFor="fspecies">
+                          Species
+                        </label>
+                        <input
+                          type="text"
+                          className="fi"
+                          id="fspecies"
+                          placeholder="Wolf, fox, dragon..."
+                          value={formData.species}
+                          onChange={updateForm('species')}
+                        />
+                      </div>
+                      <div className="fg">
+                        <label className="fl" htmlFor="fsuit">
+                          Suit Type
+                        </label>
+                        <select className="fsl" id="fsuit" value={formData.suitType} onChange={updateForm('suitType')}>
+                          <option value="">Select type...</option>
+                          {fursuitSuitTypes.map((option) => (
+                            <option key={option} value={option}>
+                              {option}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="fg">
+                      <label className="fl" htmlFor="frefsheet">
+                        Reference Sheet (link)
+                      </label>
+                      <input
+                        type="text"
+                        className="fi"
+                        id="frefsheet"
+                        placeholder="https://... or Google Drive / FurAffinity link"
+                        value={formData.referenceSheet}
+                        onChange={updateForm('referenceSheet')}
+                      />
+                    </div>
+                  </>
+                )}
                 {showPackagePrice ? (
                   <div className="fr">
                     <div className="fg">
@@ -812,18 +958,18 @@ export default function HomePage() {
                 ) : (
                   <div className="fr">
                     <div className="fg">
-                      <label className="fl" htmlFor="fb">
+                      <label className="fl" htmlFor={isFursuit ? 'fb-fursuit' : 'fb'}>
                         Budget {isCustomPackage ? '*' : ''}
                       </label>
                       <select
                         className="fsl"
-                        id="fb"
+                        id={isFursuit ? 'fb-fursuit' : 'fb'}
                         required={isCustomPackage}
-                        value={formData.budget}
-                        onChange={updateForm('budget')}
+                        value={isFursuit ? formData.fursuitBudget : formData.budget}
+                        onChange={updateForm(isFursuit ? 'fursuitBudget' : 'budget')}
                       >
                         <option value="">Select budget...</option>
-                        {budgetOptions.map((option) => (
+                        {(isFursuit ? fursuitBudgetOptions : budgetOptions).map((option) => (
                           <option key={option} value={option}>
                             {option}
                           </option>
@@ -843,6 +989,26 @@ export default function HomePage() {
                         ))}
                       </select>
                     </div>
+                  </div>
+                )}
+                {isFursuit && showPackagePrice && (
+                  <div className="fg">
+                    <label className="fl" htmlFor="fb-fursuit-range">
+                      Budget Range (optional)
+                    </label>
+                    <select
+                      className="fsl"
+                      id="fb-fursuit-range"
+                      value={formData.fursuitBudget}
+                      onChange={updateForm('fursuitBudget')}
+                    >
+                      <option value="">Select range...</option>
+                      {fursuitBudgetOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 )}
                 <div className="fg">
@@ -933,8 +1099,8 @@ export default function HomePage() {
                 <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
                   Start a Project <span aria-hidden="true">→</span>
                 </a>
-                <a href="mailto:voidinkstudios1@gmail.com" className="bs">
-                  voidinkstudios1@gmail.com
+                <a href="mailto:support@voidinkstudios.com" className="bs">
+                  support@voidinkstudios.com
                 </a>
               </div>
             </div>

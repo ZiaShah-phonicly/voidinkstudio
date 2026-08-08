@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
+import usePageMeta from '../hooks/usePageMeta'
+import { pageTitle } from '../data/seo'
 import { trackOrder } from '../utils/trackOrder'
 
 const STATUS_STEPS = ['new', 'reviewing', 'quoted', 'in_progress', 'done']
@@ -35,6 +37,10 @@ export default function TrackOrderPage() {
   const { trackingId: routeId } = useParams()
   const [searchParams] = useSearchParams()
   const initial = routeId || searchParams.get('id') || ''
+  usePageMeta({
+    title: pageTitle('Track Order'),
+    description: 'Track your VOIDINK Studios commission with your VI- tracking ID.',
+  })
 
   const [input, setInput] = useState(initial)
   const [order, setOrder] = useState(null)
@@ -190,7 +196,7 @@ export default function TrackOrderPage() {
                 <p>{order.description || 'No brief was provided with this order.'}</p>
                 <p className="track-help">
                   Need changes? Email{' '}
-                  <a href="mailto:voidinkstudios1@gmail.com">voidinkstudios1@gmail.com</a> with your
+                  <a href="mailto:support@voidinkstudios.com">support@voidinkstudios.com</a> with your
                   tracking ID, or <Link to="/#query">submit a new query</Link>.
                 </p>
               </div>

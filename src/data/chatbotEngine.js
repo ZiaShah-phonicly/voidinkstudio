@@ -12,7 +12,8 @@ const SERVICE_KEYWORDS = [
   { slug: 'branding-logo', words: ['branding', 'brand identity', 'logo design', 'logo', 'rebrand'] },
   { slug: 'animation', words: ['animation', 'animate', 'motion graphics', 'explainer video', 'logo anim', 'logo reveal'] },
   { slug: 'dnd-character-art', words: ['dnd', 'd&d', 'dungeons', 'dragon', 'rpg', 'tabletop', 'dnd character', 'campaign art'] },
-  { slug: 'furry-art', words: ['furry', 'fursona', 'reference sheet', 'fursuit art'] },
+  { slug: 'furry-art', words: ['furry', 'fursona', 'reference sheet', 'furry oc'] },
+  { slug: 'fursuits', words: ['fursuit', 'fursuits', 'partial suit', 'full suit', 'fursuit head', 'suit commission', 'fur suit'] },
   { slug: 'nsfw-art', words: ['nsfw', 'mature art', 'adult art', 'nsfw art'] },
   { slug: 'cover-art', words: ['cover art', 'album cover', 'book cover', 'game cover', 'spotify cover'] },
   { slug: 'custom-character-design', words: ['custom character', 'character design', 'oc design', 'original character', 'anime character', 'cartoon character'] },
@@ -31,6 +32,11 @@ const SCOPE_HINTS = {
     { keys: ['nsfw ref', 'nsfw reference', 'reference nsfw', 'ref sheet nsfw'], scope: 'reference-nsfw' },
     { keys: ['sfw', 'reference', 'ref sheet', 'turnaround'], scope: 'reference-sfw' },
     { keys: ['scene', 'background', 'full scene'], scope: 'scene' },
+  ],
+  fursuits: [
+    { keys: ['head only', 'just a head', 'fursuit head', 'head'], scope: 'head' },
+    { keys: ['partial'], scope: 'partial' },
+    { keys: ['full suit', 'full body suit', 'digitigrade', 'plantigrade'], scope: 'full' },
   ],
   'comic-book-art': [
     { keys: ['4 page', 'short', 'starter', 'pilot'], scope: 'starter' },
@@ -106,7 +112,9 @@ export const initialChatSession = {
 }
 
 function parsePrice(priceStr) {
-  return Number(String(priceStr).replace(/[^0-9.]/g, '')) || 0
+  const cleaned = String(priceStr).replace(/,/g, '')
+  const match = cleaned.match(/[\d.]+/)
+  return match ? Number(match[0]) || 0 : 0
 }
 
 function getService(slug) {
@@ -221,6 +229,7 @@ function pickPackageByScope(pricing, scope) {
     basic: 0,
     logo: 0,
     headshot: 0,
+    head: 0,
     character: 0,
     bust: 0,
     album: 0,
@@ -235,6 +244,7 @@ function pickPackageByScope(pricing, scope) {
     'reference-sfw': 1,
     'reference-nsfw': 1,
     half: 1,
+    partial: 1,
     starter_brand: 1,
     explainer: 1,
     book: 1,
@@ -346,7 +356,7 @@ function formatPackageRecommendation(service, pkg, session) {
   }
 
   lines.push('', '🚀 **Next step:** Share your references & we\'ll confirm Asap!.')
-  lines.push('📧 voidinkstudios1@gmail.com')
+  lines.push('📧 support@voidinkstudios.com')
 
   return lines.join('\n')
 }
@@ -367,6 +377,7 @@ function getScopeQuestion(slug) {
     'nsfw-art': 'NSFW format?\n• **Single Character** ($99)\n• **Full Scene** ($199)\n• **Illustrated Pages** ($399)',
     'custom-character-design': 'Character format?\n• **Bust / Headshot** ($49)\n• **Half Body** ($99)\n• **Full Body** ($149)',
     '2d-vtuber-models': 'VTuber package?\n• **Half Body No Rig** ($149)\n• **Half Body Rigged** ($299) ⭐\n• **Full Body No Rig** ($249)\n• **Full Body Rigged** ($499)',
+    fursuits: 'Which suit?\n• **Custom Head** ($800–$1,500)\n• **Partial Suit** ($1,500–$3,000) ⭐\n• **Full Suit** ($3,000–$6,000+)',
   }
   return questions[slug] || null
 }
@@ -385,6 +396,7 @@ function characterClarificationReply() {
     '• **Custom Character Design** — from $49',
     '• **DnD / RPG** character — from $99',
     '• **Furry OC** — from $39',
+    '• **Fursuit Commission** — from $800',
     '• **2D VTuber Model** — from $149',
     '• **Brand Mascot** — from $99',
     '• **Comic character** — from $399',
@@ -396,7 +408,7 @@ function characterClarificationReply() {
 
 function buildQuickReplies(session) {
   if (session.stage === 'pick-character-type') {
-    return ['Custom Character', 'DnD Character', 'Furry OC', 'VTuber', 'Mascot']
+    return ['Custom Character', 'DnD Character', 'Furry OC', 'Fursuit', 'VTuber', 'Mascot']
   }
   if (!session.serviceSlug) {
     return ['Website', 'Logo', 'Comic', 'DnD Art', 'AI Chatbot', 'VTuber', 'App Dev']
@@ -404,6 +416,9 @@ function buildQuickReplies(session) {
   if (!session.scope && getScopeQuestion(session.serviceSlug)) {
     if (session.serviceSlug === 'furry-art') {
       return ['Headshot $39', 'Ref Sheet SFW $149', 'Ref Sheet NSFW $199', 'Full Scene $299']
+    }
+    if (session.serviceSlug === 'fursuits') {
+      return ['Head $800+', 'Partial $1.5k+', 'Full Suit $3k+']
     }
     return ['Basic / Starter', 'Professional', 'Premium / Full']
   }
@@ -459,7 +474,7 @@ export function processChatMessage(userMessage, session) {
   if (lower.includes('human') || lower.includes('real person') || lower.includes('talk to someone')) {
     return {
       session: next,
-      text: 'Sure! 📧 Email us at **voidinkstudios1@gmail.com** or fill the contact form on our site.\n\nAvg response: **30 minutes**. Want me to note your project details first?',
+      text: 'Sure! 📧 Email us at **support@voidinkstudios.com** or fill the contact form on our site.\n\nAvg response: **30 minutes**. Want me to note your project details first?',
       quickReplies: ['Yes, note my project', 'Other services'],
     }
   }
@@ -474,7 +489,7 @@ export function processChatMessage(userMessage, session) {
   ) {
     return {
       session: { ...initialChatSession, stage: 'discovery' },
-      text: `✨ **Our 14 services (current pricing):**\n\n${listAllServices()}\n\nWhich one interests you?`,
+      text: `✨ **Our 15 services (current pricing):**\n\n${listAllServices()}\n\nWhich one interests you?`,
       quickReplies: buildQuickReplies(initialChatSession),
     }
   }
@@ -618,6 +633,10 @@ export function processChatQuickReply(label, session) {
     'DnD Character': 'DnD full body character art with custom armor',
     'Custom Character': 'I want custom character design full body, budget $150',
     'Furry OC': 'Furry reference sheet for my OC',
+    Fursuit: 'I want a fursuit commission, partial suit',
+    'Head $800+': 'I want a custom fursuit head, budget $800',
+    'Partial $1.5k+': 'I want a partial fursuit, budget $1500',
+    'Full Suit $3k+': 'I want a full fursuit, budget $3000',
     VTuber: 'I need a half body VTuber model with Live2D Rigging',
     Mascot: 'Brand mascot with expressions, budget $170',
     'Comic Art': 'Comic book art 4 pages with custom characters',

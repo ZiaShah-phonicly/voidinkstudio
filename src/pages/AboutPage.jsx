@@ -1,11 +1,13 @@
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import Reveal, { RevealItem } from '../components/Reveal'
+import usePageMeta from '../hooks/usePageMeta'
+import { pageTitle } from '../data/seo'
 import { studioStats, studioStatsCopy } from '../data/voidinkData'
 
 const whyChoose = [
   {
     icon: '🎨',
-    title: '14+ Services Under One Roof',
+    title: `${studioStats.services}+ Services Under One Roof`,
     text: 'Art, design, AI, development — everything you need in one place. No need to hire multiple freelancers or agencies.',
   },
   {
@@ -44,13 +46,18 @@ const stats = [
 ]
 
 const designServices =
-  'Website Design, Branding & Logo, Mascot Design, Comic Book Art, Cover Art, Custom Character Design, DnD Character Art, Furry Art, NSFW Art, 2D VTuber Models, 3D Models, Animation'
+  'Website Design, Branding & Logo, Mascot Design, Comic Book Art, Cover Art, Custom Character Design, DnD Character Art, Furry Art, Fursuit Commissions, NSFW Art, 2D VTuber Models, 3D Models, Animation'
 const techServices =
   'Website Development, App Development, AI Chatbots, Voice Agents, Business Automations'
 
 export default function AboutPage() {
   const navigate = useNavigate()
   const { setChatOpen = () => {} } = useOutletContext() ?? {}
+  usePageMeta({
+    title: pageTitle('About'),
+    description:
+      'VOIDINK Studios is a remote-first creative studio for custom art, branding, websites, apps, and AI. Also known as Voidink Studio or voidinkstudio.',
+  })
 
   const goTo = (event, path) => {
     event.preventDefault()
@@ -84,12 +91,13 @@ export default function AboutPage() {
               <p>
                 At VOIDINK Studios, we turn bold ideas into powerful digital experiences. We are a world-class creative
                 studio specializing in art, design, AI solutions, and development — helping brands, creators, and
-                businesses build work that stands out, connects, and leaves a lasting impression.
+                businesses build work that stands out, connects, and leaves a lasting impression. People also search for
+                us as Voidink Studio or voidinkstudio; our official name is VOIDINK Studios.
               </p>
               <p>
                 From custom websites, AI chatbots, voice agents, and mobile apps to comic book art, 3D models, VTuber
                 models, mascot design, branding, animation, character art, and cover art — we bring creativity and
-                technology together under one roof with 14+ professional services.
+                technology together under one roof with {studioStats.services}+ professional services.
               </p>
               <p>
                 Every project we take on is built with attention to detail, clear communication, and a deep focus on
