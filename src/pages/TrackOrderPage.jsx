@@ -4,8 +4,6 @@ import usePageMeta from '../hooks/usePageMeta'
 import { pageTitle } from '../data/seo'
 import { trackOrder } from '../utils/trackOrder'
 
-const STATUS_STEPS = ['new', 'reviewing', 'quoted', 'in_progress', 'done']
-
 const STATUS_LABELS = {
   new: 'Received',
   reviewing: 'Reviewing',
@@ -79,8 +77,23 @@ export default function TrackOrderPage() {
   }
 
   const status = order?.status || 'new'
-  const stepIndex = STATUS_STEPS.indexOf(status)
+  const customPhase = String(order?.phase || '').trim()
+  const workStepKey = customPhase ? 'phase' : 'in_progress'
+  const barSteps = [
+    { key: 'new', label: STATUS_LABELS.new },
+    { key: 'reviewing', label: STATUS_LABELS.reviewing },
+    { key: 'quoted', label: STATUS_LABELS.quoted },
+    { key: workStepKey, label: customPhase || STATUS_LABELS.in_progress },
+    { key: 'done', label: STATUS_LABELS.done },
+  ]
+  const currentBarStep =
+    status === 'in_progress' ? workStepKey : status
+  const currentBarIndex = barSteps.findIndex((step) => step.key === currentBarStep)
   const cancelled = status === 'cancelled'
+  const statusBadgeLabel =
+    status === 'in_progress' && customPhase
+      ? customPhase
+      : STATUS_LABELS[status] || status.replace('_', ' ')
 
   return (
     <section className="section track-page">
@@ -129,21 +142,27 @@ export default function TrackOrderPage() {
                 <p className="track-kicker">Tracking ID</p>
                 <h2 className="track-id">{order.tracking_id}</h2>
                 <p className="track-hint">{STATUS_HINTS[status] || ''}</p>
+                {customPhase ? (
+                  <div className="track-current-phase">
+                    <span className="track-current-phase-label">Current phase</span>
+                    <strong>{customPhase}</strong>
+                  </div>
+                ) : null}
               </div>
               <span className={`track-status status-${status}`}>
-                {STATUS_LABELS[status] || status.replace('_', ' ')}
+                {statusBadgeLabel}
               </span>
             </div>
 
             {!cancelled ? (
               <ol className="track-steps" aria-label="Order progress">
-                {STATUS_STEPS.map((step, index) => {
-                  const done = stepIndex >= 0 && index <= stepIndex
-                  const current = step === status
+                {barSteps.map((step, index) => {
+                  const done = currentBarIndex >= 0 && index <= currentBarIndex
+                  const current = step.key === currentBarStep
                   return (
-                    <li key={step} className={`${done ? 'done' : ''} ${current ? 'current' : ''}`}>
+                    <li key={step.key} className={`${done ? 'done' : ''} ${current ? 'current' : ''}`}>
                       <span className="track-dot" aria-hidden="true" />
-                      <span className="track-step-label">{STATUS_LABELS[step]}</span>
+                      <span className="track-step-label">{step.label}</span>
                     </li>
                   )
                 })}
