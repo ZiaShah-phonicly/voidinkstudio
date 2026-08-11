@@ -38,6 +38,9 @@
 		},
 		{
 			"path": "../voidink-admin"
+		},
+		{
+			"path": "../OmniRoute"
 		}
 	],
 	"settings": {}
