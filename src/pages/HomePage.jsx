@@ -253,7 +253,7 @@ export default function HomePage() {
       package: packageValue,
       price: order.price || matched?.price || '',
       budget: '',
-      description,
+      description: '',  // Leave description blank for user to fill in
       suitType: isFursuitFormService(service) ? getFursuitSuitTypeForPackage(packageValue) : '',
       species: order.species || '',
       referenceSheet: order.referenceSheet || '',
