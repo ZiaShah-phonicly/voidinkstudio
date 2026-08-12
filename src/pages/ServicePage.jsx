@@ -157,7 +157,7 @@ export default function ServicePage() {
                   onClick={() => setLightboxIndex(index)}
                 >
                   <span className="shot-media">
-                    <img src={item.image} alt="" loading="lazy" decoding="async" />
+                    <img src={item.image} alt={item.title || 'Portfolio image'} loading="lazy" decoding="async" />
                     <span className="shot-hover">View shot</span>
                   </span>
                   <span className="shot-info">

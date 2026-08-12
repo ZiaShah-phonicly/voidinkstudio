@@ -9,7 +9,15 @@ import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
 import { homeFaqPreview } from '../data/faqData'
-import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, faqPageSchema, graphSchema } from '../data/seo'
+import {
+  DEFAULT_DESCRIPTION,
+  DEFAULT_TITLE,
+  SITE_DATE_MODIFIED,
+  breadcrumbSchema,
+  faqPageSchema,
+  graphSchema,
+  webPageSchema,
+} from '../data/seo'
 import { submitToGoogleSheet } from '../utils/submitToGoogleSheet'
 import { submitToVoidinkApi } from '../utils/submitToVoidinkApi'
 import {
@@ -116,10 +124,10 @@ function StatCounter({ target, suffix }) {
 
   return (
     <div ref={ref}>
-      <h3>
+      <p className="hero-st-value">
         {count}
         {suffix}
-      </h3>
+      </p>
     </div>
   )
 }
@@ -408,7 +416,18 @@ export default function HomePage() {
 
   return (
     <div className="home-page">
-      <JsonLd data={graphSchema(faqPageSchema(homeFaqPreview))} />
+      <JsonLd
+        data={graphSchema(
+          webPageSchema({
+            path: '/',
+            name: DEFAULT_TITLE,
+            description: DEFAULT_DESCRIPTION,
+            dateModified: SITE_DATE_MODIFIED,
+          }),
+          breadcrumbSchema([{ name: 'Home', path: '/' }]),
+          faqPageSchema(homeFaqPreview),
+        )}
+      />
       <GoldTubesBackground />
       <section className="hero" id="home" aria-labelledby="hero-title">
         <div className="hero-bg" aria-hidden="true">
@@ -451,12 +470,24 @@ export default function HomePage() {
             </div>
             <div className="hero-ey">✦ World-Class Art, Design & Development Studio</div>
             <h1 className="hero-t" id="hero-title">
-              Art Born <span className="gt">From The</span> <span className="vt">VOID</span>
+              Art, Logo &amp; Web — Born From The <span className="vt">VOID</span>
             </h1>
             <div className="hero-tg">— Where Imagination Has No Limits —</div>
+            <p className="hero-takeaway">
+              <strong>Key takeaway:</strong> VOIDINK Studios is a remote creative and technology studio for brands,
+              creators, startups, and streamers who need custom logos, comic art, AI agents, websites, and apps —
+              transparent packages from $39 with full ownership on delivery.
+            </p>
             <p className="hero-d">
-              We craft world-class logos, illustrations, comic books, AI agents, websites, apps, and digital art that
-              leave lasting impressions and drive real results.
+              In short: we help indie creators, streamers, startups, and established brands worldwide ship
+              pixel-perfect art and production-ready tech — from first brief to final files. Explore our process on{' '}
+              <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
+                Instagram @voidinkstudios
+              </a>
+              .
+            </p>
+            <p className="hero-updated">
+              <time dateTime={SITE_DATE_MODIFIED}>Last updated August 12, 2026</time>
             </p>
             <div className="hero-act">
               <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
@@ -519,7 +550,8 @@ export default function HomePage() {
                 <span className="gt">under one roof</span>
               </h2>
             <p className="section-sub">
-              From pixel-perfect art to AI-powered solutions — we handle every creative and technical challenge.
+              Built for brands, creators, startups, and streamers — from pixel-perfect art to AI-powered products under
+              one studio.
             </p>
           </Reveal>
           <div className="sv-g">
@@ -533,7 +565,12 @@ export default function HomePage() {
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
-                <ServiceCardBg slug={service.slug} fallbackImage={service.cardImage} delayMs={index * 280} />
+                <ServiceCardBg
+                  slug={service.slug}
+                  fallbackImage={service.cardImage}
+                  delayMs={index * 280}
+                  alt={`${service.title} portfolio sample`}
+                />
                 {service.isNew && <div className="sv-new">NEW</div>}
                 <div className="sv-i" aria-hidden="true">
                   {service.icon}
@@ -574,7 +611,7 @@ export default function HomePage() {
                 onClick={() => setWorkLightboxIndex(index)}
               >
                 <span className="shot-media">
-                  <img src={item.image} alt="" loading="lazy" decoding="async" />
+                  <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
                   <span className="shot-hover">View shot</span>
                 </span>
                 <span className="shot-info">
@@ -611,6 +648,10 @@ export default function HomePage() {
             <h2 className="section-title">
               How we bring ideas <span className="gt">to life</span>
             </h2>
+            <p className="section-sub">
+              Direct answer: every project follows four steps — Discovery, Concept, Refine, and Deliver — so you know
+              what happens after you submit a brief.
+            </p>
           </Reveal>
           <div className="pr-g">
             {processSteps.map((step, index) => (
@@ -699,7 +740,9 @@ export default function HomePage() {
                     aria-expanded={open}
                     onClick={() => setOpenFaq(open ? null : index)}
                   >
-                    <span className="faq-acc-text">{faq.q}</span>
+                    <span className="faq-acc-text">
+                      <h3 className="faq-acc-heading">{faq.q}</h3>
+                    </span>
                     <span className="faq-acc-icon" aria-hidden="true" />
                   </button>
                   <div className="faq-acc-a" inert={!open}>
@@ -731,6 +774,10 @@ export default function HomePage() {
             <h2 className="section-title">
               What clients <span className="gt">say about us</span>
             </h2>
+            <p className="section-sub">
+              Bottom line: clients hire VOIDINK for clear communication, on-time delivery, and final files they fully
+              own.
+            </p>
           </Reveal>
           <div className="tm-g">
             {testimonials.map((item, index) => (

@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { getServiceGallery } from '../data/serviceGalleries'
 
-export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, delayMs = 0 }) {
+export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, delayMs = 0, alt = '' }) {
   const wrapRef = useRef(null)
   const pausedRef = useRef(false)
   const gallery = getServiceGallery(slug).map((item) => item.image).filter(Boolean)
@@ -56,7 +56,7 @@ export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, 
           key={src}
           className={`sv-shadow${slideIndex === index ? ' sv-shadow-on' : ''}`}
           src={src}
-          alt=""
+          alt={alt}
           loading={slideIndex === 0 ? 'eager' : 'lazy'}
           decoding="async"
         />

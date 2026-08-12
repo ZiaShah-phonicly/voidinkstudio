@@ -2,9 +2,13 @@
 export const SITE_ORIGIN = 'https://voidinkstudios.com'
 export const BRAND_NAME = 'VOIDINK Studios'
 
+/** ISO date for WebPage dateModified — bump when homepage content meaningfully changes. */
+export const SITE_DATE_MODIFIED = '2026-08-12'
+
 export const DEFAULT_TITLE = 'VOIDINK Studios — Art, Logo, Comic, AI & Web'
+/** Keep ~110–165 chars for SERP snippets (tool-checked). */
 export const DEFAULT_DESCRIPTION =
-  'VOIDINK Studios creates custom logos, comic art, AI agents, websites, and apps for brands and creators worldwide. Transparent packages from $39, with full ownership on delivery.'
+  'Custom logos, comic art, AI agents, websites & apps for brands and creators. Packages from $39 — full ownership on delivery.'
 
 /** Real brand spellings people type — schema only, never stuffed into H1. */
 export const ALTERNATE_NAMES = [
@@ -69,6 +73,28 @@ export function websiteSchema() {
     url: `${SITE_ORIGIN}/`,
     publisher: { '@id': `${SITE_ORIGIN}/#organization` },
     inLanguage: 'en',
+  }
+}
+
+/** Homepage / marketing page identity — not Article (this is not a blog post). */
+export function webPageSchema({
+  path = '/',
+  name = BRAND_NAME,
+  description = DEFAULT_DESCRIPTION,
+  dateModified = SITE_DATE_MODIFIED,
+} = {}) {
+  const url = path.startsWith('http') ? path : `${SITE_ORIGIN}${path}`
+  return {
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name,
+    description,
+    isPartOf: { '@id': `${SITE_ORIGIN}/#website` },
+    about: { '@id': `${SITE_ORIGIN}/#organization` },
+    publisher: { '@id': `${SITE_ORIGIN}/#organization` },
+    inLanguage: 'en',
+    dateModified,
   }
 }
 

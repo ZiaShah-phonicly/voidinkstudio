@@ -47,7 +47,9 @@ export default function FaqPage() {
                     aria-expanded={open}
                     onClick={() => setOpenKey(open ? null : key)}
                   >
-                    <span className="faq-acc-text">{item.q}</span>
+                    <span className="faq-acc-text">
+                      <h3 className="faq-acc-heading">{item.q}</h3>
+                    </span>
                     <span className="faq-acc-icon" aria-hidden="true" />
                   </button>
 
