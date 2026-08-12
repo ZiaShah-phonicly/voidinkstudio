@@ -474,9 +474,9 @@ export default function HomePage() {
             </h1>
             <div className="hero-tg">— Where Imagination Has No Limits —</div>
             <p className="hero-d">
-              Key takeaway: VOIDINK Studios creates custom logos, comic art, AI agents, websites, and apps for brands,
-              creators, startups, and streamers worldwide — packages from $39 with full ownership on delivery. In short,
-              hire us when you need art and tech under one studio.
+              Key takeaway: custom logos, comic art, AI agents, websites, and apps — packages from $39, full ownership on
+              delivery. For brands, creators, startups, and streamers in design, gaming, and software; use when you need
+              art and tech under one studio.
             </p>
             <div className="hero-act">
               <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
@@ -539,8 +539,7 @@ export default function HomePage() {
                 <span className="gt">under one roof</span>
               </h2>
             <p className="section-sub">
-              Built for brands, creators, startups, and streamers — from pixel-perfect art to AI-powered products under
-              one studio. See recent work on{' '}
+              Use cases: logos, comics, character art, websites, apps, AI agents. Recent work on{' '}
               <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
                 Instagram @voidinkstudios
               </a>
@@ -642,8 +641,7 @@ export default function HomePage() {
               How we bring ideas <span className="gt">to life</span>
             </h2>
             <p className="section-sub">
-              Direct answer: every project follows four steps — Discovery, Concept, Refine, and Deliver — so you know
-              what happens after you submit a brief.
+              Direct answer: four steps — Discovery, Concept, Refine, Deliver.
             </p>
           </Reveal>
           <div className="pr-g">
@@ -671,7 +669,7 @@ export default function HomePage() {
             <h2 className="section-title">
               Transparent pricing, <span className="gt">no surprises</span>
             </h2>
-            <p className="section-sub">Clear packages, fixed delivery times, and 100% ownership rights.</p>
+            <p className="section-sub">Clear packages, fixed timelines, full ownership after payment.</p>
           </Reveal>
           <Reveal>
             <div className="pt-tabs" role="tablist">
@@ -720,8 +718,7 @@ export default function HomePage() {
               Frequently Asked <span className="gt">Questions</span>
             </h2>
             <p className="section-sub">
-              Direct answer: most clients ask about pricing, deposits, ownership, and how to start — short answers are
-              below, with the full FAQ on a dedicated page.
+              Short answers on pricing, deposits, ownership, and how to start.
             </p>
           </Reveal>
 
@@ -771,8 +768,7 @@ export default function HomePage() {
               What clients <span className="gt">say about us</span>
             </h2>
             <p className="section-sub">
-              Bottom line: clients hire VOIDINK for clear communication, on-time delivery, and final files they fully
-              own.
+              Bottom line: clear communication, on-time delivery, full ownership.
             </p>
           </Reveal>
           <div className="tm-g">
@@ -1137,9 +1133,7 @@ export default function HomePage() {
               <h2 className="section-title">
                 Ready to bring your vision to <span className="gt">life?</span>
               </h2>
-              <p className="section-sub">
-                Bottom line: start with a free quote — we reply fast with timeline, package options, and next steps.
-              </p>
+              <p className="section-sub">Start with a free quote — timeline and packages, fast.</p>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
                   Start a Project <span aria-hidden="true">→</span>

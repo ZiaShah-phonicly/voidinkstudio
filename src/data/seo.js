@@ -58,7 +58,7 @@ export function organizationSchema() {
     image: `${SITE_ORIGIN}/og-image.jpg`,
     email: 'support@voidinkstudios.com',
     description:
-      'Remote-first creative and technology studio for custom artwork, branding, websites, apps, and AI agents.',
+      'Remote-first creative and technology studio for brands, creators, startups, and streamers — custom artwork, branding, websites, apps, and AI agents.',
     areaServed: 'Worldwide',
     sameAs: ['https://x.com/voidinkstudios', 'https://www.instagram.com/voidinkstudios/'],
   }
