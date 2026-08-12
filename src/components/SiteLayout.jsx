@@ -19,6 +19,32 @@ export default function SiteLayout() {
   usePageMeta({ canonical: `${window.location.origin}${location.pathname}` })
 
   useEffect(() => {
+    const isProtectedMedia = (target) => {
+      if (!(target instanceof Element)) return false
+      return Boolean(
+        target.closest(
+          'video, .media-protect, .shot, .shot-media, .shot-open, .sv-c, .sv-bg, .lb, .lb-card',
+        ),
+      )
+    }
+
+    const onContextMenu = (event) => {
+      if (isProtectedMedia(event.target)) event.preventDefault()
+    }
+
+    const onDragStart = (event) => {
+      if (isProtectedMedia(event.target)) event.preventDefault()
+    }
+
+    document.addEventListener('contextmenu', onContextMenu, true)
+    document.addEventListener('dragstart', onDragStart, true)
+    return () => {
+      document.removeEventListener('contextmenu', onContextMenu, true)
+      document.removeEventListener('dragstart', onDragStart, true)
+    }
+  }, [])
+
+  useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 600)
     return () => clearTimeout(timer)
   }, [])

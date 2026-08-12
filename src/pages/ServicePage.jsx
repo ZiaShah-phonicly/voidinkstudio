@@ -156,6 +156,7 @@ export default function ServicePage() {
                   onMouseEnter={() => setCursorHover(true)}
                   onMouseLeave={() => setCursorHover(false)}
                   onClick={() => setLightboxIndex(index)}
+                  onContextMenu={(event) => event.preventDefault()}
                 >
                   <span className="shot-media">
                     {isVideoSrc(item.image) ? (
@@ -322,6 +323,7 @@ export default function ServicePage() {
                 className="sv-c sv-c-link"
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
+                onContextMenu={(event) => event.preventDefault()}
               >
                 <ServiceCardBg slug={item.slug} fallbackImage={item.cardImage} delayMs={index * 280} />
                 {item.isNew && <div className="sv-new">NEW</div>}
