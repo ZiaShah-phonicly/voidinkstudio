@@ -26,10 +26,10 @@ dist-ssr
 *.sln
 *.sw?
 
-# Local unzip dumps (not site runtime assets)
-public/AI Chatbots*/
-public/App Development*/
-public/Website Design*/
+# Local unzip dumps only (timestamped exports — keep clean portfolio folders tracked)
+public/AI Chatbots, Voice Agents & Automations-*/
+public/App Development-*/
+public/Website Design & Development-*/
 public/Dnd-*/
 sunshine-dental.html
 voidinkstudio_space.code-workspace

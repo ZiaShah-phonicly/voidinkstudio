@@ -1,4 +1,5 @@
 import { serviceDetails } from './serviceDetails'
+import { isVideoSrc, serviceGalleries } from './serviceGalleries'
 
 /** Single source of truth for marketing stats (hero, about, footer, SEO). */
 export const studioStats = {
@@ -35,335 +36,109 @@ export const marqueeItems = [
   'Custom Character Design',
 ]
 
-export const services = serviceDetails.map(({ slug, icon, title, shortText, isNew, cardImage }) => ({
-  slug,
-  icon,
-  title,
-  text: shortText,
-  isNew,
-  cardImage,
-}))
+/** Home services grid: real portfolio folders first; missing-portfolio services last. */
+const SERVICES_WITH_PORTFOLIO = new Set([
+  'website-design-development',
+  'ai-agents-chatbots',
+  'app-development',
+  'comic-book-art',
+  '2d-vtuber-models',
+  'branding-logo',
+  'animation',
+  'dnd-character-art',
+  'cover-art',
+])
+
+export const services = serviceDetails
+  .map(({ slug, icon, title, shortText, isNew, cardImage }) => ({
+    slug,
+    icon,
+    title,
+    text: shortText,
+    isNew,
+    cardImage,
+  }))
+  .slice()
+  .sort((a, b) => {
+    const aRank = SERVICES_WITH_PORTFOLIO.has(a.slug) ? 0 : 1
+    const bRank = SERVICES_WITH_PORTFOLIO.has(b.slug) ? 0 : 1
+    return aRank - bRank
+  })
 
 export const workCategories = ['All', 'Web', 'AI Agents', 'Apps', 'Design']
 
-/** Home portfolio grid — Web / AI / Apps / Design */
-export const workItems = [
-  {
-    id: 'web-medical',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-01-medical.webp',
-    category: 'Web',
-    title: 'Medical Clinic Website',
-    meta: 'Website • Healthcare',
-    featured: false,
-  },
-  {
-    id: 'web-real-estate',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-02-real-estate.webp',
-    category: 'Web',
-    title: 'Real Estate Website',
-    meta: 'Website • Property Listings',
-    featured: false,
-  },
-  {
-    id: 'web-ecommerce',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-03-ecommerce.webp',
-    category: 'Web',
-    title: 'E-Commerce Store',
-    meta: 'Website • Online Shop',
-    featured: true,
-  },
-  {
-    id: 'web-restaurant',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-04-restaurant.webp',
-    category: 'Web',
-    title: 'Restaurant Website',
-    meta: 'Website • Hospitality',
-    featured: false,
-  },
-  {
-    id: 'web-automotive',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-05-automotive.webp',
-    category: 'Web',
-    title: 'Automotive Dealership Site',
-    meta: 'Website • Auto Sales',
-    featured: false,
-  },
-  {
-    id: 'web-beauty-spa',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-06-beauty-spa.webp',
-    category: 'Web',
-    title: 'Beauty & Spa Website',
-    meta: 'Website • Wellness Brand',
-    featured: false,
-  },
-  {
-    id: 'web-fitness',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-07-fitness.webp',
-    category: 'Web',
-    title: 'Fitness Studio Website',
-    meta: 'Website • Gym & Training',
-    featured: false,
-  },
-  {
-    id: 'web-saas',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-08-saas-landing.webp',
-    category: 'Web',
-    title: 'SaaS Product Landing',
-    meta: 'Website • SaaS Landing',
-    featured: true,
-  },
-  {
-    id: 'web-fashion',
-    serviceSlug: 'website-design-development',
-    image: '/portfolio/web/web-09-fashion-store.webp',
-    category: 'Web',
-    title: 'Fashion Store Website',
-    meta: 'Website • Fashion Retail',
-    featured: false,
-  },
-  {
-    id: 'app-fintech',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-01-fintech.webp',
-    category: 'Apps',
-    title: 'Fintech Banking App',
-    meta: 'Mobile • Finance',
-    featured: true,
-  },
-  {
-    id: 'app-ecommerce',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-02-ecommerce.webp',
-    category: 'Apps',
-    title: 'E-Commerce Shopping App',
-    meta: 'Mobile • Retail',
-    featured: false,
-  },
-  {
-    id: 'app-telemedicine',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-03-telemedicine.webp',
-    category: 'Apps',
-    title: 'Telemedicine App',
-    meta: 'Mobile • Healthcare',
-    featured: false,
-  },
-  {
-    id: 'app-food-delivery',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-04-food-delivery.webp',
-    category: 'Apps',
-    title: 'Food Delivery App',
-    meta: 'Mobile • On-Demand',
-    featured: false,
-  },
-  {
-    id: 'app-real-estate',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-05-real-estate.webp',
-    category: 'Apps',
-    title: 'Real Estate App',
-    meta: 'Mobile • Property Search',
-    featured: false,
-  },
-  {
-    id: 'app-saas-crm',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-06-saas-crm.webp',
-    category: 'Apps',
-    title: 'SaaS CRM App',
-    meta: 'Mobile • Business CRM',
-    featured: false,
-  },
-  {
-    id: 'app-on-demand',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-07-on-demand.webp',
-    category: 'Apps',
-    title: 'On-Demand Services App',
-    meta: 'Mobile • Services Marketplace',
-    featured: false,
-  },
-  {
-    id: 'app-edtech',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-08-edtech.webp',
-    category: 'Apps',
-    title: 'EdTech Learning App',
-    meta: 'Mobile • Education',
-    featured: false,
-  },
-  {
-    id: 'app-fitness',
-    serviceSlug: 'app-development',
-    image: '/portfolio/apps/app-09-fitness.webp',
-    category: 'Apps',
-    title: 'Fitness & Wellness App',
-    meta: 'Mobile • Health & Fitness',
-    featured: false,
-  },
-  {
-    id: 'ai-customer-support',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-01-customer-support.webp',
-    category: 'AI Agents',
-    title: 'AI Customer Support Bot',
-    meta: 'Chatbot • Auto Support',
-    featured: false,
-  },
-  {
-    id: 'ai-whatsapp',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-02-whatsapp-automation.webp',
-    category: 'AI Agents',
-    title: 'WhatsApp Automation Agent',
-    meta: 'Messaging • Auto Replies',
-    featured: false,
-  },
-  {
-    id: 'ai-voice-agent',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-03-voice-agent.webp',
-    category: 'AI Agents',
-    title: 'AI Voice Agent',
-    meta: 'Voice AI • Call Handling',
-    featured: true,
-  },
-  {
-    id: 'ai-lead-gen',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-04-lead-gen.webp',
-    category: 'AI Agents',
-    title: 'Lead Generation Bot',
-    meta: 'Chatbot • Lead Capture',
-    featured: false,
-  },
-  {
-    id: 'ai-ecommerce',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-05-ecommerce.webp',
-    category: 'AI Agents',
-    title: 'E-Commerce AI Assistant',
-    meta: 'Shopping • Support Agent',
-    featured: false,
-  },
-  {
-    id: 'ai-restaurant',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-06-restaurant.webp',
-    category: 'AI Agents',
-    title: 'Restaurant Booking Bot',
-    meta: 'Hospitality • Orders',
-    featured: false,
-  },
-  {
-    id: 'ai-real-estate',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-07-real-estate.webp',
-    category: 'AI Agents',
-    title: 'Real Estate AI Agent',
-    meta: 'Property • Lead Qualifier',
-    featured: false,
-  },
-  {
-    id: 'ai-healthcare',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-08-healthcare.webp',
-    category: 'AI Agents',
-    title: 'Healthcare Chatbot',
-    meta: 'Medical • Patient Support',
-    featured: false,
-  },
-  {
-    id: 'ai-workflow-auto',
-    serviceSlug: 'ai-agents-chatbots',
-    image: '/portfolio/ai/ai-09-workflow.webp',
-    category: 'AI Agents',
-    title: 'Workflow Automation',
-    meta: 'n8n • Business Automations',
-    featured: false,
-  },
-  {
-    id: 'brand-identity',
-    serviceSlug: 'branding-logo',
-    image: '/portfolio/brandforge.jpg',
-    category: 'Design',
-    title: 'BrandForge Identity',
-    meta: 'Branding • Logo System',
-    featured: true,
-  },
-  {
-    id: 'brand-kit',
-    serviceSlug: 'branding-logo',
-    image: '/portfolio/services/brand/5.jpg',
-    category: 'Design',
-    title: 'Visual Identity Suite',
-    meta: 'Branding • Full Brand Kit',
-    featured: false,
-  },
-  {
-    id: 'mascot-set',
-    serviceSlug: 'mascot-design',
-    image: '/portfolio/services/mascot/1.jpg',
-    category: 'Design',
-    title: 'Brand Mascot Set',
-    meta: 'Mascot • Character IP',
-    featured: false,
-  },
-  {
-    id: 'stream-mascot',
-    serviceSlug: 'mascot-design',
-    image: '/portfolio/services/mascot/4.jpg',
-    category: 'Design',
-    title: 'Stream Mascot Look',
-    meta: 'Mascot • Brand Face',
-    featured: false,
-  },
-  {
-    id: 'comic-cover',
-    serviceSlug: 'comic-book-art',
-    image: '/portfolio/heroic-comics.jpg',
-    category: 'Design',
-    title: 'Hero Issue Cover',
-    meta: 'Comic • Cover Art',
-    featured: false,
-  },
-  {
-    id: 'book-cover',
-    serviceSlug: 'cover-art',
-    image: '/portfolio/services/cover/4.jpg',
-    category: 'Design',
-    title: 'Title Typography Cover',
-    meta: 'Cover Art • Publishing',
-    featured: false,
-  },
-  {
-    id: 'character-sheet',
-    serviceSlug: 'custom-character-design',
-    image: '/portfolio/services/character/1.jpg',
-    category: 'Design',
-    title: 'Hero Character Sheet',
-    meta: 'Character Design • OC',
-    featured: false,
-  },
-  {
-    id: 'dnd-portrait',
-    serviceSlug: 'dnd-character-art',
-    image: '/portfolio/services/dnd/1.webp',
-    category: 'Design',
-    title: 'Fantasy Portrait',
-    meta: 'DnD • Character Art',
-    featured: true,
-  },
+const WORK_CATEGORY_BY_SLUG = {
+  'website-design-development': 'Web',
+  'ai-agents-chatbots': 'AI Agents',
+  'app-development': 'Apps',
+  'comic-book-art': 'Design',
+  '3d-models': 'Design',
+  'mascot-design': 'Design',
+  '2d-vtuber-models': 'Design',
+  'branding-logo': 'Design',
+  animation: 'Design',
+  'dnd-character-art': 'Design',
+  'furry-art': 'Design',
+  'nsfw-art': 'Design',
+  'cover-art': 'Design',
+  'custom-character-design': 'Design',
+  fursuits: 'Design',
+}
+
+/** Home portfolio order — one strong shot per service (best 6 → 2 rows × 3). */
+const HOME_PORTFOLIO_SLUGS = [
+  'website-design-development',
+  'ai-agents-chatbots',
+  'app-development',
+  'comic-book-art',
+  '2d-vtuber-models',
+  'cover-art',
 ]
+
+/** Preferred filename titles (without extension) when available in that gallery. */
+const HOME_PORTFOLIO_PICKS = {
+  'website-design-development': 'Saas-Landing',
+  'ai-agents-chatbots': 'Automations-ai-03-AI-Voice-Agent',
+  'app-development': 'Fintech-App-Development',
+  'comic-book-art': 'Comic Book Panels',
+  '2d-vtuber-models': 'Sage_s Vtuber',
+  'cover-art': 'Cover Art',
+}
+
+/** All portfolio shots (built from serviceGalleries — title = filename). */
+export const workItems = Object.entries(serviceGalleries).flatMap(([slug, items]) =>
+  items.map((item, index) => ({
+    id: `${slug}-${index}`,
+    serviceSlug: slug,
+    image: item.image,
+    category: WORK_CATEGORY_BY_SLUG[slug] || 'Design',
+    title: item.title,
+    meta: item.meta,
+    featured: false,
+  })),
+)
+
+/** Home #work grid: best 6 across services (2 rows on desktop). */
+export function getHomePortfolio(limit = 6) {
+  const bySlug = new Map()
+  for (const item of workItems) {
+    if (!bySlug.has(item.serviceSlug)) bySlug.set(item.serviceSlug, [])
+    bySlug.get(item.serviceSlug).push(item)
+  }
+
+  const picked = []
+  for (const slug of HOME_PORTFOLIO_SLUGS) {
+    const items = bySlug.get(slug) || []
+    if (!items.length) continue
+    const images = items.filter((item) => !isVideoSrc(item.image))
+    const pool = images.length ? images : items
+    const preferred = HOME_PORTFOLIO_PICKS[slug]
+    const match = preferred ? pool.find((item) => item.title === preferred) : null
+    picked.push(match || pool[0])
+  }
+
+  return picked.slice(0, limit)
+}
 
 export const processSteps = [
   { num: '01', title: 'Discovery', text: 'We learn your vision, audience & goals through detailed briefing.' },

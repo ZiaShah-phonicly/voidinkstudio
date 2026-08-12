@@ -1,70 +1,41 @@
 # VOIDINK Studios
 
-> Official website: https://voidinkstudios.com
-> Also known as: VOIDINK, Void Ink, Void Ink Studios, VOIDINK Studio, Voidink Studio, Voidink Studios, voidinkstudio, voidinkstudios
-> Email: support@voidinkstudios.com
+> Remote-first creative and technology studio for custom artwork, branding, websites, apps, and AI agents. Packages from $39 USD with full ownership on delivery. Also known as VOIDINK, Void Ink Studios, Voidink Studio, voidinkstudio, and voidinkstudios. Contact: support@voidinkstudios.com.
 
-VOIDINK Studios is a remote-first creative and technology studio. We deliver custom artwork, branding, websites, mobile apps, AI chatbots, voice agents, and related commissions for clients worldwide.
+VOIDINK Studios serves brands, creators, startups, and streamers worldwide. We are not a tattoo studio and are not affiliated with Void Ink Tattoo Berlin, Vo Ink Studio (Moncton), or voidinkstudio.vercel.app.
 
-We are not a tattoo studio. We are not Void Ink Tattoo Berlin, Vo Ink Studio (Moncton), or voidinkstudio.vercel.app.
+Typical snapshot: 15 services, 500+ projects, 200+ clients in 25 countries, ~99% satisfaction. Work starts after a free consultation and 50% deposit; remaining 50% is due before final file delivery. NDAs available; portfolio display only with client permission.
 
-## Snapshot
+## Pages
 
-- 15 services (art + design + development + AI)
-- 500+ projects delivered
-- 200+ clients in 25 countries
-- Typical satisfaction: 99%
-- Packages from $39 USD
-- Full ownership of final deliverables after full payment
-- Confidential by default; NDAs available
-- Portfolio display only with client permission (never for NDA work)
+- [Home](https://voidinkstudios.com/): Main site with services, pricing, and quote form
+- [About](https://voidinkstudios.com/about): Studio story, mission, and who we serve
+- [FAQ](https://voidinkstudios.com/faq): Pricing, deposits, ownership, timelines, and process
+- [Track order](https://voidinkstudios.com/track): Look up a commission with a VI- tracking ID
+- [Pricing](https://voidinkstudios.com/#pricing): Transparent packages and Order Now prefill
+- [Request a quote](https://voidinkstudios.com/#query): Contact form for project briefs
 
-## How to work with us
+## Services
 
-1. Request a quote: https://voidinkstudios.com/#query or email support@voidinkstudios.com
-2. Free consultation, timeline, and pricing
-3. 50% deposit to start; remaining 50% before final file delivery
-4. Track an order with a VI- ID: https://voidinkstudios.com/track
+- [Furry Art](https://voidinkstudios.com/services/furry-art): Custom furry art from $39
+- [Custom Character Design](https://voidinkstudios.com/services/custom-character-design): Original characters from $49
+- [Branding & Logo](https://voidinkstudios.com/services/branding-logo): Logos and brand kits from $59
+- [Mascot Design](https://voidinkstudios.com/services/mascot-design): Brand and stream mascots from $99
+- [DnD Character Art](https://voidinkstudios.com/services/dnd-character-art): Tabletop character art from $99
+- [Cover Art](https://voidinkstudios.com/services/cover-art): Book and comic covers from $99
+- [NSFW Art](https://voidinkstudios.com/services/nsfw-art): Confidential adult commissions from $99
+- [Animation](https://voidinkstudios.com/services/animation): Motion and animated assets from $99
+- [2D VTuber Models](https://voidinkstudios.com/services/2d-vtuber-models): Live2D-ready models from $149
+- [3D Models](https://voidinkstudios.com/services/3d-models): Custom 3D assets from $249
+- [Comic Book Art](https://voidinkstudios.com/services/comic-book-art): Pages and issues from $399
+- [Fursuit Commissions](https://voidinkstudios.com/services/fursuits): Heads, partials, and full suits from $800
+- [AI Agents & Chatbots](https://voidinkstudios.com/services/ai-agents-chatbots): Chat, voice, and automation from $299
+- [Website Design & Development](https://voidinkstudios.com/services/website-design-development): Sites and landing pages from $399
+- [App Development](https://voidinkstudios.com/services/app-development): Mobile and product apps from $599
 
-## Main pages
+## Optional
 
-- Home: https://voidinkstudios.com/
-- About: https://voidinkstudios.com/about
-- FAQ: https://voidinkstudios.com/faq
-- Track order: https://voidinkstudios.com/track
-- Privacy: https://voidinkstudios.com/privacy-policy
-- Terms: https://voidinkstudios.com/terms-of-service
-- X: https://x.com/voidinkstudios
-- Instagram: https://www.instagram.com/voidinkstudios/
-
-## Services (starting prices, USD)
-
-Art & design
-
-- Furry Art — from $39 — https://voidinkstudios.com/services/furry-art
-- Custom Character Design — from $49 — https://voidinkstudios.com/services/custom-character-design
-- Branding & Logo — from $59 — https://voidinkstudios.com/services/branding-logo
-- Mascot Design — from $99 — https://voidinkstudios.com/services/mascot-design
-- DnD Character Art — from $99 — https://voidinkstudios.com/services/dnd-character-art
-- Cover Art — from $99 — https://voidinkstudios.com/services/cover-art
-- NSFW Art (confidential) — from $99 — https://voidinkstudios.com/services/nsfw-art
-- Animation — from $99 — https://voidinkstudios.com/services/animation
-- 2D VTuber Models — from $149 — https://voidinkstudios.com/services/2d-vtuber-models
-- 3D Models — from $249 — https://voidinkstudios.com/services/3d-models
-- Comic Book Art — from $399 — https://voidinkstudios.com/services/comic-book-art
-- Fursuit Commissions — from $800 — https://voidinkstudios.com/services/fursuits
-
-Web, apps & AI
-
-- AI Chatbots, Voice Agents & Automations — from $299 — https://voidinkstudios.com/services/ai-agents-chatbots
-- Website Design & Development — from $399 — https://voidinkstudios.com/services/website-design-development
-- App Development — from $599 — https://voidinkstudios.com/services/app-development
-
-Exact package prices, timelines, and what’s included are on each service page and the homepage pricing section: https://voidinkstudios.com/#pricing
-
-## Policies (short)
-
-- Unlimited revisions within the agreed package scope; major scope changes may need a new quote.
-- Delivery timelines depend on the package (days for most art/web; weeks for apps and fursuits).
-- Rush delivery may be available for a fee.
-- We serve international clients remotely across timezones.
+- [Privacy Policy](https://voidinkstudios.com/privacy-policy): How personal data is collected and used
+- [Terms of Service](https://voidinkstudios.com/terms-of-service): Project process, payments, and ownership terms
+- [X / Twitter](https://x.com/voidinkstudios): Studio updates and work samples
+- [Instagram](https://www.instagram.com/voidinkstudios/): Portfolio and commission highlights

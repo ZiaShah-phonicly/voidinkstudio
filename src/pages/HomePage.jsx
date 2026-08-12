@@ -5,6 +5,7 @@ import PricingCard from '../components/PricingCard'
 import Reveal, { RevealItem } from '../components/Reveal'
 import ImageLightbox from '../components/ImageLightbox'
 import ServiceCardBg from '../components/ServiceCardBg'
+import LazyVideo from '../components/LazyVideo'
 import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
@@ -41,8 +42,9 @@ import {
   studioStats,
   studioStatsCopy,
   testimonials,
-  workItems,
+  getHomePortfolio,
 } from '../data/voidinkData'
+import { isVideoSrc } from '../data/serviceGalleries'
 
 const emptyForm = {
   name: '',
@@ -412,7 +414,7 @@ export default function HomePage() {
   }
 
   const activePricing = pricingCategories.find((cat) => cat.id === pricingTab) ?? pricingCategories[0]
-  const featuredWork = workItems.filter((item) => item.featured).slice(0, 6)
+  const featuredWork = getHomePortfolio(6)
 
   return (
     <div className="home-page">
@@ -603,13 +605,17 @@ export default function HomePage() {
                 onClick={() => setWorkLightboxIndex(index)}
               >
                 <span className="shot-media">
-                  <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
-                  <span className="shot-hover">View shot</span>
+                  {isVideoSrc(item.image) ? (
+                    <LazyVideo src={item.image} ariaLabel={item.title} />
+                  ) : (
+                    <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+                  )}
+                  <span className="shot-hover">{isVideoSrc(item.image) ? 'Play' : 'View shot'}</span>
                 </span>
                 <span className="shot-info">
                   <span className="shot-text">
                     <span className="shot-name">{item.title}</span>
-                    <span className="shot-meta">{item.meta}</span>
+                    {item.meta ? <span className="shot-meta">{item.meta}</span> : null}
                   </span>
                 </span>
               </RevealItem>

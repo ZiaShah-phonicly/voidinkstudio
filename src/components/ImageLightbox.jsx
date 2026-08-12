@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
+import { isVideoSrc } from '../data/serviceGalleries'
 
 export default function ImageLightbox({ items = [], index, onClose, onChange }) {
   const total = items.length
@@ -37,6 +38,10 @@ export default function ImageLightbox({ items = [], index, onClose, onChange }) 
     onChange?.(((nextIndex % total) + total) % total)
   }
 
+  const video = isVideoSrc(item.image)
+  const hasMeta = Boolean(item.meta || item.category)
+  const hasDesc = Boolean(item.desc || item.description)
+
   return createPortal(
     <div
       className="lb"
@@ -68,15 +73,24 @@ export default function ImageLightbox({ items = [], index, onClose, onChange }) 
         onClick={(event) => event.stopPropagation()}
         onKeyDown={(event) => event.stopPropagation()}
       >
-        <img src={item.image} alt={item.title || 'Portfolio image'} />
+        {video ? (
+          <video
+            key={item.image}
+            src={item.image}
+            controls
+            autoPlay
+            playsInline
+            muted
+            loop
+            aria-label={item.title || 'Portfolio video'}
+          />
+        ) : (
+          <img src={item.image} alt={item.title || 'Portfolio image'} />
+        )}
         <div className="lb-info">
-          <p className="lb-kicker">{item.meta || item.category || 'Portfolio'}</p>
+          {hasMeta ? <p className="lb-kicker">{item.meta || item.category}</p> : null}
           <h3 id="lb-title">{item.title || 'Work sample'}</h3>
-          <p className="lb-desc">
-            {item.desc ||
-              item.description ||
-              `${item.title || 'This piece'} — ${item.meta || item.category || 'VOIDINK Studios work sample'}.`}
-          </p>
+          {hasDesc ? <p className="lb-desc">{item.desc || item.description}</p> : null}
         </div>
       </div>
       {total > 1 && (

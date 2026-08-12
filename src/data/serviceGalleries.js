@@ -1,43 +1,54 @@
+/** Build a gallery entry from a public folder + filename (title = name without extension). */
+function fromFile(folder, file) {
+  // encodeURIComponent turns & → %26 and , → %2C; Vite static serve then 404s to SPA HTML.
+  // Keep those literal so public/ paths with & and , resolve correctly.
+  const encSeg = (s) => encodeURIComponent(s).replace(/%26/g, '&').replace(/%2C/gi, ',')
+  const image = `/${[folder, file].map(encSeg).join('/')}`
+  const title = file.replace(/\.[^.]+$/, '')
+  return { image, title }
+}
+
 /** Portfolio galleries shown on each service detail page */
 export const serviceGalleries = {
   'website-design-development': [
-    { image: '/portfolio/web/web-01-medical.webp', title: 'Medical Clinic Website', meta: 'Healthcare Site' },
-    { image: '/portfolio/web/web-02-real-estate.webp', title: 'Real Estate Website', meta: 'Property Listings' },
-    { image: '/portfolio/web/web-03-ecommerce.webp', title: 'E-Commerce Store', meta: 'Online Shop' },
-    { image: '/portfolio/web/web-04-restaurant.webp', title: 'Restaurant Website', meta: 'Hospitality' },
-    { image: '/portfolio/web/web-05-automotive.webp', title: 'Automotive Dealership Site', meta: 'Auto Sales' },
-    { image: '/portfolio/web/web-06-beauty-spa.webp', title: 'Beauty & Spa Website', meta: 'Wellness Brand' },
-    { image: '/portfolio/web/web-07-fitness.webp', title: 'Fitness Studio Website', meta: 'Gym & Training' },
-    { image: '/portfolio/web/web-08-saas-landing.webp', title: 'SaaS Product Landing', meta: 'SaaS Landing' },
-    { image: '/portfolio/web/web-09-fashion-store.webp', title: 'Fashion Store Website', meta: 'Fashion Retail' },
+    fromFile('Website Design & Development', 'Automotive.webp'),
+    fromFile('Website Design & Development', 'Beauty-Spa.webp'),
+    fromFile('Website Design & Development', 'E-commerce.webp'),
+    fromFile('Website Design & Development', 'Fashion-Store.webp'),
+    fromFile('Website Design & Development', 'Fitness.webp'),
+    fromFile('Website Design & Development', 'Medical.webp'),
+    fromFile('Website Design & Development', 'Real-Estate.webp'),
+    fromFile('Website Design & Development', 'Restaurant.webp'),
+    fromFile('Website Design & Development', 'Saas-Landing.webp'),
   ],
   'ai-agents-chatbots': [
-    { image: '/portfolio/ai/ai-01-customer-support.webp', title: 'AI Customer Support Bot', meta: 'Chatbot • Auto Support' },
-    { image: '/portfolio/ai/ai-02-whatsapp-automation.webp', title: 'WhatsApp Automation Agent', meta: 'Messaging • Auto Replies' },
-    { image: '/portfolio/ai/ai-03-voice-agent.webp', title: 'AI Voice Agent', meta: 'Voice AI • Call Handling' },
-    { image: '/portfolio/ai/ai-04-lead-gen.webp', title: 'Lead Generation Bot', meta: 'Chatbot • Lead Capture' },
-    { image: '/portfolio/ai/ai-05-ecommerce.webp', title: 'E-Commerce AI Assistant', meta: 'Shopping • Support Agent' },
-    { image: '/portfolio/ai/ai-06-restaurant.webp', title: 'Restaurant Booking Bot', meta: 'Hospitality • Orders' },
-    { image: '/portfolio/ai/ai-07-real-estate.webp', title: 'Real Estate AI Agent', meta: 'Property • Lead Qualifier' },
-    { image: '/portfolio/ai/ai-08-healthcare.webp', title: 'Healthcare Chatbot', meta: 'Medical • Patient Support' },
-    { image: '/portfolio/ai/ai-09-workflow.webp', title: 'Workflow Automation', meta: 'n8n • Business Automations' },
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-01-customer-support.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-02-whatsapp-automation.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-03-AI-Voice-Agent.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-04-Lead-Generation-Bot.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-05-E-commerce-AI.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-06-Restaurant-Bo.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-07-Real-Estate-AI.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-08-Healthcare-Bot.webp'),
+    fromFile('Ai Chatbots, Voice Agents & Automations', 'Automations-ai-09-Workflow-Automation.webp'),
   ],
   'app-development': [
-    { image: '/portfolio/apps/app-01-fintech.webp', title: 'Fintech Banking App', meta: 'Mobile • Finance' },
-    { image: '/portfolio/apps/app-02-ecommerce.webp', title: 'E-Commerce Shopping App', meta: 'Mobile • Retail' },
-    { image: '/portfolio/apps/app-03-telemedicine.webp', title: 'Telemedicine App', meta: 'Mobile • Healthcare' },
-    { image: '/portfolio/apps/app-04-food-delivery.webp', title: 'Food Delivery App', meta: 'Mobile • On-Demand' },
-    { image: '/portfolio/apps/app-05-real-estate.webp', title: 'Real Estate App', meta: 'Mobile • Property' },
-    { image: '/portfolio/apps/app-06-saas-crm.webp', title: 'SaaS CRM App', meta: 'Mobile • Business CRM' },
-    { image: '/portfolio/apps/app-07-on-demand.webp', title: 'On-Demand Services App', meta: 'Mobile • Marketplace' },
-    { image: '/portfolio/apps/app-08-edtech.webp', title: 'EdTech Learning App', meta: 'Mobile • Education' },
-    { image: '/portfolio/apps/app-09-fitness.webp', title: 'Fitness & Wellness App', meta: 'Mobile • Fitness' },
+    fromFile('App Development', 'Ecommerce-App-Development.webp'),
+    fromFile('App Development', 'EdTech-App-Development.webp'),
+    fromFile('App Development', 'Fintech-App-Development.webp'),
+    fromFile('App Development', 'Fitness-Wellness-App.webp'),
+    fromFile('App Development', 'Food-Delivery-App.webp'),
+    fromFile('App Development', 'On-Demand-Services-App.webp'),
+    fromFile('App Development', 'Real-Estate-App.webp'),
+    fromFile('App Development', 'SaaS-CRM-App.webp'),
+    fromFile('App Development', 'Telemedicine-App-Development.webp'),
   ],
   'comic-book-art': [
-    { image: '/portfolio/services/comic/1.jpg', title: 'Hero Issue Cover', meta: 'Comic Cover' },
-    { image: '/portfolio/services/comic/3.jpg', title: 'Heroic Comics #1', meta: '24 Pages' },
-    { image: '/portfolio/services/comic/4.jpg', title: 'Panel Story Arc', meta: 'Sequential Art' },
-    { image: '/portfolio/services/comic/5.jpg', title: 'Character Spotlight', meta: 'Illustration' },
+    fromFile('Comic', 'Comic 1 page.webp'),
+    fromFile('Comic', 'Comic Book Panels.webp'),
+    fromFile('Comic', 'Comic Book.webp'),
+    fromFile('Comic', 'Comic Dialogues.webp'),
+    fromFile('Comic', 'Comic with Panel.webp'),
   ],
   '3d-models': [
     { image: '/portfolio/services/3d/1.jpg', title: 'Tech Product Model', meta: '3D Render' },
@@ -53,34 +64,35 @@ export const serviceGalleries = {
     { image: '/portfolio/services/mascot/5.jpg', title: 'Stylized Character', meta: 'Vector Feel' },
   ],
   '2d-vtuber-models': [
-    { image: '/portfolio/services/vtuber/1.jpg', title: 'Nova VTuber Model', meta: 'Live2D Ready' },
-    { image: '/portfolio/services/vtuber/2.jpg', title: 'Expression Pack', meta: 'Emotion Sheet' },
-    { image: '/portfolio/services/vtuber/3.jpg', title: 'Character Turn Pose', meta: '2D Design' },
-    { image: '/portfolio/services/vtuber/4.jpg', title: 'Streamer Avatar', meta: 'VTuber Art' },
-    { image: '/portfolio/services/vtuber/5.jpg', title: 'Abstract Avatar Glow', meta: 'Visual Identity' },
+    fromFile('2D Model', '2D Model Female.mp4'),
+    fromFile('2D Model', '2D Model Male.mp4'),
+    fromFile('2D Model', '2D Model-Vtuber.mp4'),
+    fromFile('2D Model', 'Female Vtuber.mp4'),
+    fromFile('2D Model', 'Male Vtuber.mp4'),
+    fromFile('2D Model', 'Sage_s Vtuber.mp4'),
+    fromFile('2D Model', 'Vtuber Female.mp4'),
+    fromFile('2D Model', 'Vtuber.mp4'),
   ],
   'branding-logo': [
-    { image: '/portfolio/services/brand/1.jpg', title: 'BrandForge Identity', meta: 'Logo System' },
-    { image: '/portfolio/services/brand/2.jpg', title: 'Palette & Marks', meta: 'Brand Kit' },
-    { image: '/portfolio/services/brand/3.jpg', title: 'Studio Brand Wall', meta: 'Guidelines' },
-    { image: '/portfolio/services/brand/5.jpg', title: 'Visual Identity Suite', meta: 'Full Brand' },
+    { image: '/portfolio/brandforge.jpg', title: 'BrandForge Identity' },
   ],
   animation: [
-    { image: '/portfolio/services/anim/1.jpg', title: 'Motion Storyboard', meta: 'Animation' },
-    { image: '/portfolio/services/anim/3.jpg', title: 'Social Video Frame', meta: 'Shorts' },
-    { image: '/portfolio/services/anim/4.jpg', title: 'Cinematic Motion', meta: 'Film Look' },
-    { image: '/portfolio/services/anim/5.jpg', title: 'Explainer Sequence', meta: 'Brand Film' },
+    fromFile('Animation', 'Bugatti Intro.mp4'),
+    fromFile('Animation', 'Intro.mp4'),
+    fromFile('Animation', 'Train Animation.mp4'),
+    fromFile('Animation', 'Train Intro Animation.mp4'),
   ],
   'dnd-character-art': [
-    { image: '/portfolio/services/dnd/1.webp', title: 'Fantasy Portrait', meta: 'Character Art' },
-    { image: '/portfolio/services/dnd/2.webp', title: 'Dragon Realm Scene', meta: 'Campaign Art' },
-    { image: '/portfolio/services/dnd/3.webp', title: 'Party Encounter', meta: 'Group Scene' },
-    { image: '/portfolio/services/dnd/4.webp', title: 'Dark Fantasy Mood', meta: 'DnD Scene' },
-    { image: '/portfolio/services/dnd/5.webp', title: 'Hero Token Style', meta: 'Tabletop Art' },
-    { image: '/portfolio/services/dnd/6.webp', title: 'Armored Hero', meta: 'Character Study' },
-    { image: '/portfolio/services/dnd/7.webp', title: 'Spellcaster Focus', meta: 'Portrait' },
-    { image: '/portfolio/services/dnd/8.webp', title: 'Quest Atmosphere', meta: 'Environment' },
-    { image: '/portfolio/services/dnd/9.webp', title: 'Epic Campaign Art', meta: 'Illustration' },
+    fromFile('Dnd', 'Barbarian.webp'),
+    fromFile('Dnd', 'Bard.webp'),
+    fromFile('Dnd', 'Cleric.webp'),
+    fromFile('Dnd', 'Druid.webp'),
+    fromFile('Dnd', 'Fighter.webp'),
+    fromFile('Dnd', 'Monk.webp'),
+    fromFile('Dnd', 'Paladin.webp'),
+    fromFile('Dnd', 'Ranger.webp'),
+    fromFile('Dnd', 'Rogue.webp'),
+    fromFile('Dnd', 'Vampire.webp'),
   ],
   'furry-art': [
     { image: '/portfolio/services/furry/1.jpg', title: 'Species Reference Feel', meta: 'Furry Style' },
@@ -96,11 +108,11 @@ export const serviceGalleries = {
     { image: '/portfolio/services/nsfw/5.jpg', title: 'Gradient Atmosphere', meta: 'NDA Projects' },
   ],
   'cover-art': [
-    { image: '/portfolio/services/cover/1.jpg', title: 'Hardcover Focus', meta: 'Book Cover' },
-    { image: '/portfolio/services/cover/2.jpg', title: 'Paperback Stack', meta: 'Publishing' },
-    { image: '/portfolio/services/cover/3.jpg', title: 'Library Series Look', meta: 'Editorial' },
-    { image: '/portfolio/services/cover/4.jpg', title: 'Title Typography Cover', meta: 'Cover Design' },
-    { image: '/portfolio/services/cover/5.jpg', title: 'Author Brand Cover', meta: 'Print Ready' },
+    fromFile('Cover Art', 'Book Cover Art.webp'),
+    fromFile('Cover Art', 'Book Cover.webp'),
+    fromFile('Cover Art', 'Cover Art-Book cover.webp'),
+    fromFile('Cover Art', 'Cover Art.webp'),
+    fromFile('Cover Art', 'Music-Cover Art.webp'),
   ],
   'custom-character-design': [
     { image: '/portfolio/services/character/1.jpg', title: 'Hero Character Sheet', meta: 'OC Design' },
@@ -109,6 +121,10 @@ export const serviceGalleries = {
     { image: '/portfolio/services/character/4.jpg', title: 'Stylized Persona', meta: 'Character IP' },
     { image: '/portfolio/services/character/5.jpg', title: 'Costume & Pose Study', meta: 'Design Pass' },
   ],
+}
+
+export function isVideoSrc(src = '') {
+  return /\.(mp4|webm|ogg)(\?|#|$)/i.test(String(src))
 }
 
 export function getServiceGallery(slug) {
