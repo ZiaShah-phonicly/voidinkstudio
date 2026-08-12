@@ -161,7 +161,15 @@ export default function ServicePage() {
                     {isVideoSrc(item.image) ? (
                       <LazyVideo src={item.image} ariaLabel={item.title || 'Portfolio video'} />
                     ) : (
-                      <img src={item.image} alt={item.title || 'Portfolio image'} loading="lazy" decoding="async" />
+                      <img
+                        src={item.image}
+                        alt={item.title || 'Portfolio image'}
+                        loading="lazy"
+                        decoding="async"
+                        draggable={false}
+                        onContextMenu={(event) => event.preventDefault()}
+                        onDragStart={(event) => event.preventDefault()}
+                      />
                     )}
                     <span className="shot-hover">{isVideoSrc(item.image) ? 'Play' : 'View shot'}</span>
                   </span>

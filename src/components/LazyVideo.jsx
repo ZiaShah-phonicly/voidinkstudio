@@ -1,5 +1,9 @@
 import { useEffect, useRef, useState } from 'react'
 
+function blockMenu(event) {
+  event.preventDefault()
+}
+
 /** Muted looping video that only attaches src / plays when near the viewport. */
 export default function LazyVideo({
   src,
@@ -49,8 +53,13 @@ export default function LazyVideo({
       loop
       playsInline
       controls={controls}
+      controlsList="nodownload noplaybackrate noremoteplayback"
+      disablePictureInPicture
+      disableRemotePlayback
       preload="none"
       aria-label={ariaLabel}
+      onContextMenu={blockMenu}
+      draggable={false}
     />
   )
 }

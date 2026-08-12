@@ -110,24 +110,32 @@ export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, 
             <video
               key={src}
               ref={slideIndex === 0 ? videoRef : undefined}
-              className={`sv-shadow${on ? ' sv-shadow-on' : ''}`}
+              className={`sv-shadow media-protect${on ? ' sv-shadow-on' : ''}`}
               src={inView ? src : undefined}
               muted
               loop
               playsInline
+              controlsList="nodownload noplaybackrate noremoteplayback"
+              disablePictureInPicture
+              disableRemotePlayback
               preload="none"
               aria-label={alt}
+              onContextMenu={(event) => event.preventDefault()}
+              draggable={false}
             />
           )
         }
         return (
           <img
             key={src}
-            className={`sv-shadow${on ? ' sv-shadow-on' : ''}`}
+            className={`sv-shadow media-protect${on ? ' sv-shadow-on' : ''}`}
             src={src}
             alt={alt}
             loading={slideIndex === 0 ? 'lazy' : 'lazy'}
             decoding="async"
+            draggable={false}
+            onContextMenu={(event) => event.preventDefault()}
+            onDragStart={(event) => event.preventDefault()}
           />
         )
       })}
