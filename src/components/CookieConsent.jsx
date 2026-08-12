@@ -95,7 +95,7 @@ export default function CookieConsent() {
         }}
       >
         <div className="cookie-settings-box">
-          <h3>Cookie Preferences</h3>
+          <p className="cookie-settings-title">Cookie Preferences</p>
           <p>Manage your cookie preferences below. Essential cookies cannot be disabled.</p>
 
           <div className="cookie-toggle-row">

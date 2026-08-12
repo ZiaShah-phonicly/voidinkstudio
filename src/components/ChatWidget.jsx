@@ -112,7 +112,7 @@ export default function ChatWidget({ open: controlledOpen, onOpenChange }) {
         <div className="ch">
           <div className="ch-av">🤖</div>
           <div className="ch-info">
-            <h4>VOIDINK Assistant</h4>
+            <p className="ch-name">VOIDINK Assistant</p>
             <p>
               <span className="od" /> Online • Recommends packages from our site
             </p>
