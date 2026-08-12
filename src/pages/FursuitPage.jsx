@@ -301,7 +301,12 @@ export default function FursuitPage() {
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
               >
-                <ServiceCardBg slug={item.slug} fallbackImage={item.cardImage} delayMs={index * 280} />
+                <ServiceCardBg
+                  slug={item.slug}
+                  fallbackImage={item.cardImage}
+                  delayMs={index * 280}
+                  alt={`${item.title} portfolio sample`}
+                />
                 {item.isNew && <div className="sv-new">NEW</div>}
                 <div className="sv-i" aria-hidden="true">
                   {item.icon}
