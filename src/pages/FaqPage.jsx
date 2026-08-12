@@ -41,19 +41,19 @@ export default function FaqPage() {
               const open = openKey === key
               return (
                 <RevealItem as="div" key={key} delay={index * 60} className={`faq-acc${open ? ' active' : ''}`}>
-                  <button
-                    type="button"
-                    className="faq-acc-q"
-                    aria-expanded={open}
-                    onClick={() => setOpenKey(open ? null : key)}
-                  >
-                    <span className="faq-acc-text">
-                      <h3 className="faq-acc-heading">{item.q}</h3>
-                    </span>
-                    <span className="faq-acc-icon" aria-hidden="true" />
-                  </button>
+                  <h3 className="faq-acc-heading">
+                    <button
+                      type="button"
+                      className="faq-acc-q"
+                      aria-expanded={open}
+                      onClick={() => setOpenKey(open ? null : key)}
+                    >
+                      <span className="faq-acc-text">{item.q}</span>
+                      <span className="faq-acc-icon" aria-hidden="true" />
+                    </button>
+                  </h3>
 
-                  <div className="faq-acc-a" inert={!open}>
+                  <div className="faq-acc-a">
                     <div>
                       <div className="faq-acc-a-inner">
                         {item.a?.map((text) => (

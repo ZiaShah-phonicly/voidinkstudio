@@ -470,24 +470,13 @@ export default function HomePage() {
             </div>
             <div className="hero-ey">✦ World-Class Art, Design & Development Studio</div>
             <h1 className="hero-t" id="hero-title">
-              Art, Logo &amp; Web — Born From The <span className="vt">VOID</span>
+              Art Born <span className="gt">From The</span> <span className="vt">VOID</span>
             </h1>
             <div className="hero-tg">— Where Imagination Has No Limits —</div>
-            <p className="hero-takeaway">
-              <strong>Key takeaway:</strong> VOIDINK Studios is a remote creative and technology studio for brands,
-              creators, startups, and streamers who need custom logos, comic art, AI agents, websites, and apps —
-              transparent packages from $39 with full ownership on delivery.
-            </p>
             <p className="hero-d">
-              In short: we help indie creators, streamers, startups, and established brands worldwide ship
-              pixel-perfect art and production-ready tech — from first brief to final files. Explore our process on{' '}
-              <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
-                Instagram @voidinkstudios
-              </a>
-              .
-            </p>
-            <p className="hero-updated">
-              <time dateTime={SITE_DATE_MODIFIED}>Last updated August 12, 2026</time>
+              Key takeaway: VOIDINK Studios creates custom logos, comic art, AI agents, websites, and apps for brands,
+              creators, startups, and streamers worldwide — packages from $39 with full ownership on delivery. In short,
+              hire us when you need art and tech under one studio.
             </p>
             <div className="hero-act">
               <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
@@ -551,7 +540,11 @@ export default function HomePage() {
               </h2>
             <p className="section-sub">
               Built for brands, creators, startups, and streamers — from pixel-perfect art to AI-powered products under
-              one studio.
+              one studio. See recent work on{' '}
+              <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
+                Instagram @voidinkstudios
+              </a>
+              .
             </p>
           </Reveal>
           <div className="sv-g">
@@ -726,7 +719,10 @@ export default function HomePage() {
             <h2 className="section-title">
               Frequently Asked <span className="gt">Questions</span>
             </h2>
-            <p className="section-sub">Quick answers to the questions clients ask most before starting a project.</p>
+            <p className="section-sub">
+              Direct answer: most clients ask about pricing, deposits, ownership, and how to start — short answers are
+              below, with the full FAQ on a dedicated page.
+            </p>
           </Reveal>
 
           <div className="sp-faq-list" ref={homeFaqRef}>
@@ -734,18 +730,18 @@ export default function HomePage() {
               const open = openFaq === index
               return (
                 <RevealItem as="div" key={faq.q} delay={index * 70} className={`faq-acc${open ? ' active' : ''}`}>
-                  <button
-                    type="button"
-                    className="faq-acc-q"
-                    aria-expanded={open}
-                    onClick={() => setOpenFaq(open ? null : index)}
-                  >
-                    <span className="faq-acc-text">
-                      <h3 className="faq-acc-heading">{faq.q}</h3>
-                    </span>
-                    <span className="faq-acc-icon" aria-hidden="true" />
-                  </button>
-                  <div className="faq-acc-a" inert={!open}>
+                  <h3 className="faq-acc-heading">
+                    <button
+                      type="button"
+                      className="faq-acc-q"
+                      aria-expanded={open}
+                      onClick={() => setOpenFaq(open ? null : index)}
+                    >
+                      <span className="faq-acc-text">{faq.q}</span>
+                      <span className="faq-acc-icon" aria-hidden="true" />
+                    </button>
+                  </h3>
+                  <div className="faq-acc-a">
                     <div>
                       <div className="faq-acc-a-inner">
                         <p>{faq.a}</p>
@@ -1120,7 +1116,7 @@ export default function HomePage() {
                   <div className="fii" style={index === 4 ? { borderBottom: 'none' } : undefined}>
                     <div className="fii-i">{item.icon}</div>
                     <div>
-                      <h4>{item.title}</h4>
+                      <p className="fii-title">{item.title}</p>
                       <p>{item.text}</p>
                     </div>
                   </div>
@@ -1141,7 +1137,9 @@ export default function HomePage() {
               <h2 className="section-title">
                 Ready to bring your vision to <span className="gt">life?</span>
               </h2>
-              <p className="section-sub">Start your project and experience art born from the void.</p>
+              <p className="section-sub">
+                Bottom line: start with a free quote — we reply fast with timeline, package options, and next steps.
+              </p>
               <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
                 <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
                   Start a Project <span aria-hidden="true">→</span>

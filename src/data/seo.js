@@ -5,7 +5,7 @@ export const BRAND_NAME = 'VOIDINK Studios'
 /** ISO date for WebPage dateModified — bump when homepage content meaningfully changes. */
 export const SITE_DATE_MODIFIED = '2026-08-12'
 
-export const DEFAULT_TITLE = 'VOIDINK Studios — Art, Logo, Comic, AI & Web'
+export const DEFAULT_TITLE = 'VOIDINK Studios — Art Born From The VOID'
 /** Keep ~110–165 chars for SERP snippets (tool-checked). */
 export const DEFAULT_DESCRIPTION =
   'Custom logos, comic art, AI agents, websites & apps for brands and creators. Packages from $39 — full ownership on delivery.'
