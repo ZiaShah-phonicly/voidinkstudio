@@ -156,12 +156,21 @@ export default function ServicePage() {
                   onMouseEnter={() => setCursorHover(true)}
                   onMouseLeave={() => setCursorHover(false)}
                   onClick={() => setLightboxIndex(index)}
+                  onContextMenu={(event) => event.preventDefault()}
                 >
                   <span className="shot-media">
                     {isVideoSrc(item.image) ? (
                       <LazyVideo src={item.image} ariaLabel={item.title || 'Portfolio video'} />
                     ) : (
-                      <img src={item.image} alt={item.title || 'Portfolio image'} loading="lazy" decoding="async" />
+                      <img
+                        src={item.image}
+                        alt={item.title || 'Portfolio image'}
+                        loading="lazy"
+                        decoding="async"
+                        draggable={false}
+                        onContextMenu={(event) => event.preventDefault()}
+                        onDragStart={(event) => event.preventDefault()}
+                      />
                     )}
                     <span className="shot-hover">{isVideoSrc(item.image) ? 'Play' : 'View shot'}</span>
                   </span>
@@ -314,6 +323,7 @@ export default function ServicePage() {
                 className="sv-c sv-c-link"
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
+                onContextMenu={(event) => event.preventDefault()}
               >
                 <ServiceCardBg slug={item.slug} fallbackImage={item.cardImage} delayMs={index * 280} />
                 {item.isNew && <div className="sv-new">NEW</div>}

@@ -2,6 +2,14 @@ import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { isVideoSrc } from '../data/serviceGalleries'
 
+function blockMenu(event) {
+  event.preventDefault()
+}
+
+function blockDrag(event) {
+  event.preventDefault()
+}
+
 export default function ImageLightbox({ items = [], index, onClose, onChange }) {
   const total = items.length
   const item = index == null || index < 0 || !total ? null : items[index]
@@ -72,20 +80,34 @@ export default function ImageLightbox({ items = [], index, onClose, onChange }) 
         className="lb-card"
         onClick={(event) => event.stopPropagation()}
         onKeyDown={(event) => event.stopPropagation()}
+        onContextMenu={blockMenu}
       >
         {video ? (
           <video
             key={item.image}
+            className="media-protect"
             src={item.image}
             controls
+            controlsList="nodownload noplaybackrate noremoteplayback"
+            disablePictureInPicture
+            disableRemotePlayback
             autoPlay
             playsInline
             muted
             loop
             aria-label={item.title || 'Portfolio video'}
+            onContextMenu={blockMenu}
+            draggable={false}
           />
         ) : (
-          <img src={item.image} alt={item.title || 'Portfolio image'} />
+          <img
+            className="media-protect"
+            src={item.image}
+            alt={item.title || 'Portfolio image'}
+            draggable={false}
+            onContextMenu={blockMenu}
+            onDragStart={blockDrag}
+          />
         )}
         <div className="lb-info">
           {hasMeta ? <p className="lb-kicker">{item.meta || item.category}</p> : null}

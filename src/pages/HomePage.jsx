@@ -558,6 +558,7 @@ export default function HomePage() {
                 className="sv-c sv-c-link"
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
+                onContextMenu={(event) => event.preventDefault()}
               >
                 <ServiceCardBg
                   slug={service.slug}
@@ -603,12 +604,21 @@ export default function HomePage() {
                 onMouseEnter={() => setCursorHover(true)}
                 onMouseLeave={() => setCursorHover(false)}
                 onClick={() => setWorkLightboxIndex(index)}
+                onContextMenu={(event) => event.preventDefault()}
               >
                 <span className="shot-media">
                   {isVideoSrc(item.image) ? (
                     <LazyVideo src={item.image} ariaLabel={item.title} />
                   ) : (
-                    <img src={item.image} alt={item.title} loading="lazy" decoding="async" />
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      loading="lazy"
+                      decoding="async"
+                      draggable={false}
+                      onContextMenu={(event) => event.preventDefault()}
+                      onDragStart={(event) => event.preventDefault()}
+                    />
                   )}
                   <span className="shot-hover">{isVideoSrc(item.image) ? 'Play' : 'View shot'}</span>
                 </span>
