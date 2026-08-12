@@ -1,7 +1,7 @@
 export const serviceDetails = [
   {
     slug: 'website-design-development',
-    cardImage: '/portfolio/web/web-08-saas-landing.webp',
+    cardImage: '/Website%20Design%20&%20Development/Saas-Landing.webp',
     icon: '💻',
     title: 'Website Design & Development',
     shortText: 'Modern, responsive websites with cutting-edge tech that convert visitors into loyal customers.',
@@ -39,7 +39,7 @@ export const serviceDetails = [
   },
   {
     slug: 'ai-agents-chatbots',
-    cardImage: '/portfolio/ai/ai-01-customer-support.webp',
+    cardImage: '/Ai%20Chatbots,%20Voice%20Agents%20&%20Automations/Automations-ai-03-AI-Voice-Agent.webp',
     icon: '🤖',
     title: 'AI Chatbots, Voice Agents & Automations',
     shortText: 'Smart AI systems that talk to your customers, capture leads, and automate business tasks — 24/7.',
@@ -77,7 +77,7 @@ export const serviceDetails = [
   },
   {
     slug: 'app-development',
-    cardImage: '/portfolio/apps/app-01-fintech.webp',
+    cardImage: '/App%20Development/Fintech-App-Development.webp',
     icon: '📱',
     title: 'App Development',
     shortText: 'Custom mobile apps for iOS & Android that look stunning, work flawlessly and grow your business.',
@@ -115,7 +115,7 @@ export const serviceDetails = [
   },
   {
     slug: 'comic-book-art',
-    cardImage: '/portfolio/heroic-comics.jpg',
+    cardImage: '/Comic/Comic%20Book.webp',
     icon: '📚',
     title: 'Comic Book Art',
     shortText: 'Full comic creation — characters, panels, inking, coloring and lettering. Print-ready or digital.',
@@ -229,7 +229,7 @@ export const serviceDetails = [
   },
   {
     slug: '2d-vtuber-models',
-    cardImage: '/portfolio/nova-vtuber.jpg',
+    cardImage: '/2D%20Model/2D%20Model%20Female.mp4',
     icon: '🎭',
     title: '2D VTuber Models',
     shortText: 'Custom 2D VTuber models with Live2D rigging — ready to stream on Twitch, YouTube & TikTok.',
@@ -305,7 +305,7 @@ export const serviceDetails = [
   },
   {
     slug: 'animation',
-    cardImage: '/portfolio/streamdeck-live.jpg',
+    cardImage: '/Animation/Intro.mp4',
     icon: '🎬',
     title: 'Animation',
     shortText: 'Professional animations — logo reveals, explainer videos and character animations with sound and voiceover.',
@@ -343,7 +343,7 @@ export const serviceDetails = [
   },
   {
     slug: 'dnd-character-art',
-    cardImage: '/portfolio/services/dnd/1.webp',
+    cardImage: '/Dnd/Barbarian.webp',
     icon: '⚔️',
     title: 'DnD Character Art',
     shortText: 'Detailed character art for Dungeons & Dragons campaigns, RPGs and tabletop games.',
@@ -594,7 +594,7 @@ export const serviceDetails = [
   },
   {
     slug: 'cover-art',
-    cardImage: '/portfolio/lumen-saas.jpg',
+    cardImage: '/Cover%20Art/Cover%20Art.webp',
     icon: '💿',
     title: 'Cover Art',
     shortText: 'Stunning album covers, book covers and game covers that grab attention and tell your story at a glance.',

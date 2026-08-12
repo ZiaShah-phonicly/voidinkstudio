@@ -4,12 +4,13 @@ import Reveal, { RevealItem } from '../components/Reveal'
 import PricingCard from '../components/PricingCard'
 import ImageLightbox from '../components/ImageLightbox'
 import ServiceCardBg from '../components/ServiceCardBg'
+import LazyVideo from '../components/LazyVideo'
 import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
 import { breadcrumbSchema, graphSchema, pageTitle, serviceMetaDescription, serviceSchema } from '../data/seo'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
-import { getServiceGallery } from '../data/serviceGalleries'
+import { getServiceGallery, isVideoSrc } from '../data/serviceGalleries'
 import { getFursuitFormServiceForPackage, isFursuitFormService, pricingCategories } from '../data/voidinkData'
 import NotFoundPage from './NotFoundPage'
 
@@ -157,13 +158,17 @@ export default function ServicePage() {
                   onClick={() => setLightboxIndex(index)}
                 >
                   <span className="shot-media">
-                    <img src={item.image} alt={item.title || 'Portfolio image'} loading="lazy" decoding="async" />
-                    <span className="shot-hover">View shot</span>
+                    {isVideoSrc(item.image) ? (
+                      <LazyVideo src={item.image} ariaLabel={item.title || 'Portfolio video'} />
+                    ) : (
+                      <img src={item.image} alt={item.title || 'Portfolio image'} loading="lazy" decoding="async" />
+                    )}
+                    <span className="shot-hover">{isVideoSrc(item.image) ? 'Play' : 'View shot'}</span>
                   </span>
                   <span className="shot-info">
                     <span className="shot-text">
                       <span className="shot-name">{item.title}</span>
-                      <span className="shot-meta">{item.meta}</span>
+                      {item.meta ? <span className="shot-meta">{item.meta}</span> : null}
                     </span>
                   </span>
                 </RevealItem>
