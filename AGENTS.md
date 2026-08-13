@@ -139,6 +139,7 @@ Moved to **`voidink-admin`**. See that repo’s `AGENTS.md`.
 | `VITE_FORM_USE_API` | `true` = Mongo API; `false` = Sheet only |
 | `VITE_API_URL` | API origin; empty = use Vite `/api` proxy |
 | `VITE_DISCORD_WEBHOOK_URL` | Optional |
+| `VITE_LOCK_PAGE` | `true` = block right-click / Save As / View Source; `false` = unlocked (local inspect) |
 | `VITE_TUBES_ENABLED` | `true` / `false` — hero tubes WebGL cursor (default off; heavy) |
 | `VITE_TUBES_THEME` | `voidink` \| `gold` \| `silver` (only when enabled) |
 | `VITE_TUBES_COLORS` / `LIGHTS` / `INTENSITY` | Hero tubes overrides |
@@ -237,6 +238,7 @@ Prefer editing data, not hardcoding in JSX:
 - VPS `.env` (gitignored) bakes `VITE_*` at build time, e.g.:
   - `VITE_API_URL=https://api.voidink.studio`
   - `VITE_FORM_USE_API=true`
+  - `VITE_LOCK_PAGE=true`
 - Web is **not** Docker; only the API (`backend-voidink`) is dockerized.
 
 ### General

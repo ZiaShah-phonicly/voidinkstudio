@@ -8,7 +8,7 @@ import LazyVideo from '../components/LazyVideo'
 import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
-import { breadcrumbSchema, graphSchema, pageTitle, serviceMetaDescription, serviceSchema } from '../data/seo'
+import { pageTitle, serviceMetaDescription, servicePageSchema } from '../data/seo'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
 import { getServiceGallery, isVideoSrc } from '../data/serviceGalleries'
 import { getFursuitFormServiceForPackage, isFursuitFormService, pricingCategories } from '../data/voidinkData'
@@ -41,14 +41,7 @@ export default function ServicePage() {
     return <NotFoundPage />
   }
 
-  const servicePath = `/services/${service.slug}`
-  const serviceLd = graphSchema(
-    serviceSchema(service, { path: servicePath }),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: service.title, path: servicePath },
-    ]),
-  )
+  const serviceLd = servicePageSchema(service)
 
   const pricing = pricingCategories.find((cat) => cat.id === service.pricingCategoryId)
   const related = getRelatedServices(service.slug)
@@ -104,7 +97,9 @@ export default function ServicePage() {
 
             <h1 className="sp-title">{service.title}</h1>
             <p className="sp-tagline">{service.tagline}</p>
-            <p className="sp-overview">{service.overview}</p>
+            <p className="sp-overview">
+              Key takeaway: {service.overview}
+            </p>
 
             <div className="sp-meta">
               <div className="sp-meta-item">
@@ -142,7 +137,11 @@ export default function ServicePage() {
                 {service.title} <span className="gt">work samples</span>
               </h2>
               <p className="section-sub">
-                Recent samples for this service — real project looks and style directions we ship for clients.
+                Recent samples for this service. More work on{' '}
+                <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
+                  Instagram @voidinkstudios
+                </a>
+                .
               </p>
             </Reveal>
             <div className="shot-g sp-shot-g">
@@ -164,7 +163,11 @@ export default function ServicePage() {
                     ) : (
                       <img
                         src={item.image}
-                        alt={item.title || 'Portfolio image'}
+                        alt={
+                          item.title
+                            ? `${item.title} — ${service.title} sample`
+                            : `${service.title} portfolio sample`
+                        }
                         loading="lazy"
                         decoding="async"
                         draggable={false}
@@ -254,6 +257,9 @@ export default function ServicePage() {
             <h2 className="section-title">
               How we deliver <span className="gt">{service.title.toLowerCase()}</span>
             </h2>
+            <p className="section-sub">
+              Direct answer: four steps — {service.process.map((step) => step.title).join(', ')}.
+            </p>
           </Reveal>
           <div className="pr-g">
             {service.process.map((step, index) => (
@@ -325,7 +331,12 @@ export default function ServicePage() {
                 onMouseLeave={() => setCursorHover(false)}
                 onContextMenu={(event) => event.preventDefault()}
               >
-                <ServiceCardBg slug={item.slug} fallbackImage={item.cardImage} delayMs={index * 280} />
+                <ServiceCardBg
+                  slug={item.slug}
+                  fallbackImage={item.cardImage}
+                  delayMs={index * 280}
+                  alt={`${item.title} portfolio sample`}
+                />
                 {item.isNew && <div className="sv-new">NEW</div>}
                 <div className="sv-i" aria-hidden="true">
                   {item.icon}
@@ -374,7 +385,7 @@ export default function ServicePage() {
                 Common questions about <span className="gt">{service.title.toLowerCase()}</span>
               </h2>
               <p className="section-sub">
-                Answers specific to this service. Looking for more?{' '}
+                Direct answers on pricing, process, and ownership for this service.{' '}
                 <Link to="/faq" className="sp-faq-more">
                   View all FAQs
                 </Link>
@@ -386,16 +397,18 @@ export default function ServicePage() {
                 const open = openFaq === index
                 return (
                   <RevealItem as="div" key={faq.q} delay={index * 80} className={`faq-acc${open ? ' active' : ''}`}>
-                    <button
-                      type="button"
-                      className="faq-acc-q"
-                      aria-expanded={open}
-                      onClick={() => setOpenFaq(open ? null : index)}
-                    >
-                      <span className="faq-acc-text">{faq.q}</span>
-                      <span className="faq-acc-icon" aria-hidden="true" />
-                    </button>
-                    <div className="faq-acc-a" inert={!open}>
+                    <h3 className="faq-acc-heading">
+                      <button
+                        type="button"
+                        className="faq-acc-q"
+                        aria-expanded={open}
+                        onClick={() => setOpenFaq(open ? null : index)}
+                      >
+                        <span className="faq-acc-text">{faq.q}</span>
+                        <span className="faq-acc-icon" aria-hidden="true" />
+                      </button>
+                    </h3>
+                    <div className="faq-acc-a">
                       <div>
                         <div className="faq-acc-a-inner">
                           <p>{faq.a}</p>

@@ -6,7 +6,7 @@ import ServiceCardBg from '../components/ServiceCardBg'
 import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
-import { breadcrumbSchema, graphSchema, pageTitle, serviceMetaDescription, serviceSchema } from '../data/seo'
+import { pageTitle, serviceMetaDescription, servicePageSchema } from '../data/seo'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
 import { getFursuitFormServiceForPackage, pricingCategories } from '../data/voidinkData'
 import NotFoundPage from './NotFoundPage'
@@ -35,14 +35,7 @@ export default function FursuitPage() {
 
   const pricing = pricingCategories.find((cat) => cat.id === service.pricingCategoryId)
   const related = getRelatedServices(service.slug)
-  const fursuitPath = `/services/${FURSUIT_SLUG}`
-  const fursuitLd = graphSchema(
-    serviceSchema(service, { path: fursuitPath }),
-    breadcrumbSchema([
-      { name: 'Home', path: '/' },
-      { name: service.title, path: fursuitPath },
-    ]),
-  )
+  const fursuitLd = servicePageSchema(service, { path: `/services/${FURSUIT_SLUG}` })
 
   const goToContact = (event) => {
     event.preventDefault()
@@ -103,7 +96,9 @@ export default function FursuitPage() {
                 service.title
               )}
             </h1>
-            <p className="sp-overview">{service.overview}</p>
+            <p className="sp-overview">
+              Key takeaway: {service.overview}
+            </p>
             {service.trustLine && <p className="sp-trust-line">{service.trustLine}</p>}
 
             <div className="sp-meta">
@@ -234,16 +229,18 @@ export default function FursuitPage() {
                 const open = openFaq === index
                 return (
                   <RevealItem as="div" key={faq.q} delay={index * 80} className={`faq-acc${open ? ' active' : ''}`}>
-                    <button
-                      type="button"
-                      className="faq-acc-q"
-                      aria-expanded={open}
-                      onClick={() => setOpenFaq(open ? null : index)}
-                    >
-                      <span className="faq-acc-text">{faq.q}</span>
-                      <span className="faq-acc-icon" aria-hidden="true" />
-                    </button>
-                    <div className="faq-acc-a" inert={!open}>
+                    <h3 className="faq-acc-heading">
+                      <button
+                        type="button"
+                        className="faq-acc-q"
+                        aria-expanded={open}
+                        onClick={() => setOpenFaq(open ? null : index)}
+                      >
+                        <span className="faq-acc-text">{faq.q}</span>
+                        <span className="faq-acc-icon" aria-hidden="true" />
+                      </button>
+                    </h3>
+                    <div className="faq-acc-a">
                       <div>
                         <div className="faq-acc-a-inner">
                           <p>{faq.a}</p>

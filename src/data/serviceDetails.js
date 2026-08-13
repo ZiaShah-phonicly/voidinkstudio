@@ -13,7 +13,7 @@ export const serviceDetails = [
     startingPrice: '$399',
     turnaround: '3–21 days',
     overview:
-      'Modern, responsive websites with cutting-edge tech that convert visitors into loyal customers. From a single-page brand site to a full e-commerce store — custom design, no templates, with full source code ownership.',
+      'Custom websites for brands, startups, and stores — no templates. From $399 with full source-code ownership, built to convert, rank, and go live on your hosting.',
     highlights: ['Custom modern design (no templates)', 'Mobile + tablet + desktop', 'SEO & speed optimized', 'CMS / blog options', 'Source code ownership'],
     includes: [
       'Custom UI design & development',
@@ -32,9 +32,22 @@ export const serviceDetails = [
       { step: '04', title: 'Launch', text: 'Hosting, handoff, and support.' },
     ],
     faqs: [
-      { q: 'Do you use templates?', a: 'No. Every site is a custom modern design.' },
-      { q: 'Do I get hosting?', a: 'We give you full support to deploy your project into production on your hosting. Whether you use Netlify, Vercel, cPanel, shared hosting, or your own server — we help set everything up, go live, and make sure the site runs smoothly after launch.' },
-      { q: 'Will I own the code?', a: 'Yes — 100% source code ownership on all packages.' },
+      {
+        q: 'What is VOIDINK website design?',
+        a: 'Custom websites for brands, startups, and stores — no templates. Packages from $399 with full source-code ownership and responsive layouts.',
+      },
+      {
+        q: 'How do I get started with a website project?',
+        a: 'Send a brief via the quote form. We confirm pages, timeline, and package, then start after the 50% deposit. Typical turnaround is 3–21 days.',
+      },
+      {
+        q: 'Should I use a template or a custom site?',
+        a: 'Choose custom if you need unique branding, SEO, and code you own. We do not use templates — every site is designed and built for your business.',
+      },
+      {
+        q: 'Will I own the website code?',
+        a: 'Yes — 100% source code ownership on all packages. We also help you deploy on Netlify, Vercel, cPanel, or your own server.',
+      },
     ],
   },
   {
@@ -70,9 +83,9 @@ export const serviceDetails = [
       { step: '04', title: 'Optimize', text: 'Live testing and refinements.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: 'Starter chatbot from $299. Voice + full automation from $1,499.' },
-      { q: 'Do you include voice agents?', a: 'Yes — Enterprise includes AI Voice Agent for call handling.' },
-      { q: 'Can it notify my email/Sheets?', a: 'Yes — lead capture with Google Sheets / email on all plans.' },
+      { q: 'What does an AI chatbot cost?', a: 'Starter chatbot from $299. Voice + full automation from $1,499.' },
+      { q: 'How do voice agents work?', a: 'Enterprise includes an AI Voice Agent that handles calls and routes leads — trained on your business data.' },
+      { q: 'Should I connect email or Google Sheets?', a: 'Yes if you want lead capture. Google Sheets / email notifications are included on all plans.' },
     ],
   },
   {
@@ -108,9 +121,9 @@ export const serviceDetails = [
       { step: '04', title: 'Ship', text: 'Store submission and support.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: 'Starter single-platform apps from $599.' },
-      { q: 'iOS + Android?', a: 'Professional and Enterprise include both platforms.' },
-      { q: 'Do you submit to stores?', a: 'Yes — store submission support is included.' },
+      { q: 'How much does app development start at?', a: 'Starter single-platform apps from $599.' },
+      { q: 'Should I launch on iOS and Android?', a: 'Yes for most products. Professional and Enterprise include both platforms.' },
+      { q: 'How do you submit apps to stores?', a: 'Store submission support is included — we help you list on the App Store and Google Play.' },
     ],
   },
   {
@@ -146,9 +159,9 @@ export const serviceDetails = [
       { step: '04', title: 'Deliver', text: 'Print / digital exports.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: '4-page Starter from $399. Full 24-page issue from $2,499.' },
-      { q: 'What styles?', a: 'Manga, American comics, Webtoon — your choice.' },
-      { q: 'Unlimited revisions?', a: 'Yes on all comic packages.' },
+      { q: 'What does comic book art cost?', a: '4-page Starter from $399. Full 24-page issue from $2,499.' },
+      { q: 'What comic styles do you draw?', a: 'Manga, American comics, Webtoon — your choice.' },
+      { q: 'How many revisions are included?', a: 'Unlimited revisions within the agreed package scope.' },
     ],
   },
   {
@@ -184,9 +197,9 @@ export const serviceDetails = [
       { step: '04', title: 'Export', text: 'Rigging + formats delivered.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: 'Basic 3D models from $249.' },
-      { q: 'Is rigging included?', a: 'Professional includes rigging. Premium includes full rig + turntable.' },
-      { q: 'File formats?', a: 'FBX, OBJ, GLTF, PNG renders — source on Premium.' },
+      { q: 'What does a 3D model cost?', a: 'Basic 3D models from $249.' },
+      { q: 'How does 3D rigging work?', a: 'Professional includes rigging. Premium includes full rig + turntable.' },
+      { q: 'What file formats will I get?', a: 'FBX, OBJ, GLTF, PNG renders — source on Premium.' },
     ],
   },
   {
@@ -222,9 +235,9 @@ export const serviceDetails = [
       { step: '04', title: 'Deliver', text: 'All files + commercial rights.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: 'Basic mascot from $99.' },
-      { q: 'Animation included?', a: 'Ultimate includes simple waving/idle animation.' },
-      { q: 'Commercial use?', a: 'Yes — commercial use rights on all packages.' },
+      { q: 'What does mascot design cost?', a: 'Basic mascot from $99.' },
+      { q: 'How do I get a mascot animation?', a: 'Ultimate includes a simple waving/idle animation.' },
+      { q: 'Should I get commercial-use rights?', a: 'Yes for brand use — commercial rights are included on all packages.' },
     ],
   },
   {
@@ -260,9 +273,9 @@ export const serviceDetails = [
       { step: '04', title: 'Export', text: 'Studio-ready files delivered.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: 'Half body without rigging from $149. Rigged from $299.' },
-      { q: 'VTube Studio compatible?', a: 'Yes — rigged packages include .moc3 and Studio compatibility.' },
-      { q: 'Full body with rigging?', a: 'Full Body With Rigging is $499.' },
+      { q: 'What does a VTuber model cost?', a: 'Half body without rigging from $149. Rigged from $299.' },
+      { q: 'How do I use it in VTube Studio?', a: 'Rigged packages include .moc3 files and VTube Studio compatibility.' },
+      { q: 'Should I get a full-body rig?', a: 'Yes if you want standing movement. Full Body With Rigging is $499.' },
     ],
   },
   {
@@ -298,9 +311,9 @@ export const serviceDetails = [
       { step: '04', title: 'Guide', text: 'Final files and guidelines.' },
     ],
     faqs: [
-      { q: 'Logo only price?', a: 'Logo Only starts at $59 with 24–48 hour delivery.' },
-      { q: 'Full branding?', a: 'Full Brand Identity is $499 including stationery and mini brand guide.' },
-      { q: 'Ownership?', a: '100% ownership on all branding packages.' },
+      { q: 'How much does a logo cost?', a: 'Logo Only starts at $59 with 24–48 hour delivery.' },
+      { q: 'What is included in full branding?', a: 'Full Brand Identity is $499 including stationery and a mini brand guide.' },
+      { q: 'Will I own the logo files?', a: 'Yes — 100% ownership on all branding packages.' },
     ],
   },
   {
@@ -336,9 +349,9 @@ export const serviceDetails = [
       { step: '04', title: 'Sound', text: 'SFX, VO, and final export.' },
     ],
     faqs: [
-      { q: 'Logo animation price?', a: 'Logo Animation starts at $99 (2–3 day delivery).' },
-      { q: 'Explainer included voiceover?', a: 'Yes — script writing and professional VO on Explainer.' },
-      { q: '4K available?', a: 'Character Animation delivers in 4K.' },
+      { q: 'How much does logo animation cost?', a: 'Logo Animation starts at $99 (2–3 day delivery).' },
+      { q: 'What is included in an explainer video?', a: 'Script writing and professional voiceover on the Explainer package.' },
+      { q: 'Should I order 4K animation?', a: 'Yes for character animation — that package delivers in 4K.' },
     ],
   },
   {
@@ -374,9 +387,9 @@ export const serviceDetails = [
       { step: '04', title: 'Deliver', text: 'High-res files.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: 'Full body Character Art from $99.' },
-      { q: 'Background included?', a: 'Character Scene ($149) includes a custom background.' },
-      { q: 'Party art?', a: 'Full Party ($449) covers up to 6 characters in one scene.' },
+      { q: 'What does DnD character art cost?', a: 'Full body Character Art from $99.' },
+      { q: 'How do I add a background?', a: 'Character Scene ($149) includes a custom background.' },
+      { q: 'Should I order party art?', a: 'Yes for groups — Full Party ($449) covers up to 6 characters in one scene.' },
     ],
   },
   {
@@ -412,9 +425,9 @@ export const serviceDetails = [
       { step: '04', title: 'Export', text: 'Final high-res files.' },
     ],
     faqs: [
-      { q: 'Headshot price?', a: 'Headshots start at $39 with 2–3 day delivery.' },
-      { q: 'SFW vs NSFW ref sheet?', a: 'On the Reference Sheet package, pick SFW ($149) or NSFW ($199) with the toggle buttons.' },
-      { q: 'Full scene price?', a: 'Full Scene with 1–2 characters is $299.' },
+      { q: 'How much does furry art start at?', a: 'Headshots start at $39 with 2–3 day delivery.' },
+      { q: 'What is the difference between SFW and NSFW ref sheets?', a: 'On the Reference Sheet package, pick SFW ($149) or NSFW ($199) with the toggle buttons.' },
+      { q: 'Should I order a full scene?', a: 'Yes for finished illustrations — Full Scene with 1–2 characters is $299.' },
     ],
   },
   {
@@ -587,9 +600,9 @@ export const serviceDetails = [
       { step: '04', title: 'Secure delivery', text: 'Private file handoff only.' },
     ],
     faqs: [
-      { q: 'Is it private?', a: 'Always. Work is never shared without your permission.' },
-      { q: 'Starting price?', a: 'Single Character NSFW from $99.' },
-      { q: 'Illustrated pages?', a: '4 illustrated pages package is $399.' },
+      { q: 'How private is NSFW art?', a: 'Always confidential. Work is never shared without your permission.' },
+      { q: 'What does NSFW art cost?', a: 'Single Character NSFW from $99.' },
+      { q: 'Should I order illustrated pages?', a: 'Yes for comic-style sets — the 4 illustrated pages package is $399.' },
     ],
   },
   {
@@ -625,9 +638,9 @@ export const serviceDetails = [
       { step: '04', title: 'Export', text: 'All required sizes.' },
     ],
     faqs: [
-      { q: 'Album cover price?', a: 'Album / Single Cover from $99 (2–3 days).' },
-      { q: 'Book covers include spine?', a: 'Yes — Book Cover includes front, back, and spine.' },
-      { q: 'Game cover price?', a: 'Game Cover / Key Art is $449.' },
+      { q: 'How much does cover art cost?', a: 'Album / Single Cover from $99 (2–3 days).' },
+      { q: 'What is included in a book cover?', a: 'Book Cover includes front, back, and spine.' },
+      { q: 'Should I order game key art?', a: 'Yes for store pages and trailers — Game Cover / Key Art is $449.' },
     ],
   },
   {
@@ -663,9 +676,9 @@ export const serviceDetails = [
       { step: '04', title: 'Deliver', text: 'High-res files.' },
     ],
     faqs: [
-      { q: 'Starting price?', a: 'Bust / Headshot from $49.' },
-      { q: 'Full body price?', a: 'Full Body is $149 — most popular.' },
-      { q: 'Any style?', a: 'Yes — anime, cartoon, realistic, or semi-realistic.' },
+      { q: 'What does character design cost?', a: 'Bust / Headshot from $49.' },
+      { q: 'How much is a full-body character?', a: 'Full Body is $149 — most popular.' },
+      { q: 'Should I pick a specific style?', a: 'Yes — anime, cartoon, realistic, or semi-realistic, based on your reference.' },
     ],
   },
 ]
