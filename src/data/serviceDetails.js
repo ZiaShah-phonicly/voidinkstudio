@@ -368,7 +368,7 @@ export const serviceDetails = [
     startingPrice: '$99',
     turnaround: '1–7 days',
     overview:
-      'Detailed character art for Dungeons & Dragons campaigns, RPGs and tabletop games. Realistic, semi-realistic, or anime — with armor, weapons, gear, and optional epic scenes.',
+      'Custom D&D character illustration for players, DMs, and streamers — full body, scenes, or party art from $99, with armor, weapons, and unlimited revisions.',
     highlights: ['Full body character art', 'Any art style', 'Custom backgrounds', 'Party scenes', 'Unlimited revisions'],
     includes: [
       'Full body character art',
@@ -446,11 +446,11 @@ export const serviceDetails = [
     startingPrice: '$800',
     turnaround: '4–16 weeks',
     heroEyebrow: '✦ Custom Fursuit Commissions',
-    heroHeadline: { before: 'Art Born From The ', accent: 'VOID', after: ' — Now in 3D' },
+    heroHeadline: { before: 'Fursuit ', accent: 'Commissions', after: '' },
     trustLine: 'Trusted by collectors & performers worldwide',
     relatedSlugs: ['furry-art', 'mascot-design', 'custom-character-design'],
     overview:
-      'We bring your fursona to life with handcrafted, professional-quality fursuits. From expressive heads to full-body suits, every piece is built with precision, passion, and 200+ clients worth of experience.',
+      'For collectors, performers, and creators who need a debut suit, con wear, or content look. First-hand studio examples — WIP photos and finished suits we delivered. Heads from $800.',
     highlights: [
       '200+ clients worldwide',
       'DHL Express shipping',
@@ -542,28 +542,28 @@ export const serviceDetails = [
     ],
     faqs: [
       {
-        q: 'Do I need a reference sheet?',
-        a: "Yes, a clear, unshaded reference sheet is required. If you don't have one, we offer reference sheet design as a separate service.",
+        q: 'What is a VOIDINK fursuit commission?',
+        a: 'A custom head, partial, or full suit built from your reference sheet — from $800, with WIP updates and DHL shipping.',
       },
       {
-        q: 'What measurements do you need?',
-        a: 'For heads, just your head circumference. For partials/full suits, we send a detailed measurement guide + Duct Tape Dummy (DTD) instructions.',
+        q: 'How do I get started with a fursuit?',
+        a: 'Send a reference sheet and quote request. Heads need head circumference; partials and full suits get a measurement + DTD guide.',
       },
       {
-        q: 'How do payments work?',
-        a: '50% non-refundable deposit to secure your slot. Remaining 50% + shipping due before delivery. We accept Payoneer, Wise, and bank transfer.',
+        q: 'Should I order a head, partial, or full suit?',
+        a: 'Head for a first suit or photos. Partial for cons and dance. Full suit if you perform or want a complete fursona.',
       },
       {
-        q: 'Do you ship internationally?',
-        a: 'Yes! We ship worldwide via DHL Express. USA delivery is 3–5 business days. Shipping costs are calculated by weight and destination.',
+        q: 'How do fursuit payments work?',
+        a: '50% deposit to start, remaining 50% + shipping before delivery. Payoneer, Wise, and bank transfer. Plans available on $2,000+ orders.',
+      },
+      {
+        q: 'Do you ship fursuits internationally?',
+        a: 'Yes — worldwide DHL Express. USA is typically 3–5 business days. Cost depends on weight and destination.',
       },
       {
         q: "What if the suit doesn't fit?",
-        a: 'We guarantee fit based on the measurements you provide. Minor adjustments can be discussed. Please follow our measurement guide carefully.',
-      },
-      {
-        q: 'Do you offer payment plans?',
-        a: 'Yes, for orders $2,000+. We can split the deposit into 2–3 installments. Contact us to discuss.',
+        a: 'Fit is guaranteed from the measurements you send. Follow the guide carefully; minor adjustments can be discussed.',
       },
     ],
   },

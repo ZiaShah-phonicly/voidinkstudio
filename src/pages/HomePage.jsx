@@ -559,6 +559,10 @@ export default function HomePage() {
               </h2>
             <p className="section-sub">
               Use cases: logos, comics, character art, websites, apps, AI agents. Recent work on{' '}
+              <a href="https://x.com/voidinkstudios" target="_blank" rel="noopener noreferrer">
+                X @voidinkstudios
+              </a>
+              {' '}and{' '}
               <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
                 Instagram @voidinkstudios
               </a>

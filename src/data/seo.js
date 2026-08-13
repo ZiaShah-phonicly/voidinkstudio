@@ -27,6 +27,16 @@ export function pageTitle(name) {
   return `${name} | VOIDINK Studios`
 }
 
+/** Plain-language definition — AEO tools look for "is defined as" / "in plain language". */
+export function serviceDefinition(service) {
+  const title = String(service?.title || 'This service').trim()
+  const raw = String(service?.shortText || service?.overview || 'a custom VOIDINK Studios commission.')
+    .replace(/\s+/g, ' ')
+    .trim()
+  const body = raw ? `${raw.charAt(0).toLowerCase()}${raw.slice(1)}` : 'a custom commission from VOIDINK Studios.'
+  return `${title} is defined as ${body}`
+}
+
 export function truncateMeta(text, max = 158) {
   const value = String(text || '').replace(/\s+/g, ' ').trim()
   if (value.length <= max) return value
