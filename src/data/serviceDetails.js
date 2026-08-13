@@ -166,7 +166,7 @@ export const serviceDetails = [
   },
   {
     slug: '3d-models',
-    cardImage: '/portfolio/flowops.jpg',
+    cardImage: '/3D/3D%20Rigging.mp4',
     icon: '🧊',
     title: '3D Models',
     shortText: 'High-quality 3D character models, props and environments for games, animation and VR/AR.',
@@ -394,7 +394,7 @@ export const serviceDetails = [
   },
   {
     slug: 'furry-art',
-    cardImage: '/portfolio/nebula-agency.jpg',
+    cardImage: '/Furry/Furry.webp',
     icon: '🦊',
     title: 'Furry Art',
     shortText: 'Custom furry character designs, reference sheets and illustrations with vibrant expressions and colors.',
@@ -432,7 +432,7 @@ export const serviceDetails = [
   },
   {
     slug: 'fursuits',
-    cardImage: '/portfolio/services/furry/1.jpg',
+    cardImage: '',
     icon: '🐾',
     title: 'Fursuit Commissions',
     shortText:
@@ -569,7 +569,7 @@ export const serviceDetails = [
   },
   {
     slug: 'nsfw-art',
-    cardImage: '/portfolio/nexus-rag.jpg',
+    cardImage: '/NSFW/Baddie.webp',
     icon: '🔥',
     title: 'NSFW Art',
     shortText: 'Professional NSFW artwork with complete confidentiality, privacy and quality guaranteed.',
@@ -645,7 +645,7 @@ export const serviceDetails = [
   },
   {
     slug: 'custom-character-design',
-    cardImage: '/portfolio/atlas-commerce.jpg',
+    cardImage: '/Custom/Custom%20Character.webp',
     icon: '🎨',
     title: 'Custom Character Design',
     shortText: 'Custom original characters for any purpose — anime, cartoon, realistic, game, story or personal OC.',

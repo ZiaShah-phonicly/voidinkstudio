@@ -51,10 +51,14 @@ export const serviceGalleries = {
     fromFile('Comic', 'Comic with Panel.webp'),
   ],
   '3d-models': [
-    { image: '/portfolio/services/3d/1.jpg', title: 'Tech Product Model', meta: '3D Render' },
-    { image: '/portfolio/services/3d/2.jpg', title: 'Abstract Form Study', meta: 'Modeling' },
-    { image: '/portfolio/services/3d/3.jpg', title: 'Softbody Sculpture', meta: 'CGI' },
-    { image: '/portfolio/services/3d/5.jpg', title: 'Hardware Visualization', meta: 'Product Viz' },
+    fromFile('3D', '3D Rigging.mp4'),
+    fromFile('3D', '3D C.webp'),
+    fromFile('3D', '3D Character B.webp'),
+    fromFile('3D', '3D Character F.webp'),
+    fromFile('3D', '3D Character S.webp'),
+    fromFile('3D', '3D F.webp'),
+    fromFile('3D', '3D F2.webp'),
+    fromFile('3D', '3D GM.webp'),
   ],
   'mascot-design': [
     { image: '/portfolio/services/mascot/1.jpg', title: 'Brand Mascot Set', meta: 'Character IP' },
@@ -94,18 +98,28 @@ export const serviceGalleries = {
     fromFile('Dnd', 'Rogue.webp'),
     fromFile('Dnd', 'Vampire.webp'),
   ],
+  // Physical suit photos only — never reuse Furry 2D art on this card.
+  fursuits: [],
   'furry-art': [
-    { image: '/portfolio/services/furry/1.jpg', title: 'Species Reference Feel', meta: 'Furry Style' },
-    { image: '/portfolio/services/furry/3.jpg', title: 'Soft Character Study', meta: 'Portrait' },
-    { image: '/portfolio/services/furry/4.jpg', title: 'Friendly Companion', meta: 'Character' },
-    { image: '/portfolio/services/furry/5.jpg', title: 'Expression Focus', meta: 'Reference Sheet vibe' },
+    fromFile('Furry', 'Furry.webp'),
+    fromFile('Furry', 'Furry 1.webp'),
+    fromFile('Furry', 'Furry Details.webp'),
+    fromFile('Furry', 'Furry F.webp'),
+    fromFile('Furry', 'Furry Pfp.webp'),
+    fromFile('Furry', 'Furry robo.webp'),
+    fromFile('Furry', 'PFP-ghost-color.webp'),
+    fromFile('Furry', 'Protogen.webp'),
+    fromFile('Furry', 'Protogen 1.webp'),
+    fromFile('Furry', 'Protogenn.webp'),
+    fromFile('Furry', '2-furry-character-(olympia-&-friend)-color.jpg1.webp'),
   ],
   'nsfw-art': [
-    { image: '/portfolio/services/nsfw/1.jpg', title: 'Private Gallery Style', meta: 'Confidential' },
-    { image: '/portfolio/services/nsfw/2.jpg', title: 'Abstract Form Study', meta: 'Artistic' },
-    { image: '/portfolio/services/nsfw/3.jpg', title: 'Neon Mood Piece', meta: 'Moodboard' },
-    { image: '/portfolio/services/nsfw/4.jpg', title: 'Soft Render Look', meta: 'Premium Art' },
-    { image: '/portfolio/services/nsfw/5.jpg', title: 'Gradient Atmosphere', meta: 'NDA Projects' },
+    fromFile('NSFW', 'Anime.webp'),
+    fromFile('NSFW', 'Baddie.webp'),
+    fromFile('NSFW', 'Beach.webp'),
+    fromFile('NSFW', 'Beach 2.webp'),
+    fromFile('NSFW', 'Beach Tatto girls.webp'),
+    fromFile('NSFW', 'Ladies Party.webp'),
   ],
   'cover-art': [
     fromFile('Cover Art', 'Book Cover Art.webp'),
@@ -115,11 +129,17 @@ export const serviceGalleries = {
     fromFile('Cover Art', 'Music-Cover Art.webp'),
   ],
   'custom-character-design': [
-    { image: '/portfolio/services/character/1.jpg', title: 'Hero Character Sheet', meta: 'OC Design' },
-    { image: '/portfolio/services/character/2.jpg', title: 'Concept Color Forms', meta: 'Concept Art' },
-    { image: '/portfolio/services/character/3.jpg', title: 'Avatar Character', meta: 'Full Body vibe' },
-    { image: '/portfolio/services/character/4.jpg', title: 'Stylized Persona', meta: 'Character IP' },
-    { image: '/portfolio/services/character/5.jpg', title: 'Costume & Pose Study', meta: 'Design Pass' },
+    fromFile('Custom', 'Anime.webp'),
+    fromFile('Custom', 'Assasin.webp'),
+    fromFile('Custom', 'Chibi.webp'),
+    fromFile('Custom', 'Couple Art.webp'),
+    fromFile('Custom', 'Custom Character.webp'),
+    fromFile('Custom', 'Fantasy Art.webp'),
+    fromFile('Custom', 'Fusion Character Art.webp'),
+    fromFile('Custom', 'Gay-Character.webp'),
+    fromFile('Custom', 'Puppet-Character.webp'),
+    fromFile('Custom', "Sage_s 2D.webp"),
+    fromFile('Custom', 'super-hero-couple.webp'),
   ],
 }
 
@@ -129,6 +149,5 @@ export function isVideoSrc(src = '') {
 
 export function getServiceGallery(slug) {
   if (serviceGalleries[slug]?.length) return serviceGalleries[slug]
-  if (slug === 'fursuits') return serviceGalleries['furry-art'] || []
   return []
 }

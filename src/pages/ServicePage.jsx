@@ -134,12 +134,18 @@ export default function ServicePage() {
               <h2 className="section-title">
                 {service.title} <span className="gt">work samples</span>
               </h2>
+              {service.slug === 'nsfw-art' ? (
+                <p className="section-note">
+                  🔞 This section contains SFW previews only. For uncensored NSFW artwork, kindly reach out via{' '}
+                  <a href="mailto:support@voidinkstudios.com">email</a>.
+                </p>
+              ) : null}
               <p className="section-sub">
                 {serviceDefinition(service)} First-hand samples on{' '}
                 <a href="https://x.com/voidinkstudios" target="_blank" rel="noopener noreferrer">
                   X @voidinkstudios
-                </a>
-                {' '}and{' '}
+                </a>{' '}
+                and{' '}
                 <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
                   Instagram @voidinkstudios
                 </a>
