@@ -66,7 +66,7 @@ const ORDER_STORAGE_KEY = 'voidink_pending_order'
 
 const heroStats = [
   { value: studioStats.projects, suffix: '+', label: 'Projects Delivered' },
-  { value: studioStats.clients, suffix: '+', label: `clients in ${studioStats.countries} countries` },
+  { value: studioStats.clients, suffix: '+', label: `Clients in ${studioStats.countries} Countries` },
   { value: studioStats.services, suffix: '+', label: 'Creative Services' },
   { value: studioStats.satisfaction, suffix: '%', label: 'Satisfaction Rate' },
 ]
@@ -517,14 +517,10 @@ export default function HomePage() {
                 </div>
               </div> */}
               <div className="trust-badge">
-                <span style={{ fontSize: '0.85rem' }} aria-hidden="true">
+                <span className="trust-emoji" aria-hidden="true">
                   🌍
                 </span>
-                <div>
-                  <div className="trust-score" style={{ fontSize: '0.75rem' }}>
-                    {studioStatsCopy.clientsCountriesTitle}
-                  </div>
-                </div>
+                <div className="trust-score">{studioStatsCopy.clientsCountriesTitle}</div>
               </div>
             </div>
             <div className="hero-st">

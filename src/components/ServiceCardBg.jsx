@@ -10,11 +10,11 @@ function pickSlides(gallery, fallbackImage) {
   const videos = sources.filter((src) => isVideoSrc(src))
   const images = sources.filter((src) => !isVideoSrc(src))
 
+  // Prefer explicit video fallback (e.g. 3D rigging) so the card matches the service.
+  if (fallbackImage && isVideoSrc(fallbackImage)) return [fallbackImage]
+
   // Videos are heavy — one poster clip only (no multi-video carousel on cards).
-  if (videos.length && !images.length) {
-    const preferred = fallbackImage && isVideoSrc(fallbackImage) ? fallbackImage : videos[0]
-    return [preferred]
-  }
+  if (videos.length && !images.length) return [videos[0]]
 
   if (images.length) return images.slice(0, MAX_IMAGE_SLIDES)
   return [sources[0]]

@@ -141,14 +141,15 @@ a{color:inherit}
 
 .hero-trust{display:flex;align-items:center;justify-content:center;gap:30px;margin-top:45px;padding-top:30px;border-top:1px solid var(--border);flex-wrap:wrap}
 .trust-badge{display:flex;align-items:center;gap:8px;padding:8px 16px;border:1px solid var(--border);border-radius:var(--rf);background:var(--glass);backdrop-filter:blur(5px);-webkit-backdrop-filter:blur(5px)}
+.trust-emoji{font-size:.85rem;line-height:1}
 .trust-stars{color:#FFC107;font-size:.7rem;letter-spacing:1px}
-.trust-score{font-weight:700;font-size:.85rem}
+.trust-score{font-weight:700;font-size:.85rem;color:var(--text)}
 .trust-label{font-size:.7rem;color:var(--text3)}
 .trust-tp{color:#00B67A}
 
-.hero-st{display:flex;gap:45px;margin-top:35px;padding-top:25px;border-top:1px solid var(--border);flex-wrap:wrap;justify-content:center}
-.hero-st-value,.hero-st h3{font-family:'Space Grotesk',sans-serif;font-size:2rem;font-weight:700;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0}
-.hero-st p{font-size:.78rem;color:var(--text3);margin-top:2px}
+.hero-st{display:flex;gap:64px;margin-top:44px;padding-top:34px;border-top:1px solid var(--border);flex-wrap:wrap;justify-content:center}
+.hero-st-value,.hero-st h3{font-family:'Space Grotesk',sans-serif;font-size:clamp(2.4rem,3.8vw,3.25rem);font-weight:700;letter-spacing:-1px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin:0}
+.hero-st p{font-size:1.02rem;color:var(--text3);margin-top:8px}
 
 /* PARTNERS SECTION - BRIGHT & PROFESSIONAL */
 .partners{padding:36px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;position:relative;z-index:1;background:linear-gradient(180deg,rgba(124,58,237,.02),rgba(124,58,237,.06),rgba(124,58,237,.02))}
@@ -649,6 +650,9 @@ body.cookie-banner-open{padding-bottom:100px}
 
 /* SERVICE PORTFOLIO GALLERY */
 .sp-gallery{padding-top:56px!important}
+.section-note{margin:0 auto 10px;max-width:560px;font-size:1.12rem;line-height:1.55;font-weight:700;color:var(--pink);text-align:center}
+.section-note a{color:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px}
+.section-note a:hover{color:#fff}
 
 .lb{position:fixed;inset:0;z-index:20000;background:rgba(4,4,10,.92);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;align-items:center;justify-content:center;padding:72px 80px 40px}
 .lb-card{margin:0;width:min(920px,92vw);max-height:calc(100vh - 80px);display:flex;flex-direction:column;background:var(--bg-card);border:1px solid var(--border2);border-radius:20px;overflow:hidden;box-shadow:0 28px 90px rgba(0,0,0,.55)}
