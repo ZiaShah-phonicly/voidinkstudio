@@ -19,6 +19,10 @@ export default function SiteLayout() {
   usePageMeta({ canonical: `${window.location.origin}${location.pathname}` })
 
   useEffect(() => {
+    const lockPage =
+      String(import.meta.env.VITE_LOCK_PAGE || 'false').trim().toLowerCase() === 'true'
+    if (!lockPage) return undefined
+
     const isEditable = (target) => {
       if (!(target instanceof Element)) return false
       return Boolean(target.closest('input, textarea, select, [contenteditable="true"]'))
@@ -85,13 +89,20 @@ export default function SiteLayout() {
       (path) => location.pathname.startsWith(path),
     )
     document.documentElement.classList.toggle('is-service-page', isInnerPage)
+    let hashTimer
     if (location.hash) {
       const id = location.hash.replace('#', '')
-      setTimeout(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100)
+      hashTimer = window.setTimeout(
+        () => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+        100,
+      )
     } else {
       window.scrollTo(0, 0)
     }
-    return () => document.documentElement.classList.remove('is-service-page')
+    return () => {
+      if (hashTimer) window.clearTimeout(hashTimer)
+      document.documentElement.classList.remove('is-service-page')
+    }
   }, [location.pathname, location.hash])
 
   return (

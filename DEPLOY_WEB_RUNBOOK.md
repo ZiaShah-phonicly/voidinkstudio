@@ -24,6 +24,7 @@ VITE_FORM_USE_API=true
 VITE_GOOGLE_SHEETS_URL=
 VITE_DISCORD_WEBHOOK_URL=
 VITE_TUBES_THEME=voidink
+VITE_LOCK_PAGE=true
 EOF
 # If API subdomain not ready yet: leave VITE_FORM_USE_API=false and set Sheets URL.
 

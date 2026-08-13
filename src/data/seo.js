@@ -36,9 +36,19 @@ export function truncateMeta(text, max = 158) {
 }
 
 export function serviceMetaDescription(service) {
-  const lead = service?.tagline || service?.shortText || service?.overview || DEFAULT_DESCRIPTION
-  const price = service?.startingPrice ? ` Starting ${service.startingPrice}.` : ''
-  return truncateMeta(`${lead}${price}`)
+  const lead = String(service?.tagline || service?.shortText || service?.overview || DEFAULT_DESCRIPTION)
+    .replace(/\s+/g, ' ')
+    .trim()
+  const audience =
+    Array.isArray(service?.idealFor) && service.idealFor.length
+      ? ` For ${service.idealFor.slice(0, 2).join(' and ')}.`
+      : ''
+  const price = service?.startingPrice ? ` From ${service.startingPrice}.` : ''
+  let value = `${lead}${audience}${price} Full ownership on delivery.`
+  if (value.length < 110 && service?.title) {
+    value = `${value} Hire VOIDINK Studios for ${String(service.title).toLowerCase()}.`
+  }
+  return truncateMeta(value, 158)
 }
 
 export function parseStartingPrice(value) {
@@ -192,4 +202,23 @@ export function graphSchema(...nodes) {
     '@context': 'https://schema.org',
     '@graph': graph,
   }
+}
+
+export function servicePageSchema(service, { path } = {}) {
+  if (!service?.title) return null
+  const servicePath = path || `/services/${service.slug}`
+  return graphSchema(
+    webPageSchema({
+      path: servicePath,
+      name: pageTitle(service.title),
+      description: serviceMetaDescription(service),
+    }),
+    serviceSchema(service, { path: servicePath }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: 'Services', path: '/#services' },
+      { name: service.title, path: servicePath },
+    ]),
+    faqPageSchema(service.faqs),
+  )
 }

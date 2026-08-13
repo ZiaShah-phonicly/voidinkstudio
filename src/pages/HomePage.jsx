@@ -276,19 +276,36 @@ export default function HomePage() {
     if (!order) {
       try {
         const raw = sessionStorage.getItem(ORDER_STORAGE_KEY)
-        if (raw) {
-          order = JSON.parse(raw)
-          sessionStorage.removeItem(ORDER_STORAGE_KEY)
-        }
+        if (raw) order = JSON.parse(raw)
       } catch {
         // ignore bad storage
       }
     }
-    if (order) {
-      applyOrderToForm(order)
-      if (location.state?.order) {
-        navigate('.', { replace: true, state: null })
+    if (!order) return undefined
+
+    applyOrderToForm(order)
+
+    const scrollToForm = () => {
+      document.getElementById('query')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+    const scrollTimer = window.setTimeout(scrollToForm, 80)
+    // Keep storage until after Strict Mode remount so prefill survives local-dev double-invoke.
+    const clearTimer = window.setTimeout(() => {
+      try {
+        sessionStorage.removeItem(ORDER_STORAGE_KEY)
+      } catch {
+        // ignore
       }
+    }, 400)
+
+    // Keep #query — navigate('.') drops the hash and SiteLayout then scrolls to the hero.
+    if (location.state?.order) {
+      navigate({ pathname: '/', hash: 'query' }, { replace: true, state: {} })
+    }
+
+    return () => {
+      window.clearTimeout(scrollTimer)
+      window.clearTimeout(clearTimer)
     }
   }, [location.state, navigate])
 
