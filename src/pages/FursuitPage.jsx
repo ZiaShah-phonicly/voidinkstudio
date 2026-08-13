@@ -6,7 +6,7 @@ import ServiceCardBg from '../components/ServiceCardBg'
 import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
-import { pageTitle, serviceMetaDescription, servicePageSchema } from '../data/seo'
+import { pageTitle, serviceDefinition, serviceMetaDescription, servicePageSchema } from '../data/seo'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
 import { getFursuitFormServiceForPackage, pricingCategories } from '../data/voidinkData'
 import NotFoundPage from './NotFoundPage'
@@ -96,6 +96,7 @@ export default function FursuitPage() {
                 service.title
               )}
             </h1>
+            {service.tagline && <p className="sp-tagline">{service.tagline}</p>}
             <p className="sp-overview">
               Key takeaway: {service.overview}
             </p>
@@ -136,7 +137,18 @@ export default function FursuitPage() {
               <h2 className="section-title">
                 Heads, partials & <span className="gt">full suits</span>
               </h2>
-              <p className="section-sub">Fixed ranges, WIP updates, and worldwide DHL shipping on every commission.</p>
+              <p className="section-sub">
+                {serviceDefinition(service)} Best for: head (first suit), partial (cons), full suit (performers).
+                First-hand examples and WIP screenshots on{' '}
+                <a href="https://x.com/voidinkstudios" target="_blank" rel="noopener noreferrer">
+                  X @voidinkstudios
+                </a>
+                {' '}and{' '}
+                <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
+                  Instagram @voidinkstudios
+                </a>
+                .
+              </p>
             </Reveal>
             <div className="pg">
               {pricing.packages.map((pkg, index) => (
@@ -189,6 +201,7 @@ export default function FursuitPage() {
             <h2 className="section-title">
               From reference to <span className="gt">finished fursona</span>
             </h2>
+            <p className="section-sub">How to commission: Design → Sculpt → Fur → Finish.</p>
           </Reveal>
           <div className="pr-g">
             {service.process.map((step, index) => (
@@ -263,6 +276,9 @@ export default function FursuitPage() {
               <h2 className="section-title">
                 Built for collectors & <span className="gt">performers</span>
               </h2>
+              <p className="section-sub">
+                Use cases: fursona debuts, conventions, and content — when you need a wearable character, not just art.
+              </p>
             </Reveal>
             <div className="sp-trust-grid">
               {service.trustSignals.map((item, index) => (

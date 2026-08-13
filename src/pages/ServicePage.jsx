@@ -8,7 +8,7 @@ import LazyVideo from '../components/LazyVideo'
 import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
-import { pageTitle, serviceMetaDescription, servicePageSchema } from '../data/seo'
+import { pageTitle, serviceDefinition, serviceMetaDescription, servicePageSchema } from '../data/seo'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
 import { getServiceGallery, isVideoSrc } from '../data/serviceGalleries'
 import { getFursuitFormServiceForPackage, isFursuitFormService, pricingCategories } from '../data/voidinkData'
@@ -97,9 +97,7 @@ export default function ServicePage() {
 
             <h1 className="sp-title">{service.title}</h1>
             <p className="sp-tagline">{service.tagline}</p>
-            <p className="sp-overview">
-              Key takeaway: {service.overview}
-            </p>
+            <p className="sp-overview">Key takeaway: {service.overview}</p>
 
             <div className="sp-meta">
               <div className="sp-meta-item">
@@ -137,7 +135,11 @@ export default function ServicePage() {
                 {service.title} <span className="gt">work samples</span>
               </h2>
               <p className="section-sub">
-                Recent samples for this service. More work on{' '}
+                {serviceDefinition(service)} First-hand samples on{' '}
+                <a href="https://x.com/voidinkstudios" target="_blank" rel="noopener noreferrer">
+                  X @voidinkstudios
+                </a>
+                {' '}and{' '}
                 <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
                   Instagram @voidinkstudios
                 </a>
