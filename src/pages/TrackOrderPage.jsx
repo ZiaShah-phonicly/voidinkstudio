@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Link, useParams, useSearchParams } from 'react-router-dom'
+import JsonLd from '../components/JsonLd'
 import usePageMeta from '../hooks/usePageMeta'
-import { pageTitle } from '../data/seo'
+import { pageTitle, sitePageSchema } from '../data/seo'
 import { trackOrder } from '../utils/trackOrder'
 
 const STATUS_LABELS = {
@@ -31,13 +32,15 @@ function formatWhen(value) {
   }
 }
 
+const TRACK_DESCRIPTION = 'Track your VOIDINK Studios commission with your VI- tracking ID.'
+
 export default function TrackOrderPage() {
   const { trackingId: routeId } = useParams()
   const [searchParams] = useSearchParams()
   const initial = routeId || searchParams.get('id') || ''
   usePageMeta({
     title: pageTitle('Track Order'),
-    description: 'Track your VOIDINK Studios commission with your VI- tracking ID.',
+    description: TRACK_DESCRIPTION,
   })
 
   const [input, setInput] = useState(initial)
@@ -97,9 +100,22 @@ export default function TrackOrderPage() {
 
   return (
     <section className="section track-page">
+      <JsonLd
+        data={sitePageSchema({
+          path: '/track',
+          name: pageTitle('Track Order'),
+          description: TRACK_DESCRIPTION,
+          breadcrumbName: 'Track Order',
+        })}
+      />
       <div className="container">
         <header className="track-hero">
           <div className="track-hero-copy">
+            <nav className="sp-breadcrumb" aria-label="Breadcrumb">
+              <Link to="/">Home</Link>
+              <span aria-hidden="true">/</span>
+              <span className="sp-breadcrumb-current">Track Order</span>
+            </nav>
             <div className="section-label">✦ Project tracking</div>
             <h1 className="section-title">
               Track your <span className="gt">order</span>

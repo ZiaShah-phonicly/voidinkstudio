@@ -1,13 +1,17 @@
 import { Link } from 'react-router-dom'
 import LegalPageShell from '../components/LegalPageShell'
 import Reveal from '../components/Reveal'
+import JsonLd from '../components/JsonLd'
 import usePageMeta from '../hooks/usePageMeta'
-import { pageTitle } from '../data/seo'
+import { LEGAL_DATE_MODIFIED, pageTitle, sitePageSchema } from '../data/seo'
+
+const TERMS_DESCRIPTION =
+  'Terms for using VOIDINK Studios website, commissions, payments, revisions, and ownership.'
 
 export default function TermsOfServicePage() {
   usePageMeta({
     title: pageTitle('Terms of Service'),
-    description: 'Terms for using VOIDINK Studios website, commissions, payments, revisions, and ownership.',
+    description: TERMS_DESCRIPTION,
   })
 
   return (
@@ -17,6 +21,15 @@ export default function TermsOfServicePage() {
       breadcrumb="Terms of Service"
       updated="July 28, 2026"
     >
+      <JsonLd
+        data={sitePageSchema({
+          path: '/terms-of-service',
+          name: pageTitle('Terms of Service'),
+          description: TERMS_DESCRIPTION,
+          dateModified: LEGAL_DATE_MODIFIED,
+          breadcrumbName: 'Terms of Service',
+        })}
+      />
       <Reveal className="legal-prose">
         <div className="legal-callout">
           <p>

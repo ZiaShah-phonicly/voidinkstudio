@@ -6,7 +6,10 @@ import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
 import { faqCategories } from '../data/faqData'
-import { faqPageSchemaFromCategories, graphSchema, pageTitle } from '../data/seo'
+import { faqPageSchemaFromCategories, pageTitle, sitePageSchema } from '../data/seo'
+
+const FAQ_DESCRIPTION =
+  'Answers about VOIDINK Studios pricing, process, ownership, deposits, and how to start a custom art, web, app, or AI project.'
 
 export default function FaqPage() {
   const [openKey, setOpenKey] = useState(null)
@@ -14,8 +17,7 @@ export default function FaqPage() {
   const navigate = useNavigate()
   usePageMeta({
     title: pageTitle('FAQ'),
-    description:
-      'Answers about VOIDINK Studios pricing, process, ownership, deposits, and how to start a custom art, web, app, or AI project.',
+    description: FAQ_DESCRIPTION,
   })
 
   const closeFaq = useCallback(() => setOpenKey(null), [])
@@ -28,7 +30,15 @@ export default function FaqPage() {
       breadcrumb="FAQ"
       subtitle="Everything you need to know before starting your project with VOIDINK Studios."
     >
-      <JsonLd data={graphSchema(faqPageSchemaFromCategories(faqCategories))} />
+      <JsonLd
+        data={sitePageSchema({
+          path: '/faq',
+          name: pageTitle('FAQ'),
+          description: FAQ_DESCRIPTION,
+          breadcrumbName: 'FAQ',
+          extraNodes: [faqPageSchemaFromCategories(faqCategories)],
+        })}
+      />
       <div className="faq-page-list" ref={listRef}>
         {faqCategories.map((group) => (
           <section key={group.category} className="faq-group">
