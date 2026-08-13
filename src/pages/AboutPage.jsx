@@ -1,7 +1,8 @@
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import Reveal, { RevealItem } from '../components/Reveal'
 import usePageMeta from '../hooks/usePageMeta'
-import { pageTitle } from '../data/seo'
+import JsonLd from '../components/JsonLd'
+import { pageTitle, sitePageSchema } from '../data/seo'
 import { studioStats, studioStatsCopy } from '../data/voidinkData'
 
 const whyChoose = [
@@ -50,13 +51,15 @@ const designServices =
 const techServices =
   'Website Development, App Development, AI Chatbots, Voice Agents, Business Automations'
 
+const ABOUT_DESCRIPTION =
+  'VOIDINK Studios is a remote-first creative studio for custom art, branding, websites, apps, and AI. Also known as Voidink Studio or voidinkstudio.'
+
 export default function AboutPage() {
   const navigate = useNavigate()
   const { setChatOpen = () => {} } = useOutletContext() ?? {}
   usePageMeta({
     title: pageTitle('About'),
-    description:
-      'VOIDINK Studios is a remote-first creative studio for custom art, branding, websites, apps, and AI. Also known as Voidink Studio or voidinkstudio.',
+    description: ABOUT_DESCRIPTION,
   })
 
   const goTo = (event, path) => {
@@ -66,6 +69,15 @@ export default function AboutPage() {
 
   return (
     <main id="main-content" className="about-page">
+      <JsonLd
+        data={sitePageSchema({
+          path: '/about',
+          name: pageTitle('About'),
+          description: ABOUT_DESCRIPTION,
+          extraType: 'AboutPage',
+          breadcrumbName: 'About',
+        })}
+      />
       <section className="about-hero">
         <div className="about-hero-bg" aria-hidden="true" />
         <div className="container">

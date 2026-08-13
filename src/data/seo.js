@@ -4,6 +4,8 @@ export const BRAND_NAME = 'VOIDINK Studios'
 
 /** ISO date for WebPage dateModified — bump when homepage content meaningfully changes. */
 export const SITE_DATE_MODIFIED = '2026-08-12'
+/** Visible “Last updated” on Privacy / Terms (LegalPageShell). */
+export const LEGAL_DATE_MODIFIED = '2026-07-28'
 
 export const DEFAULT_TITLE = 'VOIDINK Studios — Art Born From The VOID'
 /** Keep ~110–165 chars for SERP snippets (tool-checked). */
@@ -80,6 +82,13 @@ export function organizationSchema() {
     description:
       'Remote-first creative and technology studio for brands, creators, startups, and streamers — custom artwork, branding, websites, apps, and AI agents.',
     areaServed: 'Worldwide',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'customer support',
+      email: 'support@voidinkstudios.com',
+      url: `${SITE_ORIGIN}/#query`,
+      availableLanguage: ['English'],
+    },
     sameAs: ['https://x.com/voidinkstudios', 'https://www.instagram.com/voidinkstudios/'],
   }
 }
@@ -102,10 +111,11 @@ export function webPageSchema({
   name = BRAND_NAME,
   description = DEFAULT_DESCRIPTION,
   dateModified = SITE_DATE_MODIFIED,
+  extraType,
 } = {}) {
   const url = path.startsWith('http') ? path : `${SITE_ORIGIN}${path}`
   return {
-    '@type': 'WebPage',
+    '@type': extraType ? ['WebPage', extraType] : 'WebPage',
     '@id': `${url}#webpage`,
     url,
     name,
@@ -116,6 +126,27 @@ export function webPageSchema({
     inLanguage: 'en',
     dateModified,
   }
+}
+
+/** About / FAQ / legal / track — WebPage + visible-matching breadcrumb. Not Article. */
+export function sitePageSchema({
+  path,
+  name,
+  description,
+  dateModified = SITE_DATE_MODIFIED,
+  extraType,
+  breadcrumbName,
+  extraNodes = [],
+} = {}) {
+  if (!path || !name) return null
+  return graphSchema(
+    webPageSchema({ path, name, description, dateModified, extraType }),
+    breadcrumbSchema([
+      { name: 'Home', path: '/' },
+      { name: breadcrumbName || name, path },
+    ]),
+    ...extraNodes,
+  )
 }
 
 export function faqEntity(question, answer) {

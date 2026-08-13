@@ -1,12 +1,16 @@
 import LegalPageShell from '../components/LegalPageShell'
 import Reveal from '../components/Reveal'
+import JsonLd from '../components/JsonLd'
 import usePageMeta from '../hooks/usePageMeta'
-import { pageTitle } from '../data/seo'
+import { LEGAL_DATE_MODIFIED, pageTitle, sitePageSchema } from '../data/seo'
+
+const PRIVACY_DESCRIPTION =
+  'How VOIDINK Studios collects, uses, and protects personal data on voidinkstudios.com.'
 
 export default function PrivacyPolicyPage() {
   usePageMeta({
     title: pageTitle('Privacy Policy'),
-    description: 'How VOIDINK Studios collects, uses, and protects personal data on voidinkstudios.com.',
+    description: PRIVACY_DESCRIPTION,
   })
 
   return (
@@ -16,6 +20,15 @@ export default function PrivacyPolicyPage() {
       breadcrumb="Privacy Policy"
       updated="July 28, 2026"
     >
+      <JsonLd
+        data={sitePageSchema({
+          path: '/privacy-policy',
+          name: pageTitle('Privacy Policy'),
+          description: PRIVACY_DESCRIPTION,
+          dateModified: LEGAL_DATE_MODIFIED,
+          breadcrumbName: 'Privacy Policy',
+        })}
+      />
       <Reveal className="legal-prose">
         <div className="legal-callout">
           <p>
