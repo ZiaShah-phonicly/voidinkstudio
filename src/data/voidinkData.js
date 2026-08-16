@@ -153,54 +153,87 @@ export const processSteps = [
 
 export const testimonials = [
   {
-    stars: '★★★★★',
-    text: '"Ordered a full-body DnD rogue for my Twitch campaign. Sketch came next day, final in 4 days. Armor and cloak details were spot on — my chat lost it when I revealed her."',
+    rating: 5,
+    text: 'Ordered a full-body DnD rogue for my Twitch campaign. Sketch came next day, final in 4 days. Armor and cloak details were spot on — my chat lost it when I revealed her.',
     initials: 'RK',
     name: 'Ryan K.',
     role: 'DnD Streamer · Austin, TX',
-    meta: 'Verified · DnD Character Art',
+    meta: 'DnD Character Art',
+    tone: 'violet',
+    serviceSlug: 'dnd-character-art',
+    backdropTitle: 'Rogue',
   },
   {
-    stars: '★★★★★',
-    text: '"We needed a store chatbot before Black Friday. They built it in a week — now it answers FAQs and captures emails overnight. Support tickets dropped a ton."',
+    rating: 5,
+    text: 'We needed a store chatbot before Black Friday. They built it in a week — now it answers FAQs and captures emails overnight. Support tickets dropped a ton.',
     initials: 'SJ',
     name: 'Sarah J.',
     role: 'Founder, online boutique',
-    meta: 'Verified · AI Chatbot',
+    meta: 'AI Chatbot',
+    tone: 'pink',
+    serviceSlug: 'ai-agents-chatbots',
+    backdropTitle: 'Automations-ai-05-E-commerce-AI',
   },
   {
-    stars: '★★★★★',
-    text: '"Hired them for a 12-page comic issue. Linework and colors looked print-ready. We used the files for a small Kickstarter print run with zero redo."',
+    rating: 5,
+    text: 'Hired them for a 12-page comic issue. Linework and colors looked print-ready. We used the files for a small Kickstarter print run with zero redo.',
     initials: 'ML',
     name: 'Marcus L.',
     role: 'Indie Comic Publisher',
-    meta: 'Verified · Comic Book Art',
+    meta: 'Comic Book Art',
+    tone: 'indigo',
+    serviceSlug: 'comic-book-art',
+    backdropTitle: 'Comic Book Panels',
   },
   {
-    stars: '★★★★★',
-    text: '"Logo + brand kit for our SaaS launch. Clean mark, usable guidelines, delivered in under a week. Investors actually commented on how polished it looked."',
+    rating: 5,
+    text: 'Logo + brand kit for our SaaS launch. Clean mark, usable guidelines, delivered in under a week. Investors actually commented on how polished it looked.',
     initials: 'AP',
     name: 'Aisha P.',
     role: 'Startup Co-founder · London',
-    meta: 'Verified · Branding',
+    meta: 'Branding',
+    tone: 'fuchsia',
+    serviceSlug: 'branding-logo',
+    backdropTitle: 'BrandForge Identity',
   },
   {
-    stars: '★★★★★',
-    text: '"Got a half-body Live2D model for streaming. Expressions feel natural and VTube Studio setup was smooth. Worth every dollar for how often I use it on stream."',
+    rating: 5,
+    text: 'Got a half-body Live2D model for streaming. Expressions feel natural and VTube Studio setup was smooth. Worth every dollar for how often I use it on stream.',
     initials: 'YN',
     name: 'Yuri N.',
     role: 'VTuber · Japan',
-    meta: 'Verified · 2D VTuber',
+    meta: '2D VTuber',
+    tone: 'violet',
+    serviceSlug: '2d-vtuber-models',
+    backdropTitle: "Sage_s Vtuber",
   },
   {
-    stars: '★★★★☆',
-    text: '"Website redesign for our clinic. Took about 10 days for the professional package. One page needed a tweak after launch but they fixed it same day. Patients keep saying the site looks more trustworthy."',
+    rating: 4,
+    text: 'Website redesign for our clinic. Took about 10 days for the professional package. One page needed a tweak after launch but they fixed it same day. Patients keep saying the site looks more trustworthy.',
     initials: 'DH',
     name: 'Dr. Helen M.',
     role: 'Clinic Owner · Toronto',
-    meta: 'Verified · Website Design',
+    meta: 'Website Design',
+    tone: 'indigo',
+    serviceSlug: 'website-design-development',
+    backdropTitle: 'Medical',
   },
 ]
+
+/** Best portfolio shot for a review — prefers matching title, then still image, then any. */
+export function getTestimonialBackdrop(item) {
+  const gallery = serviceGalleries[item?.serviceSlug] || []
+  if (!gallery.length) return null
+  const preferred = item.backdropTitle
+    ? gallery.find((entry) => entry.title === item.backdropTitle)
+    : null
+  if (preferred) {
+    return { src: preferred.image, title: preferred.title, isVideo: isVideoSrc(preferred.image) }
+  }
+  const still = gallery.find((entry) => !isVideoSrc(entry.image))
+  const pick = still || gallery[0]
+  return pick ? { src: pick.image, title: pick.title, isVideo: isVideoSrc(pick.image) } : null
+}
 
 export const formServices = [
   'Website Design',
