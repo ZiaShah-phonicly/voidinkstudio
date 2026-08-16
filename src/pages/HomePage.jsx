@@ -42,9 +42,22 @@ import {
   studioStats,
   studioStatsCopy,
   testimonials,
+  getTestimonialBackdrop,
   getHomePortfolio,
 } from '../data/voidinkData'
 import { isVideoSrc } from '../data/serviceGalleries'
+
+function ReviewStars({ rating = 5, className = '' }) {
+  return (
+    <span className={`tm-stars ${className}`.trim()} aria-label={`${rating} out of 5 stars`}>
+      {[1, 2, 3, 4, 5].map((n) => (
+        <span key={n} className={n <= rating ? 'on' : 'off'} aria-hidden="true">
+          ★
+        </span>
+      ))}
+    </span>
+  )
+}
 
 const emptyForm = {
   name: '',
@@ -63,6 +76,7 @@ const emptyForm = {
 }
 
 const ORDER_STORAGE_KEY = 'voidink_pending_order'
+const REVIEW_INTERVAL_MS = 5500
 
 const heroStats = [
   { value: studioStats.projects, suffix: '+', label: 'Projects Delivered' },
@@ -145,7 +159,35 @@ export default function HomePage() {
   const [formData, setFormData] = useState(emptyForm)
   const [openFaq, setOpenFaq] = useState(null)
   const [workLightboxIndex, setWorkLightboxIndex] = useState(null)
+  const [reviewIndex, setReviewIndex] = useState(0)
+  const [reviewsPaused, setReviewsPaused] = useState(false)
   const homeFaqRef = useRef(null)
+  const reviewResumeTimer = useRef(null)
+  const reviewTouchX = useRef(null)
+  const reviewFeatureRef = useRef(null)
+  const featuredReview = testimonials[reviewIndex] ?? testimonials[0]
+
+  const pauseReviews = useCallback(() => {
+    if (reviewResumeTimer.current) window.clearTimeout(reviewResumeTimer.current)
+    setReviewsPaused(true)
+  }, [])
+
+  const resumeReviews = useCallback(() => {
+    if (reviewResumeTimer.current) window.clearTimeout(reviewResumeTimer.current)
+    reviewResumeTimer.current = window.setTimeout(() => setReviewsPaused(false), 150)
+  }, [])
+
+  const goToReview = useCallback((index) => {
+    setReviewIndex(((index % testimonials.length) + testimonials.length) % testimonials.length)
+  }, [])
+
+  const nextReview = useCallback(() => {
+    setReviewIndex((prev) => (prev + 1) % testimonials.length)
+  }, [])
+
+  const prevReview = useCallback(() => {
+    setReviewIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }, [])
 
   const closeHomeFaq = useCallback(() => setOpenFaq(null), [])
   useOutsideClose(homeFaqRef, openFaq !== null, closeHomeFaq)
@@ -308,6 +350,36 @@ export default function HomePage() {
       window.clearTimeout(clearTimer)
     }
   }, [location.state, navigate])
+
+  useEffect(() => {
+    if (reviewsPaused || testimonials.length < 2) return undefined
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (reduced) return undefined
+    const timer = window.setInterval(() => {
+      setReviewIndex((prev) => (prev + 1) % testimonials.length)
+    }, REVIEW_INTERVAL_MS)
+    return () => window.clearInterval(timer)
+  }, [reviewsPaused])
+
+  useEffect(() => {
+    return () => {
+      if (reviewResumeTimer.current) window.clearTimeout(reviewResumeTimer.current)
+    }
+  }, [])
+
+  useEffect(() => {
+    const root = reviewFeatureRef.current
+    if (!root) return undefined
+    const videos = root.querySelectorAll('video')
+    videos.forEach((video, index) => {
+      if (index === reviewIndex) {
+        video.play().catch(() => {})
+      } else {
+        video.pause()
+      }
+    })
+    return undefined
+  }, [reviewIndex])
 
   const handleFormSubmit = async (event) => {
     event.preventDefault()
@@ -793,7 +865,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="section" id="testimonials">
+      <section className="section tm-sec" id="testimonials">
+        <div className="tm-ambient" aria-hidden="true" />
         <div className="container">
           <Reveal>
             <div className="section-label">✦ Reviews</div>
@@ -801,31 +874,173 @@ export default function HomePage() {
               What clients <span className="gt">say about us</span>
             </h2>
             <p className="section-sub">
-              Bottom line: clear communication, on-time delivery, full ownership.
+              Real briefs. Real delivery dates. Notes from people who shipped with us.
             </p>
-          </Reveal>
-          <div className="tm-g">
-            {testimonials.map((item, index) => (
-              <RevealItem
-                key={item.name}
-                delay={index * 70}
-                className="tm-c"
-                onMouseEnter={() => setCursorHover(true)}
-                onMouseLeave={() => setCursorHover(false)}
-              >
-                <div className="tm-s">{item.stars}</div>
-                <p className="tm-t">{item.text}</p>
-                <div className="tm-a">
-                  <div className="tm-av">{item.initials}</div>
-                  <div>
-                    <div className="tm-n">{item.name}</div>
-                    <div className="tm-r">{item.role}</div>
-                    {item.meta && <div className="tm-meta">{item.meta}</div>}
-                  </div>
+            <div className="tm-scorebar">
+              <div className="tm-score-pill">
+                <span className="tm-score-num">{studioStats.rating}</span>
+                <div className="tm-score-copy">
+                  <ReviewStars rating={5} className="tm-stars-sm" />
+                  <span>Avg. client rating</span>
                 </div>
-              </RevealItem>
-            ))}
-          </div>
+              </div>
+              <div className="tm-score-pill">
+                <span className="tm-score-num">{studioStats.clients}+</span>
+                <div className="tm-score-copy">
+                  <strong>Clients worldwide</strong>
+                  <span>{studioStats.countries}+ countries</span>
+                </div>
+              </div>
+              <div className="tm-score-pill">
+                <span className="tm-score-num">{studioStats.satisfaction}%</span>
+                <div className="tm-score-copy">
+                  <strong>Would rebook</strong>
+                  <span>From post-delivery feedback</span>
+                </div>
+              </div>
+            </div>
+          </Reveal>
+
+          <Reveal delay={90}>
+            <div
+              ref={reviewFeatureRef}
+              className={`tm-feature tone-${featuredReview.tone || 'violet'}${reviewsPaused ? ' is-paused' : ''}`}
+              onMouseEnter={() => {
+                pauseReviews()
+                setCursorHover(true)
+              }}
+              onMouseLeave={() => {
+                resumeReviews()
+                setCursorHover(false)
+              }}
+              onTouchStart={(event) => {
+                reviewTouchX.current = event.touches[0]?.clientX ?? null
+                pauseReviews()
+              }}
+              onTouchEnd={(event) => {
+                const startX = reviewTouchX.current
+                reviewTouchX.current = null
+                const endX = event.changedTouches[0]?.clientX
+                if (startX != null && endX != null) {
+                  const delta = endX - startX
+                  if (delta > 56) prevReview()
+                  else if (delta < -56) nextReview()
+                }
+                resumeReviews()
+              }}
+              aria-roledescription="carousel"
+              aria-label="Client reviews"
+            >
+              <div className="tm-feature-mark" aria-hidden="true">
+                “
+              </div>
+              <div className="tm-slider">
+                <div
+                  className="tm-track"
+                  style={{ transform: `translateX(-${reviewIndex * 100}%)` }}
+                >
+                  {testimonials.map((item, index) => {
+                    const backdrop = getTestimonialBackdrop(item)
+                    const isActive = index === reviewIndex
+                    return (
+                      <article
+                        key={item.name}
+                        className={`tm-slide tone-${item.tone || 'violet'}${backdrop ? ' has-bg' : ''}`}
+                        aria-hidden={!isActive}
+                      >
+                        {backdrop && (
+                          <div className="tm-slide-bg" aria-hidden="true">
+                            {backdrop.isVideo ? (
+                              <video
+                                className="media-protect"
+                                src={backdrop.src}
+                                muted
+                                loop
+                                playsInline
+                                autoPlay={isActive}
+                                preload={isActive ? 'auto' : 'metadata'}
+                              />
+                            ) : (
+                              <img
+                                className="media-protect"
+                                src={backdrop.src}
+                                alt=""
+                                loading={index === 0 ? 'eager' : 'lazy'}
+                                draggable="false"
+                              />
+                            )}
+                          </div>
+                        )}
+                        <div className="tm-slide-shade" aria-hidden="true" />
+                        <div className="tm-slide-content">
+                          <div className="tm-feature-top">
+                            <ReviewStars rating={item.rating} />
+                            <span className="tm-verified">
+                              <svg viewBox="0 0 20 20" width="15" height="15" aria-hidden="true">
+                                <path
+                                  fill="currentColor"
+                                  fillRule="evenodd"
+                                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.7-9.3a1 1 0 00-1.4-1.4L9 10.6 7.7 9.3a1 1 0 10-1.4 1.4l2 2a1 1 0 001.4 0l4-4z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              Verified client
+                            </span>
+                          </div>
+                          <blockquote className="tm-feature-quote">{item.text}</blockquote>
+                          <div className="tm-feature-author">
+                            <div className={`tm-av tone-${item.tone || 'violet'}`}>{item.initials}</div>
+                            <div>
+                              <div className="tm-n">{item.name}</div>
+                              <div className="tm-r">{item.role}</div>
+                            </div>
+                            {item.meta && <span className="tm-chip">{item.meta}</span>}
+                          </div>
+                        </div>
+                      </article>
+                    )
+                  })}
+                </div>
+              </div>
+              <div className="tm-feature-nav">
+                <button
+                  type="button"
+                  className="tm-nav-btn"
+                  aria-label="Previous review"
+                  onClick={prevReview}
+                >
+                  ‹
+                </button>
+                <div className="tm-dots" role="tablist" aria-label="Select review">
+                  {testimonials.map((item, index) => (
+                    <button
+                      key={item.name}
+                      type="button"
+                      role="tab"
+                      aria-selected={index === reviewIndex}
+                      aria-label={`Show review from ${item.name}`}
+                      className={`tm-dot${index === reviewIndex ? ' a' : ''}`}
+                      onClick={() => goToReview(index)}
+                    />
+                  ))}
+                </div>
+                <button
+                  type="button"
+                  className="tm-nav-btn"
+                  aria-label="Next review"
+                  onClick={nextReview}
+                >
+                  ›
+                </button>
+              </div>
+              <div className="tm-progress" aria-hidden="true">
+                <span
+                  key={reviewIndex}
+                  className={`tm-progress-bar${reviewsPaused ? ' paused' : ''}`}
+                />
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
