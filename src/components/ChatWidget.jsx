@@ -170,9 +170,11 @@ export default function ChatWidget({ open: controlledOpen, onOpenChange }) {
           </button>
         </form>
       </div>
-      <button type="button" className="chat-toggle-btn" onClick={toggleChat} aria-label="Open VOIDINK Assistant chat">
-        <div className="chat-avatar-wrapper">
-          🤖
+      <button type="button" className="chat-toggle-btn" onClick={toggleChat} aria-label="Open VOIDINK Assistant chat — get package recommendations">
+        <span className="chat-pulse" aria-hidden="true" />
+        <span className="chat-pulse chat-pulse--late" aria-hidden="true" />
+        <div className="chat-avatar-wrapper" aria-hidden="true">
+          <span className="chat-bot-icon">🤖</span>
           <div className="chat-online" />
         </div>
         <div className="chat-toggle-text">

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { RevealItem } from './Reveal'
 
 export default function PricingCard({
   pkg,
@@ -33,9 +32,9 @@ export default function PricingCard({
   }
 
   return (
-    <RevealItem
-      delay={delay}
+    <article
       className={`pk ${pkg.featured ? 'pk-ft' : ''}`}
+      style={delay ? { animationDelay: `${delay}ms` } : undefined}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -67,12 +66,12 @@ export default function PricingCard({
           <li key={feature}>{feature}</li>
         ))}
       </ul>
-      <a href="#query" className={`pk-btn ${pkg.featured ? 'pk-bf' : 'pk-bo'}`} onClick={handleOrder}>
+      <a href="#query" className={`pk-btn ${pkg.featured ? 'bp' : 'bs'}`} onClick={handleOrder}>
         {orderLabel}
       </a>
-      <button type="button" className="pk-chat" onClick={onChat}>
+      <button type="button" className="pk-btn bs" onClick={onChat}>
         💬 Live Chat
       </button>
-    </RevealItem>
+    </article>
   )
 }

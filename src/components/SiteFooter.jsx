@@ -3,6 +3,22 @@ import { LogoMark } from './LogoMark'
 import { serviceDetails } from '../data/serviceDetails'
 import { studioStatsCopy } from '../data/voidinkData'
 
+const footerTitleBySlug = {
+  'ai-agents-chatbots': 'AI & Automations',
+  'website-design-development': 'Websites',
+  'app-development': 'Apps',
+  'branding-logo': 'Branding',
+  '3d-models': '3D Models',
+  animation: 'Animation',
+  'custom-character-design': 'Characters',
+  'mascot-design': 'Mascots',
+  'comic-book-art': 'Comics',
+  'dnd-character-art': 'DnD Art',
+  'furry-art': 'Furry Art',
+  fursuits: 'Fursuits',
+  '2d-vtuber-models': 'VTubers',
+}
+
 const artServiceSlugs = ['custom-character-design', 'mascot-design', 'comic-book-art', 'dnd-character-art', 'furry-art', 'fursuits', '2d-vtuber-models']
 const techServiceSlugs = ['website-design-development', 'ai-agents-chatbots', 'app-development', 'branding-logo', '3d-models', 'animation']
 
@@ -78,7 +94,7 @@ export default function SiteFooter() {
               <ul className="ft-l">
                 {artServices.map((item) => (
                   <li key={item.slug}>
-                    <Link to={`/services/${item.slug}`}>{item.title}</Link>
+                    <Link to={`/services/${item.slug}`}>{footerTitleBySlug[item.slug] || item.title}</Link>
                   </li>
                 ))}
               </ul>
@@ -88,7 +104,7 @@ export default function SiteFooter() {
               <ul className="ft-l">
                 {techServices.map((item) => (
                   <li key={item.slug}>
-                    <Link to={`/services/${item.slug}`}>{item.title}</Link>
+                    <Link to={`/services/${item.slug}`}>{footerTitleBySlug[item.slug] || item.title}</Link>
                   </li>
                 ))}
               </ul>

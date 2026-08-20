@@ -1218,3 +1218,22 @@ export const pricingCategories = [
     ],
   },
 ]
+
+/** Broader pricing groups (3) — service picked via select to cut tab clutter. */
+export const pricingGroups = [
+  { id: 'development', label: 'Development', categoryIds: ['web', 'ai', 'app'] },
+  {
+    id: 'illustration',
+    label: 'Illustration',
+    categoryIds: ['comic', 'cover', 'character', 'dnd', 'furry', 'nsfw'],
+  },
+  {
+    id: 'characters-brand',
+    label: 'Characters & Brand',
+    categoryIds: ['mascot', 'vtuber', '3d', 'fursuit', 'brand', 'anim'],
+  },
+]
+
+export function getPricingGroupForCategory(categoryId) {
+  return pricingGroups.find((group) => group.categoryIds.includes(categoryId)) ?? pricingGroups[0]
+}

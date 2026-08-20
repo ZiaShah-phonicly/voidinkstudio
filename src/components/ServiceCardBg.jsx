@@ -4,20 +4,16 @@ import { getServiceGallery, isVideoSrc } from '../data/serviceGalleries'
 const MAX_IMAGE_SLIDES = 3
 
 function pickSlides(gallery, fallbackImage) {
-  const sources = (gallery.length ? gallery : fallbackImage ? [fallbackImage] : []).filter(Boolean)
-  if (!sources.length) return []
-
-  const videos = sources.filter((src) => isVideoSrc(src))
-  const images = sources.filter((src) => !isVideoSrc(src))
-
-  // Prefer explicit video fallback (e.g. 3D rigging) so the card matches the service.
-  if (fallbackImage && isVideoSrc(fallbackImage)) return [fallbackImage]
-
-  // Videos are heavy — one poster clip only (no multi-video carousel on cards).
-  if (videos.length && !images.length) return [videos[0]]
-
+  const fromGallery = gallery.filter(Boolean)
+  const images = fromGallery.filter((src) => !isVideoSrc(src))
+  // Still images read clearer on cards than muted looping video.
   if (images.length) return images.slice(0, MAX_IMAGE_SLIDES)
-  return [sources[0]]
+  if (fallbackImage && !isVideoSrc(fallbackImage)) return [fallbackImage]
+
+  const videos = fromGallery.filter((src) => isVideoSrc(src))
+  if (videos.length) return [videos[0]]
+  if (fallbackImage) return [fallbackImage]
+  return []
 }
 
 export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, delayMs = 0, alt = '' }) {
@@ -99,7 +95,9 @@ export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, 
     return undefined
   }, [inView, slides, index])
 
-  if (!slides.length) return null
+  if (!slides.length) {
+    return <div className="sv-bg sv-bg-ph" aria-hidden="true" />
+  }
 
   return (
     <div className="sv-bg" ref={wrapRef} aria-hidden="true">
@@ -119,7 +117,8 @@ export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, 
               disablePictureInPicture
               disableRemotePlayback
               preload="none"
-              aria-label={alt}
+              aria-label={alt || 'VOIDINK Studios portfolio sample'}
+              title={alt || 'VOIDINK Studios portfolio sample'}
               onContextMenu={(event) => event.preventDefault()}
               draggable={false}
             />
@@ -130,7 +129,7 @@ export default function ServiceCardBg({ slug, fallbackImage, intervalMs = 3200, 
             key={src}
             className={`sv-shadow media-protect${on ? ' sv-shadow-on' : ''}`}
             src={src}
-            alt={alt}
+            alt={alt || 'VOIDINK Studios portfolio sample'}
             loading={slideIndex === 0 ? 'lazy' : 'lazy'}
             decoding="async"
             draggable={false}
