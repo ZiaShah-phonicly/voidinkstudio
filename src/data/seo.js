@@ -3,7 +3,7 @@ export const SITE_ORIGIN = 'https://voidinkstudios.com'
 export const BRAND_NAME = 'VOIDINK Studios'
 
 /** ISO date for WebPage dateModified — bump when homepage content meaningfully changes. */
-export const SITE_DATE_MODIFIED = '2026-08-12'
+export const SITE_DATE_MODIFIED = '2026-08-20'
 /** Visible “Last updated” on Privacy / Terms (LegalPageShell). */
 export const LEGAL_DATE_MODIFIED = '2026-07-28'
 

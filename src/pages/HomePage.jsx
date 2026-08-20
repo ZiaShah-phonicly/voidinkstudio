@@ -34,9 +34,10 @@ import {
   getFursuitPackageForFormService,
   getFursuitSuitTypeForPackage,
   isFursuitFormService,
-  marqueeItems,
   pricingCategories,
   pricingCategoryToFormService,
+  pricingGroups,
+  getPricingGroupForCategory,
   processSteps,
   services,
   studioStats,
@@ -503,6 +504,10 @@ export default function HomePage() {
   }
 
   const activePricing = pricingCategories.find((cat) => cat.id === pricingTab) ?? pricingCategories[0]
+  const activePricingGroup = getPricingGroupForCategory(pricingTab)
+  const pricingGroupCategories = activePricingGroup.categoryIds
+    .map((id) => pricingCategories.find((cat) => cat.id === id))
+    .filter(Boolean)
   const featuredWork = getHomePortfolio(6)
 
   return (
@@ -565,18 +570,22 @@ export default function HomePage() {
             </h1>
             <div className="hero-tg">— Where Imagination Has No Limits —</div>
             <p className="hero-d">
-              Key takeaway: custom logos, comic art, AI agents, websites, and apps — packages from $39, full ownership on
-              delivery. For brands, creators, startups, and streamers in design, gaming, and software; use when you need
-              art and tech under one studio.
+              <strong>Key takeaway:</strong> VOIDINK Studios delivers custom logos, comic art, AI agents, websites, and
+              apps — packages from $39, full ownership on delivery.
             </p>
             <div className="hero-act">
               <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
                 Get Quote <span aria-hidden="true">→</span>
               </a>
-              <a href="#query" className="bs" onClick={(e) => handleAnchorClick(e, '#query')}>
-                Start Project
+              <a href="#work" className="bs" onClick={(e) => handleAnchorClick(e, '#work')}>
+                View Work
               </a>
             </div>
+            <p className="hero-summary">
+              For brands, creators, startups, and streamers in design, gaming, and software who need art and tech under
+              one studio. Bottom line: one team for creative commissions and product builds — see real delivered work in
+              our portfolio below.
+            </p>
             <div className="hero-trust">
               {/* <div className="trust-badge">
                 <span style={{ fontSize: '0.85rem' }} aria-hidden="true">
@@ -606,16 +615,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      <div className="mq" aria-hidden="true">
-        <div className="mq-w">
-          {[...marqueeItems, ...marqueeItems].map((item, index) => (
-            <div key={`${item}-${index}`} className="mq-i">
-              {item} <span className="mq-d" />
-            </div>
-          ))}
-        </div>
-      </div>
 
       <section className="section" id="services" aria-labelledby="services-title">
         <div className="container">
@@ -678,7 +677,8 @@ export default function HomePage() {
               Selected work across <span className="gt">web, apps & design</span>
             </h2>
             <p className="section-sub">
-              A snapshot of our best projects. Explore each service page for the full portfolio.
+              A snapshot of commissions we designed and shipped — websites, apps, VTubers, comics, and character art.
+              Open any card for first-hand project examples from our studio.
             </p>
           </Reveal>
 
@@ -777,22 +777,42 @@ export default function HomePage() {
             <p className="section-sub">Clear packages, fixed timelines, full ownership after payment.</p>
           </Reveal>
           <Reveal>
-            <div className="pt-tabs" role="tablist">
-              {pricingCategories.map((cat) => (
-                <button
-                  key={cat.id}
-                  type="button"
-                  role="tab"
-                  aria-selected={pricingTab === cat.id}
-                  className={`pt-tab ${pricingTab === cat.id ? 'a' : ''}`}
-                  onClick={() => setPricingTab(cat.id)}
-                >
-                  {cat.label}
-                </button>
-              ))}
+            <div className="pt-filter">
+              <div className="pt-tabs pt-groups" role="tablist" aria-label="Pricing category groups">
+                {pricingGroups.map((group) => (
+                  <button
+                    key={group.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={activePricingGroup.id === group.id}
+                    aria-controls="pricing-packages"
+                    className={`pt-tab pt-group ${activePricingGroup.id === group.id ? 'a' : ''}`}
+                    onClick={() => setPricingTab(group.categoryIds[0])}
+                  >
+                    {group.label}
+                  </button>
+                ))}
+              </div>
+              {pricingGroupCategories.length > 1 ? (
+                <div className="pt-tabs pt-subtabs" role="tablist" aria-label={`${activePricingGroup.label} services`}>
+                  {pricingGroupCategories.map((cat) => (
+                    <button
+                      key={cat.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={pricingTab === cat.id}
+                      aria-controls="pricing-packages"
+                      className={`pt-tab ${pricingTab === cat.id ? 'a' : ''}`}
+                      onClick={() => setPricingTab(cat.id)}
+                    >
+                      {cat.label}
+                    </button>
+                  ))}
+                </div>
+              ) : null}
             </div>
           </Reveal>
-          <div className="pc a">
+          <div className="pc a" id="pricing-packages">
             <div className="pg">
               {activePricing.packages.map((pkg, index) => (
                 <PricingCard
@@ -964,7 +984,7 @@ export default function HomePage() {
                               <img
                                 className="media-protect"
                                 src={backdrop.src}
-                                alt=""
+                                alt={`${item.name} — delivered project backdrop`}
                                 loading={index === 0 ? 'eager' : 'lazy'}
                                 draggable="false"
                               />

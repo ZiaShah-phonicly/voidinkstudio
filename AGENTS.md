@@ -139,6 +139,9 @@ Moved to **`voidink-admin`**. See that repo’s `AGENTS.md`.
 | `VITE_FORM_USE_API` | `true` = Mongo API; `false` = Sheet only |
 | `VITE_API_URL` | API origin; empty = use Vite `/api` proxy |
 | `VITE_DISCORD_WEBHOOK_URL` | Optional |
+| `VITE_RETELL_VOICE_ENABLED` | `true` = show Aria on site; `false` = hide completely |
+| `VITE_RETELL_VOICE_AGENT_ID` | Retell voice agent id (`agent_…`) |
+| `RETELL_API_KEY` | Used by Vite during `npm run dev` to mint call tokens (never `VITE_`) |
 | `VITE_LOCK_PAGE` | `true` = block right-click / Save As / View Source; `false` = unlocked (local inspect) |
 | `VITE_TUBES_ENABLED` | `true` / `false` — hero tubes WebGL cursor (default off; heavy) |
 | `VITE_TUBES_THEME` | `voidink` \| `gold` \| `silver` (only when enabled) |

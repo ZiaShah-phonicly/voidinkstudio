@@ -1,30 +1,33 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { LogoMark } from './LogoMark'
 import { clearAuth, getAuth } from '../utils/authApi'
+import useOutsideClose from '../hooks/useOutsideClose'
 
-const navLinks = [
+const primaryLinks = [
   { to: '/#services', label: 'Services' },
-  { to: '/services/fursuits', label: 'Fursuits', isNew: true },
-  { to: '/#work', label: 'Portfolio' },
-  { to: '/#process', label: 'Process' },
+  { to: '/services/fursuits', label: 'Fursuits', isNew: true, route: true },
+  { to: '/#work', label: 'Work' },
   { to: '/#pricing', label: 'Pricing' },
-  { to: '/#testimonials', label: 'Reviews' },
-  { to: '/track', label: 'Track', route: true },
-  { to: '/faq', label: 'FAQ' },
 ]
 
-const navActions = [
-  { to: '/about', label: 'About Us', className: 'nav-cta nav-cta-ghost' },
-  { to: '/#query', label: 'Get Quote', className: 'nav-cta' },
+const moreLinks = [
+  { to: '/#process', label: 'Process' },
+  { to: '/#testimonials', label: 'Reviews' },
+  { to: '/track', label: 'Track', route: true },
+  { to: '/faq', label: 'FAQ', route: true },
+  { to: '/about', label: 'About', route: true },
 ]
 
 export default function SiteHeader() {
   const [navScrolled, setNavScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
   const [auth, setAuthState] = useState(() => getAuth())
   const location = useLocation()
   const navigate = useNavigate()
+  const moreRef = useRef(null)
+  useOutsideClose(moreRef, moreOpen, () => setMoreOpen(false))
 
   useEffect(() => {
     const onScroll = () => setNavScrolled(window.scrollY > 50)
@@ -35,11 +38,13 @@ export default function SiteHeader() {
   useEffect(() => {
     setAuthState(getAuth())
     setMenuOpen(false)
-  }, [location.pathname])
+    setMoreOpen(false)
+  }, [location.pathname, location.hash])
 
   const handleNavClick = (event, to) => {
     event.preventDefault()
     setMenuOpen(false)
+    setMoreOpen(false)
     const [path, hash] = to.split('#')
     if (hash && (location.pathname === path || path === '/')) {
       document.getElementById(hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -56,6 +61,23 @@ export default function SiteHeader() {
     navigate('/')
   }
 
+  const renderLink = (link) => {
+    if (link.route) {
+      return (
+        <Link to={link.to} role="menuitem" onClick={() => { setMenuOpen(false); setMoreOpen(false) }}>
+          {link.label}
+          {link.isNew ? <span className="nav-new">NEW</span> : null}
+        </Link>
+      )
+    }
+    return (
+      <a href={link.to} role="menuitem" onClick={(e) => handleNavClick(e, link.to)}>
+        {link.label}
+        {link.isNew ? <span className="nav-new">NEW</span> : null}
+      </a>
+    )
+  }
+
   return (
     <>
       <a href="/#services" className="skip-link" onClick={(e) => handleNavClick(e, '/#services')}>
@@ -68,40 +90,48 @@ export default function SiteHeader() {
             <LogoMark />
           </Link>
           <ul className={`nl ${menuOpen ? 'op' : ''}`} role="menubar">
-            {navLinks.map((link) => (
+            {primaryLinks.map((link) => (
               <li key={link.to} role="none">
-                <a href={link.to} role="menuitem" onClick={(e) => handleNavClick(e, link.to)}>
-                  {link.label}
-                  {link.isNew ? <span className="nav-new">NEW</span> : null}
-                </a>
+                {renderLink(link)}
               </li>
             ))}
+            <li role="none" className={`nav-more${moreOpen ? ' open' : ''}`} ref={moreRef}>
+              <button
+                type="button"
+                className="nav-more-btn"
+                role="menuitem"
+                aria-expanded={moreOpen}
+                aria-haspopup="true"
+                onClick={() => setMoreOpen((prev) => !prev)}
+              >
+                More <span aria-hidden="true">▾</span>
+              </button>
+              <ul className="nav-more-menu" role="menu" hidden={!moreOpen}>
+                {moreLinks.map((link) => (
+                  <li key={link.to} role="none">
+                    {renderLink(link)}
+                  </li>
+                ))}
+              </ul>
+            </li>
             {auth ? (
               <li role="none" className="nav-user">
                 <span className="nav-user-name">Hi, {auth.first_name || 'there'}</span>
-                <button type="button" className="nav-cta nav-cta-ghost" onClick={handleLogout}>
+                <button type="button" className="nav-text-btn" onClick={handleLogout}>
                   Log Out
                 </button>
               </li>
             ) : null}
-            {navActions.map((action) => (
-              <li key={`${action.label}-${action.to}`} role="none">
-                {action.route ? (
-                  <Link to={action.to} className={action.className} role="menuitem" onClick={() => setMenuOpen(false)}>
-                    {action.label}
-                  </Link>
-                ) : (
-                  <a
-                    href={action.to}
-                    className={action.className}
-                    role="menuitem"
-                    onClick={(e) => handleNavClick(e, action.to)}
-                  >
-                    {action.label}
-                  </a>
-                )}
-              </li>
-            ))}
+            <li role="none">
+              <a
+                href="/#query"
+                className="nav-cta"
+                role="menuitem"
+                onClick={(e) => handleNavClick(e, '/#query')}
+              >
+                Get Quote
+              </a>
+            </li>
           </ul>
           <button
             type="button"

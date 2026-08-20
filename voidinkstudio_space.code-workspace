@@ -40,7 +40,10 @@
 			"path": "../voidink-admin"
 		},
 		{
-			"path": "../OmniRoute"
+			"path": "../agency-agents"
+		},
+		{
+			"path": "../burger-site"
 		}
 	],
 	"settings": {}

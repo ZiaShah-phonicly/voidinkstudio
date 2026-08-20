@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
 import ChatWidget from './ChatWidget'
 import CookieConsent from './CookieConsent'
+import RetellVoiceWidget from './RetellVoiceWidget'
 import SiteFooter from './SiteFooter'
 import SiteHeader from './SiteHeader'
 import usePageMeta from '../hooks/usePageMeta'
@@ -149,6 +150,7 @@ export default function SiteLayout() {
 
       <CookieConsent />
       <ChatWidget open={chatOpen} onOpenChange={setChatOpen} />
+      <RetellVoiceWidget />
     </>
   )
 }

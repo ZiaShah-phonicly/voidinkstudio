@@ -166,7 +166,7 @@ export const serviceDetails = [
   },
   {
     slug: '3d-models',
-    cardImage: '/3D/3D%20Rigging.mp4',
+    cardImage: '/3D/3D%20Character%20B.webp',
     icon: '🧊',
     title: '3D Models',
     shortText: 'High-quality 3D character models, props and environments for games, animation and VR/AR.',
@@ -318,7 +318,7 @@ export const serviceDetails = [
   },
   {
     slug: 'animation',
-    cardImage: '/Animation/Intro.mp4',
+    cardImage: '/Custom/Custom%20Character.webp',
     icon: '🎬',
     title: 'Animation',
     shortText: 'Professional animations — logo reveals, explainer videos and character animations with sound and voiceover.',

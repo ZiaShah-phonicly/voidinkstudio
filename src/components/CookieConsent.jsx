@@ -68,16 +68,15 @@ export default function CookieConsent() {
         <div className="cookie-banner-inner">
           <div className="cookie-text">
             <p>
-              We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By
-              clicking &quot;Accept All&quot;, you consent to our use of cookies.{' '}
+              We use cookies for essentials, analytics, and personalized content.{' '}
               <Link to="/privacy-policy">Privacy Policy</Link>.
             </p>
           </div>
           <div className="cookie-actions">
-            <button type="button" className="cookie-btn cookie-btn-secondary" onClick={openSettings}>
+            <button type="button" className="bs" onClick={openSettings}>
               Preferences
             </button>
-            <button type="button" className="cookie-btn cookie-btn-primary" onClick={acceptAll}>
+            <button type="button" className="bp" onClick={acceptAll}>
               Accept All
             </button>
           </div>
@@ -137,10 +136,10 @@ export default function CookieConsent() {
           </div>
 
           <div className="cookie-settings-actions">
-            <button type="button" className="cookie-btn cookie-btn-secondary" onClick={() => setSettingsOpen(false)}>
+            <button type="button" className="bs" onClick={() => setSettingsOpen(false)}>
               Cancel
             </button>
-            <button type="button" className="cookie-btn cookie-btn-primary" onClick={savePreferences}>
+            <button type="button" className="bp" onClick={savePreferences}>
               Save Preferences
             </button>
           </div>
