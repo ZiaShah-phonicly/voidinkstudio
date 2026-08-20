@@ -571,7 +571,7 @@ export default function HomePage() {
             <div className="hero-tg">— Where Imagination Has No Limits —</div>
             <p className="hero-d">
               <strong>Key takeaway:</strong> VOIDINK Studios delivers custom logos, comic art, AI agents, websites, and
-              apps — packages from $39, full ownership on delivery.
+              apps — full ownership on delivery.
             </p>
             <div className="hero-act">
               <a href="#query" className="bp" onClick={(e) => handleAnchorClick(e, '#query')}>
