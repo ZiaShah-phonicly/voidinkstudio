@@ -318,7 +318,7 @@ export const serviceDetails = [
   },
   {
     slug: 'animation',
-    cardImage: '/Custom/Custom%20Character.webp',
+    cardImage: '/Animation/Intro.mp4',
     icon: '🎬',
     title: 'Animation',
     shortText: 'Professional animations — logo reveals, explainer videos and character animations with sound and voiceover.',

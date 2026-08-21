@@ -59,7 +59,7 @@ export default function SiteFooter() {
       <div className="brand-huge">
         <div className="container">
           <div className="brand-huge-name">VOIDINK</div>
-          <div className="brand-huge-sub">S T U D I O S</div>
+          <div className="brand-huge-sub">STUDIOS</div>
         </div>
       </div>
 

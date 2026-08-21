@@ -85,8 +85,8 @@ export const serviceGalleries = {
     { image: '/portfolio/brandforge.jpg', title: 'BrandForge Identity' },
   ],
   animation: [
-    fromFile('Animation', 'Bugatti Intro.mp4'),
     fromFile('Animation', 'Intro.mp4'),
+    fromFile('Animation', 'Bugatti Intro.mp4'),
     fromFile('Animation', 'Train Animation.mp4'),
     // fromFile('Animation', 'Train Intro Animation.mp4'),
     fromFile('Animation', 'Game Decide.mp4'),
