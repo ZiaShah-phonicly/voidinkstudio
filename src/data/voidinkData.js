@@ -1237,7 +1237,7 @@ export const pricingCategories = [
   },
 ]
 
-/** Broader pricing groups (3) — service picked via select to cut tab clutter. */
+/** Broader pricing groups — subtabs only when a group has multiple services. */
 export const pricingGroups = [
   { id: 'development', label: 'Development', categoryIds: ['web', 'ai', 'app'] },
   {
@@ -1248,7 +1248,12 @@ export const pricingGroups = [
   {
     id: 'characters-brand',
     label: 'Characters & Brand',
-    categoryIds: ['mascot', 'vtuber', '3d', 'fursuit', 'brand', 'anim'],
+    categoryIds: ['mascot', 'vtuber', '3d', 'brand', 'anim'],
+  },
+  {
+    id: 'fursuit',
+    label: 'Fursuit',
+    categoryIds: ['fursuit'],
   },
 ]
 
