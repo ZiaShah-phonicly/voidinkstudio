@@ -371,11 +371,23 @@ export default function HomePage() {
   useEffect(() => {
     const root = reviewFeatureRef.current
     if (!root) return undefined
-    const videos = root.querySelectorAll('video')
-    videos.forEach((video, index) => {
+    // Only muted backdrop loops autoplay — never force-play spoken video reviews.
+    const videos = root.querySelectorAll('.tm-slide-bg video')
+    videos.forEach((video) => {
+      const slide = video.closest('.tm-slide')
+      const slides = root.querySelectorAll('.tm-slide')
+      const index = Array.prototype.indexOf.call(slides, slide)
       if (index === reviewIndex) {
         video.play().catch(() => {})
       } else {
+        video.pause()
+      }
+    })
+    root.querySelectorAll('.tm-video-review').forEach((video) => {
+      const slide = video.closest('.tm-slide')
+      const slides = root.querySelectorAll('.tm-slide')
+      const index = Array.prototype.indexOf.call(slides, slide)
+      if (index !== reviewIndex) {
         video.pause()
       }
     })
@@ -924,7 +936,7 @@ export default function HomePage() {
           <Reveal delay={90}>
             <div
               ref={reviewFeatureRef}
-              className={`tm-feature tone-${featuredReview.tone || 'violet'}${reviewsPaused ? ' is-paused' : ''}`}
+              className={`tm-feature tone-${featuredReview.tone || 'violet'}${reviewsPaused ? ' is-paused' : ''}${featuredReview.videoReview ? ' has-video-review' : ''}`}
               onMouseEnter={() => {
                 pauseReviews()
                 setCursorHover(true)
@@ -960,12 +972,12 @@ export default function HomePage() {
                   style={{ transform: `translateX(-${reviewIndex * 100}%)` }}
                 >
                   {testimonials.map((item, index) => {
-                    const backdrop = getTestimonialBackdrop(item)
+                    const backdrop = item.videoReview ? null : getTestimonialBackdrop(item)
                     const isActive = index === reviewIndex
                     return (
                       <article
                         key={item.name}
-                        className={`tm-slide tone-${item.tone || 'violet'}${backdrop ? ' has-bg' : ''}`}
+                        className={`tm-slide tone-${item.tone || 'violet'}${backdrop ? ' has-bg' : ''}${item.videoReview ? ' is-video-review' : ''}`}
                         aria-hidden={!isActive}
                       >
                         {backdrop && (
@@ -1007,9 +1019,36 @@ export default function HomePage() {
                               Verified client
                             </span>
                           </div>
+                          {item.videoReview ? (
+                            <div className="tm-video-frame">
+                              <video
+                                className="tm-video-review media-protect"
+                                src={isActive ? item.videoReview : undefined}
+                                poster={item.avatar}
+                                controls
+                                playsInline
+                                preload={isActive ? 'metadata' : 'none'}
+                                controlsList="nodownload noplaybackrate noremoteplayback"
+                                disablePictureInPicture
+                                aria-label={`Video review from ${item.name}`}
+                                onPlay={pauseReviews}
+                                onContextMenu={(event) => event.preventDefault()}
+                              />
+                            </div>
+                          ) : null}
                           <blockquote className="tm-feature-quote">{item.text}</blockquote>
                           <div className="tm-feature-author">
-                            <div className={`tm-av tone-${item.tone || 'violet'}`}>{item.initials}</div>
+                            {item.avatar ? (
+                              <img
+                                className={`tm-av tm-av-img tone-${item.tone || 'violet'}`}
+                                src={item.avatar}
+                                alt=""
+                                loading="lazy"
+                                draggable="false"
+                              />
+                            ) : (
+                              <div className={`tm-av tone-${item.tone || 'violet'}`}>{item.initials}</div>
+                            )}
                             <div>
                               <div className="tm-n">{item.name}</div>
                               <div className="tm-r">{item.role}</div>
