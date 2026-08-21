@@ -6,11 +6,15 @@ const MAX_IMAGE_SLIDES = 3
 function pickSlides(gallery, fallbackImage) {
   const fromGallery = gallery.filter(Boolean)
   const images = fromGallery.filter((src) => !isVideoSrc(src))
+  const videos = fromGallery.filter((src) => isVideoSrc(src))
+
+  // Explicit video cardImage (e.g. Animation → Intro.mp4) plays as the card backdrop.
+  if (fallbackImage && isVideoSrc(fallbackImage)) return [fallbackImage]
+
   // Still images read clearer on cards than muted looping video.
   if (images.length) return images.slice(0, MAX_IMAGE_SLIDES)
   if (fallbackImage && !isVideoSrc(fallbackImage)) return [fallbackImage]
 
-  const videos = fromGallery.filter((src) => isVideoSrc(src))
   if (videos.length) return [videos[0]]
   if (fallbackImage) return [fallbackImage]
   return []
