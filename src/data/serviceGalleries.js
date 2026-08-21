@@ -49,6 +49,9 @@ export const serviceGalleries = {
     fromFile('Comic', 'Comic Book.webp'),
     fromFile('Comic', 'Comic Dialogues.webp'),
     fromFile('Comic', 'Comic with Panel.webp'),
+    fromFile('Comic', 'Furry Comic.webp'),
+    fromFile('Comic', 'Short Comic 1.webp'),
+    fromFile('Comic', 'Short Comic 2.webp'),
   ],
   '3d-models': [
     fromFile('3D', '3D Rigging.mp4'),
@@ -61,11 +64,12 @@ export const serviceGalleries = {
     fromFile('3D', '3D GM.webp'),
   ],
   'mascot-design': [
-    { image: '/portfolio/services/mascot/1.jpg', title: 'Brand Mascot Set', meta: 'Character IP' },
-    { image: '/portfolio/services/mascot/2.jpg', title: 'Playful Brand Buddy', meta: 'Illustration' },
-    { image: '/portfolio/services/mascot/3.jpg', title: 'Color Form Mascot', meta: 'Concept' },
-    { image: '/portfolio/services/mascot/4.jpg', title: 'Stream Mascot Look', meta: 'Brand Face' },
-    { image: '/portfolio/services/mascot/5.jpg', title: 'Stylized Character', meta: 'Vector Feel' },
+    fromFile('Reviews', 'Tinnyplus3Gaming-Final.jpg'),
+    // { image: '/portfolio/services/mascot/2.jpg', title: 'Playful Brand Buddy', meta: 'Illustration' },
+    // { image: '/portfolio/services/mascot/3.jpg', title: 'Color Form Mascot', meta: 'Concept' },
+    // { image: '/portfolio/services/mascot/4.jpg', title: 'Stream Mascot Look', meta: 'Brand Face' },
+    // { image: '/portfolio/services/mascot/5.jpg', title: 'Stylized Character', meta: 'Vector Feel' },
+
   ],
   '2d-vtuber-models': [
     fromFile('2D Model', '2D Model Female.mp4'),
@@ -84,7 +88,9 @@ export const serviceGalleries = {
     fromFile('Animation', 'Bugatti Intro.mp4'),
     fromFile('Animation', 'Intro.mp4'),
     fromFile('Animation', 'Train Animation.mp4'),
-    fromFile('Animation', 'Train Intro Animation.mp4'),
+    // fromFile('Animation', 'Train Intro Animation.mp4'),
+    fromFile('Animation', 'Game Decide.mp4'),
+    fromFile('Animation', 'Game Decide Short.mp4'),
   ],
   'dnd-character-art': [
     fromFile('Dnd', 'Barbarian.webp'),

@@ -96,6 +96,7 @@ const HOME_PORTFOLIO_SLUGS = [
   'app-development',
   'comic-book-art',
   '2d-vtuber-models',
+  'animation',
   'cover-art',
 ]
 
@@ -106,6 +107,7 @@ const HOME_PORTFOLIO_PICKS = {
   'app-development': 'Fintech-App-Development',
   'comic-book-art': 'Comic Book Panels',
   '2d-vtuber-models': 'Sage_s Vtuber',
+  animation: 'Game Decide',
   'cover-art': 'Cover Art',
 }
 
@@ -134,11 +136,16 @@ export function getHomePortfolio(limit = 6) {
   for (const slug of HOME_PORTFOLIO_SLUGS) {
     const items = bySlug.get(slug) || []
     if (!items.length) continue
+    const preferred = HOME_PORTFOLIO_PICKS[slug]
+    // Honor explicit picks (incl. videos like Game Decide); else prefer stills for the grid.
+    const preferredMatch = preferred ? items.find((item) => item.title === preferred) : null
+    if (preferredMatch) {
+      picked.push(preferredMatch)
+      continue
+    }
     const images = items.filter((item) => !isVideoSrc(item.image))
     const pool = images.length ? images : items
-    const preferred = HOME_PORTFOLIO_PICKS[slug]
-    const match = preferred ? pool.find((item) => item.title === preferred) : null
-    picked.push(match || pool[0])
+    picked.push(pool[0])
   }
 
   return picked.slice(0, limit)
@@ -152,6 +159,17 @@ export const processSteps = [
 ]
 
 export const testimonials = [
+  {
+    rating: 5,
+    text: 'TinyPlus3 Gaming recorded a video review after working with us — hit play to hear it first-hand.',
+    initials: 'TP',
+    name: 'TinyPlus3 Gaming',
+    role: 'Content creator · Gaming',
+    meta: 'Video Review',
+    tone: 'pink',
+    avatar: '/Reviews/Tinnyplus3Gaming-Final.jpg',
+    videoReview: '/Reviews/user_review_void.mp4',
+  },
   {
     rating: 5,
     text: 'Ordered a full-body DnD rogue for my Twitch campaign. Sketch came next day, final in 4 days. Armor and cloak details were spot on — my chat lost it when I revealed her.',
