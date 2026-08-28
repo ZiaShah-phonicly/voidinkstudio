@@ -2,12 +2,15 @@ import { useCallback, useRef, useState } from 'react'
 import { Link, useNavigate, useOutletContext } from 'react-router-dom'
 import Reveal, { RevealItem } from '../components/Reveal'
 import PricingCard from '../components/PricingCard'
+import ImageLightbox from '../components/ImageLightbox'
+import LazyVideo from '../components/LazyVideo'
 import ServiceCardBg from '../components/ServiceCardBg'
 import useOutsideClose from '../hooks/useOutsideClose'
 import usePageMeta from '../hooks/usePageMeta'
 import JsonLd from '../components/JsonLd'
 import { pageTitle, serviceDefinition, serviceMetaDescription, servicePageSchema } from '../data/seo'
 import { getRelatedServices, getServiceBySlug } from '../data/serviceDetails'
+import { getServiceGallery, isVideoSrc } from '../data/serviceGalleries'
 import { getFursuitFormServiceForPackage, pricingCategories } from '../data/voidinkData'
 import NotFoundPage from './NotFoundPage'
 
@@ -18,6 +21,7 @@ export default function FursuitPage() {
   const navigate = useNavigate()
   const { setCursorHover = () => {}, setChatOpen = () => {} } = useOutletContext() ?? {}
   const [openFaq, setOpenFaq] = useState(null)
+  const [lightboxIndex, setLightboxIndex] = useState(null)
   const faqListRef = useRef(null)
   const service = getServiceBySlug(FURSUIT_SLUG)
 
@@ -35,6 +39,7 @@ export default function FursuitPage() {
 
   const pricing = pricingCategories.find((cat) => cat.id === service.pricingCategoryId)
   const related = getRelatedServices(service.slug)
+  const gallery = getServiceGallery(FURSUIT_SLUG)
   const fursuitLd = servicePageSchema(service, { path: `/services/${FURSUIT_SLUG}` })
 
   const goToContact = (event) => {
@@ -128,6 +133,79 @@ export default function FursuitPage() {
           </div>
         </div>
       </section>
+
+      {gallery.length > 0 && (
+        <section className="section sp-gallery">
+          <div className="container">
+            <Reveal>
+              <div className="section-label">✦ Portfolio</div>
+              <h2 className="section-title">
+                {service.title} <span className="gt">work samples</span>
+              </h2>
+              <p className="section-sub">
+                {serviceDefinition(service)} First-hand samples on{' '}
+                <a href="https://x.com/voidinkstudios" target="_blank" rel="noopener noreferrer">
+                  X @voidinkstudios
+                </a>{' '}
+                and{' '}
+                <a href="https://www.instagram.com/voidinkstudios/" target="_blank" rel="noopener noreferrer">
+                  Instagram @voidinkstudios
+                </a>
+                .
+              </p>
+            </Reveal>
+            <div className="shot-g sp-shot-g">
+              {gallery.map((item, index) => (
+                <RevealItem
+                  key={`${item.image}-${item.title}`}
+                  as="button"
+                  type="button"
+                  delay={index * 40}
+                  className="shot shot-open"
+                  onMouseEnter={() => setCursorHover(true)}
+                  onMouseLeave={() => setCursorHover(false)}
+                  onClick={() => setLightboxIndex(index)}
+                  onContextMenu={(event) => event.preventDefault()}
+                >
+                  <span className="shot-media">
+                    {isVideoSrc(item.image) ? (
+                      <LazyVideo src={item.image} ariaLabel={item.title || 'Portfolio video'} />
+                    ) : (
+                      <img
+                        src={item.image}
+                        alt={
+                          item.title
+                            ? `${item.title} — ${service.title} sample`
+                            : `${service.title} portfolio sample`
+                        }
+                        loading="lazy"
+                        decoding="async"
+                        draggable={false}
+                        onContextMenu={(event) => event.preventDefault()}
+                        onDragStart={(event) => event.preventDefault()}
+                      />
+                    )}
+                    <span className="shot-hover">{isVideoSrc(item.image) ? 'Play' : 'View shot'}</span>
+                  </span>
+                  <span className="shot-info">
+                    <span className="shot-text">
+                      <span className="shot-name">{item.title}</span>
+                      {item.meta ? <span className="shot-meta">{item.meta}</span> : null}
+                    </span>
+                  </span>
+                </RevealItem>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <ImageLightbox
+        items={gallery}
+        index={lightboxIndex}
+        onClose={() => setLightboxIndex(null)}
+        onChange={setLightboxIndex}
+      />
 
       {pricing && (
         <section className="section sp-pricing" id="fursuit-packages">

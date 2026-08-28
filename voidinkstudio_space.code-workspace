@@ -44,6 +44,15 @@
 		},
 		{
 			"path": "../burger-site"
+		},
+		{
+			"path": "../graphify"
+		},
+		{
+			"path": "../media-inference-worker"
+		},
+		{
+			"path": "../../workflows_void/n8n workflows"
 		}
 	],
 	"settings": {}
