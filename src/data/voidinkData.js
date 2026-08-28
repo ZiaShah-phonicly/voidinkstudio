@@ -51,6 +51,7 @@ const SERVICES_WITH_PORTFOLIO = new Set([
   'custom-character-design',
   'furry-art',
   'nsfw-art',
+  'fursuits',
 ])
 
 export const services = serviceDetails

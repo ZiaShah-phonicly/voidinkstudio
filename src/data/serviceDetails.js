@@ -432,7 +432,7 @@ export const serviceDetails = [
   },
   {
     slug: 'fursuits',
-    cardImage: '',
+    cardImage: '/Fursuit/Full Fursuit.webp',
     icon: '🐾',
     title: 'Fursuit Commissions',
     shortText:

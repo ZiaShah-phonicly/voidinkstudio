@@ -105,7 +105,15 @@ export const serviceGalleries = {
     fromFile('Dnd', 'Vampire.webp'),
   ],
   // Physical suit photos only — never reuse Furry 2D art on this card.
-  fursuits: [],
+  fursuits: [
+    fromFile('Fursuit', 'Fursuit Head.webp'),
+    fromFile('Fursuit', 'Fursuit Paws.webp'),
+    fromFile('Fursuit', 'Furry Paws.webp'),
+    fromFile('Fursuit', 'Fursuit Tail.webp'),
+    fromFile('Fursuit', 'Fursuit Tails.webp'),
+    fromFile('Fursuit', 'Fursuit Full body.webp'),
+    fromFile('Fursuit', 'Full Fursuit.webp'),
+  ],
   'furry-art': [
     fromFile('Furry', 'Furry.webp'),
     fromFile('Furry', 'Furry 1.webp'),
