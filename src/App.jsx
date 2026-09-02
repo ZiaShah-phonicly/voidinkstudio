@@ -10,6 +10,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import ServicePage from './pages/ServicePage'
 import TermsOfServicePage from './pages/TermsOfServicePage'
 import TrackOrderPage from './pages/TrackOrderPage'
+import UnsubscribePage from './pages/UnsubscribePage'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/services/:slug" element={<ServicePage />} />
           <Route path="/track" element={<TrackOrderPage />} />
           <Route path="/track/:trackingId" element={<TrackOrderPage />} />
+          <Route path="/unsubscribe" element={<UnsubscribePage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/terms-of-service" element={<TermsOfServicePage />} />
           <Route path="/faq" element={<FaqPage />} />

@@ -53,6 +53,9 @@
 		},
 		{
 			"path": "../../workflows_void/n8n workflows"
+		},
+		{
+			"path": "../Synapticthoughts Site"
 		}
 	],
 	"settings": {}
