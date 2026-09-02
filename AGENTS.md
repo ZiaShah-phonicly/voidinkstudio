@@ -83,6 +83,7 @@ voidinkstudio/
 | `/services/:slug` | `ServicePage` | Order Now → home form via state + sessionStorage |
 | `/services/fursuits`, `/fursuits` | `FursuitPage` | Dedicated fursuit commissions page (`/fursuits` redirects) |
 | `/track`, `/track/:trackingId` | `TrackOrderPage` | Needs backend tracking API |
+| `/unsubscribe` | `UnsubscribePage` | Public opt-out from cold outreach (CAN-SPAM) |
 | `/faq`, `/privacy-policy`, `/terms-of-service` | Legal/FAQ | |
 | `*` | `NotFoundPage` | Branded 404 |
 | ~~`/login`, `/register`, `/admin/*`~~ | Auth / admin | **Removed from this app** — staff portal is `voidink-admin`. Prod nginx may 301 `/admin` → `admin.voidinkstudios.com`. |
@@ -174,6 +175,7 @@ Base: proxy `/api` or `VITE_API_URL`.
 | POST | `/api/login/` |
 | GET | `/api/me/` |
 | POST | `/api/voidink/submit/` |
+| POST | `/api/voidink/unsubscribe/` |
 | GET | `/api/voidink/user/?email=` |
 | GET | `/api/voidink/track/<tracking_id>/` |
 | GET/PATCH | `/api/admin/orders/…` |

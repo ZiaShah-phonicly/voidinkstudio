@@ -540,6 +540,35 @@ button.shot-media{width:100%;margin:0;padding:0;font:inherit;color:inherit;curso
 @media(max-width:700px){
   .track-steps{grid-template-columns:1fr}
 }
+
+/* —— Unsubscribe —— */
+.unsub-page{padding-top:72px}
+.unsub-hero{position:relative;padding:28px 0 32px;overflow:hidden;border-bottom:1px solid var(--border);text-align:center}
+.unsub-hero-bg{position:absolute;top:-140px;right:-100px;width:520px;height:520px;border-radius:var(--r-circle);background:radial-gradient(circle,var(--accent) 0%,transparent 70%);opacity:.16;filter:blur(90px);pointer-events:none}
+.unsub-hero .container{position:relative;z-index:1;max-width:720px}
+.unsub-title{font-family:'Space Grotesk',sans-serif;font-size:clamp(2rem,5vw,2.75rem);font-weight:800;letter-spacing:-.03em;margin:12px 0 16px}
+.unsub-sub{margin:0 auto;max-width:560px;color:var(--text2);font-size:var(--fs-lg);line-height:1.65}
+.unsub-body{padding:48px 0 100px}
+.unsub-card{max-width:480px;margin:0 auto;padding:32px 28px;border-radius:var(--r3);border:1px solid rgba(124,58,237,.22);background:linear-gradient(165deg,rgba(18,18,28,.95),rgba(10,10,18,.98));box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.unsub-form{display:flex;flex-direction:column;gap:14px}
+.unsub-form label{font-size:var(--fs-sm);color:var(--text2);font-weight:600}
+.unsub-form input{width:100%;min-height:52px;padding:14px 16px;border-radius:var(--r2);border:1px solid rgba(255,255,255,.12);background:rgba(8,8,14,.85);color:var(--text);font:inherit}
+.unsub-form input:focus{outline:none;border-color:rgba(124,58,237,.7);box-shadow:0 0 0 3px rgba(124,58,237,.18)}
+.unsub-form .btn-primary{min-height:52px;border:none;cursor:pointer;font-weight:700}
+.unsub-form .btn-primary:disabled{opacity:.65;cursor:wait}
+.unsub-error{margin:0;color:#f87171;font-size:var(--fs-sm)}
+.unsub-fine{margin:8px 0 0;font-size:var(--fs-xs);line-height:1.55;color:var(--text2)}
+.unsub-success{text-align:center}
+.unsub-success-icon{width:56px;height:56px;margin:0 auto 16px;border-radius:var(--r-circle);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:700;color:#4ade80;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.35)}
+.unsub-success h2{margin:0 0 12px;font-size:1.35rem}
+.unsub-success p{margin:0 0 22px;color:var(--text2);line-height:1.6}
+.unsub-home-btn{display:inline-flex;text-decoration:none;justify-content:center}
+@media(max-width:768px){
+  .unsub-page{padding-top:64px}
+  .unsub-body{padding:36px 0 70px}
+  .unsub-card{padding:24px 20px}
+}
+
 .nav-user{display:flex;align-items:center;gap:10px}
 .nav-user-name{font-size:var(--fs-sm);color:var(--text2);white-space:nowrap}
 .nav-user .nav-cta{cursor:pointer;font:inherit}
