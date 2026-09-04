@@ -520,7 +520,7 @@ export default function HomePage() {
   const pricingGroupCategories = activePricingGroup.categoryIds
     .map((id) => pricingCategories.find((cat) => cat.id === id))
     .filter(Boolean)
-  const featuredWork = getHomePortfolio(6)
+  const featuredWork = getHomePortfolio(7)
 
   return (
     <div className="home-page">
