@@ -125,7 +125,17 @@ export const workItems = Object.entries(serviceGalleries).flatMap(([slug, items]
   })),
 )
 
-/** Home #work grid: best 6 across services (2 rows on desktop). */
+/** Home-only 7th shot — sits under Sage VTUBER; not in service galleries. */
+const HOME_WORK_EXTRA = {
+  id: 'home-comic-timelapse',
+  serviceSlug: null,
+  image: `/Comic/${encodeURIComponent('Timelapse of Art Coloring.mp4')}`,
+  category: 'Design',
+  title: 'Timelapse of Art Coloring',
+  featured: true,
+}
+
+/** Home #work grid: best 6 across services + optional home-only 7th (centered under Sage). */
 export function getHomePortfolio(limit = 6) {
   const bySlug = new Map()
   for (const item of workItems) {
@@ -149,7 +159,9 @@ export function getHomePortfolio(limit = 6) {
     picked.push(pool[0])
   }
 
-  return picked.slice(0, limit)
+  const base = picked.slice(0, Math.min(limit, 6))
+  if (limit >= 7) return [...base, HOME_WORK_EXTRA]
+  return base
 }
 
 export const processSteps = [
